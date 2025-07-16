@@ -15,7 +15,7 @@ export default function Home() {
     // Inicializar array de letras animadas
     setAnimatedLetters(new Array(letters.length).fill(false))
 
-    // Después de 1 segundo, comenzar la animación
+    // Después de 1.5 segundos, comenzar la animación
     const initialTimer = setTimeout(() => {
       setPhase('animating')
       
@@ -25,15 +25,16 @@ export default function Home() {
           setAnimatedLetters(prev => {
             const newArray = [...prev]
             newArray[index] = true
+            console.log(`Animando letra ${index}: ${letters[index]}`)
             return newArray
           })
-        }, index * 200) // 200ms de retraso entre cada letra
+        }, index * 120) // 120ms de retraso entre cada letra para efecto más fluido
       })
 
       // Después de que todas las letras estén animadas, mostrar video
       setTimeout(() => {
         setPhase('video')
-      }, letters.length * 200 + 1500) // Extra 1500ms para completar la animación
+      }, letters.length * 120 + 2500) // Extra 2500ms para completar la animación
     }, 1500)
 
     return () => clearTimeout(initialTimer)
@@ -47,7 +48,11 @@ export default function Home() {
           {letters.map((letter, index) => (
             <span
               key={index}
-              className="text-6xl font-bold text-gray-400"
+              className="font-black text-gray-400"
+              style={{ 
+                fontSize: 'clamp(3rem, 12vw, 8rem)',
+                color: '#333333' 
+              }}
             >
               {letter === ' ' ? '\u00A0' : letter}
             </span>
@@ -75,18 +80,22 @@ export default function Home() {
   return (
     <main className="fixed inset-0 w-screen h-screen flex items-center justify-center bg-black overflow-hidden">
       <div className="flex">
-        {letters.map((letter, index) => (
-          <span
-            key={index}
-            className={`text-6xl font-bold transition-colors duration-700 ${
-              phase === 'initial' || !animatedLetters[index]
-                ? 'text-gray-400'
-                : 'text-white'
-            }`}
-          >
-            {letter === ' ' ? '\u00A0' : letter}
-          </span>
-        ))}
+        {letters.map((letter, index) => {
+          const isAnimated = animatedLetters[index]
+          return (
+            <span
+              key={index}
+              className="font-black transition-all duration-1200 ease-out"
+              style={{ 
+                fontSize: 'clamp(3rem, 12vw, 8rem)',
+                color: isAnimated ? '#ffffff' : '#333333',
+                textShadow: isAnimated ? '0 0 8px rgba(84, 79, 79, 0.2)' : 'none'
+              }}
+            >
+              {letter === ' ' ? '\u00A0' : letter}
+            </span>
+          )
+        })}
       </div>
     </main>
   )
