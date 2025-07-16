@@ -1,9 +1,12 @@
 import React from 'react'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+const poppins = Poppins({ 
+  subsets: ['latin'],
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
+})
 
 export const metadata: Metadata = {
   title: 'DNXTLAB Web',
@@ -17,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" className="h-full w-full bg-black">
-      <body className={`${inter.className} h-full w-full m-0 p-0 overflow-hidden bg-black`}>
+      <body className={`${poppins.className} h-full w-full m-0 p-0 overflow-hidden bg-black`}>
         {children}
       </body>
     </html>

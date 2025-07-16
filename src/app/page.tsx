@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
+import Image from 'next/image'
 
 export default function Home() {
   const [mounted, setMounted] = useState(false)
@@ -34,8 +35,8 @@ export default function Home() {
       // Después de que todas las letras estén animadas, mostrar video
       setTimeout(() => {
         setPhase('video')
-      }, letters.length * 120 + 2500) // Extra 2500ms para completar la animación
-    }, 1500)
+      }, letters.length * 120 + 1500) // Extra 2500ms para completar la animación
+    }, 500)
 
     return () => clearTimeout(initialTimer)
   }, [])
@@ -43,7 +44,19 @@ export default function Home() {
   // Prevenir hidratación hasta que el componente esté montado
   if (!mounted) {
     return (
-      <main className="fixed inset-0 w-screen h-screen flex items-center justify-center bg-black overflow-hidden">
+          <main className="fixed inset-0 w-screen h-screen flex items-center justify-center bg-black overflow-hidden">
+      <div className="flex items-center">
+        <Image 
+          src="/logo.jpg" 
+          alt="DNXT LAB Logo" 
+          width={120}
+          height={120}
+          className="mr-6"
+          style={{ 
+            height: 'clamp(3rem, 12vw, 8rem)',
+            width: 'auto'
+          }}
+        />
         <div className="flex">
           {letters.map((letter, index) => (
             <span
@@ -58,7 +71,8 @@ export default function Home() {
             </span>
           ))}
         </div>
-      </main>
+      </div>
+    </main>
     )
   }
 
@@ -79,23 +93,36 @@ export default function Home() {
 
   return (
     <main className="fixed inset-0 w-screen h-screen flex items-center justify-center bg-black overflow-hidden">
-      <div className="flex">
-        {letters.map((letter, index) => {
-          const isAnimated = animatedLetters[index]
-          return (
-            <span
-              key={index}
-              className="font-black transition-all duration-1200 ease-out"
-              style={{ 
-                fontSize: 'clamp(3rem, 12vw, 8rem)',
-                color: isAnimated ? '#ffffff' : '#333333',
-                textShadow: isAnimated ? '0 0 8px rgba(84, 79, 79, 0.2)' : 'none'
-              }}
-            >
-              {letter === ' ' ? '\u00A0' : letter}
-            </span>
-          )
-        })}
+      <div className="flex items-center">
+        <Image 
+          src="/logo.jpg" 
+          alt="DNXT LAB Logo" 
+          width={120}
+          height={120}
+          className="mr-6"
+          style={{ 
+            height: 'clamp(3rem, 12vw, 8rem)',
+            width: 'auto'
+          }}
+        />
+        <div className="flex">
+          {letters.map((letter, index) => {
+            const isAnimated = animatedLetters[index]
+            return (
+              <span
+                key={index}
+                className="font-black transition-all duration-1500 ease-out"
+                style={{ 
+                  fontSize: 'clamp(3rem, 12vw, 8rem)',
+                  color: isAnimated ? '#ffffff' : '#333333',
+                  textShadow: isAnimated ? '0 0 8px rgba(84, 79, 79, 0.2)' : 'none'
+                }}
+              >
+                {letter === ' ' ? '\u00A0' : letter}
+              </span>
+            )
+          })}
+        </div>
       </div>
     </main>
   )
