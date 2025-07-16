@@ -17,68 +17,15 @@ html, body {
   background-color: #000000;
 }
 
+/* Clases para el efecto de animación inicial */
 @layer utilities {
   .text-logo-size {
     font-size: clamp(3rem, 12vw, 8rem);
   }
   
-  .text-main-title {
-    font-size: clamp(2.5rem, 7vw, 8.5rem);
-  }
-  
-  .text-description {
-    font-size: clamp(1.25rem, 2.5vw, 2rem);
-  }
-  
-  .text-button {
-    font-size: clamp(16px, 2vw, 22px);
-  }
-  
-  .text-right-content {
-    font-size: clamp(1.5rem, 3vw, 2.375rem);
-  }
-  
   .logo-size {
     height: clamp(3rem, 12vw, 8rem);
     width: auto;
-  }
-  
-  .button-size {
-    width: clamp(200px, 20vw, 258px);
-    height: clamp(60px, 8vw, 70px);
-  }
-  
-  .svg-size {
-    width: clamp(28px, 3vw, 37px);
-    height: clamp(28px, 3vw, 37px);
-  }
-  
-  .max-w-title {
-    max-width: 1259px;
-  }
-  
-  .max-w-description {
-    max-width: 617px;
-  }
-  
-  .max-w-right {
-    max-width: 557px;
-  }
-  
-  .line-height-90 {
-    line-height: 90%;
-  }
-  
-  .line-height-110 {
-    line-height: 110%;
-  }
-  
-  .font-morien {
-    font-family: 'Morien', sans-serif;
-  }
-  
-  .font-inter {
-    font-family: 'Inter', sans-serif;
   }
   
   .text-animation-initial {
@@ -89,4 +36,80 @@ html, body {
     color: #FFFFFF;
     filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
   }
+}
+
+/* Clases para el contenido del video - FUERA de @layer para mayor especificidad */
+.text-main-title {
+  font-size: clamp(2.5rem, 7vw, 8.5rem) !important;
+}
+
+.text-description {
+  font-size: clamp(1.25rem, 2.5vw, 2rem) !important;
+}
+
+.text-button {
+  font-size: clamp(16px, 2vw, 22px) !important;
+}
+
+.button-size {
+  width: clamp(200px, 20vw, 258px) !important;
+  height: clamp(60px, 8vw, 70px) !important;
+}
+
+.svg-size {
+  width: clamp(28px, 3vw, 37px) !important;
+  height: clamp(28px, 3vw, 37px) !important;
+}
+
+.max-w-title {
+  max-width: 1259px !important;
+}
+
+.max-w-description {
+  max-width: 617px !important;
+}
+
+.line-height-90 {
+  line-height: 90% !important;
+}
+
+.line-height-110 {
+  line-height: 110% !important;
+}
+
+.font-morien {
+  font-family: 'Morien', sans-serif !important;
+}
+
+.font-inter {
+  font-family: 'Inter', sans-serif !important;
+}
+
+.force-white-text {
+  color: #FFFFFF !important;
+}
+
+.force-black-text {
+  color: #000000 !important;
+}
+
+/* Forzar clases de Tailwind que no funcionan */
+.mb-8 {
+  margin-bottom: 2rem !important;
+}
+
+.mb-4 {
+  margin-bottom: 1rem !important;
+}
+
+.p-8 {
+  padding: 2rem !important;
+}
+
+.text-white {
+  color: #FFFFFF !important;
+}
+
+.text-black {
+  color: #000000 !important;
 } 
