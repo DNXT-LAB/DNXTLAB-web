@@ -2,12 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 html, body {
   margin: 0;
   padding: 0;
@@ -21,4 +15,78 @@ html, body {
   height: 100vh;
   width: 100vw;
   background-color: #000000;
+}
+
+@layer utilities {
+  .text-logo-size {
+    font-size: clamp(3rem, 12vw, 8rem);
+  }
+  
+  .text-main-title {
+    font-size: clamp(2.5rem, 7vw, 8.5rem);
+  }
+  
+  .text-description {
+    font-size: clamp(1.25rem, 2.5vw, 2rem);
+  }
+  
+  .text-button {
+    font-size: clamp(16px, 2vw, 22px);
+  }
+  
+  .text-right-content {
+    font-size: clamp(1.5rem, 3vw, 2.375rem);
+  }
+  
+  .logo-size {
+    height: clamp(3rem, 12vw, 8rem);
+    width: auto;
+  }
+  
+  .button-size {
+    width: clamp(200px, 20vw, 258px);
+    height: clamp(60px, 8vw, 70px);
+  }
+  
+  .svg-size {
+    width: clamp(28px, 3vw, 37px);
+    height: clamp(28px, 3vw, 37px);
+  }
+  
+  .max-w-title {
+    max-width: 1259px;
+  }
+  
+  .max-w-description {
+    max-width: 617px;
+  }
+  
+  .max-w-right {
+    max-width: 557px;
+  }
+  
+  .line-height-90 {
+    line-height: 90%;
+  }
+  
+  .line-height-110 {
+    line-height: 110%;
+  }
+  
+  .font-morien {
+    font-family: 'Morien', sans-serif;
+  }
+  
+  .font-inter {
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .text-animation-initial {
+    color: #6B7280;
+  }
+  
+  .text-animation-active {
+    color: #FFFFFF;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+  }
 } 

@@ -1,129 +1,24 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
-import Image from 'next/image'
+import React from 'react'
+import { useLoadingAnimation } from '../hooks/useLoadingAnimation'
+import LoadingAnimation from '../components/LoadingAnimation'
+import VideoContent from '../components/VideoContent'
 
 export default function Home() {
-  const [mounted, setMounted] = useState(false)
-  const [phase, setPhase] = useState<'initial' | 'animating' | 'video'>('initial')
-  const [animatedLetters, setAnimatedLetters] = useState<boolean[]>([])
+  const { mounted, phase, animatedLetters, letters } = useLoadingAnimation()
 
-  const text = "DNXT LAB"
-  const letters = text.split('')
-
-  useEffect(() => {
-    setMounted(true)
-    // Inicializar array de letras animadas
-    setAnimatedLetters(new Array(letters.length).fill(false))
-
-    // Después de 1.5 segundos, comenzar la animación
-    const initialTimer = setTimeout(() => {
-      setPhase('animating')
-      
-      // Animar letras de izquierda a derecha
-      letters.forEach((_, index) => {
-        setTimeout(() => {
-          setAnimatedLetters(prev => {
-            const newArray = [...prev]
-            newArray[index] = true
-            console.log(`Animando letra ${index}: ${letters[index]}`)
-            return newArray
-          })
-        }, index * 120) // 120ms de retraso entre cada letra para efecto más fluido
-      })
-
-      // Después de que todas las letras estén animadas, mostrar video
-      setTimeout(() => {
-        setPhase('video')
-      }, letters.length * 120 + 1500) // Extra 2500ms para completar la animación
-    }, 500)
-
-    return () => clearTimeout(initialTimer)
-  }, [])
-
-  // Prevenir hidratación hasta que el componente esté montado
-  if (!mounted) {
+  // Mostrar animación inicial hasta que se complete
+  if (phase !== 'video') {
     return (
-          <main className="fixed inset-0 w-screen h-screen flex items-center justify-center bg-black overflow-hidden">
-      <div className="flex items-center">
-        <Image 
-          src="/logo.jpg" 
-          alt="DNXT LAB Logo" 
-          width={120}
-          height={120}
-          className="mr-6"
-          style={{ 
-            height: 'clamp(3rem, 12vw, 8rem)',
-            width: 'auto'
-          }}
-        />
-        <div className="flex">
-          {letters.map((letter, index) => (
-            <span
-              key={index}
-              className="font-black text-gray-400"
-              style={{ 
-                fontSize: 'clamp(3rem, 12vw, 8rem)',
-                color: '#333333' 
-              }}
-            >
-              {letter === ' ' ? '\u00A0' : letter}
-            </span>
-          ))}
-        </div>
-      </div>
-    </main>
+      <LoadingAnimation 
+        letters={letters}
+        animatedLetters={animatedLetters}
+        mounted={mounted}
+      />
     )
   }
 
-  if (phase === 'video') {
-    return (
-      <div className="fixed inset-0 w-screen h-screen overflow-hidden bg-black">
-        <video
-          className="w-full h-full object-cover"
-          src="/video.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-        />
-      </div>
-    )
-  }
-
-  return (
-    <main className="fixed inset-0 w-screen h-screen flex items-center justify-center bg-black overflow-hidden">
-      <div className="flex items-center">
-        <Image 
-          src="/logo.jpg" 
-          alt="DNXT LAB Logo" 
-          width={120}
-          height={120}
-          className="mr-6"
-          style={{ 
-            height: 'clamp(3rem, 12vw, 8rem)',
-            width: 'auto'
-          }}
-        />
-        <div className="flex">
-          {letters.map((letter, index) => {
-            const isAnimated = animatedLetters[index]
-            return (
-              <span
-                key={index}
-                className="font-black transition-all duration-1500 ease-out"
-                style={{ 
-                  fontSize: 'clamp(3rem, 12vw, 8rem)',
-                  color: isAnimated ? '#ffffff' : '#333333',
-                  textShadow: isAnimated ? '0 0 8px rgba(84, 79, 79, 0.2)' : 'none'
-                }}
-              >
-                {letter === ' ' ? '\u00A0' : letter}
-              </span>
-            )
-          })}
-        </div>
-      </div>
-    </main>
-  )
+  // Mostrar contenido principal con video
+  return <VideoContent />
 } 
