@@ -28,16 +28,16 @@ export default function VideoContent() {
         <div className="w-full p-10 flex justify-between items-end">
           {/* Contenido izquierdo */}
           <div className="flex flex-col items-start max-w-title">
-            <h1 className="text-white font-bold mb-8 uppercase font-morien text-main-title line-height-90 w-full">
+            <h1 className="!text-white font-bold mb-8 uppercase font-morien text-main-title line-height-90 w-full">
               THE HOME<br />
               SPEAKER MADE<br />
               TO IMPRESS
             </h1>
-            <p className="text-white mb-8 font-inter text-description font-normal line-height-110 w-full max-w-description">
+            <p className="!text-white mb-8 font-inter text-description font-normal line-height-110 w-full max-w-description">
               Captivating no matter where you place it, this powerful home speaker sounds as beautiful as it looks.
             </p>
             <button className="flex items-center justify-center hover:opacity-90 transition-opacity bg-white rounded-full button-size border-none cursor-pointer">
-              <span className="text-black font-morien text-button font-light line-height-110 mr-3">
+              <span className="!text-black font-morien text-button font-light line-height-110 mr-3">
                 GO TO SHOP
               </span>
               <svg className="svg-size" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -49,7 +49,7 @@ export default function VideoContent() {
 
           {/* Contenido derecho */}
           <div className="flex flex-col items-end max-w-right">
-            <p className="text-white text-right font-inter text-right-content font-bold line-height-110 w-full">
+            <p className="!text-white text-right font-inter text-right-content font-bold line-height-110 w-full">
               Applying our Acoustic Lens Technology into the conical speaker body creates a 360-degree sound experience.
             </p>
           </div>
