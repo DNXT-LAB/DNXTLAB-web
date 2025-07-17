@@ -5,12 +5,17 @@ import './globals.css'
 
 const poppins = Poppins({ 
   subsets: ['latin'],
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  display: 'swap',
+  variable: '--font-poppins'
 })
 
 export const metadata: Metadata = {
   title: 'DNXTLAB Web',
-  description: 'DNXTLAB Web Application',
+  description: 'DNXTLAB Web Application - Bespoke AI & Web Design Solutions',
+  keywords: ['AI', 'Web Design', 'Automation', 'Digital Solutions'],
+  authors: [{ name: 'DNXTLAB' }],
+  viewport: 'width=device-width, initial-scale=1',
 }
 
 export default function RootLayout({
@@ -19,8 +24,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="es" className="h-full w-full bg-black">
-      <body className={`${poppins.className} h-full w-full overflow-hidden bg-black`}>
+    <html lang="es" className={`${poppins.variable} h-full w-full bg-black`}>
+      <body 
+        className={`${poppins.className} h-full w-full overflow-hidden bg-black`}
+        suppressHydrationWarning={true}
+      >
         {children}
       </body>
     </html>
