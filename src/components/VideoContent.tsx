@@ -79,6 +79,16 @@ export default function VideoContent() {
   const fifthLevelProgress = Math.max(0, Math.min((scrollY - fifthLevelStart) / 800, 1))
   const fifthSmoothProgress = easeOutCubic(fifthLevelProgress)
   
+  // Sexto nivel de scroll (después de 3400px) - transición final
+  const sixthLevelStart = 3400
+  const sixthLevelProgress = Math.max(0, Math.min((scrollY - sixthLevelStart) / 800, 1))
+  const sixthSmoothProgress = easeOutCubic(sixthLevelProgress)
+  
+  // Séptimo nivel de scroll (después de 4200px) - transición a formulario
+  const seventhLevelStart = 4200
+  const seventhLevelProgress = Math.max(0, Math.min((scrollY - seventhLevelStart) / 800, 1))
+  const seventhSmoothProgress = easeOutCubic(seventhLevelProgress)
+  
   // La pestaña respeta el navbar inicialmente, luego ocupa toda la pantalla
   const navbarHeight = 80 // Altura aproximada del navbar
   const tabTransform = scrollY < scrollThreshold ? 
@@ -406,8 +416,9 @@ export default function VideoContent() {
               height: '100%',
               top: '50%',
               left: '50%',
-              transform: `translate(-50%, -50%)`,
-              opacity: thirdSmoothProgress
+              transform: `translate(-50%, -50%) scale(${1 - (seventhSmoothProgress * 0.5)}) translateY(${-seventhSmoothProgress * 1000}px)`,
+              transformOrigin: 'center top',
+              opacity: thirdSmoothProgress * (1 - seventhSmoothProgress)
             }}
           >
             <div className="flex w-full h-full px-16">
@@ -512,9 +523,9 @@ export default function VideoContent() {
                 <div 
                   className="absolute transition-all duration-700"
                   style={{
-                    left: fifthSmoothProgress > 0 ? '45%' : (fourthSmoothProgress > 0 ? '98%' : '200%'),
+                    left: sixthSmoothProgress > 0 ? '-8%' : (fifthSmoothProgress > 0 ? '45%' : (fourthSmoothProgress > 0 ? '98%' : '200%')),
                     top: '50%',
-                    transform: `translate(-50%, -50%) rotate(${fifthSmoothProgress > 0 ? '0' : '-15'}deg)`,
+                    transform: `translate(-50%, -50%) rotate(${sixthSmoothProgress > 0 ? '15' : (fifthSmoothProgress > 0 ? '0' : '-15')}deg)`,
                     opacity: fourthSmoothProgress > 0 ? 1 : 0
                   }}
                 >
@@ -542,9 +553,9 @@ export default function VideoContent() {
                 <div 
                   className="absolute transition-all duration-700"
                   style={{
-                    left: fifthSmoothProgress > 0 ? '98%' : '200%',
+                    left: sixthSmoothProgress > 0 ? '50%' : (fifthSmoothProgress > 0 ? '98%' : '200%'),
                     top: '50%',
-                    transform: 'translate(-50%, -50%) rotate(-15deg)',
+                    transform: `translate(-50%, -50%) rotate(${sixthSmoothProgress > 0 ? '0' : '-15'}deg)`,
                     opacity: fifthSmoothProgress
                   }}
                 >
@@ -570,10 +581,10 @@ export default function VideoContent() {
               </div>
             </div>
 
-            {/* Botón Services centrado */}
+            {/* Botón Services centrado - SIEMPRE VISIBLE */}
             <div className="absolute left-1/2 -translate-x-1/2" style={{ 
               bottom: '5%',
-              opacity: fourthSmoothProgress > 0 ? 0 : 1,
+              opacity: 1,
               transition: 'opacity 0.5s ease-out'
             }}>
               <button 
@@ -590,6 +601,97 @@ export default function VideoContent() {
                   <path d="M10.5146 18C9.96236 18 9.51465 18.4477 9.51465 19C9.51465 19.5523 9.96236 20 10.5146 20V18ZM28.1923 19.7071C28.5828 19.3166 28.5828 18.6834 28.1923 18.2929L21.8283 11.9289C21.4378 11.5384 20.8047 11.5384 20.4141 11.9289C20.0236 12.3195 20.0236 12.9526 20.4141 13.3431L26.071 19L20.4141 24.6569C20.0236 25.0474 20.0236 25.6805 20.4141 26.0711C20.8047 26.4616 21.4378 26.4616 21.8283 26.0711L28.1923 19.7071ZM10.5146 19V20H27.4852V19V18H10.5146V19Z" fill="black"/>
                 </svg>
               </button>
+            </div>
+          </div>
+
+          {/* SECCION D - Formulario de Contacto */}
+          <div 
+            className="transition-transform duration-700 ease-out"
+            style={{ 
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              top: '50%',
+              left: '50%',
+              transform: `translate(-50%, -50%) translateY(${(1 - seventhSmoothProgress) * 100}px)`,
+              opacity: seventhSmoothProgress
+            }}
+          >
+            <div className="flex w-full h-full px-16">
+              {/* Lado izquierdo - Información de contacto */}
+              <div className="flex-1 flex flex-col justify-center pl-8">
+                <h2 className="text-[90px] font-bold text-black font-morien leading-[1.1] mb-12">
+                  BOOK A CALL<br/>
+                  NOW
+                </h2>
+                
+                <div className="space-y-6 text-xl text-black font-inter">
+                  <div>
+                    <p className="mb-2">Phone Num: +351 999999999</p>
+                  </div>
+                  
+                  <div>
+                    <p className="mb-2">Email: info@diamondnxt.com</p>
+                  </div>
+                  
+                  <div>
+                    <p className="mb-2">Sede: Rua Conselheiro Veloso Cruz, N.º</p>
+                    <p>10 Porto — 4400 092 Vila Nova de Gaia.</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Lado derecho - Formulario */}
+              <div className="flex-1 flex items-center justify-center pr-16">
+                <div 
+                  className="bg-gray-300 rounded-3xl p-12 shadow-2xl"
+                  style={{
+                    width: '600px',
+                    background: 'linear-gradient(135deg, #d1d5db 0%, #9ca3af 100%)',
+                  }}
+                >
+                  <form className="space-y-6">
+                    <div>
+                      <input
+                        type="text"
+                        placeholder="First name"
+                        className="w-full px-6 py-4 bg-white/70 rounded-full text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400 font-inter"
+                      />
+                    </div>
+                    
+                    <div>
+                      <input
+                        type="text"
+                        placeholder="Last Name"
+                        className="w-full px-6 py-4 bg-white/70 rounded-full text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400 font-inter"
+                      />
+                    </div>
+                    
+                    <div>
+                      <input
+                        type="email"
+                        placeholder="Whats your email"
+                        className="w-full px-6 py-4 bg-white/70 rounded-full text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400 font-inter"
+                      />
+                    </div>
+                    
+                    <div>
+                      <textarea
+                        placeholder="Tell us about your project..."
+                        rows={6}
+                        className="w-full px-6 py-4 bg-white/70 rounded-3xl text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400 resize-none font-inter"
+                      />
+                    </div>
+                    
+                    <button 
+                      type="submit"
+                      className="w-full py-4 bg-black text-white rounded-full font-morien text-lg hover:bg-gray-800 transition-colors"
+                    >
+                      Book a call
+                    </button>
+                  </form>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -623,6 +725,16 @@ export default function VideoContent() {
       {/* Contenido extra para la transición de las 3 cartas */}
       <div className="relative z-0 bg-transparent" style={{ height: '400vh' }}>
         {/* Espacio adicional para las transiciones del quinto nivel - 3 cartas finales */}
+      </div>
+      
+      {/* Contenido extra para la transición final */}
+      <div className="relative z-0 bg-transparent" style={{ height: '400vh' }}>
+        {/* Espacio adicional para las transiciones del sexto nivel - transición final */}
+      </div>
+      
+      {/* Contenido extra para el formulario de contacto */}
+      <div className="relative z-0 bg-transparent" style={{ height: '400vh' }}>
+        {/* Espacio adicional para las transiciones del séptimo nivel - formulario */}
       </div>
     </div>
   )
