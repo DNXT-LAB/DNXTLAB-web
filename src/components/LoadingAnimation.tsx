@@ -27,7 +27,7 @@ export default function LoadingAnimation({ letters, animatedLetters, mounted }: 
                   isAnimated ? 'text-animation-active' : 'text-animation-initial'
                 }`}
                 style={{
-                  transitionDelay: mounted ? `${index * 120}ms` : '0ms'
+                  transitionDelay: mounted ? `${index * 0}ms` : '0ms'
                 }}
               >
                 {letter === ' ' ? '\u00A0' : letter}
