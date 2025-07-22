@@ -334,7 +334,7 @@ export default function VideoContent() {
               position: 'absolute',
               width: '100%',
               height: '100%',
-              top: '50%',
+              top: '57%',
               left: '50%',
               transform: `translate(-50%, ${secondSmoothProgress < 0.3 ? '100%' : '-50%'}) translateY(${thirdSmoothProgress > 0.3 ? -(thirdSmoothProgress * 400) : 0}px)`,
               transformOrigin: 'center center',
@@ -346,7 +346,7 @@ export default function VideoContent() {
           >
             <div className="h-full">
               <div className="flex justify-center mb-8 mt-12 mr-40">
-                <p className="text-lg font-inter text-gray-600 uppercase tracking-wider">STRATEGIC FLEXIBILITY</p>
+                <p className="text-3xl font-inter text-gray-600 uppercase tracking-wider">STRATEGIC FLEXIBILITY</p>
               </div>
               
               {/* Video debajo del título */}
@@ -361,7 +361,7 @@ export default function VideoContent() {
                   className="object-cover rounded-2xl shadow-lg"
                   style={{
                     width: '87%',
-                    height: '500px',
+                    height: '430px',
                     background: 'linear-gradient(135deg, #0891b2 0%, #1e40af 50%, #7c3aed 100%)'
                   }}
                 ></video>
@@ -369,10 +369,10 @@ export default function VideoContent() {
               
               {/* Título y descripción */}
               <div className="text-center w-full max-w-[1400px] ml-32">
-                <h2 className="text-5xl font-bold text-black font-morien mb-8 whitespace-nowrap">
-                  Solutions That Evolve With Your Business
+                <h2 className="text-5xl text-black font-morien mb-8">
+                  Solutions That Evolve <span className="font-bold">With Your Business</span>
                 </h2>
-                <p className="text-xl text-gray-600 font-inter mx-auto" style={{ maxWidth: '1200px' }}>
+                <p className="text-xl text-gray-600 font-inter mx-auto" style={{ maxWidth: '1030px' }}>
                   At DNXT LAB, we don't sell tools—we design intelligent frameworks tailored to your operations. By blending technical depth with strategic foresight, we ensure every AI or digital solution evolves with your business and supports long-term growth.
                 </p>
               </div>
