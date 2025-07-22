@@ -13,13 +13,13 @@ export default function VideoContent() {
   // Definir las posiciones exactas de cada sección
   const sectionPositions = [
     0,     // Sección 0: Video completo
-    600,   // Sección A: Primera pestaña
-    1200,  // Sección B: Strategic Flexibility
-    1800,  // Sección C inicial: Texto completo
-    2600,  // Sección C con Card 1 centrada
-    3400,  // Sección C con Card 2 centrada
-    4200,  // Sección C con Card 3 centrada
-    5000   // Sección D: Formulario
+    370,   // Sección A: Primera pestaña (reducido de 600 a 400)
+    1000,  // Sección B: Strategic Flexibility (ajustado proporcionalmente)
+    1600,  // Sección C inicial: Texto completo (ajustado proporcionalmente)
+    2400,  // Sección C con Card 1 centrada (ajustado proporcionalmente)
+    3200,  // Sección C con Card 2 centrada (ajustado proporcionalmente)
+    4000,  // Sección C con Card 3 centrada (ajustado proporcionalmente)
+    4800   // Sección D: Formulario (ajustado proporcionalmente)
   ]
 
   useEffect(() => {
@@ -102,8 +102,8 @@ export default function VideoContent() {
   }, [currentSection, scrollY, isTransitioning])
 
   // Calcular la posición de la pestaña basada en el scroll
-  const scrollThreshold = 100 // Píxeles de scroll antes de que aparezca la pestaña
-  const maxScroll = Math.max(400, windowHeight * 0.5) // Mínimo 400px o 50% de la altura
+  const scrollThreshold = 60 // Píxeles de scroll antes de que aparezca la pestaña (reducido de 100 a 60)
+  const maxScroll = Math.max(300, windowHeight * 0.4) // Mínimo 300px o 40% de la altura (reducido)
   const adjustedScroll = Math.max(0, scrollY - scrollThreshold)
   const tabProgress = Math.max(0, Math.min(adjustedScroll / maxScroll, 1))
   
@@ -113,33 +113,33 @@ export default function VideoContent() {
   // Función easing suave para hacer la animación más natural
   const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3)
   
-  // Segundo nivel de scroll (después de 600px) - transición Sección A → Sección B
-  const secondLevelStart = 600
+  // Segundo nivel de scroll (después de 400px) - transición Sección A → Sección B
+  const secondLevelStart = 400
   const secondLevelProgress = Math.max(0, Math.min((scrollY - secondLevelStart) / 400, 1))
   const secondSmoothProgress = easeOutCubic(secondLevelProgress)
   
-  // Tercer nivel de scroll (después de 1200px) - transición Sección B → Sección C
-  const thirdLevelStart = 1200
+  // Tercer nivel de scroll (después de 1000px) - transición Sección B → Sección C
+  const thirdLevelStart = 1000
   const thirdLevelProgress = Math.max(0, Math.min((scrollY - thirdLevelStart) / 400, 1))
   const thirdSmoothProgress = easeOutCubic(thirdLevelProgress)
   
-  // Cuarto nivel de scroll (después de 1800px) - efecto de carta moviéndose al centro
-  const fourthLevelStart = 1800
+  // Cuarto nivel de scroll (después de 1600px) - efecto de carta moviéndose al centro
+  const fourthLevelStart = 1600
   const fourthLevelProgress = Math.max(0, Math.min((scrollY - fourthLevelStart) / 800, 1)) // Más espacio para las 3 cartas
   const fourthSmoothProgress = easeOutCubic(fourthLevelProgress)
   
-  // Quinto nivel de scroll (después de 2600px) - transición a las 3 cartas
-  const fifthLevelStart = 2600
+  // Quinto nivel de scroll (después de 2400px) - transición a las 3 cartas
+  const fifthLevelStart = 2400
   const fifthLevelProgress = Math.max(0, Math.min((scrollY - fifthLevelStart) / 800, 1))
   const fifthSmoothProgress = easeOutCubic(fifthLevelProgress)
   
-  // Sexto nivel de scroll (después de 3400px) - transición final
-  const sixthLevelStart = 3400
+  // Sexto nivel de scroll (después de 3200px) - transición final
+  const sixthLevelStart = 3200
   const sixthLevelProgress = Math.max(0, Math.min((scrollY - sixthLevelStart) / 800, 1))
   const sixthSmoothProgress = easeOutCubic(sixthLevelProgress)
   
-  // Séptimo nivel de scroll (después de 4200px) - transición a formulario
-  const seventhLevelStart = 4200
+  // Séptimo nivel de scroll (después de 4000px) - transición a formulario
+  const seventhLevelStart = 4000
   const seventhLevelProgress = Math.max(0, Math.min((scrollY - seventhLevelStart) / 800, 1))
   const seventhSmoothProgress = easeOutCubic(seventhLevelProgress)
   
