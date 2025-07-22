@@ -386,7 +386,7 @@ export default function VideoContent() {
               width: '100%',
               height: '100%',
               top: '50%',
-              left: '50%',
+              left: '45%',
               transform: `translate(-50%, -50%) translateY(${seventhSmoothProgress > 0.2 ? -(seventhSmoothProgress * 600) : 0}px)`,
               transformOrigin: 'center center',
               opacity: thirdSmoothProgress < 0.2 ? 0 : (seventhSmoothProgress > 0.2 ? Math.max(0, 1 - (seventhSmoothProgress * 2)) : 1),
@@ -421,7 +421,7 @@ export default function VideoContent() {
                     INFRASTRUCTURE
                   </h2>
                   <div style={{ opacity: fourthSmoothProgress > 0 ? 0 : 1 }} className="transition-opacity duration-500">
-                    <p className="text-[32px] text-gray-800 font-inter mb-12">
+                    <p className="text-[36px] text-black font-inter mb-12">
                       Explore our core expertise
                     </p>
                     
