@@ -10,6 +10,17 @@ export default function VideoContent() {
   const [currentSection, setCurrentSection] = useState(0) // Nueva state para controlar la sección actual
   const [isTransitioning, setIsTransitioning] = useState(false) // Para evitar múltiples transiciones
 
+  // Estados para el formulario de contacto
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    message: ''
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitMessage, setSubmitMessage] = useState('')
+  const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | null>(null)
+
   // Definir las posiciones exactas de cada sección
   const sectionPositions = [
     0,     // Sección 0: Video completo
@@ -190,6 +201,68 @@ export default function VideoContent() {
       
       // Permitir nueva transición después de un breve tiempo
       setTimeout(() => setIsTransitioning(false), 200)
+    }
+  }
+
+  // Funciones para manejar el formulario de contacto
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    
+    // Validación básica
+    if (!formData.firstName || !formData.lastName || !formData.email || !formData.message) {
+      setSubmitMessage('Por favor, completa todos los campos')
+      setSubmitStatus('error')
+      return
+    }
+
+    setIsSubmitting(true)
+    setSubmitMessage('')
+    setSubmitStatus(null)
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        setSubmitMessage('¡Gracias! Tu mensaje ha sido enviado correctamente. Nos pondremos en contacto contigo pronto.')
+        setSubmitStatus('success')
+        // Limpiar el formulario
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          message: ''
+        })
+      } else {
+        setSubmitMessage(data.error || 'Error al enviar el mensaje. Por favor, intenta de nuevo.')
+        setSubmitStatus('error')
+      }
+    } catch (error) {
+      console.error('Error:', error)
+      setSubmitMessage('Error de conexión. Por favor, verifica tu conexión a internet y intenta de nuevo.')
+      setSubmitStatus('error')
+    } finally {
+      setIsSubmitting(false)
+      // Limpiar mensaje después de 5 segundos
+      setTimeout(() => {
+        setSubmitMessage('')
+        setSubmitStatus(null)
+      }, 5000)
     }
   }
 
@@ -674,44 +747,84 @@ export default function VideoContent() {
                     background: 'linear-gradient(135deg, #d1d5db 0%, #9ca3af 100%)',
                   }}
                 >
-                  <form className="space-y-6">
+                  <form className="space-y-6" onSubmit={handleSubmit}>
                     <div>
                       <input
                         type="text"
+                        name="firstName"
+                        value={formData.firstName}
+                        onChange={handleInputChange}
                         placeholder="First name"
-                        className="w-full px-6 py-4 bg-white/70 rounded-full text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400 font-inter"
+                        disabled={isSubmitting}
+                        className="w-full px-6 py-4 bg-white/70 rounded-full text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400 font-inter disabled:opacity-50"
+                        required
                       />
                     </div>
                     
                     <div>
                       <input
                         type="text"
+                        name="lastName"
+                        value={formData.lastName}
+                        onChange={handleInputChange}
                         placeholder="Last Name"
-                        className="w-full px-6 py-4 bg-white/70 rounded-full text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400 font-inter"
+                        disabled={isSubmitting}
+                        className="w-full px-6 py-4 bg-white/70 rounded-full text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400 font-inter disabled:opacity-50"
+                        required
                       />
                     </div>
                     
                     <div>
                       <input
                         type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
                         placeholder="Whats your email"
-                        className="w-full px-6 py-4 bg-white/70 rounded-full text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400 font-inter"
+                        disabled={isSubmitting}
+                        className="w-full px-6 py-4 bg-white/70 rounded-full text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400 font-inter disabled:opacity-50"
+                        required
                       />
                     </div>
                     
                     <div>
                       <textarea
+                        name="message"
+                        value={formData.message}
+                        onChange={handleInputChange}
                         placeholder="Tell us about your project..."
                         rows={6}
-                        className="w-full px-6 py-4 bg-white/70 rounded-3xl text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400 resize-none font-inter"
+                        disabled={isSubmitting}
+                        className="w-full px-6 py-4 bg-white/70 rounded-3xl text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400 resize-none font-inter disabled:opacity-50"
+                        required
                       />
                     </div>
                     
+                    {/* Mensaje de respuesta */}
+                    {submitMessage && (
+                      <div className={`p-4 rounded-2xl text-center font-inter ${
+                        submitStatus === 'success' 
+                          ? 'bg-green-100 text-green-800 border border-green-300' 
+                          : 'bg-red-100 text-red-800 border border-red-300'
+                      }`}>
+                        {submitMessage}
+                      </div>
+                    )}
+                    
                     <button 
                       type="submit"
-                      className="w-full py-4 bg-black text-white rounded-full font-morien text-lg hover:bg-gray-800 transition-colors"
+                      disabled={isSubmitting}
+                      className="w-full py-4 bg-black text-white rounded-full font-morien text-lg hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                     >
-                      Book a call
+                      {isSubmitting ? (
+                        <>
+                          <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          Enviando...
+                        </>
+                      ) : 'Book a call'}
                     </button>
                   </form>
                 </div>
