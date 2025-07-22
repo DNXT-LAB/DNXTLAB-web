@@ -175,6 +175,24 @@ export default function VideoContent() {
   
   // Variables simplificadas para las transiciones
 
+  // Función para navegar a una sección específica
+  const navigateToSection = (targetSection: number) => {
+    if (targetSection >= 0 && targetSection < sectionPositions.length) {
+      // Navegación directa e inmediata
+      setIsTransitioning(true)
+      setCurrentSection(targetSection)
+      
+      // Actualizar scrollY directamente a la posición de destino
+      const targetPosition = sectionPositions[targetSection]
+      if (targetPosition !== undefined) {
+        setScrollY(targetPosition)
+      }
+      
+      // Permitir nueva transición después de un breve tiempo
+      setTimeout(() => setIsTransitioning(false), 200)
+    }
+  }
+
   return (
     <div className="relative w-screen bg-black">
       {/* Video Background - Fixed para que siempre esté de fondo */}
@@ -195,7 +213,10 @@ export default function VideoContent() {
       
       {/* Navbar */}
       <div className="fixed top-0 left-0 right-0 z-60 p-8">
-        <Navbar isDark={secondSmoothProgress > 0.3} />
+        <Navbar 
+          isDark={secondSmoothProgress > 0.3} 
+          onNavigateToSection={navigateToSection}
+        />
       </div>
       
       {/* Contenido principal - FIJO para que no se mueva, más abajo a la izquierda */}
