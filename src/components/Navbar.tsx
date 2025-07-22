@@ -18,15 +18,15 @@ export default function Navbar({ isDark = false }: NavbarProps) {
       {/* Logo y nombre a la izquierda */}
       <div className="flex items-center">
         <Image 
-          src="/logo.jpg" 
+          src="/logo2.png" 
           alt="DNXT LAB Logo" 
-          width={32}
-          height={32}
-          className="mr-3"
+          width={70}
+          height={70}
+          className=""
           priority
           quality={90}
         />
-        <span className={`text-lg font-semibold transition-colors duration-500 ${
+        <span className={`text-4xl font-bold transition-colors duration-500 ${
           isDark ? 'text-black' : 'text-white'
         }`}>DNXT LAB</span>
       </div>

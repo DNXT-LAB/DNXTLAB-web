@@ -7,6 +7,20 @@ export default function VideoContent() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [scrollY, setScrollY] = useState(0)
   const [windowHeight, setWindowHeight] = useState(800) // Valor por defecto
+  const [currentSection, setCurrentSection] = useState(0) // Nueva state para controlar la sección actual
+  const [isTransitioning, setIsTransitioning] = useState(false) // Para evitar múltiples transiciones
+
+  // Definir las posiciones exactas de cada sección
+  const sectionPositions = [
+    0,     // Sección 0: Video completo
+    600,   // Sección A: Primera pestaña
+    1200,  // Sección B: Strategic Flexibility
+    1800,  // Sección C inicial: Texto completo
+    2600,  // Sección C con Card 1 centrada
+    3400,  // Sección C con Card 2 centrada
+    4200,  // Sección C con Card 3 centrada
+    5000   // Sección D: Formulario
+  ]
 
   useEffect(() => {
     const video = videoRef.current
@@ -24,9 +38,24 @@ export default function VideoContent() {
   }, [])
 
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY
-      setScrollY(currentScrollY)
+    const handleWheel = (e: WheelEvent) => {
+      e.preventDefault()
+      
+      // Evitar múltiples transiciones rápidas
+      if (isTransitioning) return
+      
+      setIsTransitioning(true)
+      
+      if (e.deltaY > 0) {
+        // Scroll hacia abajo
+        setCurrentSection(prev => Math.min(prev + 1, sectionPositions.length - 1))
+      } else {
+        // Scroll hacia arriba
+        setCurrentSection(prev => Math.max(prev - 1, 0))
+      }
+      
+      // Permitir nueva transición después de 800ms
+      setTimeout(() => setIsTransitioning(false), 800)
     }
 
     const handleResize = () => {
@@ -34,17 +63,43 @@ export default function VideoContent() {
     }
 
     if (typeof window !== 'undefined') {
-      window.addEventListener('scroll', handleScroll, { passive: true })
+      // Actualizar scrollY basado en la sección actual con transición suave
+      const targetPosition = sectionPositions[currentSection]
+      if (targetPosition !== undefined) {
+        // Transición suave al nuevo scroll
+        const startPosition = scrollY
+        const duration = 800
+        const startTime = performance.now()
+        
+        const animateScroll = (currentTime: number) => {
+          const elapsed = currentTime - startTime
+          const progress = Math.min(elapsed / duration, 1)
+          
+          // Easing function (ease-out-cubic)
+          const easeProgress = 1 - Math.pow(1 - progress, 3)
+          
+          const newScrollY = startPosition + (targetPosition - startPosition) * easeProgress
+          setScrollY(newScrollY)
+          
+          if (progress < 1) {
+            requestAnimationFrame(animateScroll)
+          }
+        }
+        
+        requestAnimationFrame(animateScroll)
+      }
+      
+      window.addEventListener('wheel', handleWheel, { passive: false })
       window.addEventListener('resize', handleResize)
       
       return () => {
-        window.removeEventListener('scroll', handleScroll)
+        window.removeEventListener('wheel', handleWheel)
         window.removeEventListener('resize', handleResize)
       }
     }
     
     return () => {} // Fix para el error de TypeScript
-  }, [])
+  }, [currentSection, scrollY, isTransitioning])
 
   // Calcular la posición de la pestaña basada en el scroll
   const scrollThreshold = 100 // Píxeles de scroll antes de que aparezca la pestaña
@@ -53,11 +108,10 @@ export default function VideoContent() {
   const tabProgress = Math.max(0, Math.min(adjustedScroll / maxScroll, 1))
   
   // Efectos animados basados en scroll - nivel 1 (primera sección)
-  const animationProgress = Math.max(0, Math.min(scrollY / 600, 1)) // Primer nivel
+  // const animationProgress = Math.max(0, Math.min(scrollY / 600, 1)) // Primer nivel
   
   // Función easing suave para hacer la animación más natural
   const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3)
-  const smoothProgress = easeOutCubic(animationProgress)
   
   // Segundo nivel de scroll (después de 600px) - transición Sección A → Sección B
   const secondLevelStart = 600
@@ -99,112 +153,23 @@ export default function VideoContent() {
   const tabHeight = scrollY < secondLevelStart ? `calc(100vh - ${navbarHeight}px)` : '100vh'
   const tabTop = scrollY < secondLevelStart ? `${navbarHeight}px` : '0px'
   
-  // SECCION A - Efecto pirámide: sube, se encoge y converge al centro
+  // SECCION A - Variables para transformaciones
   const sectionATranslateY = scrollY < secondLevelStart ? 0 : -(secondSmoothProgress * 600)
-  const sectionAScale = scrollY < secondLevelStart ? 1 : 1 - (secondSmoothProgress * 0.9) // Se encoge a 10%
-  const sectionAOpacity = scrollY < secondLevelStart ? 1 : 1 - secondSmoothProgress
+  const sectionAScale = scrollY < secondLevelStart ? 1 : 1 - (secondSmoothProgress * 0.9)
   
-  // Convergencia al centro (efecto pirámide)
+  // Video y texto convergen al centro
   const centerX = typeof window !== 'undefined' ? window.innerWidth / 2 : 800
   const centerY = typeof window !== 'undefined' ? window.innerHeight / 2 : 400
-  
-  // Video converge al centro
-  const videoOriginalLeft = 60 + 60 + 306 // left del container + left del video + mitad del width
-  const videoOriginalTop = 154 + 255 // top del video + mitad del height
+  const videoOriginalLeft = 60 + 60 + 306
+  const videoOriginalTop = 154 + 255
   const videoConvergeX = scrollY < secondLevelStart ? 0 : (centerX - videoOriginalLeft) * secondSmoothProgress
   const videoConvergeY = scrollY < secondLevelStart ? 0 : (centerY - videoOriginalTop) * secondSmoothProgress
-  
-  // Texto converge al centro
-  const textOriginalLeft = 60 + 780 + 473 // left del container + left del texto + mitad del width
-  const textOriginalTop = 400 // aproximadamente el centro del texto
+  const textOriginalLeft = 60 + 780 + 473
+  const textOriginalTop = 400
   const textConvergeX = scrollY < secondLevelStart ? 0 : (centerX - textOriginalLeft) * secondSmoothProgress
   const textConvergeY = scrollY < secondLevelStart ? 0 : (centerY - textOriginalTop) * secondSmoothProgress
   
-  // SECCION B - Aparece más rápido cuando A desaparece
-  const sectionBScale = scrollY < secondLevelStart ? 
-    0 : // Completamente invisible hasta que A desaparezca
-    secondSmoothProgress > 0.5 ? 0.1 + ((secondSmoothProgress - 0.5) / 0.5) * 0.9 : 0 // Aparece cuando A está al 50%
-  const sectionBTranslateY = scrollY < secondLevelStart ?
-    400 : // Fuera de pantalla
-    secondSmoothProgress > 0.5 ? (1 - ((secondSmoothProgress - 0.5) / 0.5)) * 400 : 400
-  const sectionBOpacity = scrollY < secondLevelStart ?
-    0 : // Invisible
-    secondSmoothProgress > 0.5 ? (secondSmoothProgress - 0.5) / 0.5 : 0
-  
-  // SECCION B - Efecto pirámide: sube, se encoge y converge al centro (copiado de Sección A)
-  const sectionBFinalTranslateY = scrollY < thirdLevelStart ? sectionBTranslateY : sectionBTranslateY - (thirdSmoothProgress * 600)
-  const sectionBFinalScale = scrollY < thirdLevelStart ? sectionBScale : sectionBScale * (1 - (thirdSmoothProgress * 0.9)) // Se encoge a 10%
-  const sectionBFinalOpacity = scrollY < thirdLevelStart ? sectionBOpacity : sectionBOpacity * (1 - thirdSmoothProgress)
-  
-  // Convergencia al centro para Sección B (efecto pirámide)
-  // Contenido principal converge al centro - usando posiciones dispersas como en A
-  const sectionBContentOriginalLeft = centerX + 300 // Posición inicial desplazada
-  const sectionBContentOriginalTop = centerY + 150 // Posición inicial desplazada
-  const sectionBConvergeX = scrollY < thirdLevelStart ? 0 : (centerX - sectionBContentOriginalLeft) * thirdSmoothProgress
-  const sectionBConvergeY = scrollY < thirdLevelStart ? 0 : (centerY - sectionBContentOriginalTop) * thirdSmoothProgress
-  
-  // SECCION C - Crece de pequeño a grande
-  const sectionCScale = 0.1 + (thirdSmoothProgress * 0.9)
-  const sectionCTranslateY = (1 - thirdSmoothProgress) * 400 // Empieza 400px abajo
-  const sectionCOpacity = thirdSmoothProgress
-  
-  // Posición inicial de la carta 1 (centro vertical, lado derecho)
-  const cardInitialRight = 100 // Lado derecho
-  const cardInitialTop = '50%' // Centro vertical
-  
-  // Sistema de 3 cartas que se mueven de derecha a izquierda con scroll
-  const cardMoveToCenter = scrollY >= fourthLevelStart
-  
-  // Progreso de las cartas (0 = posición inicial, 1 = todas las cartas visibles)
-  const cardProgress = cardMoveToCenter ? fourthSmoothProgress : 0
-  
-  // Posiciones exactas según las imágenes
-  // Card 1: Empieza con inclinación en el centro → Se mueve a la izquierda
-  const card1Left = `calc(50% - 300px - ${cardProgress * 500}px)` // Centro → Izquierda
-  
-  // Card 2: Empieza completamente fuera de la pantalla → Solo visible cuando Card 1 sale del centro
-  const card2Left = `calc(50% + ${800 - cardProgress * 700}px)` // Completamente fuera → Centro
-  
-  // Card 3: Empieza muy lejos → Derecha (más accesible)
-  const card3Left = `calc(50% + ${1200 - cardProgress * 400}px)` // Muy lejos → Derecha
-  
-  // Rotaciones: Card 1 empieza inclinada, se endereza en el centro
-  // Card 1: Inclinada al inicio → Recta en el centro → Inclinada a la izquierda
-  const card1Rotation = cardProgress === 0 ? -8 : // Inclinada al inicio (con título grande)
-    cardProgress < 0.3 ? -8 + (cardProgress * 10 * 0.8) : // Se endereza gradualmente
-    cardProgress < 0.7 ? 0 : // Recta en el centro
-    (cardProgress - 0.7) * 10 * 1.5 // Inclinación hacia adelante a la izquierda
-  
-  // Card 2: Muy inclinada → Recta en el centro
-  const card2Rotation = cardProgress < 0.6 ? -25 + (cardProgress * 1.67 * 25) : // Se endereza hacia el centro
-    cardProgress < 0.8 ? 0 : // Recta en el centro
-    (cardProgress - 0.8) * 5 * (-8) // Ligera inclinación cuando sale del centro
-  
-  // Card 3: Muy inclinada → Se endereza gradualmente
-  const card3Rotation = cardProgress < 0.7 ? -20 : // Más inclinada fuera de pantalla
-    -20 + ((cardProgress - 0.7) * 3.33 * 20) // Se endereza cuando llega
-  
-  // Opacidades progresivas
-  const card1Opacity = sectionCOpacity // Aparece con la sección C
-  const card2Opacity = cardProgress > 0.4 ? // Solo aparece cuando Card 1 sale del centro
-    cardProgress < 0.8 ? (cardProgress - 0.4) * 2.5 : // Se hace visible gradualmente
-    1 : 0 // Invisible cuando Card 1 está centrada
-  const card3Opacity = cardProgress > 0.6 ? Math.min(1, (cardProgress - 0.6) * 2.5) : 0 // Aparece solo al final
-  
-      // Contenido izquierdo desaparece (excepto título)
-    const leftContentOpacity = scrollY < fourthLevelStart ? 1 : 1 - fourthSmoothProgress
-    
-    // Título centrado cuando Card 1 está en el centro, pequeño después
-    const titleScale = scrollY < fourthLevelStart ? 1 : // Tamaño normal al principio
-      cardProgress < 0.3 ? 1 : // Tamaño normal al principio
-      cardProgress < 0.7 ? 0.25 : // Mucho más pequeño cuando Card 1 está en el centro (text-2xl)
-      0.2 // Aún más pequeño después
-    
-    const titleOpacity = scrollY < fourthLevelStart ? 1 : Math.max(0.9, 1 - (fourthSmoothProgress * 0.1)) // Título se mantiene muy visible
-    const titleLeft = scrollY < fourthLevelStart ? 0 : -(fourthSmoothProgress * 100) // Título se mueve un poco a la izquierda
-    
-    // Título centrado verticalmente cuando Card 1 está en el centro
-    const titleCenteredVertically = cardProgress > 0.3 && cardProgress < 0.7
+  // Variables simplificadas para las transiciones
 
   return (
     <div className="relative w-screen bg-black">
@@ -285,7 +250,6 @@ export default function VideoContent() {
         >
           {/* SECCION A */}
           <div 
-            className="transition-transform duration-700 ease-out"
             style={{ 
               position: 'absolute',
               width: '100%',
@@ -293,8 +257,10 @@ export default function VideoContent() {
               top: '0',
               left: '0',
               transform: `translateY(${sectionATranslateY}px) scale(${sectionAScale})`,
-              opacity: secondSmoothProgress < 0.3 ? 1 : 0,
-              visibility: secondSmoothProgress < 0.3 ? 'visible' : 'hidden'
+              opacity: secondSmoothProgress > 0.7 ? 0 : 1 - (secondSmoothProgress * 1.2),
+              visibility: secondSmoothProgress > 0.8 ? 'hidden' : 'visible',
+              transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+              willChange: 'transform, opacity'
             }}
           >
             <video 
@@ -313,7 +279,7 @@ export default function VideoContent() {
                 top: '104px',
                 transform: `translateY(${sectionATranslateY + videoConvergeY}px) translateX(${videoConvergeX}px) scale(${sectionAScale})`,
                 transformOrigin: 'center center',
-                opacity: sectionAOpacity
+                opacity: secondSmoothProgress > 0.7 ? 0 : 1 - (secondSmoothProgress * 1.2)
               }}
             ></video>
             
@@ -328,7 +294,7 @@ export default function VideoContent() {
                 top: 'calc(50% - 853px/2 + 44.5px)',
                 transform: `translateY(${sectionATranslateY + textConvergeY}px) translateX(${textConvergeX}px) scale(${sectionAScale})`,
                 transformOrigin: 'center center',
-                opacity: sectionAOpacity
+                opacity: secondSmoothProgress > 0.7 ? 0 : 1 - (secondSmoothProgress * 1.2)
               }}
             >
               <h2 className="text-7xl font-bold text-black font-morien mb-6 leading-tight">
@@ -359,17 +325,18 @@ export default function VideoContent() {
           
           {/* SECCION B - Strategic Flexibility */}
           <div 
-            className="transition-transform duration-700 ease-out"
             style={{ 
               position: 'absolute',
               width: '100%',
               height: '100%',
               top: '50%',
               left: '50%',
-              transform: `translate(-50%, ${secondSmoothProgress < 0.3 ? '100%' : '-50%'}) scale(${1 - (thirdSmoothProgress * 0.5)}) translateY(${thirdSmoothProgress > 0 ? -thirdSmoothProgress * 1000 : 0}px)`,
-              transformOrigin: 'center top',
-              opacity: secondSmoothProgress < 0.3 ? 0 : (thirdSmoothProgress > 0 ? 1 - thirdSmoothProgress : 1),
-              visibility: secondSmoothProgress < 0.3 ? 'hidden' : 'visible'
+              transform: `translate(-50%, ${secondSmoothProgress < 0.3 ? '100%' : '-50%'}) translateY(${thirdSmoothProgress > 0.3 ? -(thirdSmoothProgress * 400) : 0}px)`,
+              transformOrigin: 'center center',
+              opacity: secondSmoothProgress < 0.2 ? 0 : (thirdSmoothProgress > 0.3 ? Math.max(0, 1 - (thirdSmoothProgress * 1.5)) : 1),
+              visibility: secondSmoothProgress > 0.1 && thirdSmoothProgress < 0.9 ? 'visible' : 'hidden',
+              transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+              willChange: 'transform, opacity'
             }}
           >
             <div className="h-full">
@@ -409,16 +376,18 @@ export default function VideoContent() {
           
           {/* SECCION C */}
           <div 
-            className="transition-transform duration-700 ease-out"
             style={{ 
               position: 'absolute',
               width: '100%',
               height: '100%',
               top: '50%',
               left: '50%',
-              transform: `translate(-50%, -50%) scale(${1 - (seventhSmoothProgress * 0.5)}) translateY(${-seventhSmoothProgress * 1000}px)`,
-              transformOrigin: 'center top',
-              opacity: thirdSmoothProgress * (1 - seventhSmoothProgress)
+              transform: `translate(-50%, -50%) translateY(${seventhSmoothProgress > 0.2 ? -(seventhSmoothProgress * 600) : 0}px)`,
+              transformOrigin: 'center center',
+              opacity: thirdSmoothProgress < 0.2 ? 0 : (seventhSmoothProgress > 0.2 ? Math.max(0, 1 - (seventhSmoothProgress * 2)) : 1),
+              visibility: thirdSmoothProgress > 0.1 && seventhSmoothProgress < 0.9 ? 'visible' : 'hidden',
+              transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+              willChange: 'transform, opacity'
             }}
           >
             <div className="flex w-full h-full px-16">
@@ -426,15 +395,19 @@ export default function VideoContent() {
               <div 
                 className="flex-1 pl-8"
                 style={{
-                  transform: `translateY(${(1 - thirdSmoothProgress) * 200}px) translateX(${(1 - thirdSmoothProgress) * -100}px)`,
-                  opacity: thirdSmoothProgress
+                  transform: `translateY(${thirdSmoothProgress < 0.5 ? (1 - thirdSmoothProgress) * 300 : 0}px) translateX(${thirdSmoothProgress < 0.5 ? (1 - thirdSmoothProgress) * -150 : 0}px)`,
+                  opacity: Math.min(1, thirdSmoothProgress * 2),
+                  transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                  willChange: 'transform, opacity'
                 }}
               >
-                <div className="max-w-[700px] transition-all duration-700"
+                <div className="max-w-[700px]"
                   style={{
                     transform: fourthSmoothProgress > 0 ? 'scale(0.4) translateX(-30%)' : 'scale(1)',
                     transformOrigin: 'left center',
-                    opacity: fifthSmoothProgress > 0 ? 0 : 1
+                    opacity: fifthSmoothProgress > 0 ? 0 : 1,
+                    transition: 'all 0.6s ease-out',
+                    willChange: 'transform, opacity'
                   }}
                 >
                   <h2 className="text-[70px] font-bold text-black font-morien leading-[1.1] mb-6 mt-28">
@@ -487,16 +460,21 @@ export default function VideoContent() {
               <div className="absolute inset-0">
                 {/* Card 1 - WEB DESIGN & DEVELOPMENT */}
                 <div 
-                  className="absolute transition-all duration-700"
+                  className="absolute"
                   style={{
                     position: 'absolute',
                     left: fifthSmoothProgress > 0 ? '-8%' : (fourthSmoothProgress > 0 ? '50%' : '80%'),
                     top: '50%',
                     transform: `
                       translate(-50%, -50%)
-                      rotate(${(fourthSmoothProgress > 0 && fifthSmoothProgress === 0) ? '0' : '15'}deg)
+                      rotate(${(fourthSmoothProgress > 0 && fifthSmoothProgress === 0) ? '0' : '-15'}deg)
+                      translateY(${(1 - thirdSmoothProgress) * 200}px)
+                      translateX(${(1 - thirdSmoothProgress) * 100}px)
                     `,
                     transformOrigin: 'center center',
+                    opacity: thirdSmoothProgress,
+                    transition: 'all 0.6s ease-out',
+                    willChange: 'transform, left, opacity'
                   }}
                 >
                   <div 
@@ -521,12 +499,14 @@ export default function VideoContent() {
 
                 {/* Card 2 - AI INTEGRATIONS */}
                 <div 
-                  className="absolute transition-all duration-700"
+                  className="absolute"
                   style={{
                     left: sixthSmoothProgress > 0 ? '-8%' : (fifthSmoothProgress > 0 ? '45%' : (fourthSmoothProgress > 0 ? '98%' : '200%')),
                     top: '50%',
-                    transform: `translate(-50%, -50%) rotate(${sixthSmoothProgress > 0 ? '15' : (fifthSmoothProgress > 0 ? '0' : '-15')}deg)`,
-                    opacity: fourthSmoothProgress > 0 ? 1 : 0
+                    transform: `translate(-50%, -50%) rotate(${sixthSmoothProgress > 0 ? '-15' : (fifthSmoothProgress > 0 ? '0' : '-15')}deg)`,
+                    opacity: fourthSmoothProgress > 0 ? 1 : 0,
+                    transition: 'all 0.6s ease-out',
+                    willChange: 'transform, left, opacity'
                   }}
                 >
                   <div 
@@ -551,12 +531,14 @@ export default function VideoContent() {
 
                 {/* Card 3 - CYBERSECURITY CONSULTANCY */}
                 <div 
-                  className="absolute transition-all duration-700"
+                  className="absolute"
                   style={{
                     left: sixthSmoothProgress > 0 ? '50%' : (fifthSmoothProgress > 0 ? '98%' : '200%'),
                     top: '50%',
                     transform: `translate(-50%, -50%) rotate(${sixthSmoothProgress > 0 ? '0' : '-15'}deg)`,
-                    opacity: fifthSmoothProgress
+                    opacity: fifthSmoothProgress,
+                    transition: 'all 0.6s ease-out',
+                    willChange: 'transform, left, opacity'
                   }}
                 >
                   <div 
@@ -606,20 +588,29 @@ export default function VideoContent() {
 
           {/* SECCION D - Formulario de Contacto */}
           <div 
-            className="transition-transform duration-700 ease-out"
             style={{ 
               position: 'absolute',
               width: '100%',
               height: '100%',
               top: '50%',
               left: '50%',
-              transform: `translate(-50%, -50%) translateY(${(1 - seventhSmoothProgress) * 100}px)`,
-              opacity: seventhSmoothProgress
+              transform: `translate(-50%, ${seventhSmoothProgress < 0.5 ? '100%' : '-50%'})`,
+              opacity: seventhSmoothProgress < 0.2 ? 0 : Math.min(1, seventhSmoothProgress * 1.5),
+              visibility: seventhSmoothProgress > 0.1 ? 'visible' : 'hidden',
+              transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+              willChange: 'transform, opacity'
             }}
           >
             <div className="flex w-full h-full px-16">
               {/* Lado izquierdo - Información de contacto */}
-              <div className="flex-1 flex flex-col justify-center pl-8">
+              <div className="flex-1 flex flex-col justify-center pl-8"
+                style={{
+                  transform: `translateY(${seventhSmoothProgress < 0.6 ? (1 - seventhSmoothProgress) * 150 : 0}px) translateX(${seventhSmoothProgress < 0.6 ? (1 - seventhSmoothProgress) * -80 : 0}px)`,
+                  opacity: Math.min(1, Math.max(0, (seventhSmoothProgress - 0.2) * 2)),
+                  transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                  willChange: 'transform, opacity'
+                }}
+              >
                 <h2 className="text-[90px] font-bold text-black font-morien leading-[1.1] mb-12">
                   BOOK A CALL<br/>
                   NOW
@@ -642,7 +633,14 @@ export default function VideoContent() {
               </div>
 
               {/* Lado derecho - Formulario */}
-              <div className="flex-1 flex items-center justify-center pr-16">
+              <div className="flex-1 flex items-center justify-center pr-16"
+                style={{
+                  transform: `translateY(${seventhSmoothProgress < 0.6 ? (1 - seventhSmoothProgress) * 150 : 0}px) translateX(${seventhSmoothProgress < 0.6 ? (1 - seventhSmoothProgress) * 80 : 0}px)`,
+                  opacity: Math.min(1, Math.max(0, (seventhSmoothProgress - 0.2) * 2)),
+                  transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                  willChange: 'transform, opacity'
+                }}
+              >
                 <div 
                   className="bg-gray-300 rounded-3xl p-12 shadow-2xl"
                   style={{
