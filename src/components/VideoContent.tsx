@@ -234,7 +234,7 @@ export default function VideoContent() {
         className="fixed left-0 right-0 z-50 transition-all duration-500 ease-out"
         style={{
           transform: `translateY(${tabTransform}%)`,
-          borderRadius: scrollY > scrollThreshold ? '0px' : '24px 24px 0 0',
+          borderRadius: scrollY < secondLevelStart ? '32px' : `${16 * (1 - secondSmoothProgress)}px`, // rounded-2xl en sección A, se quita gradualmente
           height: tabHeight,
           top: tabTop,
           width: '100vw',

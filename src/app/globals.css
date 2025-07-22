@@ -7,6 +7,20 @@ html, body {
   min-height: 100vh;
   width: 100vw;
   background-color: #000000;
+  /* Ocultar scrollbar en todos los navegadores */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+/* Ocultar scrollbar en Chrome, Safari y Edge */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Asegurar que el scroll siga funcionando */
+html {
+  scroll-behavior: smooth;
 }
 
 #__next {
