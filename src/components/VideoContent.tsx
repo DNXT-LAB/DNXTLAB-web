@@ -562,7 +562,7 @@ export default function VideoContent() {
                     left: sixthSmoothProgress > 0 ? '50%' : (fifthSmoothProgress > 0 ? '108%' : '200%'),
                     top: '50%',
                     transform: `translate(-50%, -50%) rotate(${sixthSmoothProgress > 0 ? '0' : '-15'}deg)`,
-                    opacity: fifthSmoothProgress,
+                    opacity: fifthSmoothProgress > 0 ? 1 : 0,
                     transition: 'all 0.6s ease-out',
                     willChange: 'transform, left, opacity'
                   }}
