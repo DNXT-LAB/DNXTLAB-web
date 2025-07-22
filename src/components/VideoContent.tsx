@@ -493,7 +493,7 @@ export default function VideoContent() {
                     top: '50%',
                     transform: `
                       translate(-50%, -50%)
-                      rotate(${(fourthSmoothProgress > 0 && fifthSmoothProgress === 0) ? '0' : '-15'}deg)
+                      rotate(${fifthSmoothProgress > 0 ? '15' : (fourthSmoothProgress > 0 && fifthSmoothProgress === 0) ? '0' : '-15'}deg)
                       translateY(${(1 - thirdSmoothProgress) * 200}px)
                       translateX(${(1 - thirdSmoothProgress) * 100}px)
                     `,
@@ -529,7 +529,7 @@ export default function VideoContent() {
                   style={{
                     left: sixthSmoothProgress > 0 ? '-8%' : (fifthSmoothProgress > 0 ? '50%' : (fourthSmoothProgress > 0 ? '108%' : '200%')),
                     top: '50%',
-                    transform: `translate(-50%, -50%) rotate(${sixthSmoothProgress > 0 ? '-15' : (fifthSmoothProgress > 0 ? '0' : '-15')}deg)`,
+                    transform: `translate(-50%, -50%) rotate(${sixthSmoothProgress > 0 ? '15' : (fifthSmoothProgress > 0 ? '0' : '-15')}deg)`,
                     opacity: fourthSmoothProgress > 0 ? 1 : 0,
                     transition: 'all 0.6s ease-out',
                     willChange: 'transform, left, opacity'
