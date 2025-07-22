@@ -429,7 +429,7 @@ export default function VideoContent() {
               >
                 <div className="max-w-[700px]"
                   style={{
-                    transform: fourthSmoothProgress > 0 ? 'scale(0.4) translateX(-30%)' : 'scale(1)',
+                    transform: fourthSmoothProgress > 0 ? 'scale(0.4) translateX(-10%)' : 'scale(1)',
                     transformOrigin: 'left center',
                     opacity: fifthSmoothProgress > 0 ? 0 : 1,
                     transition: 'all 0.6s ease-out',
@@ -489,7 +489,7 @@ export default function VideoContent() {
                   className="absolute"
                   style={{
                     position: 'absolute',
-                    left: fifthSmoothProgress > 0 ? '-8%' : (fourthSmoothProgress > 0 ? '50%' : '80%'),
+                    left: fifthSmoothProgress > 0 ? '-8%' : (fourthSmoothProgress > 0 ? '50%' : '78%'),
                     top: '50%',
                     transform: `
                       translate(-50%, -50%)
@@ -506,18 +506,18 @@ export default function VideoContent() {
                   <div 
                     className="bg-gradient-to-br from-gray-200 to-gray-400 rounded-3xl p-12 shadow-2xl"
                     style={{
-                      width: '600px',
-                      height: '400px',
+                      width: '800px',
+                      height: '450px',
                       background: 'linear-gradient(135deg, #e5e7eb 0%, #9ca3af 100%)',
                     }}
                   >
                     <h3 className="text-4xl font-bold text-black font-morien mb-4">
-                      WEB DESIGN &<br/>DEVELOPMENT
+                      WEB DESIGN & DEVELOPMENT
                     </h3>
                     <p className="text-2xl text-gray-700 font-inter mb-4">
                       Design That Converts
                     </p>
-                    <p className="text-lg text-gray-600 font-inter leading-relaxed">
+                    <p className="text-lg text-gray-600 font-inter leading-relaxed w-[450px]">
                       From sleek landing pages to complex platforms, we design and develop responsive, high-converting websites that adapt to your brand and scale with your business. Every pixel and line of code is crafted with purpose—to deliver speed, clarity, and results.
                     </p>
                   </div>
@@ -527,7 +527,7 @@ export default function VideoContent() {
                 <div 
                   className="absolute"
                   style={{
-                    left: sixthSmoothProgress > 0 ? '-8%' : (fifthSmoothProgress > 0 ? '45%' : (fourthSmoothProgress > 0 ? '98%' : '200%')),
+                    left: sixthSmoothProgress > 0 ? '-8%' : (fifthSmoothProgress > 0 ? '50%' : (fourthSmoothProgress > 0 ? '108%' : '200%')),
                     top: '50%',
                     transform: `translate(-50%, -50%) rotate(${sixthSmoothProgress > 0 ? '-15' : (fifthSmoothProgress > 0 ? '0' : '-15')}deg)`,
                     opacity: fourthSmoothProgress > 0 ? 1 : 0,
@@ -538,8 +538,8 @@ export default function VideoContent() {
                   <div 
                     className="bg-gradient-to-br from-blue-200 to-blue-400 rounded-3xl p-12 shadow-2xl"
                     style={{
-                      width: '600px',
-                      height: '400px',
+                      width: '800px',
+                      height: '450px',
                       background: 'linear-gradient(135deg, #dbeafe 0%, #60a5fa 100%)',
                     }}
                   >
@@ -559,7 +559,7 @@ export default function VideoContent() {
                 <div 
                   className="absolute"
                   style={{
-                    left: sixthSmoothProgress > 0 ? '50%' : (fifthSmoothProgress > 0 ? '98%' : '200%'),
+                    left: sixthSmoothProgress > 0 ? '50%' : (fifthSmoothProgress > 0 ? '108%' : '200%'),
                     top: '50%',
                     transform: `translate(-50%, -50%) rotate(${sixthSmoothProgress > 0 ? '0' : '-15'}deg)`,
                     opacity: fifthSmoothProgress,
@@ -570,8 +570,8 @@ export default function VideoContent() {
                   <div 
                     className="bg-gradient-to-br from-gray-400 to-gray-600 rounded-3xl p-12 shadow-2xl"
                     style={{
-                      width: '600px',
-                      height: '400px',
+                      width: '800px',
+                      height: '450px',
                       background: 'linear-gradient(135deg, #9ca3af 0%, #4b5563 100%)',
                     }}
                   >
