@@ -489,7 +489,7 @@ export default function VideoContent() {
                   className="absolute"
                   style={{
                     position: 'absolute',
-                    left: fifthSmoothProgress > 0 ? '-8%' : (fourthSmoothProgress > 0 ? '50%' : '78%'),
+                    left: sixthSmoothProgress > 0 ? `${-8 + (-8 - 50) * Math.min(1, sixthSmoothProgress * 1.8)}%` : (fifthSmoothProgress > 0 ? '-8%' : (fourthSmoothProgress > 0 ? '50%' : '78%')),
                     top: '50%',
                     transform: `
                       translate(-50%, -50%)
