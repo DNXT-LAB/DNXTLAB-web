@@ -54,8 +54,8 @@ export default function VideoContent() {
         setCurrentSection(prev => Math.max(prev - 1, 0))
       }
       
-      // Permitir nueva transición después de 800ms
-      setTimeout(() => setIsTransitioning(false), 800)
+      // Permitir nueva transición después de 600ms (más rápido)
+      setTimeout(() => setIsTransitioning(false), 600)
     }
 
     const handleResize = () => {
@@ -68,7 +68,7 @@ export default function VideoContent() {
       if (targetPosition !== undefined) {
         // Transición suave al nuevo scroll
         const startPosition = scrollY
-        const duration = 800
+        const duration = 100 // Duración reducida para transición más rápida
         const startTime = performance.now()
         
         const animateScroll = (currentTime: number) => {
@@ -102,8 +102,8 @@ export default function VideoContent() {
   }, [currentSection, scrollY, isTransitioning])
 
   // Calcular la posición de la pestaña basada en el scroll
-  const scrollThreshold = 60 // Píxeles de scroll antes de que aparezca la pestaña (reducido de 100 a 60)
-  const maxScroll = Math.max(300, windowHeight * 0.4) // Mínimo 300px o 40% de la altura (reducido)
+  const scrollThreshold = 50 // Píxeles de scroll antes de que aparezca la pestaña (más temprano)
+  const maxScroll = Math.max(650, windowHeight * 0.35) // Menos espacio para transición más rápida
   const adjustedScroll = Math.max(0, scrollY - scrollThreshold)
   const tabProgress = Math.max(0, Math.min(adjustedScroll / maxScroll, 1))
   
@@ -113,19 +113,23 @@ export default function VideoContent() {
   // Función easing suave para hacer la animación más natural
   const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3)
   
-  // Segundo nivel de scroll (después de 400px) - transición Sección A → Sección B
-  const secondLevelStart = 400
-  const secondLevelProgress = Math.max(0, Math.min((scrollY - secondLevelStart) / 400, 1))
+  // Función easing más suave para la entrada de la pestaña
+  const easeOutQuart = (t: number) => 1 - Math.pow(1 - t, 4)
+  const smoothTabProgress = easeOutQuart(tabProgress)
+  
+  // Segundo nivel de scroll (después de 370px) - transición Sección A → Sección B
+  const secondLevelStart = 650
+  const secondLevelProgress = Math.max(0, Math.min((scrollY - secondLevelStart) / 300, 1))
   const secondSmoothProgress = easeOutCubic(secondLevelProgress)
   
   // Tercer nivel de scroll (después de 1000px) - transición Sección B → Sección C
   const thirdLevelStart = 1000
-  const thirdLevelProgress = Math.max(0, Math.min((scrollY - thirdLevelStart) / 400, 1))
+  const thirdLevelProgress = Math.max(0, Math.min((scrollY - thirdLevelStart) / 100, 1))
   const thirdSmoothProgress = easeOutCubic(thirdLevelProgress)
   
   // Cuarto nivel de scroll (después de 1600px) - efecto de carta moviéndose al centro
   const fourthLevelStart = 1600
-  const fourthLevelProgress = Math.max(0, Math.min((scrollY - fourthLevelStart) / 800, 1)) // Más espacio para las 3 cartas
+  const fourthLevelProgress = Math.max(0, Math.min((scrollY - fourthLevelStart) / 700, 1)) // Más espacio para las 3 cartas
   const fourthSmoothProgress = easeOutCubic(fourthLevelProgress)
   
   // Quinto nivel de scroll (después de 2400px) - transición a las 3 cartas
@@ -147,7 +151,7 @@ export default function VideoContent() {
   const navbarHeight = 80 // Altura aproximada del navbar
   const tabTransform = scrollY < scrollThreshold ? 
     100 : // Completamente oculta hasta alcanzar threshold
-    100 - (tabProgress * 100) // Aparece gradualmente
+    100 - (smoothTabProgress * 100) // Aparece gradualmente con easing más suave
   
   // Altura de la pestaña: respeta navbar hasta que aparezca sección B
   const tabHeight = scrollY < secondLevelStart ? `calc(100vh - ${navbarHeight}px)` : '100vh'
@@ -235,7 +239,8 @@ export default function VideoContent() {
           top: tabTop,
           width: '100vw',
           backgroundColor: '#FFFFFF',
-          boxShadow: '0 -8px 32px rgba(0, 0, 0, 0.3)'
+          boxShadow: '0 -8px 32px rgba(0, 0, 0, 0.3)',
+          transition: 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-radius 0.4s ease-out, height 0.4s ease-out, top 0.4s ease-out'
         }}
       >
         
@@ -264,7 +269,7 @@ export default function VideoContent() {
             }}
           >
             <video 
-              src="/video.mp4" 
+              src="/video2.mp4" 
               autoPlay 
               loop 
               muted 
@@ -347,7 +352,7 @@ export default function VideoContent() {
               {/* Video debajo del título */}
               <div className="mb-12">
                 <video 
-                  src="/video.mp4" 
+                  src="/video1.mp4" 
                   autoPlay 
                   loop 
                   muted 
