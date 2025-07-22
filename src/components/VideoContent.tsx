@@ -357,10 +357,10 @@ export default function VideoContent() {
               height: '100%',
               top: '57%',
               left: '50%',
-              transform: `translate(-50%, ${secondSmoothProgress < 0.3 ? '100%' : '-50%'}) translateY(${thirdSmoothProgress > 0.3 ? -(thirdSmoothProgress * 400) : 0}px)`,
+              transform: `translate(-50%, ${secondSmoothProgress < 0.3 ? '100%' : '-50%'}) translateY(${thirdSmoothProgress > 0 ? -(thirdSmoothProgress * 900) : 0}px)`,
               transformOrigin: 'center center',
-              opacity: secondSmoothProgress < 0.2 ? 0 : (thirdSmoothProgress > 0.3 ? Math.max(0, 1 - (thirdSmoothProgress * 1.5)) : 1),
-              visibility: secondSmoothProgress > 0.1 && thirdSmoothProgress < 0.9 ? 'visible' : 'hidden',
+              opacity: secondSmoothProgress < 0.2 ? 0 : (thirdSmoothProgress > 0.3 ? Math.max(0, 1 - (thirdSmoothProgress * 2)) : 1),
+              visibility: secondSmoothProgress > 0.1 && thirdSmoothProgress < 0.6 ? 'visible' : 'hidden',
               transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
               willChange: 'transform, opacity'
             }}
@@ -408,10 +408,10 @@ export default function VideoContent() {
               height: '100%',
               top: '50%',
               left: '45%',
-              transform: `translate(-50%, -50%) translateY(${seventhSmoothProgress > 0.2 ? -(seventhSmoothProgress * 600) : 0}px)`,
+              transform: `translate(-50%, ${thirdSmoothProgress < 0.4 ? '100%' : '-50%'}) translateY(${seventhSmoothProgress > 0 ? -(seventhSmoothProgress * 1200) : 0}px)`,
               transformOrigin: 'center center',
-              opacity: thirdSmoothProgress < 0.2 ? 0 : (seventhSmoothProgress > 0.2 ? Math.max(0, 1 - (seventhSmoothProgress * 2)) : 1),
-              visibility: thirdSmoothProgress > 0.1 && seventhSmoothProgress < 0.9 ? 'visible' : 'hidden',
+              opacity: thirdSmoothProgress < 0.4 ? 0 : (seventhSmoothProgress > 0.3 ? Math.max(0, 1 - (seventhSmoothProgress * 2)) : 1),
+              visibility: thirdSmoothProgress > 0.35 && seventhSmoothProgress < 0.6 ? 'visible' : 'hidden',
               transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
               willChange: 'transform, opacity'
             }}
@@ -421,8 +421,8 @@ export default function VideoContent() {
               <div 
                 className="flex-1 pl-8"
                 style={{
-                  transform: `translateY(${thirdSmoothProgress < 0.5 ? (1 - thirdSmoothProgress) * 300 : 0}px) translateX(${thirdSmoothProgress < 0.5 ? (1 - thirdSmoothProgress) * -150 : 0}px)`,
-                  opacity: Math.min(1, thirdSmoothProgress * 2),
+                  transform: `translateY(${thirdSmoothProgress < 0.6 ? (1 - thirdSmoothProgress) * 300 : 0}px) translateX(${thirdSmoothProgress < 0.6 ? (1 - thirdSmoothProgress) * -150 : 0}px)`,
+                  opacity: thirdSmoothProgress < 0.4 ? 0 : Math.min(1, (thirdSmoothProgress - 0.4) * 2.5),
                   transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                   willChange: 'transform, opacity'
                 }}
@@ -498,7 +498,7 @@ export default function VideoContent() {
                       translateX(${(1 - thirdSmoothProgress) * 100}px)
                     `,
                     transformOrigin: 'center center',
-                    opacity: thirdSmoothProgress,
+                    opacity: thirdSmoothProgress < 0.4 ? 0 : Math.min(1, (thirdSmoothProgress - 0.4) * 2.5),
                     transition: 'all 0.6s ease-out',
                     willChange: 'transform, left, opacity'
                   }}
@@ -620,9 +620,9 @@ export default function VideoContent() {
               height: '100%',
               top: '50%',
               left: '50%',
-              transform: `translate(-50%, ${seventhSmoothProgress < 0.5 ? '100%' : '-50%'})`,
-              opacity: seventhSmoothProgress < 0.2 ? 0 : Math.min(1, seventhSmoothProgress * 1.5),
-              visibility: seventhSmoothProgress > 0.1 ? 'visible' : 'hidden',
+              transform: `translate(-50%, ${seventhSmoothProgress < 0.4 ? '100%' : '-50%'})`,
+              opacity: seventhSmoothProgress < 0.4 ? 0 : Math.min(1, (seventhSmoothProgress - 0.4) * 2.5),
+              visibility: seventhSmoothProgress > 0.35 ? 'visible' : 'hidden',
               transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
               willChange: 'transform, opacity'
             }}
@@ -631,8 +631,8 @@ export default function VideoContent() {
               {/* Lado izquierdo - Información de contacto */}
               <div className="flex-1 flex flex-col justify-center pl-8"
                 style={{
-                  transform: `translateY(${seventhSmoothProgress < 0.6 ? (1 - seventhSmoothProgress) * 150 : 0}px) translateX(${seventhSmoothProgress < 0.6 ? (1 - seventhSmoothProgress) * -80 : 0}px)`,
-                  opacity: Math.min(1, Math.max(0, (seventhSmoothProgress - 0.2) * 2)),
+                  transform: `translateY(${seventhSmoothProgress < 0.8 ? (1 - seventhSmoothProgress) * 150 : 0}px) translateX(${seventhSmoothProgress < 0.8 ? (1 - seventhSmoothProgress) * -80 : 0}px)`,
+                  opacity: Math.min(1, Math.max(0, (seventhSmoothProgress - 0.4) * 2.5)),
                   transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                   willChange: 'transform, opacity'
                 }}
@@ -661,8 +661,8 @@ export default function VideoContent() {
               {/* Lado derecho - Formulario */}
               <div className="flex-1 flex items-center justify-center pr-16"
                 style={{
-                  transform: `translateY(${seventhSmoothProgress < 0.6 ? (1 - seventhSmoothProgress) * 150 : 0}px) translateX(${seventhSmoothProgress < 0.6 ? (1 - seventhSmoothProgress) * 80 : 0}px)`,
-                  opacity: Math.min(1, Math.max(0, (seventhSmoothProgress - 0.2) * 2)),
+                  transform: `translateY(${seventhSmoothProgress < 0.8 ? (1 - seventhSmoothProgress) * 150 : 0}px) translateX(${seventhSmoothProgress < 0.8 ? (1 - seventhSmoothProgress) * 80 : 0}px)`,
+                  opacity: Math.min(1, Math.max(0, (seventhSmoothProgress - 0.4) * 2.5)),
                   transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                   willChange: 'transform, opacity'
                 }}
