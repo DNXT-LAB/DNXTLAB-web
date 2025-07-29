@@ -8,9 +8,6 @@ const nextConfig = {
     minimumCacheTTL: 60,
   },
   
-  // Configuración de compilación
-  swcMinify: true,
-  
   // Configuración de headers de seguridad
   async headers() {
     return [

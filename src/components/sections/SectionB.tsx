@@ -49,7 +49,7 @@ const SectionB: React.FC<SectionProps> = ({ progress }) => {
             Solutions That Evolve <span className="font-bold">With Your Business</span>
           </h2>
           <p className="text-xl text-gray-600 font-inter mx-auto" style={{ maxWidth: '1030px' }}>
-            At DNXT LAB, we don't sell tools—we design intelligent frameworks tailored to your operations. By blending technical depth with strategic foresight, we ensure every AI or digital solution evolves with your business and supports long-term growth.
+            At DNXT LAB, we don&apos;t sell tools—we design intelligent frameworks tailored to your operations. By blending technical depth with strategic foresight, we ensure every AI or digital solution evolves with your business and supports long-term growth.
           </p>
         </div>
       </div>

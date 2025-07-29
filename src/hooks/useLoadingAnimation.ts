@@ -61,7 +61,7 @@ export function useLoadingAnimation(): AnimationState {
     return () => {
       timeouts.forEach(timeout => clearTimeout(timeout))
     }
-  }, [letters.length, updateAnimatedLetter])
+  }, [letters, updateAnimatedLetter])
 
   return {
     mounted,

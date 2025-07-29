@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { SECTION_POSITIONS, SCROLL_CONFIG } from '@/utils/constants'
 import { calculateScrollProgress, calculateSectionATransforms, calculateTabProperties } from '@/utils/animations'
-import type { ScrollProgress } from '@/types/animations'
 
 export const useScrollAnimation = () => {
   const [scrollY, setScrollY] = useState(0)
@@ -86,6 +85,8 @@ export const useScrollAnimation = () => {
         window.removeEventListener('resize', handleResize)
       }
     }
+    
+    return () => {}
   }, [currentSection, scrollY, isTransitioning])
 
   // Calcular todos los valores derivados
