@@ -11,49 +11,89 @@ const SectionA: React.FC<SectionAProps> = ({
   textConvergeY
 }) => {
   const { secondSmoothProgress } = progress
-  const [videoLeftPosition, setVideoLeftPosition] = useState('0px')
-  const [textLeftPosition, setTextLeftPosition] = useState('650px')
+  const [scaleFactor, setScaleFactor] = useState(1)
+  const [viewportDimensions, setViewportDimensions] = useState({ width: 1920, height: 1080 })
 
-  // Función para calcular las posiciones left basadas en el tamaño de pantalla
-  const calculatePositions = () => {
+  // Función para calcular el factor de escala basado en el viewport
+  const calculateScaleAndDimensions = () => {
     if (typeof window !== 'undefined') {
       const width = window.innerWidth
-      if (width >= 1580) { // XL screens
-        return {
-          videoLeft: '220px',
-          textLeft: '1000px'
-        }
-      } else { // Desktop normal
-        return {
-          videoLeft: '0px',
-          textLeft: '650px'
-        }
+      const height = window.innerHeight
+      
+      // Base de referencia: 1920x1080 (pantalla estándar)
+      const baseWidth = 1920
+      const baseHeight = 1080
+      
+      // Calcular factor de escala basado en el ancho, con límites mínimos y máximos
+      const widthScale = width / baseWidth
+      const heightScale = height / baseHeight
+      
+      // Usar el menor de los dos factores para mantener proporciones
+      const scale = Math.min(widthScale, heightScale)
+      
+      // Aplicar límites para evitar escalas extremas
+      const clampedScale = Math.max(0.6, Math.min(2.5, scale))
+      
+      return {
+        scaleFactor: clampedScale,
+        width,
+        height
       }
     }
     return {
-      videoLeft: '0px',
-      textLeft: '650px'
+      scaleFactor: 1,
+      width: 1920,
+      height: 1080
     }
   }
 
-  // Effect para actualizar las posiciones cuando cambie el tamaño
+  // Effect para actualizar el factor de escala cuando cambie el tamaño
   useEffect(() => {
-    const updatePositions = () => {
-      const positions = calculatePositions()
-      setVideoLeftPosition(positions.videoLeft)
-      setTextLeftPosition(positions.textLeft)
+    const updateScale = () => {
+      const { scaleFactor: newScale, width, height } = calculateScaleAndDimensions()
+      setScaleFactor(newScale)
+      setViewportDimensions({ width, height })
     }
 
-    // Establecer posiciones iniciales
-    updatePositions()
+    // Establecer escala inicial
+    updateScale()
 
     // Escuchar cambios de tamaño
-    window.addEventListener('resize', updatePositions)
+    window.addEventListener('resize', updateScale)
     
     return () => {
-      window.removeEventListener('resize', updatePositions)
+      window.removeEventListener('resize', updateScale)
     }
   }, [])
+
+  // Calcular dimensiones y posiciones escaladas
+  const getScaledDimensions = () => {
+    // Dimensiones base
+    const baseVideo = { width: 812, height: 700 }
+    const baseText = { width: 1147, height: 753 }
+    
+    // Posiciones base (relativas al viewport)
+    const baseVideoLeft = viewportDimensions.width * 0.11 // ~220px en 1920px
+    const baseVideoTop = 104
+    const baseTextLeft = viewportDimensions.width * 0.52 // ~1000px en 1920px
+    
+    return {
+      video: {
+        width: baseVideo.width * scaleFactor,
+        height: baseVideo.height * scaleFactor,
+        left: baseVideoLeft,
+        top: baseVideoTop * scaleFactor
+      },
+      text: {
+        width: baseText.width * scaleFactor,
+        height: baseText.height * scaleFactor,
+        left: baseTextLeft,
+        top: `calc(50% - ${(753 * scaleFactor)/2}px + ${44.5 * scaleFactor}px)`
+      }
+    }
+  }
+
+  const dimensions = getScaledDimensions()
 
   const sectionStyle: React.CSSProperties = { 
     position: 'absolute',
@@ -70,10 +110,10 @@ const SectionA: React.FC<SectionAProps> = ({
 
   const videoStyle: React.CSSProperties = {
     position: 'absolute',
-    width: '612px',
-    height: '510px',
-    left: videoLeftPosition,
-    top: '104px',
+    width: `${dimensions.video.width}px`,
+    height: `${dimensions.video.height}px`,
+    left: `${dimensions.video.left}px`,
+    top: `${dimensions.video.top}px`,
     transform: `translateY(${sectionATranslateY + videoConvergeY}px) translateX(${videoConvergeX}px) scale(${sectionAScale})`,
     transformOrigin: 'center center',
     opacity: secondSmoothProgress > 0.7 ? 0 : 1 - (secondSmoothProgress * 1.2)
@@ -81,14 +121,36 @@ const SectionA: React.FC<SectionAProps> = ({
 
   const textStyle: React.CSSProperties = { 
     position: 'absolute',
-    width: '947px',
-    height: '753px',
-    left: textLeftPosition,
-    top: 'calc(50% - 853px/2 + 44.5px)',
+    width: `${dimensions.text.width}px`,
+    height: `${dimensions.text.height}px`,
+    left: `${dimensions.text.left}px`,
+    top: dimensions.text.top,
     transform: `translateY(${sectionATranslateY + textConvergeY}px) translateX(${textConvergeX}px) scale(${sectionAScale})`,
     transformOrigin: 'center center',
     opacity: secondSmoothProgress > 0.7 ? 0 : 1 - (secondSmoothProgress * 1.2)
   }
+
+  // Calcular tamaños de fuente escalados
+  const getScaledFontSizes = () => {
+    return {
+      mainTitle: `${6 * scaleFactor}rem`,
+      subtitle: `${3 * scaleFactor}rem`,
+      description: `${1.25 * scaleFactor}rem`,
+      button: `${1.125 * scaleFactor}rem`,
+      buttonPadding: {
+        x: `${2.5 * scaleFactor}rem`,
+        y: `${1.25 * scaleFactor}rem`
+      },
+      gap: `${1 * scaleFactor}rem`,
+      spacing: {
+        mb6: `${1.5 * scaleFactor}rem`,
+        mb8: `${2 * scaleFactor}rem`,
+        mb12: `${3 * scaleFactor}rem`
+      }
+    }
+  }
+
+  const fontSizes = getScaledFontSizes()
 
   return (
     <div style={sectionStyle}>
@@ -109,21 +171,51 @@ const SectionA: React.FC<SectionAProps> = ({
           className="transition-transform duration-700 ease-out"
           style={textStyle}
         >
-          <h2 className="text-7xl font-bold text-black font-morien mb-6 leading-tight">
+          <h2 
+            className="font-bold text-black font-morien leading-tight"
+            style={{ 
+              fontSize: fontSizes.mainTitle, 
+              marginBottom: fontSizes.spacing.mb6 
+            }}
+          >
             WE BUILD WITH<br/>INTELLIGENCE AND<br/>INTENT
           </h2>
-          <p className="text-4xl text-gray-700 font-inter mb-8 leading-tight">
+          <p 
+            className="text-black font-inter leading-tight"
+            style={{ 
+              fontSize: fontSizes.subtitle, 
+              marginBottom: fontSizes.spacing.mb8 
+            }}
+          >
             Smart systems. Seamless design.<br/>Real results.
           </p>
-          <p className="text-xl text-gray-600 font-inter max-w-2xl mb-12 leading-relaxed">
+          <p 
+            className="text-gray-600 font-inter leading-relaxed"
+            style={{ 
+              fontSize: fontSizes.description, 
+              marginBottom: fontSizes.spacing.mb12,
+              maxWidth: `${32 * scaleFactor}rem`
+            }}
+          >
             At DNXT LAB, we create intelligent digital solutions that think, adapt, and scale—combining AI automation, UX strategy, and high-performance web design to help you launch faster, work smarter, and grow stronger.
           </p>
           <button 
-            className="text-lg px-10 py-5 bg-black text-white rounded-full font-morien hover:bg-gray-800 transition-colors flex items-center gap-4"
+            className="bg-black text-white rounded-full font-morien hover:bg-gray-800 transition-colors flex items-center"
+            style={{
+              fontSize: fontSizes.button,
+              paddingLeft: fontSizes.buttonPadding.x,
+              paddingRight: fontSizes.buttonPadding.x,
+              paddingTop: fontSizes.buttonPadding.y,
+              paddingBottom: fontSizes.buttonPadding.y,
+              gap: fontSizes.gap
+            }}
           >
             SERVICES
             <svg 
-              className="w-6 h-6" 
+              style={{ 
+                width: `${1.5 * scaleFactor}rem`, 
+                height: `${1.5 * scaleFactor}rem` 
+              }}
               viewBox="0 0 37 37" 
               fill="none" 
               xmlns="http://www.w3.org/2000/svg"
