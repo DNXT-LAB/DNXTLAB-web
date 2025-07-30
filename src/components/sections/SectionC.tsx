@@ -65,7 +65,8 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
 
   return (
     <div style={sectionStyle}>
-      <div className="flex w-full h-full px-16">
+      {/* Layout Desktop - Solo visible en pantallas >= 1024px */}
+      <div className="hidden lg:flex w-full h-full px-16">
         {/* Contenido principal lado izquierdo */}
         <div className="flex-1 md:pl-8" style={leftContentStyle}>
           <div className="max-w-[330px] md:max-w-[700px]" style={titleStyle}>
@@ -114,8 +115,53 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
           </div>
         </div>
 
-        {/* Contenedor de Cards */}
+        {/* Contenedor de Cards Desktop */}
         <div className="absolute inset-0">
+          <ServiceCard 
+            title="WEB DESIGN & DEVELOPMENT"
+            subtitle="Design That Converts"
+            description="From sleek landing pages to complex platforms, we design and develop responsive, high-converting websites that adapt to your brand and scale with your business. Every pixel and line of code is crafted with purpose—to deliver speed, clarity, and results."
+            gradient="linear-gradient(135deg, #e5e7eb 0%, #9ca3af 100%)"
+            position={card1Position}
+            rotation={card1Rotation}
+            opacity={card1Opacity}
+          />
+          
+          <ServiceCard 
+            title="AI INTEGRATIONS"
+            subtitle="Smarter Business Operations"
+            description="We help businesses unlock the power of AI with custom-built solutions that automate workflows, streamline decision-making, and boost productivity. From internal tools to customer-facing experiences, we design AI that adapts to your goals—and delivers measurable impact."
+            gradient="linear-gradient(135deg, #dbeafe 0%, #60a5fa 100%)"
+            position={card2Position}
+            rotation={card2Rotation}
+            opacity={card2Opacity}
+          />
+          
+          <ServiceCard 
+            title="CYBERSECURITY CONSULTANCY"
+            subtitle="Protect What Matters"
+            description="We help you safeguard your digital infrastructure with proactive cybersecurity strategies. From risk assessments to secure system architecture, we design and implement solutions that prevent threats, ensure compliance, and build long-term resilience across your operations."
+            gradient="linear-gradient(135deg, #9ca3af 0%, #4b5563 100%)"
+            position={card3Position}
+            rotation={card3Rotation}
+            opacity={card3Opacity}
+          />
+        </div>
+      </div>
+
+      {/* Layout Mobile & iPad - Visible en pantallas < 1024px */}
+      <div className="block lg:hidden w-full h-full p-4 md:p-6">
+        {/* Título fijo arriba en mobile/iPad */}
+        <div className="text-center mb-8">
+          <h2 className="text-2xl md:text-4xl font-bold text-black font-morien leading-[1.1]">
+            ELEVATE YOUR<br/>
+            DIGITAL<br/>
+            INFRASTRUCTURE
+          </h2>
+        </div>
+
+        {/* Contenedor de Cards Mobile/iPad - posicionadas debajo del título */}
+        <div className="relative w-full h-[calc(100%-120px)]">
           <ServiceCard 
             title="WEB DESIGN & DEVELOPMENT"
             subtitle="Design That Converts"
@@ -155,11 +201,11 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
         transition: 'opacity 0.5s ease-out'
       }}>
         <button 
-          className="flex items-center gap-4 px-12 py-4 bg-black text-white rounded-full font-morien text-lg hover:bg-gray-800 transition-colors"
+          className="flex items-center gap-4 px-6 py-3 md:px-12 md:py-4 bg-black text-white rounded-full font-morien text-sm md:text-lg hover:bg-gray-800 transition-colors"
         >
           SERVICES
           <svg 
-            className="w-6 h-6" 
+            className="w-4 h-4 md:w-6 md:h-6" 
             viewBox="0 0 37 37" 
             fill="none" 
             xmlns="http://www.w3.org/2000/svg"

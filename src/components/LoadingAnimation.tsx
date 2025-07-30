@@ -8,7 +8,7 @@ export default function LoadingAnimation({ letters, animatedLetters, mounted }: 
       <div className="flex items-center">
         <div className="logo-size">
           <Image 
-            src="/logo2.png" 
+            src="/logo.png" 
             alt="DNXT LAB Logo" 
             width={520}
             height={520}

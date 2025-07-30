@@ -32,20 +32,18 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   return (
     <div style={cardStyle}>
       <div 
-        className="rounded-3xl p-12 shadow-2xl"
+        className="rounded-3xl p-6 md:p-8 lg:p-12 shadow-2xl w-[300px] h-[350px] md:w-[400px] md:h-[400px] lg:w-[800px] lg:h-[450px]"
         style={{
-          width: '800px',
-          height: '450px',
           background: gradient,
         }}
       >
-        <h3 className="text-4xl font-bold text-black font-morien mb-4">
+        <h3 className="text-lg md:text-2xl lg:text-4xl font-bold text-black font-morien mb-2 md:mb-3 lg:mb-4">
           {title}
         </h3>
-        <p className="text-2xl text-gray-700 font-inter mb-4">
+        <p className="text-sm md:text-lg lg:text-2xl text-gray-700 font-inter mb-2 md:mb-3 lg:mb-4">
           {subtitle}
         </p>
-        <p className="text-lg text-gray-600 font-inter leading-relaxed w-[450px]">
+        <p className="text-xs md:text-sm lg:text-lg text-gray-600 font-inter leading-relaxed">
           {description}
         </p>
       </div>
