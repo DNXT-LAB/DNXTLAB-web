@@ -67,15 +67,15 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
     <div style={sectionStyle}>
       <div className="flex w-full h-full px-16">
         {/* Contenido principal lado izquierdo */}
-        <div className="flex-1 pl-8" style={leftContentStyle}>
-          <div className="max-w-[700px]" style={titleStyle}>
-            <h2 className="text-[70px] font-bold text-black font-morien leading-[1.1] mb-6 mt-28">
+        <div className="flex-1 md:pl-8" style={leftContentStyle}>
+          <div className="max-w-[330px] md:max-w-[700px]" style={titleStyle}>
+            <h2 className="text-[32px] text-center md:text-start md:text-[70px] font-bold text-black font-morien leading-[1.1] mb-6 mt-36 md:mt-28">
               ELEVATE YOUR<br/>
               DIGITAL<br/>
               INFRASTRUCTURE
             </h2>
             <div style={{ opacity: servicesOpacity }} className="transition-opacity duration-500">
-              <p className="text-[36px] text-black font-inter mb-12">
+              <p className="text-[24px] md:text-[36px] text-black font-inter mb-12">
                 Explore our core expertise
               </p>
               
