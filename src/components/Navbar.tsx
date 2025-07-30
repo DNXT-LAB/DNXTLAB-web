@@ -31,7 +31,7 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
       {/* Logo y nombre a la izquierda */}
       <div className="flex items-center">
         <Image 
-          src="/logo2.png" 
+          src="/logo.png" 
           alt="DNXT LAB Logo" 
           width={70}
           height={70}
