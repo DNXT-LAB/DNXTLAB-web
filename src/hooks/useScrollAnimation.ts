@@ -26,6 +26,9 @@ export const useScrollAnimation = () => {
 
   // Effect para configurar eventos de scroll y resize (solo una vez)
   useEffect(() => {
+    let touchStartY = 0
+    let touchEndY = 0
+
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault()
       
@@ -42,6 +45,40 @@ export const useScrollAnimation = () => {
       setTimeout(() => setIsTransitioning(false), SCROLL_CONFIG.TRANSITION_TIMEOUT)
     }
 
+    const handleTouchStart = (e: TouchEvent) => {
+      if (e.touches[0]) {
+        touchStartY = e.touches[0].clientY
+      }
+    }
+
+    const handleTouchMove = (e: TouchEvent) => {
+      // No prevenir el comportamiento por defecto aquí para permitir scroll nativo
+      if (e.touches[0]) {
+        touchEndY = e.touches[0].clientY
+      }
+    }
+
+    const handleTouchEnd = (e: TouchEvent) => {
+      if (isTransitioning) return
+      
+      const touchDiff = touchStartY - touchEndY
+      const minSwipeDistance = 50 // Mínima distancia para considerar un swipe
+      
+      if (Math.abs(touchDiff) > minSwipeDistance) {
+        setIsTransitioning(true)
+        
+        if (touchDiff > 0) {
+          // Swipe hacia arriba (scroll down)
+          setCurrentSection(prev => Math.min(prev + 1, SECTION_POSITIONS.length - 1))
+        } else {
+          // Swipe hacia abajo (scroll up)
+          setCurrentSection(prev => Math.max(prev - 1, 0))
+        }
+        
+        setTimeout(() => setIsTransitioning(false), SCROLL_CONFIG.TRANSITION_TIMEOUT)
+      }
+    }
+
     const handleResize = () => {
       setWindowHeight(window.innerHeight)
       setWindowWidth(window.innerWidth)
@@ -52,11 +89,22 @@ export const useScrollAnimation = () => {
       setWindowHeight(window.innerHeight)
       setWindowWidth(window.innerWidth)
       
+      // Eventos de ratón (desktop)
       window.addEventListener('wheel', handleWheel, { passive: false })
+      
+      // Eventos touch (móvil)
+      window.addEventListener('touchstart', handleTouchStart, { passive: true })
+      window.addEventListener('touchmove', handleTouchMove, { passive: true })
+      window.addEventListener('touchend', handleTouchEnd, { passive: true })
+      
+      // Evento resize
       window.addEventListener('resize', handleResize)
       
       return () => {
         window.removeEventListener('wheel', handleWheel)
+        window.removeEventListener('touchstart', handleTouchStart)
+        window.removeEventListener('touchmove', handleTouchMove)
+        window.removeEventListener('touchend', handleTouchEnd)
         window.removeEventListener('resize', handleResize)
       }
     }
