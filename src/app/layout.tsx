@@ -11,6 +11,9 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
+  icons: {
+    icon: '/favicon.png',
+  },
   title: 'DNXTLAB Web',
   description: 'DNXTLAB Web Application - Bespoke AI & Web Design Solutions',
   keywords: ['AI', 'Web Design', 'Automation', 'Digital Solutions'],
