@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import type { SectionAProps } from '@/types/animations'
 
 const SectionA: React.FC<SectionAProps> = ({
@@ -11,6 +11,49 @@ const SectionA: React.FC<SectionAProps> = ({
   textConvergeY
 }) => {
   const { secondSmoothProgress } = progress
+  const [videoLeftPosition, setVideoLeftPosition] = useState('0px')
+  const [textLeftPosition, setTextLeftPosition] = useState('650px')
+
+  // Función para calcular las posiciones left basadas en el tamaño de pantalla
+  const calculatePositions = () => {
+    if (typeof window !== 'undefined') {
+      const width = window.innerWidth
+      if (width >= 1580) { // XL screens
+        return {
+          videoLeft: '220px',
+          textLeft: '1000px'
+        }
+      } else { // Desktop normal
+        return {
+          videoLeft: '0px',
+          textLeft: '650px'
+        }
+      }
+    }
+    return {
+      videoLeft: '0px',
+      textLeft: '650px'
+    }
+  }
+
+  // Effect para actualizar las posiciones cuando cambie el tamaño
+  useEffect(() => {
+    const updatePositions = () => {
+      const positions = calculatePositions()
+      setVideoLeftPosition(positions.videoLeft)
+      setTextLeftPosition(positions.textLeft)
+    }
+
+    // Establecer posiciones iniciales
+    updatePositions()
+
+    // Escuchar cambios de tamaño
+    window.addEventListener('resize', updatePositions)
+    
+    return () => {
+      window.removeEventListener('resize', updatePositions)
+    }
+  }, [])
 
   const sectionStyle: React.CSSProperties = { 
     position: 'absolute',
@@ -29,7 +72,7 @@ const SectionA: React.FC<SectionAProps> = ({
     position: 'absolute',
     width: '612px',
     height: '510px',
-    left: '60px',
+    left: videoLeftPosition,
     top: '104px',
     transform: `translateY(${sectionATranslateY + videoConvergeY}px) translateX(${videoConvergeX}px) scale(${sectionAScale})`,
     transformOrigin: 'center center',
@@ -40,7 +83,7 @@ const SectionA: React.FC<SectionAProps> = ({
     position: 'absolute',
     width: '947px',
     height: '753px',
-    left: '780px',
+    left: textLeftPosition,
     top: 'calc(50% - 853px/2 + 44.5px)',
     transform: `translateY(${sectionATranslateY + textConvergeY}px) translateX(${textConvergeX}px) scale(${sectionAScale})`,
     transformOrigin: 'center center',
@@ -72,7 +115,7 @@ const SectionA: React.FC<SectionAProps> = ({
           <p className="text-4xl text-gray-700 font-inter mb-8 leading-tight">
             Smart systems. Seamless design.<br/>Real results.
           </p>
-          <p className="text-xl text-gray-600 font-inter max-w-3xl mb-12 leading-relaxed">
+          <p className="text-xl text-gray-600 font-inter max-w-2xl mb-12 leading-relaxed">
             At DNXT LAB, we create intelligent digital solutions that think, adapt, and scale—combining AI automation, UX strategy, and high-performance web design to help you launch faster, work smarter, and grow stronger.
           </p>
           <button 
