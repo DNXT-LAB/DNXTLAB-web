@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { SECTION_POSITIONS, SCROLL_CONFIG } from '@/utils/constants'
 import { calculateScrollProgress, calculateSectionATransforms, calculateTabProperties } from '@/utils/animations'
 
@@ -8,6 +8,14 @@ export const useScrollAnimation = () => {
   const [windowWidth, setWindowWidth] = useState(1200)
   const [currentSection, setCurrentSection] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
+  
+  // Ref para acceder a currentSection sin crear dependencia
+  const currentSectionRef = useRef(currentSection)
+  
+  // Actualizar ref cada vez que cambie currentSection
+  useEffect(() => {
+    currentSectionRef.current = currentSection
+  }, [currentSection])
 
   // Función para navegar a una sección específica
   const navigateToSection = useCallback((targetSection: number) => {
@@ -26,10 +34,20 @@ export const useScrollAnimation = () => {
 
   // Effect para configurar eventos de scroll y resize (solo una vez)
   useEffect(() => {
-    let touchStartY = 0
-    let touchEndY = 0
+    // Detectar si estamos en un dispositivo móvil
+    const isMobile = () => {
+      return typeof window !== 'undefined' && (
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+        window.innerWidth < 1024
+      )
+    }
+
+
 
     const handleWheel = (e: WheelEvent) => {
+      // En móvil, no interferir con el scroll nativo
+      if (isMobile()) return
+      
       e.preventDefault()
       
       if (isTransitioning) return
@@ -45,37 +63,19 @@ export const useScrollAnimation = () => {
       setTimeout(() => setIsTransitioning(false), SCROLL_CONFIG.TRANSITION_TIMEOUT)
     }
 
-    const handleTouchStart = (e: TouchEvent) => {
-      if (e.touches[0]) {
-        touchStartY = e.touches[0].clientY
-      }
-    }
-
-    const handleTouchMove = (e: TouchEvent) => {
-      // No prevenir el comportamiento por defecto aquí para permitir scroll nativo
-      if (e.touches[0]) {
-        touchEndY = e.touches[0].clientY
-      }
-    }
-
-    const handleTouchEnd = (e: TouchEvent) => {
-      if (isTransitioning) return
+    const handleNativeScroll = () => {
+      if (!isMobile()) return
       
-      const touchDiff = touchStartY - touchEndY
-      const minSwipeDistance = 50 // Mínima distancia para considerar un swipe
+      const scrollPosition = window.scrollY
+      const windowHeight = window.innerHeight
       
-      if (Math.abs(touchDiff) > minSwipeDistance) {
-        setIsTransitioning(true)
-        
-        if (touchDiff > 0) {
-          // Swipe hacia arriba (scroll down)
-          setCurrentSection(prev => Math.min(prev + 1, SECTION_POSITIONS.length - 1))
-        } else {
-          // Swipe hacia abajo (scroll up)
-          setCurrentSection(prev => Math.max(prev - 1, 0))
-        }
-        
-        setTimeout(() => setIsTransitioning(false), SCROLL_CONFIG.TRANSITION_TIMEOUT)
+      // Calcular qué sección debería estar activa basada en el scroll nativo
+      const sectionIndex = Math.round(scrollPosition / windowHeight)
+      const clampedSection = Math.max(0, Math.min(sectionIndex, SECTION_POSITIONS.length - 1))
+      
+      if (clampedSection !== currentSectionRef.current) {
+        setCurrentSection(clampedSection)
+        setScrollY(SECTION_POSITIONS[clampedSection] || 0)
       }
     }
 
@@ -85,27 +85,40 @@ export const useScrollAnimation = () => {
     }
 
     if (typeof window !== 'undefined') {
-      // Configurar valores iniciales solo una vez
+      // Configurar valores iniciales
       setWindowHeight(window.innerHeight)
       setWindowWidth(window.innerWidth)
       
-      // Eventos de ratón (desktop)
-      window.addEventListener('wheel', handleWheel, { passive: false })
+      if (isMobile()) {
+        // En móvil: usar scroll nativo
+        document.body.style.overflow = 'auto'
+        document.documentElement.style.overflow = 'auto'
+        
+        // Establecer altura del contenido para permitir scroll nativo
+        document.body.style.height = `${SECTION_POSITIONS.length * 100}vh`
+        
+        window.addEventListener('scroll', handleNativeScroll, { passive: true })
+      } else {
+        // En desktop: usar scroll personalizado
+        document.body.style.overflow = 'hidden'
+        document.documentElement.style.overflow = 'hidden'
+        
+        window.addEventListener('wheel', handleWheel, { passive: false })
+      }
       
-      // Eventos touch (móvil)
-      window.addEventListener('touchstart', handleTouchStart, { passive: true })
-      window.addEventListener('touchmove', handleTouchMove, { passive: true })
-      window.addEventListener('touchend', handleTouchEnd, { passive: true })
-      
-      // Evento resize
       window.addEventListener('resize', handleResize)
       
       return () => {
         window.removeEventListener('wheel', handleWheel)
-        window.removeEventListener('touchstart', handleTouchStart)
-        window.removeEventListener('touchmove', handleTouchMove)
-        window.removeEventListener('touchend', handleTouchEnd)
+        window.removeEventListener('scroll', handleNativeScroll)
         window.removeEventListener('resize', handleResize)
+        
+        // Restaurar estilos
+        if (typeof document !== 'undefined') {
+          document.body.style.overflow = ''
+          document.documentElement.style.overflow = ''
+          document.body.style.height = ''
+        }
       }
     }
     
