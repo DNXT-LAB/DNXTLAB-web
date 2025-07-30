@@ -3,49 +3,113 @@ import type { SectionProps } from '@/types/animations'
 
 const SectionB: React.FC<SectionProps> = ({ progress }) => {
   const { secondSmoothProgress, thirdSmoothProgress } = progress
-  const [leftPosition, setLeftPosition] = useState('16%')
+  const [scaleFactor, setScaleFactor] = useState(1)
+  const [viewportDimensions, setViewportDimensions] = useState({ width: 1920, height: 1080 })
 
-  // Función para calcular la posición left basada en el ancho de pantalla
-  const calculateLeftPosition = () => {
+  // Función para calcular el factor de escala basado en el viewport
+  const calculateScaleAndDimensions = () => {
     if (typeof window !== 'undefined') {
       const width = window.innerWidth
-      if (width < 640) { // iPhone
-        return '7%'
-      } else if (width < 1024) { // iPad
-        return '16%'
-      } else if (width < 1540) { // Desktop
-        return '36%'
-      } else {
-        return '50%'
+      const height = window.innerHeight
+      
+      // Base de referencia: 1920x1080 (pantalla estándar)
+      const baseWidth = 1920
+      const baseHeight = 1080
+      
+      // Calcular factor de escala basado en el ancho, con límites mínimos y máximos
+      const widthScale = width / baseWidth
+      const heightScale = height / baseHeight
+      
+      // Usar el menor de los dos factores para mantener proporciones
+      const scale = Math.min(widthScale, heightScale)
+      
+      // Aplicar límites para evitar escalas extremas
+      const clampedScale = Math.max(0.6, Math.min(2.5, scale))
+      
+      return {
+        scaleFactor: clampedScale,
+        width,
+        height
       }
     }
-    return '16%'
+    return {
+      scaleFactor: 1,
+      width: 1920,
+      height: 1080
+    }
   }
 
-  // Effect para actualizar la posición left cuando cambie el tamaño
+  // Effect para actualizar el factor de escala cuando cambie el tamaño
   useEffect(() => {
-    const updateLeftPosition = () => {
-      setLeftPosition(calculateLeftPosition())
+    const updateScale = () => {
+      const { scaleFactor: newScale, width, height } = calculateScaleAndDimensions()
+      setScaleFactor(newScale)
+      setViewportDimensions({ width, height })
     }
 
-    // Establecer posición inicial
-    updateLeftPosition()
+    // Establecer escala inicial
+    updateScale()
 
     // Escuchar cambios de tamaño
-    window.addEventListener('resize', updateLeftPosition)
+    window.addEventListener('resize', updateScale)
     
     return () => {
-      window.removeEventListener('resize', updateLeftPosition)
+      window.removeEventListener('resize', updateScale)
     }
   }, [])
+
+  // Calcular dimensiones y posiciones escaladas
+  const getScaledDimensions = () => {
+    // Posición left relativa al viewport (centrado aproximadamente)
+    const baseLeftPosition = viewportDimensions.width * 0.5 // 50% centrado
+    
+    // Dimensiones del video escaladas
+    const baseVideoWidth = viewportDimensions.width * 0.75 // 75% del ancho de pantalla
+    const baseVideoHeight = 430 // altura base
+    
+    return {
+      leftPosition: baseLeftPosition,
+      video: {
+        width: baseVideoWidth,
+        height: baseVideoHeight * scaleFactor
+      }
+    }
+  }
+
+  const dimensions = getScaledDimensions()
+
+  // Calcular tamaños de fuente escalados
+  const getScaledFontSizes = () => {
+    return {
+      subtitle: `${1.875 * scaleFactor}rem`, // text-3xl base
+      title: `${3 * scaleFactor}rem`, // text-5xl base  
+      description: `${1.25 * scaleFactor}rem`, // text-xl base
+      spacing: {
+        mb6: `${1.5 * scaleFactor}rem`,
+        mb8: `${2 * scaleFactor}rem`,
+        mb12: `${3 * scaleFactor}rem`,
+        mt12: `${3 * scaleFactor}rem`,
+        px4: `${1 * scaleFactor}rem`,
+        px8: `${2 * scaleFactor}rem`,
+        px12: `${3 * scaleFactor}rem`
+      },
+      maxWidth: {
+        sm: `${20 * scaleFactor}rem`, // max-w-sm
+        xl: `${32 * scaleFactor}rem`, // max-w-2xl  
+        xxl: `${56 * scaleFactor}rem` // max-w-4xl
+      }
+    }
+  }
+
+  const fontSizes = getScaledFontSizes()
 
   const sectionStyle: React.CSSProperties = { 
     position: 'absolute',
     width: '100%',
     height: '100%',
     top: '57%',
-    left: leftPosition,
-    transform: `translate(-50%, ${secondSmoothProgress < 0.3 ? '100%' : '-50%'}) translateY(${thirdSmoothProgress > 0 ? -(thirdSmoothProgress * 900) : 0}px)`,
+    left: `${dimensions.leftPosition}px`,
+    transform: `translate(-50%, ${secondSmoothProgress < 0.3 ? '100%' : '-50%'}) translateY(${thirdSmoothProgress > 0 ? -(thirdSmoothProgress * 900 * scaleFactor) : 0}px)`,
     transformOrigin: 'center center',
     opacity: secondSmoothProgress < 0.2 ? 0 : (thirdSmoothProgress > 0.3 ? Math.max(0, 1 - (thirdSmoothProgress * 2)) : 1),
     visibility: secondSmoothProgress > 0.1 && thirdSmoothProgress < 0.6 ? 'visible' : 'hidden',
@@ -56,13 +120,22 @@ const SectionB: React.FC<SectionProps> = ({ progress }) => {
   return (
     <div style={sectionStyle}>
       <div className="h-full">
-        <div className="flex justify-center mb-8 mt-12">
-          <p className="text-xl md:text-2xl lg:text-3xl font-inter text-gray-600 uppercase tracking-wider text-center">
+        <div 
+          className="flex justify-center"
+          style={{ marginBottom: fontSizes.spacing.mb8, marginTop: fontSizes.spacing.mt12 }}
+        >
+          <p 
+            className="font-inter text-gray-600 uppercase tracking-wider text-center"
+            style={{ fontSize: fontSizes.subtitle }}
+          >
             STRATEGIC FLEXIBILITY
           </p>
         </div>
         
-        <div className="mb-12 flex justify-center">
+        <div 
+          className="flex justify-center"
+          style={{ marginBottom: fontSizes.spacing.mb12 }}
+        >
           <video 
             src="/video1.mp4" 
             autoPlay 
@@ -70,18 +143,39 @@ const SectionB: React.FC<SectionProps> = ({ progress }) => {
             muted 
             playsInline 
             preload="auto" 
-            className="object-cover rounded-2xl shadow-lg w-68 md:w-[600px] h-48 md:h-64 lg:w-[75%] lg:h-[430px]"
+            className="object-cover rounded-2xl shadow-lg"
             style={{
+              width: `${dimensions.video.width}px`,
+              height: `${dimensions.video.height}px`,
               background: 'linear-gradient(135deg, #0891b2 0%, #1e40af 50%, #7c3aed 100%)'
             }}
           />
         </div>
         
-        <div className="flex flex-col text-center max-w-[1400px] mx-auto justify-center items-center px-4 md:px-8 lg:px-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl text-black font-morien mb-6 md:mb-8 leading-tight md:w-full">
+        <div 
+          className="flex flex-col text-center mx-auto justify-center items-center"
+          style={{ 
+            maxWidth: `${87.5 * scaleFactor}rem`, // 1400px base
+            paddingLeft: fontSizes.spacing.px12,
+            paddingRight: fontSizes.spacing.px12
+          }}
+        >
+          <h2 
+            className="text-black font-morien leading-tight"
+            style={{ 
+              fontSize: fontSizes.title,
+              marginBottom: fontSizes.spacing.mb8
+            }}
+          >
             Solutions That Evolve <br className="md:hidden" /> <span className="font-bold">With Your Business</span>
           </h2>
-          <p className="text-base md:text-lg lg:text-xl text-gray-600 font-inter mx-auto max-w-sm md:max-w-2xl lg:max-w-4xl leading-relaxed">
+          <p 
+            className="text-gray-600 font-inter mx-auto leading-relaxed"
+            style={{ 
+              fontSize: fontSizes.description,
+              maxWidth: fontSizes.maxWidth.xxl
+            }}
+          >
             At DNXT LAB, we don&apos;t sell tools—we design intelligent frameworks tailored to your operations. By blending technical depth with strategic foresight, we ensure every AI or digital solution evolves with your business and supports long-term growth.
           </p>
         </div>
