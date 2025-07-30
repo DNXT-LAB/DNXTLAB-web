@@ -24,7 +24,7 @@ export const useScrollAnimation = () => {
     }
   }, [])
 
-  // Effect para manejar eventos de scroll y resize
+  // Effect para configurar eventos de scroll y resize (solo una vez)
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault()
@@ -48,11 +48,25 @@ export const useScrollAnimation = () => {
     }
 
     if (typeof window !== 'undefined') {
-      // Configurar valores iniciales
+      // Configurar valores iniciales solo una vez
       setWindowHeight(window.innerHeight)
       setWindowWidth(window.innerWidth)
+      
+      window.addEventListener('wheel', handleWheel, { passive: false })
+      window.addEventListener('resize', handleResize)
+      
+      return () => {
+        window.removeEventListener('wheel', handleWheel)
+        window.removeEventListener('resize', handleResize)
+      }
+    }
+    
+    return () => {}
+  }, [isTransitioning])
 
-      // Actualizar scrollY basado en la sección actual con transición suave
+  // Effect separado para animaciones de scroll basadas en currentSection
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
       const targetPosition = SECTION_POSITIONS[currentSection]
       if (targetPosition !== undefined) {
         const startPosition = scrollY
@@ -76,18 +90,8 @@ export const useScrollAnimation = () => {
         
         requestAnimationFrame(animateScroll)
       }
-      
-      window.addEventListener('wheel', handleWheel, { passive: false })
-      window.addEventListener('resize', handleResize)
-      
-      return () => {
-        window.removeEventListener('wheel', handleWheel)
-        window.removeEventListener('resize', handleResize)
-      }
     }
-    
-    return () => {}
-  }, [currentSection, scrollY, isTransitioning])
+  }, [currentSection])
 
   // Calcular todos los valores derivados
   const progress = calculateScrollProgress(scrollY)
