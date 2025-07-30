@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import ServiceCard, { type ServiceCardProps } from '@/components/ui/ServiceCard'
+import ServiceCard from '@/components/ui/ServiceCard'
 import type { SectionProps } from '@/types/animations'
 
 const SectionC: React.FC<SectionProps> = ({ progress }) => {
