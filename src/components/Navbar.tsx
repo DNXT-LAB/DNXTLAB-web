@@ -27,19 +27,19 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
   }
 
   return (
-    <nav className="w-full flex items-center justify-between transition-colors duration-500" role="navigation" aria-label="Navegación principal">
+    <nav className="w-full flex items-center justify-between transition-colors duration-500 px-12" role="navigation" aria-label="Navegación principal">
       {/* Logo y nombre a la izquierda */}
       <div className="flex items-center">
         <Image 
           src="/logo.png" 
           alt="DNXT LAB Logo" 
-          width={70}
-          height={70}
+          width={150}
+          height={150}
           className=""
           priority
           quality={90}
         />
-        <span className={`text-4xl font-bold transition-colors duration-500 ${
+        <span className={`text-6xl font-bold transition-colors duration-500 ${
           isDark ? 'text-black' : 'text-white'
         }`}>DNXT LAB</span>
       </div>
@@ -47,19 +47,19 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
       {/* Botón hamburguesa a la derecha */}
       <button 
         onClick={handleMenuClick}
-        className={`flex flex-col space-y-1.5 cursor-pointer p-2 focus:outline-none focus:ring-2 focus:ring-opacity-50 rounded transition-colors duration-500 ${
+        className={`flex flex-col space-y-2 pr-20 cursor-pointer focus:outline-none focus:ring-2 focus:ring-opacity-50 rounded transition-colors duration-500 ${
           isDark ? 'focus:ring-black' : 'focus:ring-white'
         }`}
         aria-label="Abrir menú de navegación"
         aria-expanded="false"
       >
-        <div className={`w-7 h-0.5 transition-all duration-500 ${
+        <div className={`w-20 h-1 mb-3 transition-all duration-500 ${
           isDark ? 'bg-black' : 'bg-white'
         }`}></div>
-        <div className={`w-7 h-0.5 transition-all duration-500 ${
+        <div className={`w-20 h-1 mb-3 transition-all duration-500 ${
           isDark ? 'bg-black' : 'bg-white'
         }`}></div>
-        <div className={`w-7 h-0.5 transition-all duration-500 ${
+        <div className={`w-20 h-1 transition-all duration-500 ${
           isDark ? 'bg-black' : 'bg-white'
         }`}></div>
       </button>

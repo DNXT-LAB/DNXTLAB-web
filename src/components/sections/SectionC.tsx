@@ -1,5 +1,5 @@
-import React from 'react'
-import ServiceCard from '@/components/ui/ServiceCard'
+import React, { useState, useEffect } from 'react'
+import ServiceCard, { type ServiceCardProps } from '@/components/ui/ServiceCard'
 import type { SectionProps } from '@/types/animations'
 
 const SectionC: React.FC<SectionProps> = ({ progress }) => {
@@ -11,13 +11,132 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
     seventhSmoothProgress 
   } = progress
 
+  const [scaleFactor, setScaleFactor] = useState(1)
+  const [viewportDimensions, setViewportDimensions] = useState({ width: 1920, height: 1080 })
+
+  // Función para calcular el factor de escala basado en el viewport
+  const calculateScaleAndDimensions = () => {
+    if (typeof window !== 'undefined') {
+      const width = window.innerWidth
+      const height = window.innerHeight
+      
+      // Base de referencia: 1920x1080 (pantalla estándar)
+      const baseWidth = 1920
+      const baseHeight = 1080
+      
+      // Calcular factor de escala basado en el ancho, con límites mínimos y máximos
+      const widthScale = width / baseWidth
+      const heightScale = height / baseHeight
+      
+      // Usar el menor de los dos factores para mantener proporciones
+      const scale = Math.min(widthScale, heightScale)
+      
+      // Aplicar límites para evitar escalas extremas
+      const clampedScale = Math.max(0.6, Math.min(2.5, scale))
+      
+      return {
+        scaleFactor: clampedScale,
+        width,
+        height
+      }
+    }
+    return {
+      scaleFactor: 1,
+      width: 1920,
+      height: 1080
+    }
+  }
+
+  // Effect para actualizar el factor de escala cuando cambie el tamaño
+  useEffect(() => {
+    const updateScale = () => {
+      const { scaleFactor: newScale, width, height } = calculateScaleAndDimensions()
+      setScaleFactor(newScale)
+      setViewportDimensions({ width, height })
+    }
+
+    // Establecer escala inicial
+    updateScale()
+
+    // Escuchar cambios de tamaño
+    window.addEventListener('resize', updateScale)
+    
+    return () => {
+      window.removeEventListener('resize', updateScale)
+    }
+  }, [])
+
+  // Calcular dimensiones y posiciones escaladas
+  const getScaledDimensions = () => {
+    // Posición left relativa al viewport
+    const baseLeftPosition = viewportDimensions.width * 0.45 // 45% como estaba antes
+    
+    return {
+      leftPosition: baseLeftPosition,
+      maxWidths: {
+        small: 330 * scaleFactor, // max-w-[330px]
+        large: 700 * scaleFactor  // max-w-[700px]
+      },
+      padding: {
+        px16: -1 * scaleFactor, // px-16 escalado y aumentado
+        pl8: -10.05 * scaleFactor,  // pl-8 escalado y aumentado
+        p4: -1.5 * scaleFactor,   // p-4 escalado y aumentado
+        p6: -2.2 * scaleFactor  // p-6 escalado y aumentado
+      }
+    }
+  }
+
+  const dimensions = getScaledDimensions()
+
+  // Calcular tamaños de fuente escalados (aumentados para hacer la sección más grande)
+  const getScaledFontSizes = () => {
+    return {
+      mainTitle: {
+        mobile: `${2.5 * scaleFactor}rem`,      // text-2xl aumentado
+        desktop: `${5.5 * scaleFactor}rem` // text-[70px] aumentado considerablemente
+      },
+      mobileTitle: `${3.2 * scaleFactor}rem`, // text-4xl aumentado
+      subtitle: `${2.8 * scaleFactor}rem`,   // text-[36px] aumentado
+      subtitleMobile: `${1.8 * scaleFactor}rem`, // text-[24px] aumentado
+      serviceTitle: `${1.4 * scaleFactor}rem`, // text-lg aumentado
+      serviceDescription: `${1.2 * scaleFactor}rem`, // text-base aumentado
+      button: {
+        mobile: `${1.1 * scaleFactor}rem`, // text-sm aumentado
+        desktop: `${1.4 * scaleFactor}rem` // text-lg aumentado
+      },
+      spacing: {
+        mb1: `${0.4 * scaleFactor}rem`,
+        mb6: `${2.2 * scaleFactor}rem`,
+        mb8: `${3 * scaleFactor}rem`,
+        mb12: `${4.5 * scaleFactor}rem`,
+        mt28: `${8.5 * scaleFactor}rem`,
+        mt36: `${11 * scaleFactor}rem`,
+        gap4: `${1.5 * scaleFactor}rem`,
+        gap6: `${2.2 * scaleFactor}rem`,
+        spaceY6: `${2.2 * scaleFactor}rem`
+      },
+      buttonPadding: {
+        mobile: {
+          x: `${2 * scaleFactor}rem`, // px-6 aumentado
+          y: `${1 * scaleFactor}rem` // py-3 aumentado
+        },
+        desktop: {
+          x: `${4 * scaleFactor}rem`, // px-12 aumentado
+          y: `${1.4 * scaleFactor}rem`  // py-4 aumentado
+        }
+      }
+    }
+  }
+
+  const fontSizes = getScaledFontSizes()
+
   const sectionStyle: React.CSSProperties = { 
     position: 'absolute',
     width: '100%',
     height: '100%',
     top: '50%',
-    left: '45%',
-    transform: `translate(-50%, ${thirdSmoothProgress < 0.4 ? '100%' : '-50%'}) translateY(${seventhSmoothProgress > 0 ? -(seventhSmoothProgress * 1200) : 0}px)`,
+    left: `${dimensions.leftPosition}px`,
+    transform: `translate(-50%, ${thirdSmoothProgress < 0.4 ? '100%' : '-50%'}) translateY(${seventhSmoothProgress > 0 ? -(seventhSmoothProgress * 1200 * scaleFactor) : 0}px)`,
     transformOrigin: 'center center',
     opacity: thirdSmoothProgress < 0.4 ? 0 : (seventhSmoothProgress > 0.3 ? Math.max(0, 1 - (seventhSmoothProgress * 2)) : 1),
     visibility: thirdSmoothProgress > 0.35 && seventhSmoothProgress < 0.6 ? 'visible' : 'hidden',
@@ -26,7 +145,7 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
   }
 
   const leftContentStyle = {
-    transform: `translateY(${thirdSmoothProgress < 0.6 ? (1 - thirdSmoothProgress) * 300 : 0}px) translateX(${thirdSmoothProgress < 0.6 ? (1 - thirdSmoothProgress) * -150 : 0}px)`,
+    transform: `translateY(${thirdSmoothProgress < 0.6 ? (1 - thirdSmoothProgress) * 300 * scaleFactor : 0}px) translateX(${thirdSmoothProgress < 0.6 ? (1 - thirdSmoothProgress) * -150 * scaleFactor : 0}px)`,
     opacity: thirdSmoothProgress < 0.4 ? 0 : Math.min(1, (thirdSmoothProgress - 0.4) * 2.5),
     transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
     willChange: 'transform, opacity'
@@ -45,15 +164,15 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
   // Calcular posiciones y rotaciones de las cards
   const card1Position = sixthSmoothProgress > 0 
     ? `${-8 + (-8 - 50) * Math.min(1, sixthSmoothProgress * 1.8)}%` 
-    : (fifthSmoothProgress > 0 ? '-8%' : (fourthSmoothProgress > 0 ? '50%' : '78%'))
+    : (fifthSmoothProgress > 0 ? '-8%' : (fourthSmoothProgress > 0 ? '50%' : '108%'))
   
   const card2Position = sixthSmoothProgress > 0 
     ? '-8%' 
-    : (fifthSmoothProgress > 0 ? '50%' : (fourthSmoothProgress > 0 ? '108%' : '200%'))
+    : (fifthSmoothProgress > 0 ? '50%' : (fourthSmoothProgress > 0 ? '118%' : '200%'))
   
   const card3Position = sixthSmoothProgress > 0 
     ? '50%' 
-    : (fifthSmoothProgress > 0 ? '108%' : '200%')
+    : (fifthSmoothProgress > 0 ? '118%' : '200%')
 
   const card1Rotation = fifthSmoothProgress > 0 ? '15' : (fourthSmoothProgress > 0 && fifthSmoothProgress === 0) ? '0' : '-15'
   const card2Rotation = sixthSmoothProgress > 0 ? '15' : (fifthSmoothProgress > 0 ? '0' : '-15')
@@ -66,46 +185,101 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
   return (
     <div style={sectionStyle}>
       {/* Layout Desktop - Solo visible en pantallas >= 1024px */}
-      <div className="hidden lg:flex w-full h-full px-16">
+      <div 
+        className="hidden lg:flex w-full h-full"
+        style={{ paddingLeft: `${dimensions.padding.px16}rem`, paddingRight: `${dimensions.padding.px16}rem` }}
+      >
         {/* Contenido principal lado izquierdo */}
-        <div className="flex-1 md:pl-8" style={leftContentStyle}>
-          <div className="max-w-[330px] md:max-w-[700px]" style={titleStyle}>
-            <h2 className="text-[32px] text-center md:text-start md:text-[70px] font-bold text-black font-morien leading-[1.1] mb-6 mt-36 md:mt-28">
+        <div 
+          className="flex-1"
+          style={{ 
+            ...leftContentStyle, 
+            paddingLeft: `${dimensions.padding.pl8}rem` 
+          }}
+        >
+          <div 
+            style={{ 
+              ...titleStyle,
+              maxWidth: `${dimensions.maxWidths.large}px`
+            }}
+          >
+            <h2 
+              className="font-bold text-black font-morien leading-[1.1]"
+              style={{ 
+                fontSize: fontSizes.mainTitle.desktop,
+                marginBottom: fontSizes.spacing.mb6,
+                marginTop: fontSizes.spacing.mt28,
+                textAlign: 'start'
+              }}
+            >
               ELEVATE YOUR<br/>
               DIGITAL<br/>
               INFRASTRUCTURE
             </h2>
             <div style={{ opacity: servicesOpacity }} className="transition-opacity duration-500">
-              <p className="text-[24px] md:text-[36px] text-black font-inter mb-12">
+              <p 
+                className="text-black font-inter"
+                style={{ 
+                  fontSize: fontSizes.subtitle,
+                  marginBottom: fontSizes.spacing.mb12
+                }}
+              >
                 Explore our core expertise
               </p>
               
-              <div className="space-y-6">
+              <div style={{ display: 'flex', flexDirection: 'column', gap: fontSizes.spacing.spaceY6 }}>
                 <div>
-                  <h3 className="text-lg font-morien mb-1">
+                  <h3 
+                    className="font-morien"
+                    style={{ 
+                      fontSize: fontSizes.serviceTitle,
+                      marginBottom: fontSizes.spacing.mb1
+                    }}
+                  >
                     Web Design & Development:
                   </h3>
-                  <p className="text-base text-gray-600 font-inter">
+                  <p 
+                    className="text-gray-600 font-inter"
+                    style={{ fontSize: fontSizes.serviceDescription }}
+                  >
                     Crafting sleek, responsive websites that convert and reflect<br/>
                     your brand with precision.
                   </p>
                 </div>
                 
                 <div>
-                  <h3 className="text-lg font-morien mb-1">
+                  <h3 
+                    className="font-morien"
+                    style={{ 
+                      fontSize: fontSizes.serviceTitle,
+                      marginBottom: fontSizes.spacing.mb1
+                    }}
+                  >
                     AI Integrations
                   </h3>
-                  <p className="text-base text-gray-600 font-inter">
+                  <p 
+                    className="text-gray-600 font-inter"
+                    style={{ fontSize: fontSizes.serviceDescription }}
+                  >
                     Automating workflows, enhancing decision-making, and<br/>
                     unlocking new business capabilities with custom AI agents.
                   </p>
                 </div>
                 
                 <div>
-                  <h3 className="text-lg font-morien mb-1">
+                  <h3 
+                    className="font-morien"
+                    style={{ 
+                      fontSize: fontSizes.serviceTitle,
+                      marginBottom: fontSizes.spacing.mb1
+                    }}
+                  >
                     Cybersecurity Consultancy
                   </h3>
-                  <p className="text-base text-gray-600 font-inter">
+                  <p 
+                    className="text-gray-600 font-inter"
+                    style={{ fontSize: fontSizes.serviceDescription }}
+                  >
                     Protecting your digital assets with proactive strategies and<br/>
                     robust security frameworks tailored to your operations.
                   </p>
@@ -116,7 +290,7 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
         </div>
 
         {/* Contenedor de Cards Desktop */}
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 mt-80">
           <ServiceCard 
             title="WEB DESIGN & DEVELOPMENT"
             subtitle="Design That Converts"
@@ -125,6 +299,7 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
             position={card1Position}
             rotation={card1Rotation}
             opacity={card1Opacity}
+            scaleFactor={scaleFactor}
           />
           
           <ServiceCard 
@@ -135,6 +310,7 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
             position={card2Position}
             rotation={card2Rotation}
             opacity={card2Opacity}
+            scaleFactor={scaleFactor}
           />
           
           <ServiceCard 
@@ -145,15 +321,27 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
             position={card3Position}
             rotation={card3Rotation}
             opacity={card3Opacity}
+            scaleFactor={scaleFactor}
           />
         </div>
       </div>
 
       {/* Layout Mobile & iPad - Visible en pantallas < 1024px */}
-      <div className="block lg:hidden w-full h-full p-4 md:p-6">
+      <div 
+        className="block lg:hidden w-full h-full"
+        style={{ 
+          padding: `${dimensions.padding.p6}rem ${dimensions.padding.p4}rem`
+        }}
+      >
         {/* Título fijo arriba en mobile/iPad */}
-        <div className="text-center mb-8">
-          <h2 className="text-2xl md:text-4xl font-bold text-black font-morien leading-[1.1]">
+        <div 
+          className="text-center"
+          style={{ marginBottom: fontSizes.spacing.mb8 }}
+        >
+          <h2 
+            className="font-bold text-black font-morien leading-[1.1]"
+            style={{ fontSize: fontSizes.mobileTitle }}
+          >
             ELEVATE YOUR<br/>
             DIGITAL<br/>
             INFRASTRUCTURE
@@ -170,6 +358,7 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
             position={card1Position}
             rotation={card1Rotation}
             opacity={card1Opacity}
+            scaleFactor={scaleFactor}
           />
           
           <ServiceCard 
@@ -180,6 +369,7 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
             position={card2Position}
             rotation={card2Rotation}
             opacity={card2Opacity}
+            scaleFactor={scaleFactor}
           />
           
           <ServiceCard 
@@ -190,22 +380,34 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
             position={card3Position}
             rotation={card3Rotation}
             opacity={card3Opacity}
+            scaleFactor={scaleFactor}
           />
         </div>
       </div>
 
       {/* Botón Services centrado */}
       <div className="absolute left-1/2 -translate-x-1/2" style={{ 
-        bottom: '5%',
+        bottom: '-35%',
         opacity: 1,
         transition: 'opacity 0.5s ease-out'
       }}>
         <button 
-          className="flex items-center gap-4 px-6 py-3 md:px-12 md:py-4 bg-black text-white rounded-full font-morien text-sm md:text-lg hover:bg-gray-800 transition-colors"
+          className="flex items-center bg-black text-white rounded-full font-morien hover:bg-gray-800 transition-colors"
+          style={{
+            gap: fontSizes.spacing.gap4,
+            paddingLeft: fontSizes.buttonPadding.desktop.x,
+            paddingRight: fontSizes.buttonPadding.desktop.x,
+            paddingTop: fontSizes.buttonPadding.desktop.y,
+            paddingBottom: fontSizes.buttonPadding.desktop.y,
+            fontSize: fontSizes.button.desktop
+          }}
         >
           SERVICES
           <svg 
-            className="w-4 h-4 md:w-6 md:h-6" 
+            style={{ 
+              width: `${2 * scaleFactor}rem`, 
+              height: `${2 * scaleFactor}rem` 
+            }}
             viewBox="0 0 37 37" 
             fill="none" 
             xmlns="http://www.w3.org/2000/svg"

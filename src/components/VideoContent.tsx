@@ -50,7 +50,7 @@ export default function VideoContent() {
         ref={videoRef}
         className="fixed inset-0 w-full h-full object-cover z-0"
         style={{ 
-          transform: 'scale(1.5)', 
+          transform: 'scale(1.01)', 
           transformOrigin: 'center center' 
         }}
         src="/video.mp4"
