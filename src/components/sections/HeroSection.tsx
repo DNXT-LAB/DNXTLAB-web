@@ -3,7 +3,7 @@ import React from 'react'
 const HeroSection: React.FC = () => {
   return (
     <div className="fixed left-8 z-20" style={{ bottom: '1.5rem' }}>
-      <div className="flex flex-col items-start max-w-title">
+      <div className="flex flex-col items-start">
         <h1 className="force-white-text font-bold mb-8 uppercase font-morien text-main-title line-height-90">
           BESPOKE AI & WEB<br />
           DESIGN SOLUTIONS
