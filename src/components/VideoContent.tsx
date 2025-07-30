@@ -50,7 +50,7 @@ export default function VideoContent() {
         ref={videoRef}
         className="fixed inset-0 w-full h-full object-cover z-0"
         style={{ 
-          transform: 'scale(1.01)', 
+          transform: 'scale(1.1)', 
           transformOrigin: 'center center' 
         }}
         src="/video.mp4"
@@ -63,7 +63,7 @@ export default function VideoContent() {
       />
       
       {/* Overlay para mejorar legibilidad */}
-      <div className="fixed inset-0 bg-black/30 z-10" aria-hidden="true" />
+      <div className="fixed inset-0 bg-black/60 z-10" aria-hidden="true" />
       
       {/* Navbar */}
       <div className="fixed top-0 left-0 right-0 z-60 p-8">
