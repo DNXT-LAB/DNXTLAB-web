@@ -49,44 +49,93 @@ const SectionA: React.FC<SectionAProps> = ({
 
   return (
     <div style={sectionStyle}>
-      <video 
-        src="/video2.mp4" 
-        autoPlay 
-        loop 
-        muted 
-        playsInline 
-        preload="auto" 
-        className="object-cover shadow-2xl transition-transform duration-700 ease-out rounded-2xl"
-        style={videoStyle}
-      />
-      
-      <div 
-        className="transition-transform duration-700 ease-out"
-        style={textStyle}
-      >
-        <h2 className="text-7xl font-bold text-black font-morien mb-6 leading-tight">
-          WE BUILD WITH<br/>INTELLIGENCE AND<br/>INTENT
-        </h2>
-        <p className="text-4xl text-gray-700 font-inter mb-8 leading-tight">
-          Smart systems. Seamless design.<br/>Real results.
-        </p>
-        <p className="text-xl text-gray-600 font-inter max-w-3xl mb-12 leading-relaxed">
-          At DNXT LAB, we create intelligent digital solutions that think, adapt, and scale—combining AI automation, UX strategy, and high-performance web design to help you launch faster, work smarter, and grow stronger.
-        </p>
-        <button 
-          className="text-lg px-10 py-5 bg-black text-white rounded-full font-morien hover:bg-gray-800 transition-colors flex items-center gap-4"
+      {/* Layout Desktop - Solo visible en pantallas >= 1024px */}
+      <div className="hidden lg:block">
+        <video 
+          src="/video2.mp4" 
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          preload="auto" 
+          className="object-cover shadow-2xl transition-transform duration-700 ease-out rounded-2xl"
+          style={videoStyle}
+        />
+        
+        <div 
+          className="transition-transform duration-700 ease-out"
+          style={textStyle}
         >
-          SERVICES
-          <svg 
-            className="w-6 h-6" 
-            viewBox="0 0 37 37" 
-            fill="none" 
-            xmlns="http://www.w3.org/2000/svg"
+          <h2 className="text-7xl font-bold text-black font-morien mb-6 leading-tight">
+            WE BUILD WITH<br/>INTELLIGENCE AND<br/>INTENT
+          </h2>
+          <p className="text-4xl text-gray-700 font-inter mb-8 leading-tight">
+            Smart systems. Seamless design.<br/>Real results.
+          </p>
+          <p className="text-xl text-gray-600 font-inter max-w-3xl mb-12 leading-relaxed">
+            At DNXT LAB, we create intelligent digital solutions that think, adapt, and scale—combining AI automation, UX strategy, and high-performance web design to help you launch faster, work smarter, and grow stronger.
+          </p>
+          <button 
+            className="text-lg px-10 py-5 bg-black text-white rounded-full font-morien hover:bg-gray-800 transition-colors flex items-center gap-4"
           >
-            <circle cx="18.5" cy="18.5" r="18.5" fill="white"/>
-            <path d="M10.5146 18C9.96236 18 9.51465 18.4477 9.51465 19C9.51465 19.5523 9.96236 20 10.5146 20V18ZM28.1923 19.7071C28.5828 19.3166 28.5828 18.6834 28.1923 18.2929L21.8283 11.9289C21.4378 11.5384 20.8047 11.5384 20.4141 11.9289C20.0236 12.3195 20.0236 12.9526 20.4141 13.3431L26.071 19L20.4141 24.6569C20.0236 25.0474 20.0236 25.6805 20.4141 26.0711C20.8047 26.4616 21.4378 26.4616 21.8283 26.0711L28.1923 19.7071ZM10.5146 19V20H27.4852V19V18H10.5146V19Z" fill="black"/>
-          </svg>
-        </button>
+            SERVICES
+            <svg 
+              className="w-6 h-6" 
+              viewBox="0 0 37 37" 
+              fill="none" 
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="18.5" cy="18.5" r="18.5" fill="white"/>
+              <path d="M10.5146 18C9.96236 18 9.51465 18.4477 9.51465 19C9.51465 19.5523 9.96236 20 10.5146 20V18ZM28.1923 19.7071C28.5828 19.3166 28.5828 18.6834 28.1923 18.2929L21.8283 11.9289C21.4378 11.5384 20.8047 11.5384 20.4141 11.9289C20.0236 12.3195 20.0236 12.9526 20.4141 13.3431L26.071 19L20.4141 24.6569C20.0236 25.0474 20.0236 25.6805 20.4141 26.0711C20.8047 26.4616 21.4378 26.4616 21.8283 26.0711L28.1923 19.7071ZM10.5146 19V20H27.4852V19V18H10.5146V19Z" fill="black"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      {/* Layout Mobile & iPad - Visible en pantallas < 1024px */}
+      <div className="block lg:hidden w-full h-full mt-12 flex flex-col">
+        {/* Video arriba con padding */}
+        <div className="w-full mb-6 md:mb-8">
+          <video 
+            src="/video2.mp4" 
+            autoPlay 
+            loop 
+            muted 
+            playsInline 
+            preload="auto" 
+            className="w-68 md:w-[600px] h-48 md:h-64 object-cover shadow-2xl rounded-2xl"
+          />
+        </div>
+        
+        {/* Texto abajo */}
+        <div className="flex-1 flex flex-col">
+          <h2 className="text-3xl md:text-5xl font-bold text-black font-morien mb-4 md:mb-6 leading-tight">
+            WE BUILD WITH<br/>INTELLIGENCE AND<br/>INTENT
+          </h2>
+          
+          <p className="text-lg md:text-2xl text-gray-700 font-inter mb-4 md:mb-6 leading-tight">
+            Smart systems. Seamless design.<br/>Real results.
+          </p>
+          
+          <p className="text-sm md:text-base text-gray-600 font-inter mb-6 md:mb-8 leading-relaxed max-w-[300px] md:max-w-[600px]">
+            At DNXT LAB, we create intelligent digital solutions that think, adapt, and scale—combining AI automation, UX strategy, and high-performance web design to help you launch faster, work smarter, and grow stronger.
+          </p>
+          
+          <button 
+            className="text-sm md:text-base px-6 py-3 md:px-8 md:py-4 bg-black text-white rounded-full font-morien hover:bg-gray-800 transition-colors flex items-center gap-3 self-start"
+          >
+            SERVICES
+            <svg 
+              className="w-4 h-4 md:w-5 md:h-5" 
+              viewBox="0 0 37 37" 
+              fill="none" 
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="18.5" cy="18.5" r="18.5" fill="white"/>
+              <path d="M10.5146 18C9.96236 18 9.51465 18.4477 9.51465 19C9.51465 19.5523 9.96236 20 10.5146 20V18ZM28.1923 19.7071C28.5828 19.3166 28.5828 18.6834 28.1923 18.2929L21.8283 11.9289C21.4378 11.5384 20.8047 11.5384 20.4141 11.9289C20.0236 12.3195 20.0236 12.9526 20.4141 13.3431L26.071 19L20.4141 24.6569C20.0236 25.0474 20.0236 25.6805 20.4141 26.0711C20.8047 26.4616 21.4378 26.4616 21.8283 26.0711L28.1923 19.7071ZM10.5146 19V20H27.4852V19V18H10.5146V19Z" fill="black"/>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   )
