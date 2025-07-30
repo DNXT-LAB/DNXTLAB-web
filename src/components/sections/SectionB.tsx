@@ -13,8 +13,10 @@ const SectionB: React.FC<SectionProps> = ({ progress }) => {
         return '7%'
       } else if (width < 1024) { // iPad
         return '16%'
-      } else { // Desktop
+      } else if (width < 1540) { // Desktop
         return '36%'
+      } else {
+        return '50%'
       }
     }
     return '16%'
