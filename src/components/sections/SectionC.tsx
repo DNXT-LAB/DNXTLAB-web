@@ -105,7 +105,8 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
         px16: getResponsivePaddingX() * scaleFactor, // Responsivo según pantalla
         pl8: getResponsivePaddingLeft() * scaleFactor,  // Responsivo
         p4: 1 * scaleFactor,   // p-4 escalado
-        p6: 1.5 * scaleFactor  // p-6 escalado
+        p6: 1.5 * scaleFactor,  // p-6 escalado
+        p8: 0.5 * scaleFactor  // p-8 escalado
       }
     }
   }
@@ -174,19 +175,24 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
     willChange: 'transform, opacity'
   }
 
-  const leftContentStyle = {
-    transform: `translateY(${thirdSmoothProgress < 0.6 ? (1 - thirdSmoothProgress) * 300 * scaleFactor : 0}px) translateX(${thirdSmoothProgress < 0.6 ? (1 - thirdSmoothProgress) * -150 * scaleFactor : 0}px)`,
-    opacity: thirdSmoothProgress < 0.4 ? 0 : Math.min(1, (thirdSmoothProgress - 0.4) * 2.5),
-    transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-    willChange: 'transform, opacity'
-  }
-
   const titleStyle = {
     transform: fourthSmoothProgress > 0 ? 'scale(0.4) translateX(-10%)' : 'scale(1)',
     transformOrigin: 'left center',
     opacity: fifthSmoothProgress > 0 ? 0 : 1,
     transition: 'all 0.6s ease-out',
     willChange: 'transform, opacity'
+  }
+
+  const getResponsiveBottomPosition = () => {
+    if (viewportDimensions.width < 768) {
+      return '17%'; // iPhone
+    } else if (viewportDimensions.width < 1024) {
+      return '10%'; // iPad
+    } else if (viewportDimensions.width < 1536) {
+      return '3%'; // Desktop
+    } else {
+      return '-30%'; // 2XL (valor actual)
+    }
   }
 
   const servicesOpacity = fourthSmoothProgress > 0 ? 0 : 1
@@ -223,15 +229,11 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
       {/* Layout Desktop - Solo visible en pantallas >= 1024px */}
       <div 
         className="hidden lg:flex w-full h-full"
-        style={{ paddingLeft: `${dimensions.padding.px16}rem`, paddingRight: `${dimensions.padding.px16}rem` }}
+        // style={{ paddingLeft: `${dimensions.padding.px16}rem`, paddingRight: `${dimensions.padding.px16}rem` }}
       >
         {/* Contenido principal lado izquierdo */}
         <div 
-          className="flex-1"
-          style={{ 
-            ...leftContentStyle, 
-            paddingLeft: `${dimensions.padding.pl8}rem` 
-          }}
+          className="flex-1 ml-20 2xl:ml-0"
         >
           <div 
             style={{ 
@@ -244,7 +246,7 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
               style={{ 
                 fontSize: fontSizes.mainTitle.desktop,
                 marginBottom: fontSizes.spacing.mb6,
-                marginTop: viewportDimensions.width >= 1536 ? fontSizes.spacing.mt28 : '20rem', // 2XL: original, otros: mt-80
+                marginTop: viewportDimensions.width >= 1536 ? fontSizes.spacing.mt28 : '10rem', // 2XL: original
                 textAlign: 'start'
               }}
             >
@@ -368,7 +370,7 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
       </div>
 
             {/* Layout Mobile & iPad - Visible en pantallas < 1024px */}
-      <div className="block lg:hidden bg-white mt-20 relative overflow-hidden">
+      <div className="block lg:hidden bg-white mt-20 md:mt-32 relative overflow-hidden">
         {/* Título fijo arriba - Siempre visible */}
         <div className="mb-6 absolute top-4 left-[700px] md:left-[560px] right-0 text-left z-50 bg-white pt-4">
           <h2 className="text-[33px] md:text-3xl font-bold text-black font-poppins leading-none mr-28 md:mr-40">
@@ -386,33 +388,33 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
             transition: 'opacity 0.8s ease-out'
           }}
         >
-          <div className="text-center mt-52">
+          <div className="text-center mt-52 md:mt-48">
             <p className="text-xl md:text-3xl text-black font-semibold font-poppins mb-8 mr-40 md:mr-80">
               Explore our core expertise
             </p>
-            <div className="mr-40 mt-6">
+            <div className="mr-40 md:mr-96 mt-6">
               <h3 className="text-sm md:text-lg mr-16 font-poppins text-black">
                 Web Design & Development:
               </h3>
-              <p className="text-sm md:text-base text-black font-poppins text-left ml-[700px] w-80">
+              <p className="text-sm md:text-base text-black font-poppins text-left ml-[700px] md:ml-[560px] w-80 md:w-96">
                 Crafting sleek, responsive websites that convert and reflect your brand with precision.
               </p>
             </div>
 
-            <div className="mr-40 mt-5">
-              <h3 className="text-sm md:text-lg mr-40 font-poppins text-black">
+            <div className="mr-40 md:mr-96 mt-5">
+              <h3 className="text-sm md:text-lg mr-40 md:mr-48 font-poppins text-black">
                 AI Integrations
               </h3>
-              <p className="text-sm md:text-base text-gray-600 font-poppins text-left ml-[700px] w-80">
+              <p className="text-sm md:text-base text-gray-600 font-poppins text-left ml-[700px] md:ml-[560px] w-80 md:w-96">
                 Automating workflows, enhancing decision-making, and unlocking new business capabilities with custom AI agents.
               </p>
             </div>
             
-            <div className="mr-40 mt-5">
+            <div className="mr-40 md:mr-96 mt-5">
               <h3 className="text-sm md:text-lg mr-16 font-poppins text-black">
                 Cybersecurity Consultancy
               </h3>
-              <p className="text-sm md:text-base text-gray-600 font-poppins text-left ml-[700px] w-80">
+              <p className="text-sm md:text-base text-gray-600 font-poppins text-left ml-[700px] md:ml-[560px] w-80 md:w-96">
                 Protecting your digital assets with proactive strategies and robust security frameworks tailored to your operations.
               </p>
             </div>
@@ -465,12 +467,12 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
         </div>
       </div>
 
-      {/* Botón Services centrado */}
-      <div className="absolute left-1/2 -translate-x-1/2" style={{ 
-        bottom: '-35%',
-        opacity: 1,
-        transition: 'opacity 0.5s ease-out'
-      }}>
+              {/* Botón Services centrado */}
+        <div className="absolute left-[780px] md:left-[650px] lg:left-[700px] 2xl:left-1/2 -translate-x-1/2" style={{ 
+          bottom: getResponsiveBottomPosition(),
+          opacity: 1,
+          transition: 'opacity 0.5s ease-out'
+        }}>
         <button 
           className="flex items-center bg-black text-white rounded-full font-poppins hover:bg-gray-800 transition-colors"
           style={{
