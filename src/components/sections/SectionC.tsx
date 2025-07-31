@@ -185,7 +185,7 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
 
   const getResponsiveBottomPosition = () => {
     if (viewportDimensions.width < 768) {
-      return '17%'; // iPhone
+      return '30%'; // iPhone
     } else if (viewportDimensions.width < 1024) {
       return '10%'; // iPad
     } else if (viewportDimensions.width < 1536) {
@@ -370,7 +370,7 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
       </div>
 
             {/* Layout Mobile & iPad - Visible en pantallas < 1024px */}
-      <div className="block lg:hidden bg-white mt-20 md:mt-32 relative overflow-hidden">
+      <div className="block lg:hidden bg-white mt-16 md:mt-32 relative overflow-hidden">
         {/* Título fijo arriba - Siempre visible */}
         <div className="mb-6 absolute top-4 left-[700px] md:left-[560px] right-0 text-left z-50 bg-white pt-4">
           <h2 className="text-[33px] md:text-3xl font-bold text-black font-poppins leading-none mr-28 md:mr-40">
@@ -388,7 +388,7 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
             transition: 'opacity 0.8s ease-out'
           }}
         >
-          <div className="text-center mt-52 md:mt-48">
+          <div className="text-center mt-40 md:mt-48">
             <p className="text-xl md:text-3xl text-black font-semibold font-poppins mb-8 mr-40 md:mr-80">
               Explore our core expertise
             </p>
