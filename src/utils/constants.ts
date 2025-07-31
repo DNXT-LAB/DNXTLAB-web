@@ -15,7 +15,7 @@ export const SECTION_POSITIONS: SectionPositions = [
 // Configuraciones de scroll
 export const SCROLL_CONFIG = {
   THRESHOLD: 50,
-  NAVBAR_HEIGHT: 80,
+  NAVBAR_HEIGHT: 100,
   TRANSITION_TIMEOUT: 600,
   ANIMATION_DURATION: 100,
   MESSAGE_CLEAR_TIMEOUT: 5000

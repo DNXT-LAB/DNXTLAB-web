@@ -56,7 +56,7 @@ export const calculateSectionATransforms = (scrollY: number, progress: ScrollPro
 }
 
 // Calcular las propiedades de la pestaña
-export const calculateTabProperties = (scrollY: number, windowHeight: number) => {
+export const calculateTabProperties = (scrollY: number, windowHeight: number, windowWidth: number) => {
   const { THRESHOLD, NAVBAR_HEIGHT } = SCROLL_CONFIG
   const { SECOND_LEVEL_START } = SCROLL_LEVELS
   
@@ -65,7 +65,16 @@ export const calculateTabProperties = (scrollY: number, windowHeight: number) =>
   const tabProgress = Math.max(0, Math.min(adjustedScroll / maxScroll, 1))
   const smoothTabProgress = easeOutQuart(tabProgress)
   
-  const tabTransform = scrollY < THRESHOLD ? 100 : 100 - (smoothTabProgress * 100)
+  // Determinar el valor base según la sección y breakpoint responsivo
+  const getResponsiveBaseTransform = () => {
+    if (windowWidth < 640) return 20    // Mobile
+    if (windowWidth < 1024) return 50   // Tablet  
+    if (windowWidth < 1536) return 80   // Desktop
+    return 50                          // 2xl
+  }
+  
+  const baseTransform = scrollY >= 1000 ? 100 : getResponsiveBaseTransform()
+  const tabTransform = scrollY < THRESHOLD ? 100 : baseTransform - (smoothTabProgress * baseTransform)
   const tabHeight = scrollY < SECOND_LEVEL_START ? `calc(100vh - ${NAVBAR_HEIGHT}px)` : '100vh'
   const tabTop = scrollY < SECOND_LEVEL_START ? `${NAVBAR_HEIGHT}px` : '0px'
   

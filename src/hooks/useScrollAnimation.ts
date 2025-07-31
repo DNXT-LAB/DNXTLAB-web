@@ -157,7 +157,7 @@ export const useScrollAnimation = () => {
   // Calcular todos los valores derivados
   const progress = calculateScrollProgress(scrollY)
   const sectionATransforms = calculateSectionATransforms(scrollY, progress, { width: windowWidth, height: windowHeight })
-  const tabProperties = calculateTabProperties(scrollY, windowHeight)
+  const tabProperties = calculateTabProperties(scrollY, windowHeight, windowWidth)
 
   return {
     scrollY,

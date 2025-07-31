@@ -69,12 +69,12 @@ const SectionA: React.FC<SectionAProps> = ({
   // Calcular dimensiones y posiciones escaladas
   const getScaledDimensions = () => {
     // Dimensiones base
-    const baseVideo = { width: 812, height: 700 }
-    const baseText = { width: 1147, height: 753 }
+    const baseVideo = { width: 812, height: 638 }
+    const baseText = { width: 1147, height: 853 } // Aumentada para extender la pestaña
     
     // Posiciones base (relativas al viewport)
     const baseVideoLeft = viewportDimensions.width * 0.11 // ~220px en 1920px
-    const baseVideoTop = 104
+    const baseVideoTop = 74
     const baseTextLeft = viewportDimensions.width * 0.52 // ~1000px en 1920px
     
     return {
@@ -163,7 +163,7 @@ const SectionA: React.FC<SectionAProps> = ({
           muted 
           playsInline 
           preload="auto" 
-          className="object-cover shadow-2xl transition-transform duration-700 ease-out rounded-2xl"
+          className="object-cover transition-transform duration-700 ease-out rounded-2xl shadow-2xl drop-shadow-[0px_10px_10px_rgba(0,0,0,0.7)]"
           style={videoStyle}
         />
         
@@ -172,7 +172,7 @@ const SectionA: React.FC<SectionAProps> = ({
           style={textStyle}
         >
           <h2 
-            className="font-bold text-black font-morien leading-tight"
+            className="font-bold text-black font-poppins leading-tight"
             style={{ 
               fontSize: fontSizes.mainTitle, 
               marginBottom: fontSizes.spacing.mb6 
@@ -190,11 +190,11 @@ const SectionA: React.FC<SectionAProps> = ({
             Smart systems. Seamless design.<br/>Real results.
           </p>
           <p 
-            className="text-gray-600 font-inter leading-relaxed"
+            className="text-black font-poppins leading-relaxed"
             style={{ 
               fontSize: fontSizes.description, 
               marginBottom: fontSizes.spacing.mb12,
-              maxWidth: `${32 * scaleFactor}rem`
+              maxWidth: `${38 * scaleFactor}rem`
             }}
           >
             At DNXT LAB, we create intelligent digital solutions that think, adapt, and scale—combining AI automation, UX strategy, and high-performance web design to help you launch faster, work smarter, and grow stronger.
@@ -238,13 +238,13 @@ const SectionA: React.FC<SectionAProps> = ({
             muted 
             playsInline 
             preload="auto" 
-            className="w-68 md:w-[600px] h-48 md:h-64 object-cover shadow-2xl rounded-2xl"
+            className="w-68 md:w-[650px] h-48 md:h-64 object-cover shadow-2xl rounded-2xl"
           />
         </div>
         
         {/* Texto abajo */}
         <div className="flex-1 flex flex-col">
-          <h2 className="text-3xl md:text-5xl font-bold text-black font-morien mb-4 md:mb-6 leading-tight">
+          <h2 className="text-3xl md:text-5xl font-bold text-black font-poppins mb-4 md:mb-6 leading-tight">
             WE BUILD WITH<br/>INTELLIGENCE AND<br/>INTENT
           </h2>
           

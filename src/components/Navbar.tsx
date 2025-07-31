@@ -33,13 +33,13 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
         <Image 
           src="/logo.png" 
           alt="DNXT LAB Logo" 
-          width={150}
-          height={150}
-          className=""
+          width={70}
+          height={70}
+          className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24"
           priority
           quality={90}
         />
-        <span className={`text-6xl font-bold transition-colors duration-500 ${
+        <span className={`text-lg md:text-4xl lg:text-6xl font-bold transition-colors duration-500 ${
           isDark ? 'text-black' : 'text-white'
         }`}>DNXT LAB</span>
       </div>
@@ -47,19 +47,19 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
       {/* Botón hamburguesa a la derecha */}
       <button 
         onClick={handleMenuClick}
-        className={`flex flex-col space-y-2 pr-20 cursor-pointer focus:outline-none focus:ring-2 focus:ring-opacity-50 rounded transition-colors duration-500 ${
+        className={`flex flex-col space-y-2 lg:pr-20 cursor-pointer focus:outline-none focus:ring-2 focus:ring-opacity-50 rounded transition-colors duration-500 ${
           isDark ? 'focus:ring-black' : 'focus:ring-white'
         }`}
         aria-label="Abrir menú de navegación"
         aria-expanded="false"
       >
-        <div className={`w-20 h-1 mb-3 transition-all duration-500 ${
+        <div className={`w-10 md:w-20 h-1 md:mb-3 transition-all duration-500 ${
           isDark ? 'bg-black' : 'bg-white'
         }`}></div>
-        <div className={`w-20 h-1 mb-3 transition-all duration-500 ${
+        <div className={`w-10 md:w-20 h-1 md:mb-3 transition-all duration-500 ${
           isDark ? 'bg-black' : 'bg-white'
         }`}></div>
-        <div className={`w-20 h-1 transition-all duration-500 ${
+        <div className={`w-10 md:w-20 h-1 transition-all duration-500 ${
           isDark ? 'bg-black' : 'bg-white'
         }`}></div>
       </button>
@@ -105,7 +105,7 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
           </div>
 
           {/* Opciones del menú - Arriba */}
-          <div className="flex flex-col space-y-8">
+          <div className="flex flex-col justify-center items-center md:items-start text-center md:text-left space-y-28 md:space-y-8 mt-40 md:mt-0">
             <button 
               onClick={() => handleNavigation(0)}
               className="text-white text-xl font-normal font-morien text-left"

@@ -2,20 +2,20 @@ import React from 'react'
 
 const HeroSection: React.FC = () => {
   return (
-    <div className="fixed left-8 z-20 px-12" style={{ bottom: '1.5rem' }}>
+    <div className="fixed left-8 z-20 md:px-12" style={{ bottom: '1.5rem' }}>
       <div className="flex flex-col items-start mb-24">
         <h1 className="force-white-text font-bold mb-8 uppercase font-poppins text-[20px] md:text-[50px] lg:text-[80px] 2xl:text-[145px] line-height-90 mb-10">
           BESPOKE AI & WEB<br />
           DESIGN SOLUTIONS
         </h1>
-        <p className="force-white-text mb-8 font-inter font-poppins text-[16px] md:text-[20px] lg:text-[25px] 2xl:text-[43px] leading-[1.2] font-normal max-w-[1050px] mb-10">
+        <p className="force-white-text mb-8 font-inter font-poppins text-[16px] md:text-[20px] lg:text-[25px] 2xl:text-[43px] leading-[1.2] font-normal md:max-w-[450px] lg:max-w-[550px] 2xl:max-w-[1050px] mb-10">
           Empowering businesses through intelligent automation, data-driven experiences, and future-proof digital design.
         </p>
         <button 
-          className="flex items-center justify-center px-10 py-10 hover:opacity-90 transition-opacity bg-white rounded-full button-size border-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black"
+          className="flex items-center justify-center 2xl:px-10 2xl:py-10 md:px-6 md:py-6 px-3 py-3 hover:opacity-90 transition-opacity bg-white rounded-full button-size border-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black"
           aria-label="Ver servicios de DNXTLAB"
         >
-          <span className="force-black-text font-poppins text-[25px] font-light line-height-110 mr-3">
+          <span className="force-black-text font-poppins 2xl:text-[25px] text-[16px] font-light line-height-110 mr-3">
             SERVICES
           </span>
           <svg 
