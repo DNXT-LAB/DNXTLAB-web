@@ -68,32 +68,62 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
 
   // Calcular dimensiones y posiciones escaladas
   const getScaledDimensions = () => {
-    // Posición left relativa al viewport
-    const baseLeftPosition = viewportDimensions.width * 0.45 // 45% como estaba antes
+    // Posición left responsiva según tamaño de pantalla
+    const getResponsiveLeftPosition = () => {
+      if (viewportDimensions.width >= 1536) return 0.45      // 2XL: 45% (perfecto)
+      if (viewportDimensions.width >= 1280) return 0.60      // XL: 48% (más centrado)
+      return 0.5                                             // Desktop: 50% (centrado para mejor visibilidad)
+    }
+    
+    const getResponsiveMaxWidth = () => {
+      if (viewportDimensions.width >= 1536) return 700       // 2XL: 700px (perfecto)
+      if (viewportDimensions.width >= 1280) return 650       // XL: 650px (más junto al centro)
+      return 600                                             // Desktop: 600px (más junto al centro)
+    }
+    
+    const getResponsivePaddingX = () => {
+      if (viewportDimensions.width >= 1536) return 4         // 2XL: 4rem (original)
+      if (viewportDimensions.width >= 1280) return 3         // XL: 3rem (más junto)
+      return 2                                               // Desktop: 2rem (más junto)
+    }
+    
+    const getResponsivePaddingLeft = () => {
+      if (viewportDimensions.width >= 1536) return 2         // 2XL: 2rem (perfecto)
+      if (viewportDimensions.width >= 1280) return 4         // XL: 4rem (mover más al centro)
+      return 6                                               // Desktop: 6rem (mover más al centro)
+    }
+    
+    const baseLeftPosition = viewportDimensions.width * getResponsiveLeftPosition()
     
     return {
       leftPosition: baseLeftPosition,
       maxWidths: {
         small: 330 * scaleFactor, // max-w-[330px]
-        large: 700 * scaleFactor  // max-w-[700px]
+        large: getResponsiveMaxWidth() * scaleFactor  // Responsivo según pantalla
       },
       padding: {
-        px16: -1 * scaleFactor, // px-16 escalado y aumentado
-        pl8: -10.05 * scaleFactor,  // pl-8 escalado y aumentado
-        p4: -1.5 * scaleFactor,   // p-4 escalado y aumentado
-        p6: -2.2 * scaleFactor  // p-6 escalado y aumentado
+        px16: getResponsivePaddingX() * scaleFactor, // Responsivo según pantalla
+        pl8: getResponsivePaddingLeft() * scaleFactor,  // Responsivo
+        p4: 1 * scaleFactor,   // p-4 escalado
+        p6: 1.5 * scaleFactor  // p-6 escalado
       }
     }
   }
 
   const dimensions = getScaledDimensions()
 
-  // Calcular tamaños de fuente escalados (aumentados para hacer la sección más grande)
+  // Calcular tamaños de fuente escalados responsivamente
   const getScaledFontSizes = () => {
+    const getResponsiveMainTitle = () => {
+      if (viewportDimensions.width >= 1536) return 5.5       // 2XL: 5.5rem
+      if (viewportDimensions.width >= 1280) return 4.5       // XL: 4.5rem
+      return 3.5                                             // Desktop: 3.5rem (más compacto)
+    }
+    
     return {
       mainTitle: {
         mobile: `${2.5 * scaleFactor}rem`,      // text-2xl aumentado
-        desktop: `${5.5 * scaleFactor}rem` // text-[70px] aumentado considerablemente
+        desktop: `${getResponsiveMainTitle() * scaleFactor}rem` // Responsivo
       },
       mobileTitle: `${3.2 * scaleFactor}rem`, // text-4xl aumentado
       subtitle: `${2.8 * scaleFactor}rem`,   // text-[36px] aumentado
@@ -161,18 +191,24 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
 
   const servicesOpacity = fourthSmoothProgress > 0 ? 0 : 1
 
+  // Función para obtener posición inicial de card1 responsiva
+  const getResponsiveCard1Position = () => {
+    if (viewportDimensions.width >= 1536) return '108%'      // 2XL: 108% (original)
+    return '75%'                                             // Desktop/XL: 75% (más visible)
+  }
+
   // Calcular posiciones y rotaciones de las cards
   const card1Position = sixthSmoothProgress > 0 
     ? `${-8 + (-8 - 50) * Math.min(1, sixthSmoothProgress * 1.8)}%` 
-    : (fifthSmoothProgress > 0 ? '-8%' : (fourthSmoothProgress > 0 ? '50%' : '108%'))
+    : (fifthSmoothProgress > 0 ? '-8%' : (fourthSmoothProgress > 0 ? '50%' : getResponsiveCard1Position()))
   
   const card2Position = sixthSmoothProgress > 0 
     ? '-8%' 
-    : (fifthSmoothProgress > 0 ? '50%' : (fourthSmoothProgress > 0 ? '118%' : '200%'))
+    : (fifthSmoothProgress > 0 ? '50%' : (fourthSmoothProgress > 0 ? '100%' : '200%')) // Cambio: 118% -> 100% (más visible)
   
   const card3Position = sixthSmoothProgress > 0 
     ? '50%' 
-    : (fifthSmoothProgress > 0 ? '118%' : '200%')
+    : (fifthSmoothProgress > 0 ? '100%' : '200%') // Cambio: 118% -> 100% (más visible)
 
   const card1Rotation = fifthSmoothProgress > 0 ? '15' : (fourthSmoothProgress > 0 && fifthSmoothProgress === 0) ? '0' : '-15'
   const card2Rotation = sixthSmoothProgress > 0 ? '15' : (fifthSmoothProgress > 0 ? '0' : '-15')
@@ -204,11 +240,11 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
             }}
           >
             <h2 
-              className="font-bold text-black font-morien leading-[1.1]"
+              className="font-bold text-black font-poppins leading-[1.1]"
               style={{ 
                 fontSize: fontSizes.mainTitle.desktop,
                 marginBottom: fontSizes.spacing.mb6,
-                marginTop: fontSizes.spacing.mt28,
+                marginTop: viewportDimensions.width >= 1536 ? fontSizes.spacing.mt28 : '20rem', // 2XL: original, otros: mt-80
                 textAlign: 'start'
               }}
             >
@@ -218,7 +254,7 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
             </h2>
             <div style={{ opacity: servicesOpacity }} className="transition-opacity duration-500">
               <p 
-                className="text-black font-inter"
+                className="text-black font-poppins"
                 style={{ 
                   fontSize: fontSizes.subtitle,
                   marginBottom: fontSizes.spacing.mb12
@@ -230,7 +266,7 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
               <div style={{ display: 'flex', flexDirection: 'column', gap: fontSizes.spacing.spaceY6 }}>
                 <div>
                   <h3 
-                    className="font-morien"
+                    className="font-poppins"
                     style={{ 
                       fontSize: fontSizes.serviceTitle,
                       marginBottom: fontSizes.spacing.mb1
@@ -239,7 +275,7 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
                     Web Design & Development:
                   </h3>
                   <p 
-                    className="text-gray-600 font-inter"
+                    className="text-gray-600 font-poppins"
                     style={{ fontSize: fontSizes.serviceDescription }}
                   >
                     Crafting sleek, responsive websites that convert and reflect<br/>
@@ -249,7 +285,7 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
                 
                 <div>
                   <h3 
-                    className="font-morien"
+                    className="font-poppins"
                     style={{ 
                       fontSize: fontSizes.serviceTitle,
                       marginBottom: fontSizes.spacing.mb1
@@ -258,7 +294,7 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
                     AI Integrations
                   </h3>
                   <p 
-                    className="text-gray-600 font-inter"
+                    className="text-gray-600 font-poppins"
                     style={{ fontSize: fontSizes.serviceDescription }}
                   >
                     Automating workflows, enhancing decision-making, and<br/>
@@ -268,7 +304,7 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
                 
                 <div>
                   <h3 
-                    className="font-morien"
+                    className="font-poppins"
                     style={{ 
                       fontSize: fontSizes.serviceTitle,
                       marginBottom: fontSizes.spacing.mb1
@@ -277,7 +313,7 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
                     Cybersecurity Consultancy
                   </h3>
                   <p 
-                    className="text-gray-600 font-inter"
+                    className="text-gray-600 font-poppins"
                     style={{ fontSize: fontSizes.serviceDescription }}
                   >
                     Protecting your digital assets with proactive strategies and<br/>
@@ -290,7 +326,12 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
         </div>
 
         {/* Contenedor de Cards Desktop */}
-        <div className="absolute inset-0 mt-80">
+        <div 
+          className="absolute inset-0"
+          style={{
+            marginTop: viewportDimensions.width >= 1536 ? '20rem' : '10rem' // 2XL: mt-80, otros: mt-40 (más arriba)
+          }}
+        >
           <ServiceCard 
             title="WEB DESIGN & DEVELOPMENT"
             subtitle="Design That Converts"
@@ -305,7 +346,7 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
           <ServiceCard 
             title="AI INTEGRATIONS"
             subtitle="Smarter Business Operations"
-            description="We help businesses unlock the power of AI with custom-built solutions that automate workflows, streamline decision-making, and boost productivity. From internal tools to customer-facing experiences, we design AI that adapts to your goals—and delivers measurable impact."
+            description="We help businesses unlock the power of AI with custom-built solutions that automate workflows, streamline decision-making, and boost productivity. From poppinsnal tools to customer-facing experiences, we design AI that adapts to your goals—and delivers measurable impact."
             gradient="linear-gradient(135deg, #dbeafe 0%, #60a5fa 100%)"
             position={card2Position}
             rotation={card2Rotation}
@@ -326,62 +367,101 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
         </div>
       </div>
 
-      {/* Layout Mobile & iPad - Visible en pantallas < 1024px */}
-      <div 
-        className="block lg:hidden w-full h-full"
-        style={{ 
-          padding: `${dimensions.padding.p6}rem ${dimensions.padding.p4}rem`
-        }}
-      >
-        {/* Título fijo arriba en mobile/iPad */}
-        <div 
-          className="text-center"
-          style={{ marginBottom: fontSizes.spacing.mb8 }}
-        >
-          <h2 
-            className="font-bold text-black font-morien leading-[1.1]"
-            style={{ fontSize: fontSizes.mobileTitle }}
-          >
+            {/* Layout Mobile & iPad - Visible en pantallas < 1024px */}
+      <div className="block lg:hidden bg-white mt-20 relative overflow-hidden">
+        {/* Título fijo arriba - Siempre visible */}
+        <div className="text-center mb-6 absolute top-4 left-0 right-0 z-50 bg-white pt-4">
+          <h2 className="text-2xl md:text-3xl font-bold text-black font-poppins leading-tight mr-28 md:mr-40">
             ELEVATE YOUR<br/>
             DIGITAL<br/>
             INFRASTRUCTURE
           </h2>
         </div>
 
-        {/* Contenedor de Cards Mobile/iPad - posicionadas debajo del título */}
-        <div className="relative w-full h-[calc(100%-120px)]">
-          <ServiceCard 
-            title="WEB DESIGN & DEVELOPMENT"
-            subtitle="Design That Converts"
-            description="From sleek landing pages to complex platforms, we design and develop responsive, high-converting websites that adapt to your brand and scale with your business. Every pixel and line of code is crafted with purpose—to deliver speed, clarity, and results."
-            gradient="linear-gradient(135deg, #e5e7eb 0%, #9ca3af 100%)"
-            position={card1Position}
-            rotation={card1Rotation}
-            opacity={card1Opacity}
-            scaleFactor={scaleFactor}
-          />
+        {/* Contenido de servicios - Se oculta cuando aparecen cards */}
+        <div 
+          className="flex flex-col justify-center h-full"
+          style={{ 
+            opacity: thirdSmoothProgress < 30000.6 ? 1 : Math.max(0, 1 - ((thirdSmoothProgress - 0.6) * 2.5)),
+            transition: 'opacity 0.8s ease-out'
+          }}
+        >
+          <div className="text-center mt-60">
+            <p className="text-2xl md:text-4xl text-black font-poppins mb-8 mr-28">
+              Explore our core expertise
+            </p>
+            <div className="mr-40 mt-12">
+              <h3 className="text-lg md:text-lg font-poppins mb-2 text-black">
+                Web Design & Development:
+              </h3>
+              <p className="text-sm md:text-base text-black font-poppins text-left ml-[700px] w-80">
+                Crafting sleek, responsive websites that convert and reflect your brand with precision.
+              </p>
+            </div>
+
+            <div className="mr-40 mt-12">
+              <h3 className="text-lg md:text-lg font-poppins mb-2 text-black">
+                AI Integrations
+              </h3>
+              <p className="text-sm md:text-base text-gray-600 font-poppins text-left ml-[700px] w-80">
+                Automating workflows, enhancing decision-making, and unlocking new business capabilities with custom AI agents.
+              </p>
+            </div>
+            
+            <div className="mr-40 mt-12">
+              <h3 className="text-lg md:text-lg font-poppins mb-2 text-black">
+                Cybersecurity Consultancy
+              </h3>
+              <p className="text-sm md:text-base text-gray-600 font-poppins text-left ml-[700px] w-80">
+                Protecting your digital assets with proactive strategies and robust security frameworks tailored to your operations.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Cards con efecto derecha a izquierda - Aparecen progresivamente */}
+        <div className="absolute inset-0 pt-20">
+          {/* ServiceCard 1 - Aparece primero con efecto */}
+          {thirdSmoothProgress >= 0.4 && (
+            <ServiceCard 
+              title="WEB DESIGN & DEVELOPMENT"
+              subtitle="Design That Converts"
+              description="From sleek landing pages to complex platforms, we design and develop responsive, high-converting websites that adapt to your brand and scale with your business. Every pixel and line of code is crafted with purpose—to deliver speed, clarity, and results."
+              gradient="linear-gradient(135deg, #e5e7eb 0%, #9ca3af 100%)"
+              position={card1Position}
+              rotation={card1Rotation}
+              opacity={card1Opacity}
+              scaleFactor={0.6}
+            />
+          )}
           
-          <ServiceCard 
-            title="AI INTEGRATIONS"
-            subtitle="Smarter Business Operations"
-            description="We help businesses unlock the power of AI with custom-built solutions that automate workflows, streamline decision-making, and boost productivity. From internal tools to customer-facing experiences, we design AI that adapts to your goals—and delivers measurable impact."
-            gradient="linear-gradient(135deg, #dbeafe 0%, #60a5fa 100%)"
-            position={card2Position}
-            rotation={card2Rotation}
-            opacity={card2Opacity}
-            scaleFactor={scaleFactor}
-          />
+          {/* ServiceCard 2 - Aparece segundo con efecto */}
+          {fourthSmoothProgress > 0 && (
+            <ServiceCard 
+              title="AI INTEGRATIONS"
+              subtitle="Smarter Business Operations"
+              description="We help businesses unlock the power of AI with custom-built solutions that automate workflows, streamline decision-making, and boost productivity. From poppinsnal tools to customer-facing experiences, we design AI that adapts to your goals—and delivers measurable impact."
+              gradient="linear-gradient(135deg, #dbeafe 0%, #60a5fa 100%)"
+              position={card2Position}
+              rotation={card2Rotation}
+              opacity={card2Opacity}
+              scaleFactor={0.6}
+            />
+          )}
           
-          <ServiceCard 
-            title="CYBERSECURITY CONSULTANCY"
-            subtitle="Protect What Matters"
-            description="We help you safeguard your digital infrastructure with proactive cybersecurity strategies. From risk assessments to secure system architecture, we design and implement solutions that prevent threats, ensure compliance, and build long-term resilience across your operations."
-            gradient="linear-gradient(135deg, #9ca3af 0%, #4b5563 100%)"
-            position={card3Position}
-            rotation={card3Rotation}
-            opacity={card3Opacity}
-            scaleFactor={scaleFactor}
-          />
+          {/* ServiceCard 3 - Aparece tercero con efecto */}
+          {fifthSmoothProgress > 0 && (
+            <ServiceCard 
+              title="CYBERSECURITY CONSULTANCY"
+              subtitle="Protect What Matters"
+              description="We help you safeguard your digital infrastructure with proactive cybersecurity strategies. From risk assessments to secure system architecture, we design and implement solutions that prevent threats, ensure compliance, and build long-term resilience across your operations."
+              gradient="linear-gradient(135deg, #9ca3af 0%, #4b5563 100%)"
+              position={card3Position}
+              rotation={card3Rotation}
+              opacity={card3Opacity}
+              scaleFactor={0.6}
+            />
+          )}
         </div>
       </div>
 
@@ -392,7 +472,7 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
         transition: 'opacity 0.5s ease-out'
       }}>
         <button 
-          className="flex items-center bg-black text-white rounded-full font-morien hover:bg-gray-800 transition-colors"
+          className="flex items-center bg-black text-white rounded-full font-poppins hover:bg-gray-800 transition-colors"
           style={{
             gap: fontSizes.spacing.gap4,
             paddingLeft: fontSizes.buttonPadding.desktop.x,
