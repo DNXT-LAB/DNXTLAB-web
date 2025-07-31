@@ -389,10 +389,10 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
           }}
         >
           <div className="text-center mt-40 md:mt-48">
-            <p className="text-xl md:text-3xl text-black font-semibold font-poppins mb-8 mr-40 md:mr-80">
+            <p className="text-xl md:text-3xl text-black font-semibold font-poppins mr-40 md:mr-80">
               Explore our core expertise
             </p>
-            <div className="mr-40 md:mr-96 mt-6">
+            <div className="mr-40 md:mr-96 mt-2">
               <h3 className="text-sm md:text-lg mr-16 font-poppins text-black">
                 Web Design & Development:
               </h3>

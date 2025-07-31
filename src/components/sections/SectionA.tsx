@@ -252,21 +252,21 @@ const SectionA: React.FC<SectionAProps> = ({
             muted 
             playsInline 
             preload="auto" 
-            className="w-68 md:w-[650px] h-48 md:h-64 object-cover shadow-2xl rounded-2xl"
+            className="w-72 md:w-[650px] h-40 md:h-64 object-cover shadow-2xl rounded-2xl"
           />
         </div>
         
         {/* Texto abajo */}
         <div className="flex-1 flex flex-col">
-          <h2 className="text-3xl md:text-5xl font-bold text-black font-poppins mb-4 md:mb-6 leading-tight">
+          <h2 className="text-2xl md:text-5xl font-bold text-black font-poppins mb-4 md:mb-6 leading-tight">
             WE BUILD WITH<br/>INTELLIGENCE AND<br/>INTENT
           </h2>
           
-          <p className="text-lg md:text-2xl text-gray-700 font-inter mb-4 md:mb-6 leading-tight">
+          <p className="text-lg md:text-2xl text-black font-inter mb-4 md:mb-6 leading-tight">
             Smart systems. Seamless design.<br/>Real results.
           </p>
           
-          <p className="text-sm md:text-base text-gray-600 font-inter mb-6 md:mb-8 leading-relaxed max-w-[300px] md:max-w-[600px]">
+          <p className="text-[12px] md:text-base text-black font-inter mb-6 md:mb-8 leading-relaxed max-w-[300px] md:max-w-[600px]">
             At DNXT LAB, we create intelligent digital solutions that think, adapt, and scale—combining AI automation, UX strategy, and high-performance web design to help you launch faster, work smarter, and grow stronger.
           </p>
           

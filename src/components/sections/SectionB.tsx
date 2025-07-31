@@ -183,7 +183,7 @@ const SectionB: React.FC<SectionProps> = ({ progress }) => {
       </div>
 
       {/* Layout Mobile & iPad - Visible en pantallas < 1024px */}
-      <div className="block lg:hidden w-full h-full mt-24 md:mt-40 flex flex-col justify-center items-center">
+      <div className="block lg:hidden w-full h-full mt-12 md:mt-40 flex flex-col justify-center items-center">
         {/* Título arriba */}
         <div className="w-full mb-6 md:mb-8 text-center">
           <p className="text-xl md:text-2xl font-poppins text-black uppercase tracking-wider mr-28  md:mr-32">

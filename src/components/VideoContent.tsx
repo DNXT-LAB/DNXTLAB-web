@@ -81,7 +81,7 @@ export default function VideoContent() {
         className="fixed left-0 right-0 z-50 transition-all duration-500 ease-out"
         style={{
           transform: `translateY(${tabTransform}%)`,
-          borderRadius: scrollY < SCROLL_LEVELS.SECOND_LEVEL_START ? '32px' : `${16 * (1 - secondSmoothProgress)}px`,
+          borderRadius: scrollY < SCROLL_LEVELS.SECOND_LEVEL_START ? '32px 32px 0 0' : `${16 * (1 - secondSmoothProgress)}px`,
           height: tabHeight,
           top: tabTop,
           width: '100vw',
