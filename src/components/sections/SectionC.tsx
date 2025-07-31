@@ -370,8 +370,8 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
             {/* Layout Mobile & iPad - Visible en pantallas < 1024px */}
       <div className="block lg:hidden bg-white mt-20 relative overflow-hidden">
         {/* Título fijo arriba - Siempre visible */}
-        <div className="text-center mb-6 absolute top-4 left-0 right-0 z-50 bg-white pt-4">
-          <h2 className="text-2xl md:text-3xl font-bold text-black font-poppins leading-tight mr-28 md:mr-40">
+        <div className="mb-6 absolute top-4 left-[700px] md:left-[560px] right-0 text-left z-50 bg-white pt-4">
+          <h2 className="text-[33px] md:text-3xl font-bold text-black font-poppins leading-none mr-28 md:mr-40">
             ELEVATE YOUR<br/>
             DIGITAL<br/>
             INFRASTRUCTURE
@@ -386,12 +386,12 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
             transition: 'opacity 0.8s ease-out'
           }}
         >
-          <div className="text-center mt-40">
-            <p className="text-2xl md:text-4xl text-black font-poppins mb-8 mr-28">
+          <div className="text-center mt-52">
+            <p className="text-xl md:text-3xl text-black font-semibold font-poppins mb-8 mr-40 md:mr-80">
               Explore our core expertise
             </p>
             <div className="mr-40 mt-6">
-              <h3 className="text-lg md:text-lg font-poppins mb-2 text-black">
+              <h3 className="text-sm md:text-lg mr-16 font-poppins text-black">
                 Web Design & Development:
               </h3>
               <p className="text-sm md:text-base text-black font-poppins text-left ml-[700px] w-80">
@@ -399,8 +399,8 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
               </p>
             </div>
 
-            <div className="mr-40 mt-12">
-              <h3 className="text-lg md:text-lg font-poppins mb-2 text-black">
+            <div className="mr-40 mt-5">
+              <h3 className="text-sm md:text-lg mr-40 font-poppins text-black">
                 AI Integrations
               </h3>
               <p className="text-sm md:text-base text-gray-600 font-poppins text-left ml-[700px] w-80">
@@ -408,8 +408,8 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
               </p>
             </div>
             
-            <div className="mr-40 mt-12">
-              <h3 className="text-lg md:text-lg font-poppins mb-2 text-black">
+            <div className="mr-40 mt-5">
+              <h3 className="text-sm md:text-lg mr-16 font-poppins text-black">
                 Cybersecurity Consultancy
               </h3>
               <p className="text-sm md:text-base text-gray-600 font-poppins text-left ml-[700px] w-80">

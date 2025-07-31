@@ -35,11 +35,11 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
           alt="DNXT LAB Logo" 
           width={70}
           height={70}
-          className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24"
+          className="w-12 h-12 md:w-20 md:h-20 lg:w-24 lg:h-24"
           priority
           quality={90}
         />
-        <span className={`text-lg md:text-4xl lg:text-6xl font-bold transition-colors duration-500 ${
+        <span className={`text-2xl md:text-4xl lg:text-6xl font-bold transition-colors duration-500 ${
           isDark ? 'text-black' : 'text-white'
         }`}>DNXT LAB</span>
       </div>
@@ -53,13 +53,13 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
         aria-label="Abrir menú de navegación"
         aria-expanded="false"
       >
-        <div className={`w-10 md:w-20 h-1 md:mb-3 transition-all duration-500 ${
+        <div className={`w-8 md:w-20 h-[2px] md:h-1 md:mb-3 transition-all duration-500 ${
           isDark ? 'bg-black' : 'bg-white'
         }`}></div>
-        <div className={`w-10 md:w-20 h-1 md:mb-3 transition-all duration-500 ${
+        <div className={`w-8 md:w-20 h-[2px] md:h-1 md:mb-3 transition-all duration-500 ${
           isDark ? 'bg-black' : 'bg-white'
         }`}></div>
-        <div className={`w-10 md:w-20 h-1 transition-all duration-500 ${
+        <div className={`w-8 md:w-20 h-[2px] md:h-1 transition-all duration-500 ${
           isDark ? 'bg-black' : 'bg-white'
         }`}></div>
       </button>
