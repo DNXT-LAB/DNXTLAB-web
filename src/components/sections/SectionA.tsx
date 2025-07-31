@@ -72,10 +72,24 @@ const SectionA: React.FC<SectionAProps> = ({
     const baseVideo = { width: 812, height: 638 }
     const baseText = { width: 1147, height: 853 } // Aumentada para extender la pestaña
     
-    // Posiciones base (relativas al viewport)
-    const baseVideoLeft = viewportDimensions.width * 0.11 // ~220px en 1920px
+    // Posiciones base (relativas al viewport) - Responsivo
+    const getResponsiveVideoLeft = () => {
+      return viewportDimensions.width >= 1536 ? 0.11 : 0.0004  // 2XL: 0.11, Desktop: 0.0004
+    }
+    
+    const getResponsiveTextLeft = () => {
+      return viewportDimensions.width >= 1536 ? 0.52 : 0.48    // 2XL: 0.52, Desktop: 0.48
+    }
+    
+    const getResponsiveTextTopBase = () => {
+      if (viewportDimensions.width >= 1536) return 753        // 2XL: 753
+      if (viewportDimensions.width >= 1280) return 1120       // XL: 1120  
+      return 753                                               // Menores: 753
+    }
+    
+    const baseVideoLeft = viewportDimensions.width * getResponsiveVideoLeft()
     const baseVideoTop = 74
-    const baseTextLeft = viewportDimensions.width * 0.52 // ~1000px en 1920px
+    const baseTextLeft = viewportDimensions.width * getResponsiveTextLeft()
     
     return {
       video: {
@@ -88,7 +102,7 @@ const SectionA: React.FC<SectionAProps> = ({
         width: baseText.width * scaleFactor,
         height: baseText.height * scaleFactor,
         left: baseTextLeft,
-        top: `calc(50% - ${(753 * scaleFactor)/2}px + ${44.5 * scaleFactor}px)`
+        top: `calc(50% - ${(getResponsiveTextTopBase() * scaleFactor)/2}px + ${44.5 * scaleFactor}px)`
       }
     }
   }
