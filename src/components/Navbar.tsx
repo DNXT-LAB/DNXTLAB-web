@@ -27,7 +27,7 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
   }
 
   return (
-    <nav className="w-full flex items-center justify-between transition-colors duration-500 px-12" role="navigation" aria-label="Navegación principal">
+    <nav className="w-full flex items-center justify-between transition-colors duration-500 md:px-12" role="navigation" aria-label="Navegación principal">
       {/* Logo y nombre a la izquierda */}
       <div className="flex items-center">
         <Image 
