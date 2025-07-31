@@ -386,11 +386,11 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
             transition: 'opacity 0.8s ease-out'
           }}
         >
-          <div className="text-center mt-60">
+          <div className="text-center mt-40">
             <p className="text-2xl md:text-4xl text-black font-poppins mb-8 mr-28">
               Explore our core expertise
             </p>
-            <div className="mr-40 mt-12">
+            <div className="mr-40 mt-6">
               <h3 className="text-lg md:text-lg font-poppins mb-2 text-black">
                 Web Design & Development:
               </h3>
