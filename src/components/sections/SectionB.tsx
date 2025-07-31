@@ -65,7 +65,7 @@ const SectionB: React.FC<SectionProps> = ({ progress }) => {
     
     // Dimensiones del video escaladas
     const baseVideoWidth = viewportDimensions.width * 0.75 // 75% del ancho de pantalla
-    const baseVideoHeight = 430 // altura base
+    const baseVideoHeight = 530 // altura base
     
     return {
       leftPosition: baseLeftPosition,
@@ -119,13 +119,14 @@ const SectionB: React.FC<SectionProps> = ({ progress }) => {
 
   return (
     <div style={sectionStyle}>
-      <div className="h-full">
+      {/* Layout Desktop - Solo visible en pantallas >= 1024px */}
+      <div className="hidden lg:block h-full">
         <div 
           className="flex justify-center"
           style={{ marginBottom: fontSizes.spacing.mb8, marginTop: fontSizes.spacing.mt12 }}
         >
           <p 
-            className="font-inter text-gray-600 uppercase tracking-wider text-center"
+            className="font-poppins text-black uppercase tracking-wider text-center mt-20"
             style={{ fontSize: fontSizes.subtitle }}
           >
             STRATEGIC FLEXIBILITY
@@ -161,7 +162,7 @@ const SectionB: React.FC<SectionProps> = ({ progress }) => {
           }}
         >
           <h2 
-            className="text-black font-morien leading-tight"
+            className="text-black font-poppins leading-tight"
             style={{ 
               fontSize: fontSizes.title,
               marginBottom: fontSizes.spacing.mb8
@@ -170,12 +171,49 @@ const SectionB: React.FC<SectionProps> = ({ progress }) => {
             Solutions That Evolve <br className="md:hidden" /> <span className="font-bold">With Your Business</span>
           </h2>
           <p 
-            className="text-gray-600 font-inter mx-auto leading-relaxed"
+            className="text-black font-poppins mx-auto leading-relaxed"
             style={{ 
               fontSize: fontSizes.description,
               maxWidth: fontSizes.maxWidth.xxl
             }}
           >
+            At DNXT LAB, we don&apos;t sell tools—we design intelligent frameworks tailored to your operations. By blending technical depth with strategic foresight, we ensure every AI or digital solution evolves with your business and supports long-term growth.
+          </p>
+        </div>
+      </div>
+
+      {/* Layout Mobile & iPad - Visible en pantallas < 1024px */}
+      <div className="block lg:hidden w-full h-full mt-24 md:mt-40 flex flex-col justify-center items-center">
+        {/* Título arriba */}
+        <div className="w-full mb-6 md:mb-8 text-center">
+          <p className="text-xl md:text-2xl font-poppins text-black uppercase tracking-wider mr-28  md:mr-32">
+            STRATEGIC FLEXIBILITY
+          </p>
+        </div>
+        
+        {/* Video en el medio */}
+        <div className="w-full mb-6 md:mb-8 flex justify-center">
+          <video 
+            src="/video1.mp4" 
+            autoPlay 
+            loop 
+            muted 
+            playsInline 
+            preload="auto" 
+            className="w-80 md:w-[670px] h-60 md:h-72 object-cover rounded-2xl shadow-lg mr-28  md:mr-32"
+            style={{
+              background: 'linear-gradient(135deg, #0891b2 0%, #1e40af 50%, #7c3aed 100%)'
+            }}
+          />
+        </div>
+        
+        {/* Texto abajo */}
+        <div className="flex-1 flex flex-col text-center px-4 md:px-8 mr-28  md:mr-32">
+          <h2 className="text-3xl md:text-4xl font-bold text-black font-poppins mb-4 md:mb-6 leading-tight">
+            Solutions That Evolve <br/>With Your Business
+          </h2>
+          
+          <p className="text-sm md:text-base text-black font-poppins leading-relaxed max-w-[300px] md:max-w-[600px] mx-auto">
             At DNXT LAB, we don&apos;t sell tools—we design intelligent frameworks tailored to your operations. By blending technical depth with strategic foresight, we ensure every AI or digital solution evolves with your business and supports long-term growth.
           </p>
         </div>
