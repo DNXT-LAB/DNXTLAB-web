@@ -422,7 +422,7 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
         </div>
 
         {/* Cards con efecto derecha a izquierda - Aparecen progresivamente */}
-        <div className="absolute inset-0 pt-20">
+        <div className="absolute inset-0 mt-40 md:mt-48">
           {/* ServiceCard 1 - Aparece primero con efecto */}
           {thirdSmoothProgress >= 0.4 && (
             <ServiceCard 

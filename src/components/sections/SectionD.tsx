@@ -58,15 +58,8 @@ const SectionD: React.FC<ContactSectionProps> = ({
     willChange: 'transform, opacity'
   }
 
-  const leftContentStyle = {
-    transform: `translateY(${seventhSmoothProgress < 0.8 ? (1 - seventhSmoothProgress) * 150 : 0}px) translateX(${seventhSmoothProgress < 0.8 ? (1 - seventhSmoothProgress) * -80 : 0}px)`,
-    opacity: Math.min(1, Math.max(0, (seventhSmoothProgress - 0.4) * 2.5)),
-    transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-    willChange: 'transform, opacity'
-  }
-
-  const rightContentStyle = {
-    transform: `translateY(${seventhSmoothProgress < 0.8 ? (1 - seventhSmoothProgress) * 150 : 0}px) translateX(${seventhSmoothProgress < 0.8 ? (1 - seventhSmoothProgress) * 80 : 0}px)`,
+  const contentStyle = {
+    transform: `translateY(${seventhSmoothProgress < 0.8 ? (1 - seventhSmoothProgress) * 50 : 0}px)`,
     opacity: Math.min(1, Math.max(0, (seventhSmoothProgress - 0.4) * 2.5)),
     transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
     willChange: 'transform, opacity'
@@ -75,37 +68,43 @@ const SectionD: React.FC<ContactSectionProps> = ({
   return (
     <div style={sectionStyle}>
       {/* Layout Desktop - Solo visible en pantallas >= 1024px */}
-      <div className="hidden lg:flex w-full h-full px-16">
-        {/* Lado izquierdo - Información de contacto */}
-        <div className="flex-1 flex flex-col justify-center pl-8" style={leftContentStyle}>
-          <h2 className="text-[90px] font-bold text-black font-morien leading-[1.1] mb-12">
+      <div className="hidden lg:flex w-full h-full flex-col justify-center px-8" style={contentStyle}>
+        {/* Título centrado arriba */}
+        <div className="text-center mb-12">
+          <h2 className="text-[90px] font-bold text-black font-morien leading-[1.1]">
             BOOK A CALL<br/>
             NOW
           </h2>
-          
-          <div className="space-y-6 text-xl text-black font-inter">
+        </div>
+        
+        {/* Formulario con layout especial */}
+        <div className="flex justify-center mb-12">
+          <form className="w-full max-w-[1200px]" onSubmit={handleSubmit}>
+            <ContactForm 
+              formState={formState}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+              isDesktopLayout={true}
+            />
+          </form>
+        </div>
+        
+        {/* Información de contacto centrada abajo */}
+        <div className="text-center">
+          <div className="space-y-4 text-xl text-black font-inter">
             <div>
-              <p className="mb-2">Phone Num: +351 999999999</p>
+              <p>Phone Num: +351 999999999</p>
             </div>
             
             <div>
-              <p className="mb-2">Email: info@diamondnxt.com</p>
+              <p>Email: info@diamondnxt.com</p>
             </div>
             
             <div>
-              <p className="mb-2">Sede: Rua Conselheiro Veloso Cruz, N.º</p>
-              <p>10 Porto — 4400 092 Vila Nova de Gaia.</p>
+              <p>Sede: Rua Conselheiro Veloso Cruz, N.º 10</p>
+              <p>Porto — 4400 092 Vila Nova de Gaia.</p>
             </div>
           </div>
-        </div>
-
-        {/* Lado derecho - Formulario */}
-        <div className="flex-1 flex items-center justify-center pr-16" style={rightContentStyle}>
-          <ContactForm 
-            formState={formState}
-            handleInputChange={handleInputChange}
-            handleSubmit={handleSubmit}
-          />
         </div>
       </div>
 
