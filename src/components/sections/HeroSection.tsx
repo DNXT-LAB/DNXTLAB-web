@@ -2,20 +2,20 @@ import React from 'react'
 
 const HeroSection: React.FC = () => {
   return (
-    <div className="fixed left-8 z-20 md:px-12" style={{ bottom: '1.5rem' }}>
-      <div className="flex flex-col items-start mb-24">
-        <h1 className="force-white-text font-bold uppercase font-poppins text-[30px] md:text-[50px] lg:text-[80px] 2xl:text-[145px] line-height-90 mb-3">
+    <div className="fixed left-[2%] z-20 md:px-[3%]" style={{ bottom: '3%' }}>
+      <div className="flex flex-col items-start mb-[4%]">
+        <h1 className="force-white-text font-bold uppercase font-poppins text-[2.5vw] md:text-[3.2vw] lg:text-[4vw] 2xl:text-[4.8vw] line-height-90 mb-[1.5%]">
           BESPOKE AI & WEB<br />
           DESIGN SOLUTIONS
         </h1>
-        <p className="force-white-text font-inter font-poppins w-60 md:w-96 lg:w-full text-[16px] md:text-[20px] lg:text-[25px] 2xl:text-[43px] leading-[1.2] font-normal md:max-w-[450px] lg:max-w-[550px] 2xl:max-w-[1050px] mb-4">
+        <p className="force-white-text font-inter font-poppins w-[55%] md:w-[70%] lg:w-[85%] text-[1.2vw] md:text-[1.4vw] lg:text-[1.6vw] 2xl:text-[1.8vw] leading-[1.3] font-normal md:max-w-[35%] lg:max-w-[40%] 2xl:max-w-[45%] mb-[2%]">
           Empowering businesses through intelligent automation, data-driven experiences, and future-proof digital design.
         </p>
         <button 
-          className="flex items-center justify-center 2xl:px-10 2xl:py-10 md:px-6 md:py-6 px-1 py-1 hover:opacity-90 transition-opacity bg-white rounded-full button-size border-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black"
-          aria-label="Ver servicios de DNXTLAB"
+          className="flex items-center justify-center 2xl:px-[2%] 2xl:py-[1.8%] md:px-[1.2%] md:py-[1.2%] px-[0.6%] py-[0.6%] hover:opacity-90 transition-opacity bg-white rounded-full button-size border-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black"
+          aria-label="View DNXTLAB services"
         >
-          <span className="force-black-text font-poppins 2xl:text-[25px] text-[16px] font-light line-height-110 mr-3">
+          <span className="force-black-text font-poppins 2xl:text-[1.1vw] text-[0.8vw] font-light line-height-110 mr-[0.8%]">
             SERVICES
           </span>
           <svg 

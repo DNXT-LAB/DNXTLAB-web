@@ -61,7 +61,7 @@ const SectionB: React.FC<SectionProps> = ({ progress }) => {
   // Calculate scaled dimensions and positions
   const getScaledDimensions = () => {
     // Left position relative to viewport (approximately centered)
-    const baseLeftPosition = viewportDimensions.width * 0.5 // 50% centered
+    const baseLeftPosition = viewportDimensions.width * 0.47 // 50% centered
     
     // Dimensiones del video escaladas
     const baseVideoWidth = viewportDimensions.width * 0.75 // 75% of screen width

@@ -206,15 +206,15 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
   // Calculate positions and rotations of the cards
   const card1Position = sixthSmoothProgress > 0 
     ? `${-8 + (-8 - 50) * Math.min(1, sixthSmoothProgress * 1.8)}%` 
-    : (fifthSmoothProgress > 0 ? '-8%' : (fourthSmoothProgress > 0 ? '50%' : getResponsiveCard1Position()))
+    : (fifthSmoothProgress > 0 ? '-20%' : (fourthSmoothProgress > 0 ? '50%' : getResponsiveCard1Position()))
   
   const card2Position = sixthSmoothProgress > 0 
-    ? '-8%' 
-    : (fifthSmoothProgress > 0 ? '50%' : (fourthSmoothProgress > 0 ? '100%' : '200%')) // Change: 118% -> 100% (more visible)
+    ? '-20%' 
+    : (fifthSmoothProgress > 0 ? '55%' : (fourthSmoothProgress > 0 ? '130%' : '200%')) // Change: 118% -> 100% (more visible)
   
   const card3Position = sixthSmoothProgress > 0 
     ? '50%' 
-    : (fifthSmoothProgress > 0 ? '100%' : '200%') // Change: 118% -> 100% (more visible)
+    : (fifthSmoothProgress > 0 ? '130%' : '200%') // Change: 118% -> 100% (more visible)
 
   const card1Rotation = fifthSmoothProgress > 0 ? '15' : (fourthSmoothProgress > 0 && fifthSmoothProgress === 0) ? '0' : '-15'
   const card2Rotation = sixthSmoothProgress > 0 ? '15' : (fifthSmoothProgress > 0 ? '0' : '-15')
