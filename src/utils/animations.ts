@@ -1,11 +1,11 @@
 import { SCROLL_LEVELS, SCROLL_CONFIG } from './constants'
 import type { ScrollProgress } from '@/types/animations'
 
-// Funciones de easing
+// Easing functions
 export const easeOutCubic = (t: number): number => 1 - Math.pow(1 - t, 3)
 export const easeOutQuart = (t: number): number => 1 - Math.pow(1 - t, 4)
 
-// Calcular el progreso de scroll para cada nivel
+// Calculate scroll progress for each level
 export const calculateScrollProgress = (scrollY: number): ScrollProgress => {
   const secondLevelProgress = Math.max(0, Math.min((scrollY - SCROLL_LEVELS.SECOND_LEVEL_START) / SCROLL_LEVELS.SECOND_LEVEL_RANGE, 1))
   const thirdLevelProgress = Math.max(0, Math.min((scrollY - SCROLL_LEVELS.THIRD_LEVEL_START) / SCROLL_LEVELS.THIRD_LEVEL_RANGE, 1))
@@ -24,7 +24,7 @@ export const calculateScrollProgress = (scrollY: number): ScrollProgress => {
   }
 }
 
-// Calcular las transformaciones para la Sección A
+// Calculate transformations for Section A
 export const calculateSectionATransforms = (scrollY: number, progress: ScrollProgress, windowSize: { width: number; height: number }) => {
   const { secondSmoothProgress } = progress
   const { SECOND_LEVEL_START } = SCROLL_LEVELS
@@ -32,7 +32,7 @@ export const calculateSectionATransforms = (scrollY: number, progress: ScrollPro
   const sectionATranslateY = scrollY < SECOND_LEVEL_START ? 0 : -(secondSmoothProgress * 600)
   const sectionAScale = scrollY < SECOND_LEVEL_START ? 1 : 1 - (secondSmoothProgress * 0.9)
   
-  // Video y texto convergen al centro
+  // Video and text converge to center
   const centerX = windowSize.width / 2
   const centerY = windowSize.height / 2
   const videoOriginalLeft = 60 + 60 + 306
@@ -55,7 +55,7 @@ export const calculateSectionATransforms = (scrollY: number, progress: ScrollPro
   }
 }
 
-// Calcular las propiedades de la pestaña
+// Calculate tab properties
 export const calculateTabProperties = (scrollY: number, windowHeight: number, windowWidth: number) => {
   const { THRESHOLD, NAVBAR_HEIGHT } = SCROLL_CONFIG
   const { SECOND_LEVEL_START } = SCROLL_LEVELS
@@ -65,7 +65,7 @@ export const calculateTabProperties = (scrollY: number, windowHeight: number, wi
   const tabProgress = Math.max(0, Math.min(adjustedScroll / maxScroll, 1))
   const smoothTabProgress = easeOutQuart(tabProgress)
   
-  // Determinar el valor base según la sección y breakpoint responsivo
+  // Determine base value according to section and responsive breakpoint
   const getResponsiveBaseTransform = () => {
     if (windowWidth < 640) return 20    // Mobile
     if (windowWidth < 1024) return 50   // Tablet  

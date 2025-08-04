@@ -14,24 +14,24 @@ const SectionA: React.FC<SectionAProps> = ({
   const [scaleFactor, setScaleFactor] = useState(1)
   const [viewportDimensions, setViewportDimensions] = useState({ width: 1920, height: 1080 })
 
-  // Función para calcular el factor de escala basado en el viewport
+  // Function to calculate scale factor based on viewport
   const calculateScaleAndDimensions = () => {
     if (typeof window !== 'undefined') {
       const width = window.innerWidth
       const height = window.innerHeight
       
-      // Base de referencia: 1920x1080 (pantalla estándar)
+              // Reference base: 1920x1080 (standard screen)
       const baseWidth = 1920
       const baseHeight = 1080
       
-      // Calcular factor de escala basado en el ancho, con límites mínimos y máximos
+              // Calculate scale factor based on width, with minimum and maximum limits
       const widthScale = width / baseWidth
       const heightScale = height / baseHeight
       
       // Usar el menor de los dos factores para mantener proporciones
       const scale = Math.min(widthScale, heightScale)
       
-      // Aplicar límites para evitar escalas extremas
+              // Apply limits to avoid extreme scales
       const clampedScale = Math.max(0.6, Math.min(2.5, scale))
       
       return {
@@ -47,7 +47,7 @@ const SectionA: React.FC<SectionAProps> = ({
     }
   }
 
-  // Effect para actualizar el factor de escala cuando cambie el tamaño
+  // Effect to update scale factor when size changes
   useEffect(() => {
     const updateScale = () => {
       const { scaleFactor: newScale, width, height } = calculateScaleAndDimensions()
@@ -58,7 +58,7 @@ const SectionA: React.FC<SectionAProps> = ({
     // Establecer escala inicial
     updateScale()
 
-    // Escuchar cambios de tamaño
+            // Listen for size changes
     window.addEventListener('resize', updateScale)
     
     return () => {
@@ -66,11 +66,11 @@ const SectionA: React.FC<SectionAProps> = ({
     }
   }, [])
 
-  // Calcular dimensiones y posiciones escaladas
+      // Calculate scaled dimensions and positions
   const getScaledDimensions = () => {
     // Dimensiones base
     const baseVideo = { width: 812, height: 638 }
-    const baseText = { width: 1147, height: 853 } // Aumentada para extender la pestaña
+    const baseText = { width: 1147, height: 853 } // Increased to extend the tab
     
     // Posiciones base (relativas al viewport) - Responsivo
     const getResponsiveVideoLeft = () => {
@@ -144,7 +144,7 @@ const SectionA: React.FC<SectionAProps> = ({
     opacity: secondSmoothProgress > 0.7 ? 0 : 1 - (secondSmoothProgress * 1.2)
   }
 
-  // Calcular tamaños de fuente escalados
+  // Calculate scaled font sizes
   const getScaledFontSizes = () => {
     return {
       mainTitle: `${6 * scaleFactor}rem`,
@@ -168,7 +168,7 @@ const SectionA: React.FC<SectionAProps> = ({
 
   return (
     <div style={sectionStyle}>
-      {/* Layout Desktop - Solo visible en pantallas >= 1024px */}
+              {/* Desktop Layout - Only visible on screens >= 1024px */}
       <div className="hidden lg:block">
         <video 
           src="/video2.mp4" 
@@ -241,9 +241,9 @@ const SectionA: React.FC<SectionAProps> = ({
         </div>
       </div>
 
-      {/* Layout Mobile & iPad - Visible en pantallas < 1024px */}
+              {/* Mobile & iPad Layout - Visible on screens < 1024px */}
       <div className="block lg:hidden w-full h-full mt-12 flex flex-col">
-        {/* Video arriba con padding */}
+        {/* Video at top with padding */}
         <div className="w-full mb-6 md:mb-8">
           <video 
             src="/video2.mp4" 
@@ -256,7 +256,7 @@ const SectionA: React.FC<SectionAProps> = ({
           />
         </div>
         
-        {/* Texto abajo */}
+        {/* Text below */}
         <div className="flex-1 flex flex-col">
           <h2 className="text-2xl md:text-5xl font-bold text-black font-poppins mb-4 md:mb-6 leading-tight">
             WE BUILD WITH<br/>INTELLIGENCE AND<br/>INTENT

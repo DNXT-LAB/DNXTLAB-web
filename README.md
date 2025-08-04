@@ -1,88 +1,88 @@
 # DNXT LAB - Audio Speaker Landing Page
 
-Una página de aterrizaje moderna para altavoces de audio con animaciones fluidas y diseño responsivo.
+A modern landing page for audio speakers with smooth animations and responsive design.
 
-## 🚀 Características
+## 🚀 Features
 
-- **Animación de carga**: Efecto de texto animado "DNXT LAB" con transición suave
-- **Video de fondo**: Reproducción automática de video con overlay
-- **Diseño responsivo**: Optimizado para todos los dispositivos
-- **Tipografía personalizada**: Fuentes Morien e Inter
-- **Arquitectura modular**: Componentes y hooks organizados
+- **Loading animation**: Animated "DNXT LAB" text effect with smooth transition
+- **Background video**: Auto-playing video with overlay
+- **Responsive design**: Optimized for all devices
+- **Custom typography**: Morien and Inter fonts
+- **Modular architecture**: Organized components and hooks
 
-## 📁 Estructura del Proyecto
+## 📁 Project Structure
 
 ```
 src/
 ├── app/
-│   ├── globals.css          # Estilos globales y utilidades Tailwind
-│   ├── layout.tsx          # Layout principal de la aplicación
-│   └── page.tsx            # Página principal
+│   ├── globals.css          # Global styles and Tailwind utilities
+│   ├── layout.tsx          # Main application layout
+│   └── page.tsx            # Main page
 ├── components/
-│   ├── LoadingAnimation.tsx # Componente de animación inicial
-│   ├── Navbar.tsx          # Componente de navegación
-│   └── VideoContent.tsx    # Componente de contenido principal
+│   ├── LoadingAnimation.tsx # Initial animation component
+│   ├── Navbar.tsx          # Navigation component
+│   └── VideoContent.tsx    # Main content component
 ├── hooks/
-│   └── useLoadingAnimation.ts # Hook personalizado para animación
+│   └── useLoadingAnimation.ts # Custom hook for animation
 └── types/
-    └── index.ts            # Definiciones de tipos TypeScript
+    └── index.ts            # TypeScript type definitions
 ```
 
-## 🛠️ Tecnologías Utilizadas
+## 🛠️ Technologies Used
 
-- **Next.js 14**: Framework de React con App Router
-- **TypeScript**: Tipado estático
-- **Tailwind CSS**: Framework de CSS utilitario
-- **React Hooks**: Estado y efectos personalizados
+- **Next.js 14**: React framework with App Router
+- **TypeScript**: Static typing
+- **Tailwind CSS**: Utility-first CSS framework
+- **React Hooks**: Custom state and effects
 
-## 🎨 Componentes Principales
+## 🎨 Main Components
 
 ### LoadingAnimation
-- Maneja la animación inicial "DNXT LAB"
-- Transición de letras grises a blancas
-- Logo animado con efectos suaves
+- Handles initial "DNXT LAB" animation
+- Gray to white letter transition
+- Animated logo with smooth effects
 
 ### VideoContent
-- Video de fondo a pantalla completa
-- Contenido superpuesto con navbar
-- Layout responsivo con contenido izquierdo y derecho
+- Full-screen background video
+- Overlaid content with navbar
+- Responsive layout with left and right content
 
 ### useLoadingAnimation Hook
-- Gestiona el estado de la animación
-- Controla las fases: initial → animating → video
-- Timing personalizable para efectos
+- Manages animation state
+- Controls phases: initial → animating → video
+- Customizable timing for effects
 
-## 🎯 Especificaciones de Diseño
+## 🎯 Design Specifications
 
-### Tipografía
-- **Título principal**: Morien, 136px (responsive)
-- **Descripción**: Inter, 32px (responsive)
-- **Botón**: Morien, 22px (responsive)
+### Typography
+- **Main title**: Morien, 136px (responsive)
+- **Description**: Inter, 32px (responsive)
+- **Button**: Morien, 22px (responsive)
 
-### Colores
-- **Fondo**: Negro (#000000)
-- **Texto**: Blanco (#FFFFFF)
-- **Botón**: Blanco con texto negro
-- **Overlay**: Negro con 30% transparencia
+### Colors
+- **Background**: Black (#000000)
+- **Text**: White (#FFFFFF)
+- **Button**: White with black text
+- **Overlay**: Black with 30% transparency
 
-### Animaciones
-- **Duración**: 1.5s para transiciones
-- **Timing**: 120ms entre letras
-- **Easing**: ease-out para suavidad
+### Animations
+- **Duration**: 1.5s for transitions
+- **Timing**: 120ms between letters
+- **Easing**: ease-out for smoothness
 
-## 📱 Diseño Responsivo
+## 📱 Responsive Design
 
-- **Desktop**: Layout completo con contenido izquierdo/derecho
-- **Tablet**: Ajustes de tamaño de fuente y espaciado
-- **Mobile**: Stack vertical con navegación optimizada
+- **Desktop**: Full layout with left/right content
+- **Tablet**: Font size and spacing adjustments
+- **Mobile**: Vertical stack with optimized navigation
 
-## 🔧 Personalización
+## 🔧 Customization
 
-Los estilos personalizados se encuentran en `globals.css`:
-- Tamaños de fuente con `clamp()` para responsividad
-- Utilidades Tailwind personalizadas
-- Variables de ancho máximo para layout
+Custom styles are found in `globals.css`:
+- Font sizes with `clamp()` for responsiveness
+- Custom Tailwind utilities
+- Maximum width variables for layout
 
-## 📄 Licencia
+## 📄 License
 
-Este proyecto está bajo la Licencia MIT.
+This project is under the MIT License.

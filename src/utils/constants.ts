@@ -1,18 +1,18 @@
 import type { SectionPositions } from '@/types/animations'
 
-// Posiciones exactas de cada sección
+// Exact positions of each section
 export const SECTION_POSITIONS: SectionPositions = [
-  0,     // Sección 0: Video completo
-  370,   // Sección A: Primera pestaña
-  1000,  // Sección B: Strategic Flexibility
-  1600,  // Sección C inicial: Texto completo
-  2400,  // Sección C con Card 1 centrada
-  3200,  // Sección C con Card 2 centrada
-  4000,  // Sección C con Card 3 centrada
-  4800   // Sección D: Formulario
+  0,     // Section 0: Full video
+  370,   // Section A: First tab
+  1000,  // Section B: Strategic Flexibility
+  1600,  // Section C initial: Full text
+  2400,  // Section C with Card 1 centered
+  3200,  // Section C with Card 2 centered
+  4000,  // Section C with Card 3 centered
+  4800   // Section D: Form
 ] as const
 
-// Configuraciones de scroll
+// Scroll configurations
 export const SCROLL_CONFIG = {
   THRESHOLD: 50,
   NAVBAR_HEIGHT: 100,

@@ -14,24 +14,24 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
   const [scaleFactor, setScaleFactor] = useState(1)
   const [viewportDimensions, setViewportDimensions] = useState({ width: 1920, height: 1080 })
 
-  // Función para calcular el factor de escala basado en el viewport
+  // Function to calculate scale factor based on viewport
   const calculateScaleAndDimensions = () => {
     if (typeof window !== 'undefined') {
       const width = window.innerWidth
       const height = window.innerHeight
       
-      // Base de referencia: 1920x1080 (pantalla estándar)
+              // Reference base: 1920x1080 (standard screen)
       const baseWidth = 1920
       const baseHeight = 1080
       
-      // Calcular factor de escala basado en el ancho, con límites mínimos y máximos
+              // Calculate scale factor based on width, with minimum and maximum limits
       const widthScale = width / baseWidth
       const heightScale = height / baseHeight
       
       // Usar el menor de los dos factores para mantener proporciones
       const scale = Math.min(widthScale, heightScale)
       
-      // Aplicar límites para evitar escalas extremas
+              // Apply limits to avoid extreme scales
       const clampedScale = Math.max(0.6, Math.min(2.5, scale))
       
       return {
@@ -47,7 +47,7 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
     }
   }
 
-  // Effect para actualizar el factor de escala cuando cambie el tamaño
+  // Effect to update scale factor when size changes
   useEffect(() => {
     const updateScale = () => {
       const { scaleFactor: newScale, width, height } = calculateScaleAndDimensions()
@@ -58,7 +58,7 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
     // Establecer escala inicial
     updateScale()
 
-    // Escuchar cambios de tamaño
+            // Listen for size changes
     window.addEventListener('resize', updateScale)
     
     return () => {
@@ -66,31 +66,31 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
     }
   }, [])
 
-  // Calcular dimensiones y posiciones escaladas
+  // Calculate scaled dimensions and positions
   const getScaledDimensions = () => {
-    // Posición left responsiva según tamaño de pantalla
+    // Responsive left position according to screen size
     const getResponsiveLeftPosition = () => {
       if (viewportDimensions.width >= 1536) return 0.45      // 2XL: 45% (perfecto)
-      if (viewportDimensions.width >= 1280) return 0.60      // XL: 48% (más centrado)
-      return 0.5                                             // Desktop: 50% (centrado para mejor visibilidad)
+      if (viewportDimensions.width >= 1280) return 0.60      // XL: 48% (more centered)
+      return 0.5                                             // Desktop: 50% (centered for better visibility)
     }
     
     const getResponsiveMaxWidth = () => {
       if (viewportDimensions.width >= 1536) return 700       // 2XL: 700px (perfecto)
-      if (viewportDimensions.width >= 1280) return 650       // XL: 650px (más junto al centro)
-      return 600                                             // Desktop: 600px (más junto al centro)
+          if (viewportDimensions.width >= 1280) return 650       // XL: 650px (closer to center)
+    return 600                                             // Desktop: 600px (closer to center)
     }
     
     const getResponsivePaddingX = () => {
       if (viewportDimensions.width >= 1536) return 4         // 2XL: 4rem (original)
-      if (viewportDimensions.width >= 1280) return 3         // XL: 3rem (más junto)
-      return 2                                               // Desktop: 2rem (más junto)
+          if (viewportDimensions.width >= 1280) return 3         // XL: 3rem (closer together)
+    return 2                                               // Desktop: 2rem (closer together)
     }
     
     const getResponsivePaddingLeft = () => {
       if (viewportDimensions.width >= 1536) return 2         // 2XL: 2rem (perfecto)
-      if (viewportDimensions.width >= 1280) return 4         // XL: 4rem (mover más al centro)
-      return 6                                               // Desktop: 6rem (mover más al centro)
+          if (viewportDimensions.width >= 1280) return 4         // XL: 4rem (move closer to center)
+    return 6                                               // Desktop: 6rem (move closer to center)
     }
     
     const baseLeftPosition = viewportDimensions.width * getResponsiveLeftPosition()
@@ -99,10 +99,10 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
       leftPosition: baseLeftPosition,
       maxWidths: {
         small: 330 * scaleFactor, // max-w-[330px]
-        large: getResponsiveMaxWidth() * scaleFactor  // Responsivo según pantalla
+        large: getResponsiveMaxWidth() * scaleFactor  // Responsive according to screen
       },
       padding: {
-        px16: getResponsivePaddingX() * scaleFactor, // Responsivo según pantalla
+        px16: getResponsivePaddingX() * scaleFactor, // Responsive according to screen
         pl8: getResponsivePaddingLeft() * scaleFactor,  // Responsivo
         p4: 1 * scaleFactor,   // p-4 escalado
         p6: 1.5 * scaleFactor,  // p-6 escalado
@@ -113,12 +113,12 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
 
   const dimensions = getScaledDimensions()
 
-  // Calcular tamaños de fuente escalados responsivamente
+  // Calculate responsively scaled font sizes
   const getScaledFontSizes = () => {
     const getResponsiveMainTitle = () => {
       if (viewportDimensions.width >= 1536) return 5.5       // 2XL: 5.5rem
       if (viewportDimensions.width >= 1280) return 4.5       // XL: 4.5rem
-      return 3.5                                             // Desktop: 3.5rem (más compacto)
+      return 3.5                                             // Desktop: 3.5rem (more compact)
     }
     
     return {
@@ -197,24 +197,24 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
 
   const servicesOpacity = fourthSmoothProgress > 0 ? 0 : 1
 
-  // Función para obtener posición inicial de card1 responsiva
+  // Function to get responsive initial position of card1
   const getResponsiveCard1Position = () => {
     if (viewportDimensions.width >= 1536) return '108%'      // 2XL: 108% (original)
-    return '75%'                                             // Desktop/XL: 75% (más visible)
+    return '75%'                                             // Desktop/XL: 75% (more visible)
   }
 
-  // Calcular posiciones y rotaciones de las cards
+  // Calculate positions and rotations of the cards
   const card1Position = sixthSmoothProgress > 0 
     ? `${-8 + (-8 - 50) * Math.min(1, sixthSmoothProgress * 1.8)}%` 
     : (fifthSmoothProgress > 0 ? '-8%' : (fourthSmoothProgress > 0 ? '50%' : getResponsiveCard1Position()))
   
   const card2Position = sixthSmoothProgress > 0 
     ? '-8%' 
-    : (fifthSmoothProgress > 0 ? '50%' : (fourthSmoothProgress > 0 ? '100%' : '200%')) // Cambio: 118% -> 100% (más visible)
+    : (fifthSmoothProgress > 0 ? '50%' : (fourthSmoothProgress > 0 ? '100%' : '200%')) // Change: 118% -> 100% (more visible)
   
   const card3Position = sixthSmoothProgress > 0 
     ? '50%' 
-    : (fifthSmoothProgress > 0 ? '100%' : '200%') // Cambio: 118% -> 100% (más visible)
+    : (fifthSmoothProgress > 0 ? '100%' : '200%') // Change: 118% -> 100% (more visible)
 
   const card1Rotation = fifthSmoothProgress > 0 ? '15' : (fourthSmoothProgress > 0 && fifthSmoothProgress === 0) ? '0' : '-15'
   const card2Rotation = sixthSmoothProgress > 0 ? '15' : (fifthSmoothProgress > 0 ? '0' : '-15')
@@ -226,12 +226,12 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
 
   return (
     <div style={sectionStyle}>
-      {/* Layout Desktop - Solo visible en pantallas >= 1024px */}
+              {/* Desktop Layout - Only visible on screens >= 1024px */}
       <div 
         className="hidden lg:flex w-full h-full"
         // style={{ paddingLeft: `${dimensions.padding.px16}rem`, paddingRight: `${dimensions.padding.px16}rem` }}
       >
-        {/* Contenido principal lado izquierdo */}
+        {/* Main content left side */}
         <div 
           className="flex-1 ml-20 2xl:ml-0"
         >
@@ -331,7 +331,7 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
         <div 
           className="absolute inset-0"
           style={{
-            marginTop: viewportDimensions.width >= 1536 ? '20rem' : '10rem' // 2XL: mt-80, otros: mt-40 (más arriba)
+            marginTop: viewportDimensions.width >= 1536 ? '20rem' : '10rem' // 2XL: mt-80, others: mt-40 (higher up)
           }}
         >
           <ServiceCard 
@@ -369,9 +369,9 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
         </div>
       </div>
 
-            {/* Layout Mobile & iPad - Visible en pantallas < 1024px */}
+            {/* Mobile & iPad Layout - Visible on screens < 1024px */}
       <div className="block lg:hidden bg-white mt-16 md:mt-32 relative overflow-hidden">
-        {/* Título fijo arriba - Siempre visible */}
+        {/* Fixed title at top - Always visible */}
         <div className="mb-6 absolute top-4 left-[700px] md:left-[560px] right-0 text-left z-50 bg-white pt-4">
           <h2 className="text-[33px] md:text-3xl font-bold text-black font-poppins leading-none mr-28 md:mr-40">
             ELEVATE YOUR<br/>
@@ -421,7 +421,7 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
           </div>
         </div>
 
-        {/* Cards con efecto derecha a izquierda - Aparecen progresivamente */}
+        {/* Cards with right to left effect - Appear progressively */}
         <div className="absolute inset-0 mt-40 md:mt-48">
           {/* ServiceCard 1 - Aparece primero con efecto */}
           {thirdSmoothProgress >= 0.4 && (
@@ -467,7 +467,7 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
         </div>
       </div>
 
-              {/* Botón Services centrado */}
+              {/* Centered Services button */}
         <div className="absolute left-[780px] md:left-[650px] lg:left-[700px] 2xl:left-1/2 -translate-x-1/2" style={{ 
           bottom: getResponsiveBottomPosition(),
           opacity: 1,

@@ -1,50 +1,50 @@
-# 📧 Configuración del Sistema de Email
+# 📧 Email System Setup
 
-Para que el formulario de contacto funcione correctamente, necesitas configurar las variables de entorno para el envío de emails.
+For the contact form to work correctly, you need to configure environment variables for email sending.
 
-## 🛠️ Variables de Entorno
+## 🛠️ Environment Variables
 
-Crea un archivo `.env.local` en la raíz del proyecto con las siguientes variables:
+Create a `.env.local` file in the project root with the following variables:
 
 ```env
-# Configuración SMTP (Ejemplo con Gmail)
+# SMTP Configuration (Example with Gmail)
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
 SMTP_SECURE=false
-SMTP_USER=tu-email@gmail.com
-SMTP_PASS=tu-app-password
+SMTP_USER=your-email@gmail.com
+SMTP_PASS=your-app-password
 
 # Emails
-SMTP_FROM=tu-email@gmail.com
-CONTACT_EMAIL=donde-quieres-recibir-emails@gmail.com
+SMTP_FROM=your-email@gmail.com
+CONTACT_EMAIL=where-you-want-to-receive-emails@gmail.com
 ```
 
-## 📋 Configuración para Gmail
+## 📋 Gmail Configuration
 
-### Paso 1: Habilitar Verificación en 2 Pasos
-1. Ve a tu [Cuenta de Google](https://myaccount.google.com/)
-2. Haz clic en "Seguridad"
-3. Habilita "Verificación en 2 pasos"
+### Step 1: Enable 2-Step Verification
+1. Go to your [Google Account](https://myaccount.google.com/)
+2. Click on "Security"
+3. Enable "2-Step Verification"
 
-### Paso 2: Crear Contraseña de Aplicación
-1. En la misma sección de "Seguridad"
-2. Busca "Contraseñas de aplicaciones"
-3. Selecciona "Correo" y tu dispositivo
-4. Google te dará una contraseña de 16 caracteres
-5. **Usa esta contraseña en `SMTP_PASS`, NO tu contraseña normal**
+### Step 2: Create App Password
+1. In the same "Security" section
+2. Look for "App passwords"
+3. Select "Mail" and your device
+4. Google will give you a 16-character password
+5. **Use this password in `SMTP_PASS`, NOT your normal password**
 
-### Paso 3: Configurar Variables
+### Step 3: Configure Variables
 ```env
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
 SMTP_SECURE=false
-SMTP_USER=tu-email@gmail.com
-SMTP_PASS=abcd efgh ijkl mnop  # La contraseña de aplicación de 16 caracteres
-SMTP_FROM=tu-email@gmail.com
-CONTACT_EMAIL=tu-email@gmail.com  # O cualquier otro email donde quieras recibir los mensajes
+SMTP_USER=your-email@gmail.com
+SMTP_PASS=abcd efgh ijkl mnop  # The 16-character app password
+SMTP_FROM=your-email@gmail.com
+CONTACT_EMAIL=your-email@gmail.com  # Or any other email where you want to receive messages
 ```
 
-## 🔧 Configuración para Otros Proveedores
+## 🔧 Configuration for Other Providers
 
 ### Outlook/Hotmail
 ```env
@@ -60,44 +60,44 @@ SMTP_PORT=587
 SMTP_SECURE=false
 ```
 
-## ✅ Probar la Configuración
+## ✅ Test the Configuration
 
-1. Inicia el servidor de desarrollo: `npm run dev`
-2. Ve a la sección del formulario en tu sitio
-3. Completa y envía el formulario
-4. Revisa tu email para confirmar que llegó el mensaje
+1. Start the development server: `npm run dev`
+2. Go to the form section on your site
+3. Fill out and submit the form
+4. Check your email to confirm the message arrived
 
-## 🔒 Seguridad
+## 🔒 Security
 
-- **NUNCA** subas tu archivo `.env.local` a GitHub
-- El archivo `.env.local` ya está en `.gitignore`
-- Usa contraseñas de aplicación, no contraseñas principales
-- Las variables de entorno son seguras y solo están disponibles en el servidor
+- **NEVER** upload your `.env.local` file to GitHub
+- The `.env.local` file is already in `.gitignore`
+- Use app passwords, not main passwords
+- Environment variables are secure and only available on the server
 
-## 🐛 Solución de Problemas
+## 🐛 Troubleshooting
 
 ### Error: "Invalid login"
-- Verifica que estés usando una contraseña de aplicación, no tu contraseña normal
-- Confirma que la verificación en 2 pasos esté habilitada
+- Verify you're using an app password, not your normal password
+- Confirm that 2-step verification is enabled
 
 ### Error: "Connection timeout"
-- Verifica tu conexión a internet
-- Algunos ISPs bloquean el puerto 587, prueba con 465 y `SMTP_SECURE=true`
+- Check your internet connection
+- Some ISPs block port 587, try with 465 and `SMTP_SECURE=true`
 
 ### Error: "Authentication failed"
-- Revisa que tu email y contraseña de aplicación sean correctos
-- Asegúrate de que no haya espacios extra en las variables
+- Check that your email and app password are correct
+- Make sure there are no extra spaces in the variables
 
-## 📨 Ejemplo de Email que se Enviará
+## 📨 Example Email That Will Be Sent
 
-Cuando alguien complete el formulario, recibirás un email como este:
+When someone completes the form, you will receive an email like this:
 
-**Asunto:** Nuevo contacto desde DNXTLAB - [Nombre] [Apellido]
+**Subject:** New contact from DNXTLAB - [First Name] [Last Name]
 
-**Contenido:**
-- Información del cliente (nombre, apellido, email)
-- El mensaje completo
-- Formato HTML profesional
-- Footer identificando que vino del formulario de DNXTLAB
+**Content:**
+- Client information (first name, last name, email)
+- The complete message
+- Professional HTML format
+- Footer identifying it came from the DNXTLAB form
 
-¡Tu formulario de contacto ya está listo! 🚀 
+Your contact form is ready! 🚀 

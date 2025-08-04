@@ -13,10 +13,10 @@ export function useLoadingAnimation(): AnimationState {
   const [phase, setPhase] = useState<AnimationPhase>('initial')
   const [animatedLetters, setAnimatedLetters] = useState<boolean[]>([])
 
-  // Memoizar las letras para evitar recalcular en cada render
+  // Memoize letters to avoid recalculating on each render
   const letters = useMemo(() => ANIMATION_CONFIG.TEXT.split(''), [])
 
-  // Función para actualizar letra animada
+  // Function to update animated letter
   const updateAnimatedLetter = useCallback((index: number) => {
     setAnimatedLetters(prev => {
       const newArray = [...prev]
@@ -28,17 +28,17 @@ export function useLoadingAnimation(): AnimationState {
   useEffect(() => {
     let timeouts: NodeJS.Timeout[] = []
 
-    // Marcar como montado
+    // Mark as mounted
     setMounted(true)
     
-    // Inicializar array de letras animadas
+    // Initialize animated letters array
     setAnimatedLetters(new Array(letters.length).fill(false))
 
-    // Configurar la secuencia de animación
+    // Configure animation sequence
     const initialTimer = setTimeout(() => {
       setPhase('animating')
       
-      // Programar animación de cada letra
+      // Schedule animation for each letter
       letters.forEach((_, index) => {
         const letterTimer = setTimeout(() => {
           updateAnimatedLetter(index)
@@ -47,7 +47,7 @@ export function useLoadingAnimation(): AnimationState {
         timeouts.push(letterTimer)
       })
 
-      // Programar transición a video
+      // Schedule transition to video
       const videoTimer = setTimeout(() => {
         setPhase('video')
       }, letters.length * ANIMATION_CONFIG.LETTER_DELAY + ANIMATION_CONFIG.FINAL_DELAY)
@@ -57,7 +57,7 @@ export function useLoadingAnimation(): AnimationState {
 
     timeouts.push(initialTimer)
 
-    // Cleanup: limpiar todos los timeouts al desmontar
+    // Cleanup: clear all timeouts on unmount
     return () => {
       timeouts.forEach(timeout => clearTimeout(timeout))
     }

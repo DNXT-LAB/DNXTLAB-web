@@ -12,12 +12,12 @@ export const useScrollAnimation = () => {
   // Ref para acceder a currentSection sin crear dependencia
   const currentSectionRef = useRef(currentSection)
   
-  // Actualizar ref cada vez que cambie currentSection
+  // Update ref every time currentSection changes
   useEffect(() => {
     currentSectionRef.current = currentSection
   }, [currentSection])
 
-  // Función para navegar a una sección específica
+  // Function to navigate to a specific section
   const navigateToSection = useCallback((targetSection: number) => {
     if (targetSection >= 0 && targetSection < SECTION_POSITIONS.length) {
       setIsTransitioning(true)
@@ -32,9 +32,9 @@ export const useScrollAnimation = () => {
     }
   }, [])
 
-  // Effect para configurar eventos de scroll y resize (solo una vez)
+  // Effect to configure scroll and resize events (only once)
   useEffect(() => {
-    // Detectar si estamos en un dispositivo móvil
+    // Detect if we are on a mobile device
     const isMobile = () => {
       return typeof window !== 'undefined' && (
         /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
@@ -45,7 +45,7 @@ export const useScrollAnimation = () => {
 
 
     const handleWheel = (e: WheelEvent) => {
-      // En móvil, no interferir con el scroll nativo
+      // On mobile, don't interfere with native scroll
       if (isMobile()) return
       
       e.preventDefault()
@@ -69,7 +69,7 @@ export const useScrollAnimation = () => {
       const scrollPosition = window.scrollY
       const windowHeight = window.innerHeight
       
-      // Calcular qué sección debería estar activa basada en el scroll nativo
+      // Calculate which section should be active based on native scroll
       const sectionIndex = Math.round(scrollPosition / windowHeight)
       const clampedSection = Math.max(0, Math.min(sectionIndex, SECTION_POSITIONS.length - 1))
       
@@ -85,16 +85,16 @@ export const useScrollAnimation = () => {
     }
 
     if (typeof window !== 'undefined') {
-      // Configurar valores iniciales
+      // Configure initial values
       setWindowHeight(window.innerHeight)
       setWindowWidth(window.innerWidth)
       
       if (isMobile()) {
-        // En móvil: usar scroll nativo
+        // On mobile: use native scroll
         document.body.style.overflow = 'auto'
         document.documentElement.style.overflow = 'auto'
         
-        // Establecer altura del contenido para permitir scroll nativo
+        // Set content height to allow native scroll
         document.body.style.height = `${SECTION_POSITIONS.length * 100}vh`
         
         window.addEventListener('scroll', handleNativeScroll, { passive: true })
@@ -154,7 +154,7 @@ export const useScrollAnimation = () => {
     }
   }, [currentSection])
 
-  // Calcular todos los valores derivados
+      // Calculate all derived values
   const progress = calculateScrollProgress(scrollY)
   const sectionATransforms = calculateSectionATransforms(scrollY, progress, { width: windowWidth, height: windowHeight })
   const tabProperties = calculateTabProperties(scrollY, windowHeight, windowWidth)

@@ -17,11 +17,11 @@ const ContactForm: React.FC<ContactFormProps> = ({
   const { formData, isSubmitting, submitMessage, submitStatus } = formState
 
   if (isDesktopLayout) {
-    // Layout desktop especial: inputs a la izquierda, textarea y botón a la derecha
+    // Special desktop layout: inputs on the left, textarea and button on the right
     return (
       <div className="w-full max-w-[1200px]">
         <div className="flex gap-8">
-          {/* Lado izquierdo - Inputs */}
+          {/* Left side - Inputs */}
           <div className="flex-1 space-y-4">
             <div>
               <input
@@ -63,7 +63,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
             </div>
           </div>
 
-          {/* Lado derecho - Textarea y botón */}
+          {/* Right side - Textarea and button */}
           <div className="flex-1 space-y-4">
             <div>
               <textarea
@@ -112,7 +112,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
     )
   }
 
-  // Layout normal (móvil/iPad): todo en columna vertical
+  // Normal layout (mobile/iPad): everything in vertical column
   return (
     <div className="w-full max-w-[600px]">
       <form className="space-y-4" onSubmit={handleSubmit}>

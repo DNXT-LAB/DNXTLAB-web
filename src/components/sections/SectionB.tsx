@@ -6,24 +6,24 @@ const SectionB: React.FC<SectionProps> = ({ progress }) => {
   const [scaleFactor, setScaleFactor] = useState(1)
   const [viewportDimensions, setViewportDimensions] = useState({ width: 1920, height: 1080 })
 
-  // Función para calcular el factor de escala basado en el viewport
+  // Function to calculate scale factor based on viewport
   const calculateScaleAndDimensions = () => {
     if (typeof window !== 'undefined') {
       const width = window.innerWidth
       const height = window.innerHeight
       
-      // Base de referencia: 1920x1080 (pantalla estándar)
+              // Reference base: 1920x1080 (standard screen)
       const baseWidth = 1920
       const baseHeight = 1080
       
-      // Calcular factor de escala basado en el ancho, con límites mínimos y máximos
+              // Calculate scale factor based on width, with minimum and maximum limits
       const widthScale = width / baseWidth
       const heightScale = height / baseHeight
       
       // Usar el menor de los dos factores para mantener proporciones
       const scale = Math.min(widthScale, heightScale)
       
-      // Aplicar límites para evitar escalas extremas
+              // Apply limits to avoid extreme scales
       const clampedScale = Math.max(0.6, Math.min(2.5, scale))
       
       return {
@@ -39,7 +39,7 @@ const SectionB: React.FC<SectionProps> = ({ progress }) => {
     }
   }
 
-  // Effect para actualizar el factor de escala cuando cambie el tamaño
+  // Effect to update scale factor when size changes
   useEffect(() => {
     const updateScale = () => {
       const { scaleFactor: newScale, width, height } = calculateScaleAndDimensions()
@@ -50,7 +50,7 @@ const SectionB: React.FC<SectionProps> = ({ progress }) => {
     // Establecer escala inicial
     updateScale()
 
-    // Escuchar cambios de tamaño
+            // Listen for size changes
     window.addEventListener('resize', updateScale)
     
     return () => {
@@ -58,13 +58,13 @@ const SectionB: React.FC<SectionProps> = ({ progress }) => {
     }
   }, [])
 
-  // Calcular dimensiones y posiciones escaladas
+  // Calculate scaled dimensions and positions
   const getScaledDimensions = () => {
-    // Posición left relativa al viewport (centrado aproximadamente)
-    const baseLeftPosition = viewportDimensions.width * 0.5 // 50% centrado
+    // Left position relative to viewport (approximately centered)
+    const baseLeftPosition = viewportDimensions.width * 0.5 // 50% centered
     
     // Dimensiones del video escaladas
-    const baseVideoWidth = viewportDimensions.width * 0.75 // 75% del ancho de pantalla
+    const baseVideoWidth = viewportDimensions.width * 0.75 // 75% of screen width
     const baseVideoHeight = 530 // altura base
     
     return {
@@ -78,7 +78,7 @@ const SectionB: React.FC<SectionProps> = ({ progress }) => {
 
   const dimensions = getScaledDimensions()
 
-  // Calcular tamaños de fuente escalados
+  // Calculate scaled font sizes
   const getScaledFontSizes = () => {
     return {
       subtitle: `${1.875 * scaleFactor}rem`, // text-3xl base
@@ -119,7 +119,7 @@ const SectionB: React.FC<SectionProps> = ({ progress }) => {
 
   return (
     <div style={sectionStyle}>
-      {/* Layout Desktop - Solo visible en pantallas >= 1024px */}
+              {/* Desktop Layout - Only visible on screens >= 1024px */}
       <div className="hidden lg:block h-full">
         <div 
           className="flex justify-center"
@@ -182,9 +182,9 @@ const SectionB: React.FC<SectionProps> = ({ progress }) => {
         </div>
       </div>
 
-      {/* Layout Mobile & iPad - Visible en pantallas < 1024px */}
+              {/* Mobile & iPad Layout - Visible on screens < 1024px */}
       <div className="block lg:hidden w-full h-full mt-12 md:mt-40 flex flex-col justify-center items-center">
-        {/* Título arriba */}
+        {/* Title at top */}
         <div className="w-full mb-6 md:mb-8 text-center">
           <p className="text-xl md:text-2xl font-poppins text-black uppercase tracking-wider mr-28  md:mr-32">
             STRATEGIC FLEXIBILITY
@@ -207,7 +207,7 @@ const SectionB: React.FC<SectionProps> = ({ progress }) => {
           />
         </div>
         
-        {/* Texto abajo */}
+        {/* Text below */}
         <div className="flex-1 flex flex-col text-center px-4 md:px-8 mr-28  md:mr-32">
           <h2 className="text-3xl md:text-4xl font-bold text-black font-poppins mb-4 md:mb-6 leading-tight">
             Solutions That Evolve <br/>With Your Business

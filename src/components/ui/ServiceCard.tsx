@@ -21,22 +21,22 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   opacity,
   scaleFactor = 1
 }) => {
-  // Calcular dimensiones escaladas
+  // Calculate scaled dimensions
   const getScaledDimensions = () => {
     return {
-      width: 800 * scaleFactor, // lg:w-[800px] como base
-      height: 450 * scaleFactor, // lg:h-[450px] como base
-      padding: 3 * scaleFactor, // lg:p-12 como base (12*0.25rem = 3rem)
+      width: 800 * scaleFactor, // lg:w-[800px] as base
+      height: 450 * scaleFactor, // lg:h-[450px] as base
+      padding: 3 * scaleFactor, // lg:p-12 as base (12*0.25rem = 3rem)
       borderRadius: 1.5 * scaleFactor // rounded-3xl (24px = 1.5rem)
     }
   }
 
-  // Calcular tamaños de fuente escalados
+  // Calculate scaled font sizes
   const getScaledFontSizes = () => {
     return {
-      title: `${2.25 * scaleFactor}rem`, // lg:text-4xl como base
-      subtitle: `${1.5 * scaleFactor}rem`, // lg:text-2xl como base
-      description: `${1.125 * scaleFactor}rem`, // lg:text-lg como base
+      title: `${2.25 * scaleFactor}rem`, // lg:text-4xl as base
+      subtitle: `${1.5 * scaleFactor}rem`, // lg:text-2xl as base
+      description: `${1.125 * scaleFactor}rem`, // lg:text-lg as base
       spacing: {
         mb2: `${0.5 * scaleFactor}rem`, // lg:mb-4 como base (convertido a rem)
         mb3: `${0.75 * scaleFactor}rem`,

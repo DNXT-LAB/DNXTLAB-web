@@ -1,68 +1,68 @@
-# 🚀 Refactorización Completada - Buenas Prácticas Aplicadas
+# 🚀 Refactoring Completed - Best Practices Applied
 
-## 📋 Resumen de Cambios
+## 📋 Summary of Changes
 
-Se ha refactorizado completamente el código aplicando las mejores prácticas de React/Next.js, separando el componente monolítico de 765 líneas en una estructura modular y mantenible.
+The code has been completely refactored applying React/Next.js best practices, separating the monolithic component of 765 lines into a modular and maintainable structure.
 
-## 🗂️ Nueva Estructura de Archivos
+## 🗂️ New File Structure
 
 ```
 src/
 ├── components/
-│   ├── sections/                    # ✨ NUEVO: Componentes de sección
-│   │   ├── HeroSection.tsx         # Sección principal fija
+│   ├── sections/                    # ✨ NEW: Section components
+│   │   ├── HeroSection.tsx         # Fixed main section
 │   │   ├── SectionA.tsx            # "WE BUILD WITH INTELLIGENCE"
 │   │   ├── SectionB.tsx            # "Strategic Flexibility"
-│   │   ├── SectionC.tsx            # Servicios con cards
-│   │   └── SectionD.tsx            # Formulario de contacto
-│   ├── ui/                         # ✨ NUEVO: Componentes UI reutilizables
-│   │   ├── ServiceCard.tsx         # Card de servicio reutilizable
-│   │   └── ContactForm.tsx         # Formulario de contacto
-│   ├── VideoContent.tsx            # ♻️ REFACTORIZADO: Componente principal limpio
-│   └── Navbar.tsx                  # Existente
-├── hooks/                          # ✨ NUEVO: Hooks personalizados
-│   ├── useScrollAnimation.ts       # Lógica de animaciones de scroll
-│   └── useContactForm.ts           # Lógica del formulario
-├── utils/                          # ✨ NUEVO: Utilidades
-│   ├── animations.ts               # Funciones de cálculo de animaciones
-│   └── constants.ts                # Constantes centralizadas
-└── types/                          # ✨ NUEVO: Tipos TypeScript
-    └── animations.ts               # Interfaces y tipos
+│   │   ├── SectionC.tsx            # Services with cards
+│   │   └── SectionD.tsx            # Contact form
+│   ├── ui/                         # ✨ NEW: Reusable UI components
+│   │   ├── ServiceCard.tsx         # Reusable service card
+│   │   └── ContactForm.tsx         # Contact form
+│   ├── VideoContent.tsx            # ♻️ REFACTORED: Clean main component
+│   └── Navbar.tsx                  # Existing
+├── hooks/                          # ✨ NEW: Custom hooks
+│   ├── useScrollAnimation.ts       # Scroll animation logic
+│   └── useContactForm.ts           # Form logic
+├── utils/                          # ✨ NEW: Utilities
+│   ├── animations.ts               # Animation calculation functions
+│   └── constants.ts                # Centralized constants
+└── types/                          # ✨ NEW: TypeScript types
+    └── animations.ts               # Interfaces and types
 ```
 
-## 🎯 Beneficios Implementados
+## 🎯 Implemented Benefits
 
-### ✅ **Separación de Responsabilidades**
-- **Componente principal**: Solo orquesta y coordina
-- **Secciones**: Cada una maneja su propia lógica visual
-- **Hooks**: Lógica de estado y efectos separada
-- **Utils**: Cálculos complejos extraídos
+### ✅ **Separation of Concerns**
+- **Main component**: Only orchestrates and coordinates
+- **Sections**: Each handles its own visual logic
+- **Hooks**: State and effects logic separated
+- **Utils**: Complex calculations extracted
 
-### ✅ **Reutilización de Código**
-- `ServiceCard`: Componente reutilizable para las 3 tarjetas de servicios
-- `ContactForm`: Formulario extraído como componente independiente
-- Funciones de utilidad para cálculos matemáticos
+### ✅ **Code Reusability**
+- `ServiceCard`: Reusable component for the 3 service cards
+- `ContactForm`: Form extracted as independent component
+- Utility functions for mathematical calculations
 
-### ✅ **TypeScript Mejorado**
-- Interfaces bien definidas para todas las props
-- Tipos estrictos para animaciones y formularios
-- Mejor autocompletado y detección de errores
+### ✅ **Improved TypeScript**
+- Well-defined interfaces for all props
+- Strict types for animations and forms
+- Better autocompletion and error detection
 
-### ✅ **Mantenibilidad**
-- **Antes**: 1 archivo de 765 líneas
-- **Después**: 12 archivos especializados con responsabilidades claras
-- Cada archivo tiene menos de 150 líneas
+### ✅ **Maintainability**
+- **Before**: 1 file with 765 lines
+- **After**: 12 specialized files with clear responsibilities
+- Each file has less than 150 lines
 
-### ✅ **Testabilidad**
-- Componentes aislados más fáciles de testear
-- Hooks extraídos permiten testing unitario
-- Lógica pura en utils es fácil de probar
+### ✅ **Testability**
+- Isolated components easier to test
+- Extracted hooks allow unit testing
+- Pure logic in utils is easy to test
 
-## 🔧 Hooks Personalizados Creados
+## 🔧 Custom Hooks Created
 
 ### `useScrollAnimation`
 ```typescript
-// Maneja toda la lógica de scroll y animaciones
+// Handles all scroll and animation logic
 const {
   scrollY, progress, sectionATransforms,
   tabProperties, navigateToSection
@@ -71,77 +71,77 @@ const {
 
 ### `useContactForm`
 ```typescript
-// Maneja el estado y lógica del formulario
+// Handles form state and logic
 const {
   formState, handleInputChange, handleSubmit
 } = useContactForm()
 ```
 
-## 📦 Componentes Modulares
+## 📦 Modular Components
 
-### Secciones (`/sections/`)
-- **HeroSection**: Contenido principal fijo
-- **SectionA**: Inteligencia e intención
-- **SectionB**: Flexibilidad estratégica  
-- **SectionC**: Servicios con cards animadas
-- **SectionD**: Formulario de contacto
+### Sections (`/sections/`)
+- **HeroSection**: Fixed main content
+- **SectionA**: Intelligence and intent
+- **SectionB**: Strategic flexibility  
+- **SectionC**: Services with animated cards
+- **SectionD**: Contact form
 
-### UI Reutilizable (`/ui/`)
-- **ServiceCard**: Card configurables para servicios
-- **ContactForm**: Formulario independiente y reutilizable
+### Reusable UI (`/ui/`)
+- **ServiceCard**: Configurable cards for services
+- **ContactForm**: Independent and reusable form
 
-## 🎨 Constantes Centralizadas
+## 🎨 Centralized Constants
 
 ```typescript
-// Todas las configuraciones en un lugar
+// All configurations in one place
 export const SECTION_POSITIONS = [0, 370, 1000, 1600, 2400, 3200, 4000, 4800]
 export const SCROLL_CONFIG = { THRESHOLD: 50, NAVBAR_HEIGHT: 80, ... }
 export const SCROLL_LEVELS = { SECOND_LEVEL_START: 650, ... }
 ```
 
-## 🔄 Funciones de Utilidad
+## 🔄 Utility Functions
 
 ```typescript
-// Cálculos complejos extraídos
+// Complex calculations extracted
 export const calculateScrollProgress = (scrollY: number): ScrollProgress => { ... }
 export const calculateSectionATransforms = (...) => { ... }
 export const calculateTabProperties = (...) => { ... }
 ```
 
-## ✅ **Resultado Final**
+## ✅ **Final Result**
 
-### ✨ **Código Limpio**
-- Separación clara de responsabilidades
-- Componentes enfocados en una sola tarea
-- Fácil de entender y modificar
+### ✨ **Clean Code**
+- Clear separation of responsibilities
+- Components focused on a single task
+- Easy to understand and modify
 
-### 🚀 **Rendimiento**
-- Misma funcionalidad, código más eficiente
-- Mejor tree-shaking
-- Componentes más ligeros
+### 🚀 **Performance**
+- Same functionality, more efficient code
+- Better tree-shaking
+- Lighter components
 
-### 🛠️ **Mantenimiento**
-- Cambios aislados por componente
-- Fácil debugging
-- Nuevas funcionalidades más sencillas de añadir
+### 🛠️ **Maintenance**
+- Isolated changes per component
+- Easy debugging
+- New features simpler to add
 
-### 👥 **Colaboración**
-- Estructura clara para trabajo en equipo
-- Componentes independientes
-- Documentación integrada con TypeScript
+### 👥 **Collaboration**
+- Clear structure for team work
+- Independent components
+- Documentation integrated with TypeScript
 
-## 🎯 **Sin Cambios en Funcionalidad**
+## 🎯 **No Changes in Functionality**
 
-**Importante**: Todo el frontend funciona exactamente igual que antes. Los cambios son puramente arquitectónicos:
+**Important**: The entire frontend works exactly the same as before. The changes are purely architectural:
 
-- ✅ Mismas animaciones de scroll
-- ✅ Mismo comportamiento visual
-- ✅ Mismo formulario de contacto funcional
-- ✅ Mismas transiciones entre secciones
-- ✅ Misma UX y experiencia de usuario
+- ✅ Same scroll animations
+- ✅ Same visual behavior
+- ✅ Same functional contact form
+- ✅ Same transitions between sections
+- ✅ Same UX and user experience
 
-**La refactorización es 100% interna - el usuario final no nota ninguna diferencia.**
+**The refactoring is 100% internal - the end user notices no difference.**
 
 ---
 
-🎉 **¡Refactorización completada con éxito!** El código ahora sigue las mejores prácticas de la industria manteniendo toda la funcionalidad original. 
+🎉 **Refactoring completed successfully!** The code now follows industry best practices while maintaining all original functionality. 

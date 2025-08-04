@@ -9,7 +9,7 @@ import VideoContent from '../components/VideoContent'
 function HomeContent() {
   const { mounted, phase, animatedLetters, letters } = useLoadingAnimation()
 
-  // Mostrar animación inicial hasta que se complete
+  // Show initial animation until completed
   if (phase !== 'video') {
     return (
       <LoadingAnimation 
@@ -20,11 +20,11 @@ function HomeContent() {
     )
   }
 
-  // Mostrar contenido principal con video
+  // Show main content with video
   return <VideoContent />
 }
 
-// Fallback loading simple para el servidor
+// Simple loading fallback for server
 function LoadingFallback() {
   return (
     <main className="fixed inset-0 w-screen h-screen flex items-center justify-center bg-black overflow-hidden">

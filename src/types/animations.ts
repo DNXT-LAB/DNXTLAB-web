@@ -1,4 +1,4 @@
-// Tipos para las animaciones de scroll
+// Types for scroll animations
 export interface ScrollProgress {
   secondSmoothProgress: number
   thirdSmoothProgress: number
@@ -8,7 +8,7 @@ export interface ScrollProgress {
   seventhSmoothProgress: number
 }
 
-// Tipos para los datos del formulario
+// Types for form data
 export interface FormData {
   firstName: string
   lastName: string
@@ -23,7 +23,7 @@ export interface FormState {
   submitStatus: 'success' | 'error' | null
 }
 
-// Props para las secciones
+// Props for sections
 export interface SectionProps {
   scrollY: number
   progress: ScrollProgress
@@ -45,10 +45,10 @@ export interface ContactSectionProps extends SectionProps {
   handleSubmit: (e: React.FormEvent) => void
 }
 
-// Tipos para las posiciones de las secciones
+// Types for section positions
 export type SectionPositions = readonly number[]
 
-// Props para la navegación
+// Props for navigation
 export interface NavigationProps {
   onNavigateToSection: (section: number) => void
   currentSection: number

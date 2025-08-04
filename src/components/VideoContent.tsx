@@ -45,7 +45,7 @@ export default function VideoContent() {
 
   return (
     <div className="relative w-screen bg-black">
-      {/* Video Background - Fixed para que siempre esté de fondo */}
+      {/* Video Background - Fixed so it's always in the background */}
       <video
         ref={videoRef}
         className="fixed inset-0 w-full h-full object-cover z-0"
@@ -59,10 +59,10 @@ export default function VideoContent() {
         muted
         playsInline
         preload="auto"
-        aria-label="Video de fondo mostrando las soluciones de DNXTLAB"
+        aria-label="Background video showing DNXTLAB solutions"
       />
       
-      {/* Overlay para mejorar legibilidad */}
+      {/* Overlay to improve readability */}
       <div className="fixed inset-0 bg-black/60 z-10" aria-hidden="true" />
       
       {/* Navbar */}
@@ -73,10 +73,10 @@ export default function VideoContent() {
         />
       </div>
       
-      {/* Hero Section - Contenido principal fijo */}
+      {/* Hero Section - Fixed main content */}
       <HeroSection />
 
-      {/* Pestaña blanca que se desliza desde abajo */}
+      {/* White tab that slides from below */}
       <div 
         className="fixed left-0 right-0 z-50 transition-all duration-500 ease-out"
         style={{
@@ -99,7 +99,7 @@ export default function VideoContent() {
             left: '60px',
           }}
         >
-          {/* Sección A */}
+          {/* Section A */}
           <SectionA 
             scrollY={scrollY}
             progress={progress}
@@ -107,21 +107,21 @@ export default function VideoContent() {
             {...sectionATransforms}
           />
           
-          {/* Sección B */}
+          {/* Section B */}
           <SectionB 
             scrollY={scrollY}
             progress={progress}
             windowHeight={windowHeight}
           />
           
-          {/* Sección C */}
+          {/* Section C */}
           <SectionC 
             scrollY={scrollY}
             progress={progress}
             windowHeight={windowHeight}
           />
 
-          {/* Sección D */}
+          {/* Section D */}
           <SectionD 
             scrollY={scrollY}
             progress={progress}

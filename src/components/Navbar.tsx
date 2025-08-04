@@ -27,8 +27,8 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
   }
 
   return (
-    <nav className="w-full flex items-center justify-between transition-colors duration-500 md:px-12" role="navigation" aria-label="Navegación principal">
-      {/* Logo y nombre a la izquierda */}
+    <nav className="w-full flex items-center justify-between transition-colors duration-500 md:px-12" role="navigation" aria-label="Main navigation">
+      {/* Logo and name on the left */}
       <div className="flex items-center">
         <Image 
           src="/logo.png" 
@@ -44,13 +44,13 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
         }`}>DNXT LAB</span>
       </div>
       
-      {/* Botón hamburguesa a la derecha */}
+      {/* Hamburger button on the right */}
       <button 
         onClick={handleMenuClick}
         className={`flex flex-col space-y-2 lg:pr-20 cursor-pointer focus:outline-none focus:ring-2 focus:ring-opacity-50 rounded transition-colors duration-500 ${
           isDark ? 'focus:ring-black' : 'focus:ring-white'
         }`}
-        aria-label="Abrir menú de navegación"
+        aria-label="Open navigation menu"
         aria-expanded="false"
       >
         <div className={`w-8 md:w-20 h-[2px] md:h-1 md:mb-3 transition-all duration-500 ${
@@ -64,7 +64,7 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
         }`}></div>
       </button>
 
-      {/* Menú desplegable - Efecto Glass */}
+      {/* Dropdown menu - Glass effect */}
       <div 
         className={`fixed top-0 right-0 z-50 transition-transform duration-500 ease-out ${
           isMenuOpen ? 'transform translate-x-0' : 'transform translate-x-full'
@@ -80,12 +80,12 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
         }}
       >
         <div className="flex flex-col h-full p-8 relative">
-          {/* Botón X para cerrar */}
+          {/* X button to close */}
           <div className="flex justify-end mb-12">
             <button 
               onClick={handleMenuClose}
               className="text-white p-2"
-              aria-label="Cerrar menú"
+              aria-label="Close menu"
             >
               <svg 
                 className="w-6 h-6" 
@@ -104,7 +104,7 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
             </button>
           </div>
 
-          {/* Opciones del menú - Arriba */}
+          {/* Menu options - Top */}
           <div className="flex flex-col justify-center items-center md:items-start text-center md:text-left space-y-28 md:space-y-8 mt-40 md:mt-0">
             <button 
               onClick={() => handleNavigation(0)}
@@ -130,7 +130,7 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
         </div>
       </div>
 
-      {/* Overlay para cerrar el menú al hacer click fuera */}
+      {/* Overlay to close menu when clicking outside */}
       {isMenuOpen && (
         <div 
           className="fixed inset-0 z-40"

@@ -33,9 +33,9 @@ export const useContactForm = () => {
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault()
     
-    // Validación básica
+    // Basic validation
     if (!formData.firstName || !formData.lastName || !formData.email || !formData.message) {
-      setSubmitMessage('Por favor, completa todos los campos')
+      setSubmitMessage('Please fill in all fields')
       setSubmitStatus('error')
       return
     }
@@ -56,17 +56,17 @@ export const useContactForm = () => {
       const data = await response.json()
 
       if (response.ok) {
-        setSubmitMessage('¡Gracias! Tu mensaje ha sido enviado correctamente. Nos pondremos en contacto contigo pronto.')
+        setSubmitMessage('Thank you! Your message has been sent successfully. We will get in touch with you soon.')
         setSubmitStatus('success')
-        // Limpiar el formulario
+        // Clear the form
         setFormData(initialFormData)
       } else {
-        setSubmitMessage(data.error || 'Error al enviar el mensaje. Por favor, intenta de nuevo.')
+        setSubmitMessage(data.error || 'Error sending message. Please try again.')
         setSubmitStatus('error')
       }
     } catch (error) {
       console.error('Error:', error)
-      setSubmitMessage('Error de conexión. Por favor, verifica tu conexión a internet y intenta de nuevo.')
+      setSubmitMessage('Connection error. Please check your internet connection and try again.')
       setSubmitStatus('error')
     } finally {
       setIsSubmitting(false)

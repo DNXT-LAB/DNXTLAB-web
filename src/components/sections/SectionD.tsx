@@ -11,7 +11,7 @@ const SectionD: React.FC<ContactSectionProps> = ({
   const { seventhSmoothProgress } = progress
   const [leftPosition, setLeftPosition] = useState('50%')
 
-  // Función para calcular la posición left basada en el ancho de pantalla
+  // Function to calculate left position based on screen width
   const calculateLeftPosition = () => {
     if (typeof window !== 'undefined') {
       const width = window.innerWidth
@@ -28,16 +28,16 @@ const SectionD: React.FC<ContactSectionProps> = ({
     return '38%'
   }
 
-  // Effect para actualizar la posición left cuando cambie el tamaño
+  // Effect to update left position when size changes
   useEffect(() => {
     const updateLeftPosition = () => {
       setLeftPosition(calculateLeftPosition())
     }
 
-    // Establecer posición inicial
+            // Set initial position
     updateLeftPosition()
 
-    // Escuchar cambios de tamaño
+            // Listen for size changes
     window.addEventListener('resize', updateLeftPosition)
     
     return () => {
@@ -67,9 +67,9 @@ const SectionD: React.FC<ContactSectionProps> = ({
 
   return (
     <div style={sectionStyle}>
-      {/* Layout Desktop - Solo visible en pantallas >= 1024px */}
+              {/* Desktop Layout - Only visible on screens >= 1024px */}
       <div className="hidden lg:flex w-full h-full flex-col justify-center px-8" style={contentStyle}>
-        {/* Título centrado arriba */}
+        {/* Centered title at top */}
         <div className="text-center mb-12">
           <h2 className="text-[90px] font-bold text-black font-morien leading-[1.1]">
             BOOK A CALL<br/>
@@ -77,7 +77,7 @@ const SectionD: React.FC<ContactSectionProps> = ({
           </h2>
         </div>
         
-        {/* Formulario con layout especial */}
+                  {/* Form with special layout */}
         <div className="flex justify-center mb-12">
           <form className="w-full max-w-[1200px]" onSubmit={handleSubmit}>
             <ContactForm 
@@ -89,7 +89,7 @@ const SectionD: React.FC<ContactSectionProps> = ({
           </form>
         </div>
         
-        {/* Información de contacto centrada abajo */}
+        {/* Centered contact information at bottom */}
         <div className="text-center">
           <div className="space-y-4 text-xl text-black font-inter">
             <div>
@@ -108,9 +108,9 @@ const SectionD: React.FC<ContactSectionProps> = ({
         </div>
       </div>
 
-      {/* Layout Mobile & iPad - Visible en pantallas < 1024px */}
+              {/* Mobile & iPad Layout - Visible on screens < 1024px */}
       <div className="block lg:hidden w-full h-full p-3 md:p-6 flex flex-col justify-center mt-20">
-        {/* Título arriba */}
+        {/* Title at top */}
         <div className="text-center mb-4 mt-20">
           <h2 className="text-3xl md:text-6xl font-bold text-black font-morien leading-[1.1]">
             BOOK A CALL
@@ -118,7 +118,7 @@ const SectionD: React.FC<ContactSectionProps> = ({
           </h2>
         </div>
         
-        {/* Información de contacto en medio */}
+        {/* Contact information in middle */}
         <div className="text-center md:mb-8">
           <div className="space-y-2 md:space-y-4 text-sm md:text-lg text-black font-inter">
             <div>
@@ -136,7 +136,7 @@ const SectionD: React.FC<ContactSectionProps> = ({
           </div>
         </div>
         
-        {/* Formulario abajo */}
+        {/* Form below */}
         <div className="flex justify-center">
           <div className="scale-55 md:scale-100 origin-center">
             <ContactForm 
