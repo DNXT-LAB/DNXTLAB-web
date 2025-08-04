@@ -77,7 +77,7 @@ const SectionD: React.FC<ContactSectionProps> = ({
         </div>
         
         {/* Custom Form Layout like the image */}
-        <div className="w-[2000px] mb-[6%]">
+        <div className="w-[2200px] mb-[6%]">
           <form onSubmit={handleSubmit} className="w-full">
             <div className="flex gap-[4%] mb-[4%]">
               {/* Left Column - Input Fields + Contact Info */}
@@ -142,7 +142,7 @@ const SectionD: React.FC<ContactSectionProps> = ({
                 <button
                   type="submit"
                   disabled={formState.isSubmitting}
-                  className="w-full py-[3%] px-[6%] bg-black text-white text-[1.1vw] xl:text-[1vw] 2xl:text-[0.9vw] font-medium rounded-[25px] hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-400 transition-colors disabled:opacity-50"
+                  className="w-full py-[2%] px-[6%] bg-black text-white text-[1.1vw] xl:text-[1vw] 2xl:text-[0.9vw] font-medium rounded-[25px] hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-400 transition-colors disabled:opacity-50"
                 >
                   {formState.isSubmitting ? 'Sending...' : 'Book a call'}
                 </button>
