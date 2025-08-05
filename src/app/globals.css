@@ -35,11 +35,6 @@ html {
     font-size: clamp(3rem, 4vw, 2rem);
   }
   
-  .logo-size {
-    height: clamp(5rem, 12vw, 8rem);
-    width: auto;
-  }
-  
   .text-animation-initial {
     color: #333333;
   }
