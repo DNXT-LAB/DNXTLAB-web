@@ -14,8 +14,8 @@ export const metadata: Metadata = {
   icons: {
     icon: '/favicon.png',
   },
-  title: 'DNXTLAB',
-  description: 'DNXTLAB Application - Bespoke AI & Web Design Solutions',
+  title: 'DNXTLAB Web',
+  description: 'DNXTLAB Web Application - Bespoke AI & Web Design Solutions',
   keywords: ['AI', 'Web Design', 'Automation', 'Digital Solutions'],
   authors: [{ name: 'DNXTLAB' }],
   viewport: 'width=device-width, initial-scale=1',

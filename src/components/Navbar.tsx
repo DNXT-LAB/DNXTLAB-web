@@ -55,27 +55,21 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
           <div className="flex items-center bg-green-400 rounded-full px-6 py-2 space-x-6">
             <button 
               onClick={() => handleNavigation(0)}
-              className={`text-lg font-normal font-morien hover:opacity-70 transition-all duration-500 whitespace-nowrap ${
-                isDark ? 'text-black' : 'text-white'
-              }`}
+              className="text-black text-lg font-normal font-morien hover:opacity-70 transition-opacity whitespace-nowrap"
             >
               HOME
             </button>
             
             <button 
               onClick={() => handleNavigation(3)}
-              className={`text-lg font-normal font-morien hover:opacity-70 transition-all duration-500 whitespace-nowrap ${
-                isDark ? 'text-black' : 'text-white'
-              }`}
+              className="text-black text-lg font-normal font-morien hover:opacity-70 transition-opacity whitespace-nowrap"
             >
               SERVICES
             </button>
             
             <button 
               onClick={() => handleNavigation(7)}
-              className={`text-lg font-normal font-morien hover:opacity-70 transition-all duration-500 whitespace-nowrap ${
-                isDark ? 'text-black' : 'text-white'
-              }`}
+              className="text-black text-lg font-normal font-morien hover:opacity-70 transition-opacity whitespace-nowrap"
             >
               BOOK A CALL
             </button>

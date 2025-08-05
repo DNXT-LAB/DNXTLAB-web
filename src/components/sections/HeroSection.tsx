@@ -4,18 +4,18 @@ const HeroSection: React.FC = () => {
   return (
     <div className="fixed left-[2%] z-20 md:px-[3%]" style={{ bottom: '3%' }}>
       <div className="flex flex-col items-start mb-[4%]">
-        <h1 className="force-white-text font-bold uppercase font-poppins text-[10vw] md:text-[9.5vw] lg:text-[6vw] 2xl:text-[4.8vw] line-height-90 mb-[1.5%]">
+        <h1 className="force-white-text font-bold uppercase font-poppins text-[2.5vw] md:text-[3.2vw] lg:text-[4vw] 2xl:text-[4.8vw] line-height-90 mb-[1.5%]">
           BESPOKE AI & WEB<br />
           DESIGN SOLUTIONS
         </h1>
-        <p className="force-white-text font-inter font-poppins w-[92%] md:w-[95%] lg:w-[85%] text-[4.7vw] md:text-[4.4vw] lg:text-[2.7vw] 2xl:text-[1.8vw] leading-[1.3] font-normal md:max-w-[95%] lg:max-w-[60%] 2xl:max-w-[45%] mb-[2%]">
+        <p className="force-white-text font-inter font-poppins w-[55%] md:w-[70%] lg:w-[85%] text-[1.2vw] md:text-[1.4vw] lg:text-[1.6vw] 2xl:text-[1.8vw] leading-[1.3] font-normal md:max-w-[35%] lg:max-w-[40%] 2xl:max-w-[45%] mb-[2%]">
           Empowering businesses through intelligent automation, data-driven experiences, and future-proof digital design.
         </p>
         <button 
           className="flex items-center justify-center 2xl:px-[2%] 2xl:py-[1.8%] md:px-[1.2%] md:py-[1.2%] px-[0.6%] py-[0.6%] hover:opacity-90 transition-opacity bg-white rounded-full button-size border-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black"
           aria-label="View DNXTLAB services"
         >
-          <span className="force-black-text font-poppins 2xl:text-[1vw] lg:text-[1.3vw] md:text-[2.5vw] text-[4.2vw] font-light line-height-110 2xl:mr-[10.8%] lg:mr-[10.8%] md:mr-[10.8%] mr-[10.8%]">
+          <span className="force-black-text font-poppins 2xl:text-[1.1vw] text-[0.8vw] font-light line-height-110 mr-[0.8%]">
             SERVICES
           </span>
           <svg 
