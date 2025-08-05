@@ -29,7 +29,7 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
   return (
     <nav className="w-full flex items-center justify-between transition-colors duration-500 md:px-12" role="navigation" aria-label="Main navigation">
       {/* Logo and name on the left */}
-      <div className="flex items-center">
+      <div className="flex items-center relative z-[51] lg:z-auto">
         <Image 
           src="/logo.png" 
           alt="DNXT LAB Logo" 
@@ -55,21 +55,21 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
           <div className="flex items-center bg-green-400 rounded-full px-6 py-2 space-x-6">
             <button 
               onClick={() => handleNavigation(0)}
-              className="text-black text-lg font-normal font-morien hover:opacity-70 transition-opacity whitespace-nowrap"
+              className={`text-lg font-normal font-morien hover:opacity-70 transition-opacity whitespace-nowrap ${isDark ? 'text-black' : 'text-white'}`}
             >
               HOME
             </button>
             
             <button 
               onClick={() => handleNavigation(3)}
-              className="text-black text-lg font-normal font-morien hover:opacity-70 transition-opacity whitespace-nowrap"
+              className={`text-lg font-normal font-morien hover:opacity-70 transition-opacity whitespace-nowrap ${isDark ? 'text-black' : 'text-white'}`}
             >
               SERVICES
             </button>
             
             <button 
               onClick={() => handleNavigation(7)}
-              className="text-black text-lg font-normal font-morien hover:opacity-70 transition-opacity whitespace-nowrap"
+              className={`text-lg font-normal font-morien hover:opacity-70 transition-opacity whitespace-nowrap ${isDark ? 'text-black' : 'text-white'}`}
             >
               BOOK A CALL
             </button>
@@ -163,7 +163,8 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
           isMenuOpen ? 'transform translate-x-0' : 'transform translate-x-full'
         }`}
         style={{ 
-          width: '400px',
+          width: '100vw',
+          maxWidth: '400px',
           height: '100vh',
           background: 'rgba(0, 0, 0, 0.6)',
           backdropFilter: 'blur(10px)',
