@@ -44,29 +44,128 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
         }`}>DNXT LAB</span>
       </div>
       
-      {/* Hamburger button on the right */}
+      {/* Desktop Menu Container - Only visible on lg+ */}
+      <div className="hidden lg:flex items-center">
+        {/* Menu Items - Appear to the left of button with green background */}
+        <div className={`flex items-center transition-all duration-500 ease-out ${
+          isMenuOpen 
+            ? 'opacity-100 translate-x-0 scale-100' 
+            : 'opacity-0 translate-x-4 scale-95 pointer-events-none'
+        }`} style={{ marginRight: '2px' }}>
+          <div className="flex items-center bg-green-400 rounded-full px-6 py-2 space-x-6">
+            <button 
+              onClick={() => handleNavigation(0)}
+              className={`text-lg font-normal font-morien hover:opacity-70 transition-all duration-500 whitespace-nowrap ${
+                isDark ? 'text-black' : 'text-white'
+              }`}
+            >
+              HOME
+            </button>
+            
+            <button 
+              onClick={() => handleNavigation(3)}
+              className={`text-lg font-normal font-morien hover:opacity-70 transition-all duration-500 whitespace-nowrap ${
+                isDark ? 'text-black' : 'text-white'
+              }`}
+            >
+              SERVICES
+            </button>
+            
+            <button 
+              onClick={() => handleNavigation(7)}
+              className={`text-lg font-normal font-morien hover:opacity-70 transition-all duration-500 whitespace-nowrap ${
+                isDark ? 'text-black' : 'text-white'
+              }`}
+            >
+              BOOK A CALL
+            </button>
+          </div>
+        </div>
+
+        {/* Plus/X Button for Desktop - Fixed position */}
+        <button 
+          onClick={handleMenuClick}
+          className={`lg:mr-20 w-12 h-12 flex items-center justify-center transition-all duration-300 ${
+            isMenuOpen ? 'bg-green-400 rounded-full' : 'bg-transparent'
+          } focus:outline-none focus:ring-opacity-50 ${
+            isDark ? '' : 'focus:ring-white'
+          }`}
+          aria-label={isMenuOpen ? "Close menu" : "Open navigation menu"}
+          aria-expanded={isMenuOpen}
+        >
+          <div className="relative w-6 h-6 flex flex-col justify-center items-center">
+            {/* Hamburger to X Animation */}
+            {/* Top line */}
+            <div className={`h-0.5 transition-all duration-300 ease-in-out ${
+              isDark ? 'bg-black' : 'bg-white'
+            } ${
+              isMenuOpen 
+                ? 'w-6 rotate-45 translate-y-0' 
+                : 'w-7 rotate-0 -translate-y-1.5'
+            }`}></div>
+            
+            {/* Middle line */}
+            <div className={`w-7 h-0.5 transition-all duration-300 ease-in-out ${
+              isDark ? 'bg-black' : 'bg-white'
+            } ${
+              isMenuOpen ? 'opacity-0 scale-0' : 'opacity-100 scale-100'
+            }`}></div>
+            
+            {/* Bottom line */}
+            <div className={`h-0.5 transition-all duration-300 ease-in-out ${
+              isDark ? 'bg-black' : 'bg-white'
+            } ${
+              isMenuOpen 
+                ? 'w-7 -rotate-45 translate-y-[-4px]' 
+                : 'w-7 rotate-0 translate-y-1.5'
+            }`}></div>
+          </div>
+        </button>
+      </div>
+
+      {/* Mobile Plus/X Button - Only visible on mobile/tablet */}
       <button 
         onClick={handleMenuClick}
-        className={`flex flex-col space-y-2 lg:pr-20 cursor-pointer focus:outline-none focus:ring-2 focus:ring-opacity-50 rounded transition-colors duration-500 ${
+        className={`lg:hidden w-10 h-10 md:w-12 md:h-12 flex items-center justify-center transition-all duration-300 ${
+          isMenuOpen ? 'bg-green-400 rounded-full' : 'bg-transparent'
+        } focus:outline-none focus:ring-2 focus:ring-opacity-50 ${
           isDark ? 'focus:ring-black' : 'focus:ring-white'
         }`}
-        aria-label="Open navigation menu"
-        aria-expanded="false"
+        aria-label={isMenuOpen ? "Close menu" : "Open navigation menu"}
+        aria-expanded={isMenuOpen}
       >
-        <div className={`w-8 md:w-20 h-[2px] md:h-1 md:mb-3 transition-all duration-500 ${
-          isDark ? 'bg-black' : 'bg-white'
-        }`}></div>
-        <div className={`w-8 md:w-20 h-[2px] md:h-1 md:mb-3 transition-all duration-500 ${
-          isDark ? 'bg-black' : 'bg-white'
-        }`}></div>
-        <div className={`w-8 md:w-20 h-[2px] md:h-1 transition-all duration-500 ${
-          isDark ? 'bg-black' : 'bg-white'
-        }`}></div>
+        <div className="relative w-5 h-5 md:w-6 md:h-6 flex flex-col justify-center items-center">
+          {/* Hamburger to X Animation */}
+          {/* Top line */}
+          <div className={`h-0.5 transition-all duration-300 ease-in-out ${
+            isDark ? 'bg-black' : 'bg-white'
+          } ${
+            isMenuOpen 
+              ? 'w-4 md:w-5 rotate-45 translate-y-0' 
+              : 'w-6 md:w-7 rotate-0 -translate-y-1 md:-translate-y-1.5'
+          }`}></div>
+          
+          {/* Middle line */}
+          <div className={`w-6 md:w-7 h-0.5 transition-all duration-300 ease-in-out ${
+            isDark ? 'bg-black' : 'bg-white'
+          } ${
+            isMenuOpen ? 'opacity-0 scale-0' : 'opacity-100 scale-100'
+          }`}></div>
+          
+          {/* Bottom line */}
+          <div className={`h-0.5 transition-all duration-300 ease-in-out ${
+            isDark ? 'bg-black' : 'bg-white'
+          } ${
+            isMenuOpen 
+              ? 'w-4 md:w-5 -rotate-45 translate-y-0' 
+              : 'w-6 md:w-7 rotate-0 translate-y-1 md:translate-y-1.5'
+          }`}></div>
+        </div>
       </button>
 
-      {/* Dropdown menu - Glass effect */}
+      {/* Mobile Dropdown menu - Glass effect - Only visible on mobile/tablet */}
       <div 
-        className={`fixed top-0 right-0 z-50 transition-transform duration-500 ease-out ${
+        className={`lg:hidden fixed top-0 right-0 z-50 transition-transform duration-500 ease-out ${
           isMenuOpen ? 'transform translate-x-0' : 'transform translate-x-full'
         }`}
         style={{ 
@@ -130,10 +229,10 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
         </div>
       </div>
 
-      {/* Overlay to close menu when clicking outside */}
+      {/* Overlay to close menu when clicking outside - Mobile only */}
       {isMenuOpen && (
         <div 
-          className="fixed inset-0 z-40"
+          className="lg:hidden fixed inset-0 z-40"
           onClick={handleMenuClose}
           aria-hidden="true"
         ></div>
