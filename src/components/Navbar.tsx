@@ -26,12 +26,6 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
     setIsMenuOpen(false)
   }
 
-  const menuContainerStyle: React.CSSProperties = {
-    background: 'rgba(0, 0, 0, 0.6)',
-    backdropFilter: 'blur(10px)',
-    WebkitBackdropFilter: 'blur(10px)',
-  };
-
   const menuButtonStyle: React.CSSProperties = isMenuOpen ? {
     background: 'rgba(0, 0, 0, 0.6)',
     backdropFilter: 'blur(10px)',
@@ -56,78 +50,54 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
         }`}>DNXT LAB</span>
       </div>
       
-      {/* Desktop Menu Container - Only visible on md+ */}
-      <div className="hidden md:flex items-center">
-        {/* Menu Items - Appear to the left of button with green background */}
-        <div className={`flex items-center transition-all duration-500 ease-out ${
-          isMenuOpen 
-            ? 'opacity-100 translate-x-0 scale-100' 
-            : 'opacity-0 translate-x-4 scale-95 pointer-events-none'
-        }`} style={{ marginRight: '2px' }}>
-          <div className="flex items-center rounded-full px-6 py-2 space-x-6" style={menuContainerStyle}>
-            <button 
-              onClick={() => handleNavigation(0)}
-              className="text-white text-base lg:text-lg font-normal font-morien hover:opacity-70 transition-opacity whitespace-nowrap"
-            >
-              HOME
-            </button>
-            
-            <button 
-              onClick={() => handleNavigation(3)}
-              className="text-white text-base lg:text-lg font-normal font-morien hover:opacity-70 transition-opacity whitespace-nowrap"
-            >
-              SERVICES
-            </button>
-            
-            <button 
-              onClick={() => handleNavigation(7)}
-              className="text-white text-base lg:text-lg font-normal font-morien hover:opacity-70 transition-opacity whitespace-nowrap"
-            >
-              BOOK A CALL
-            </button>
-          </div>
-        </div>
-
-        {/* Plus/X Button for Desktop - Fixed position */}
-        <button 
-          onClick={handleMenuClick}
-          className={`lg:mr-20 w-12 h-12 flex items-center justify-center transition-all duration-300 ${
-            isMenuOpen ? 'rounded-full' : 'bg-transparent'
-          } focus:outline-none focus:ring-opacity-50 ${
-            isDark ? '' : 'focus:ring-white'
-          }`}
-          style={menuButtonStyle}
-          aria-label={isMenuOpen ? "Close menu" : "Open navigation menu"}
-          aria-expanded={isMenuOpen}
+      {/* Desktop/Tablet Menu Container (md+) */}
+      <div className="hidden md:flex justify-end items-center">
+        <div
+          className="flex items-center justify-end rounded-full transition-all duration-700 ease-in-out"
+          style={isMenuOpen ? {
+            background: 'rgba(0, 0, 0, 0.6)',
+            backdropFilter: 'blur(10px)',
+            WebkitBackdropFilter: 'blur(10px)',
+          } : {}}
         >
-          <div className="relative w-6 h-6 flex flex-col justify-center items-center">
-            {/* Hamburger to X Animation */}
-            {/* Top line */}
-            <div className={`h-0.5 transition-all duration-300 ease-in-out ${
-              isDark ? 'bg-black' : 'bg-white'
-            } ${
-              isMenuOpen 
-                ? 'w-6 rotate-45 translate-y-0' 
-                : 'w-7 rotate-0 -translate-y-1.5'
-            }`}></div>
-            
-            {/* Middle line */}
-            <div className={`w-7 h-0.5 transition-all duration-300 ease-in-out ${
-              isDark ? 'bg-black' : 'bg-white'
-            } ${
-              isMenuOpen ? 'opacity-0 scale-0' : 'opacity-100 scale-100'
-            }`}></div>
-            
-            {/* Bottom line */}
-            <div className={`h-0.5 transition-all duration-300 ease-in-out ${
-              isDark ? 'bg-black' : 'bg-white'
-            } ${
-              isMenuOpen 
-                ? 'w-7 -rotate-45 translate-y-[-4px]' 
-                : 'w-7 rotate-0 translate-y-1.5'
-            }`}></div>
+          {/* Animated Menu Items */}
+          <div className={`flex items-center transition-all duration-500 ease-in-out overflow-hidden whitespace-nowrap ${isMenuOpen ? 'max-w-xl px-6' : 'max-w-0'}`}>
+            <div className="flex items-center space-x-6">
+              <button 
+                onClick={() => handleNavigation(0)}
+                className={`text-base lg:text-lg font-normal font-morien hover:opacity-70 transition-opacity ${isDark ? 'text-black' : 'text-white'}`}
+              >
+                HOME
+              </button>
+              <button 
+                onClick={() => handleNavigation(3)}
+                className={`text-base lg:text-lg font-normal font-morien hover:opacity-70 transition-opacity ${isDark ? 'text-black' : 'text-white'}`}
+              >
+                SERVICES
+              </button>
+              <button 
+                onClick={() => handleNavigation(7)}
+                className={`text-base lg:text-lg font-normal font-morien hover:opacity-70 transition-opacity ${isDark ? 'text-black' : 'text-white'}`}
+              >
+                BOOK A CALL
+              </button>
+            </div>
           </div>
-        </button>
+          {/* Menu Toggle Button */}
+          <button
+            onClick={handleMenuClick}
+            className="relative w-12 h-12 bg-transparent flex-shrink-0 flex items-center justify-center"
+            aria-label={isMenuOpen ? "Close menu" : "Open navigation menu"}
+            aria-expanded={isMenuOpen}
+          >
+            <div className="relative w-6 h-6 flex flex-col justify-center items-center">
+              {/* Hamburger to X Animation */}
+              <div className={`h-0.5 transition-all duration-300 ease-in-out ${isDark ? 'bg-black' : 'bg-white'} ${isMenuOpen ? 'w-6 rotate-45 translate-y-0' : 'w-7 rotate-0 -translate-y-1.5'}`}></div>
+              <div className={`w-7 h-0.5 transition-all duration-300 ease-in-out ${isDark ? 'bg-black' : 'bg-white'} ${isMenuOpen ? 'opacity-0 scale-0' : 'opacity-100 scale-100'}`}></div>
+              <div className={`h-0.5 transition-all duration-300 ease-in-out ${isDark ? 'bg-black' : 'bg-white'} ${isMenuOpen ? 'w-7 -rotate-45 translate-y-[-4px]' : 'w-7 rotate-0 translate-y-1.5'}`}></div>
+            </div>
+          </button>
+        </div>
       </div>
 
       {/* Mobile Plus/X Button - Only visible on mobile */}
@@ -247,4 +217,4 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
       )}
     </nav>
   )
-} 
+}
