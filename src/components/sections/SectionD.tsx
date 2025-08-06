@@ -32,7 +32,7 @@ const SectionD: React.FC<ContactSectionProps> = ({
   };
 
   return (
-    <div style={sectionStyle} className="flex items-center justify-center lg:mt-[1%] w-[20%] ml-[7%] md:ml-[18%] md:w-[40%] lg:w-[70%] lg:ml-[39%] 2xl:w-[110%] 2xl:ml-[59%]">
+    <div style={sectionStyle} className="flex items-center justify-center lg:mt-[1%] w-[20%] ml-[7%] md:ml-[18%] md:w-[40%] lg:w-[70%] lg:ml-[39%] 2xl:w-[100%] 2xl:ml-[49%]">
       <div
         style={contentStyle}
         className="w-full h-full flex flex-col justify-center px-6 sm:px-8 md:px-12 mx-auto"

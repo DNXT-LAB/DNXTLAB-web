@@ -138,7 +138,7 @@ const SectionA: React.FC<SectionAProps> = ({
     width: `${dimensions.text.width}px`,
     height: `${dimensions.text.height}px`,
     left: `${dimensions.text.left}px`,
-    top: dimensions.text.top,
+    // top: dimensions.text.top,
     transform: `translateY(${sectionATranslateY + textConvergeY}px) translateX(${textConvergeX}px) scale(${sectionAScale})`,
     transformOrigin: 'center center',
     opacity: secondSmoothProgress > 0.7 ? 0 : 1 - (secondSmoothProgress * 1.2)
@@ -182,7 +182,7 @@ const SectionA: React.FC<SectionAProps> = ({
         />
         
         <div 
-          className="transition-transform duration-700 ease-out"
+          className="transition-transform duration-700 ease-out mt-12"
           style={textStyle}
         >
           <h2 

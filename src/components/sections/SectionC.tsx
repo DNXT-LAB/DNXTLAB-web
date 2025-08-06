@@ -342,7 +342,6 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
             position={card1Position}
             rotation={card1Rotation}
             opacity={card1Opacity}
-            scaleFactor={scaleFactor}
           />
           
           <ServiceCard 
@@ -353,7 +352,6 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
             position={card2Position}
             rotation={card2Rotation}
             opacity={card2Opacity}
-            scaleFactor={scaleFactor}
           />
           
           <ServiceCard 
@@ -364,7 +362,6 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
             position={card3Position}
             rotation={card3Rotation}
             opacity={card3Opacity}
-            scaleFactor={scaleFactor}
           />
         </div>
       </div>
@@ -433,7 +430,6 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
               position={card1Position}
               rotation={card1Rotation}
               opacity={card1Opacity}
-              scaleFactor={0.6}
             />
           )}
           
@@ -447,7 +443,6 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
               position={card2Position}
               rotation={card2Rotation}
               opacity={card2Opacity}
-              scaleFactor={0.6}
             />
           )}
           
@@ -461,7 +456,6 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
               position={card3Position}
               rotation={card3Rotation}
               opacity={card3Opacity}
-              scaleFactor={0.6}
             />
           )}
         </div>
