@@ -242,7 +242,7 @@ const SectionA: React.FC<SectionAProps> = ({
       </div>
 
               {/* Mobile & iPad Layout - Visible on screens < 1024px */}
-      <div className="block lg:hidden w-full h-full mt-12 flex flex-col">
+      <div className="block lg:hidden w-full h-screen-dynamic mt-12 flex flex-col">
         {/* Video at top with padding */}
         <div className="w-full mb-6 md:mb-8">
           <video 
