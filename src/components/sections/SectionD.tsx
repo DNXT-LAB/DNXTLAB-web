@@ -32,14 +32,14 @@ const SectionD: React.FC<ContactSectionProps> = ({
   };
 
   return (
-    <div style={sectionStyle} className="flex items-center justify-center lg:mt-[1%] w-[20%] ml-[7%] md:ml-[18%] md:w-[40%] lg:w-[70%] lg:ml-[39%] 2xl:w-[100%] 2xl:ml-[49%]">
+    <div style={sectionStyle} className="flex items-center justify-center md:mt-[4%] lg:mt-[1%] w-[20%] ml-[7%] md:ml-[18%] md:w-[40%] lg:w-[70%] lg:ml-[39%] 2xl:w-[100%] 2xl:ml-[49%]">
       <div
         style={contentStyle}
         className="w-full h-full flex flex-col justify-center px-6 sm:px-8 md:px-12 mx-auto"
       >
         {/* Title */}
         <div className="text-center lg:text-left mb-6 lg:mb-10">
-          <h2 className="text-4xl sm:text-5xl lg:text-5xl 2xl:text-7xl font-semibold text-black font-poppins leading-tight">
+          <h2 className="text-3xl lg:text-5xl 2xl:text-7xl font-semibold text-black font-poppins leading-tight">
             BOOK A CALL NOW
           </h2>
         </div>
@@ -58,7 +58,7 @@ const SectionD: React.FC<ContactSectionProps> = ({
                 value={formState.formData.firstName}
                 onChange={handleInputChange}
                 placeholder="First name"
-                className="w-full px-6 py-4 2xl:py-6 text-base 2xl:text-lg text-black placeholder-gray-500 border-none rounded-full focus:outline-none focus:ring-2 focus:ring-black bg-white shadow-md"
+                className="w-full px-6 py-2 md:py-4 2xl:py-6 text-base 2xl:text-lg text-black placeholder-gray-500 border-none rounded-full focus:outline-none focus:ring-2 focus:ring-black bg-white shadow-md"
                 style={{ background: 'linear-gradient(0deg, #D6D6D6, #ffffff)' }}
                 required
               />
@@ -68,7 +68,7 @@ const SectionD: React.FC<ContactSectionProps> = ({
                 value={formState.formData.lastName}
                 onChange={handleInputChange}
                 placeholder="Last Name"
-                className="w-full px-6 py-4 2xl:py-6 text-base 2xl:text-lg text-black placeholder-gray-500 border-none rounded-full focus:outline-none focus:ring-2 focus:ring-black bg-white shadow-md"
+                className="w-full px-6 py-2 md:py-4 2xl:py-6 text-base 2xl:text-lg text-black placeholder-gray-500 border-none rounded-full focus:outline-none focus:ring-2 focus:ring-black bg-white shadow-md"
                 style={{ background: 'linear-gradient(0deg, #D6D6D6, #ffffff)' }}
                 required
               />
@@ -78,7 +78,7 @@ const SectionD: React.FC<ContactSectionProps> = ({
                 value={formState.formData.email}
                 onChange={handleInputChange}
                 placeholder="Your email"
-                className="w-full px-6 py-4 2xl:py-6 text-base 2xl:text-lg text-black placeholder-gray-500 border-none rounded-full focus:outline-none focus:ring-2 focus:ring-black bg-white shadow-md"
+                className="w-full px-6 py-2 md:py-4 2xl:py-6 text-base 2xl:text-lg text-black placeholder-gray-500 border-none rounded-full focus:outline-none focus:ring-2 focus:ring-black bg-white shadow-md"
                 style={{ background: 'linear-gradient(0deg, #D6D6D6, #ffffff)' }}
                 required
               />
@@ -101,7 +101,7 @@ const SectionD: React.FC<ContactSectionProps> = ({
                 value={formState.formData.message}
                 onChange={handleInputChange}
                 placeholder="Tell us about your project..."
-                className="w-full h-40 sm:h-48 lg:h-full px-6 py-4 2xl:py-6 text-base 2xl:text-lg text-black placeholder-gray-500 border-none rounded-3xl focus:outline-none focus:ring-2 focus:ring-black resize-none bg-white shadow-md"
+                className="w-full h-28 md:h-48 lg:h-full px-6 py-4 2xl:py-6 text-base 2xl:text-lg text-black placeholder-gray-500 border-none rounded-3xl focus:outline-none focus:ring-2 focus:ring-black resize-none bg-white shadow-md"
                 style={{ background: 'linear-gradient(0deg, #D6D6D6, #ffffff)' }}
                 required
               />
