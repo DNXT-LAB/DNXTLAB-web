@@ -35,7 +35,7 @@ const SectionD: React.FC<ContactSectionProps> = ({
     <div style={sectionStyle} className="flex items-center justify-center md:mt-[4%] lg:mt-[1%] w-[20%] ml-[7%] md:ml-[18%] md:w-[40%] lg:w-[70%] lg:ml-[39%] 2xl:w-[100%] 2xl:ml-[49%]">
       <div
         style={contentStyle}
-        className="w-full h-full flex flex-col justify-center px-6 sm:px-8 md:px-12 mx-auto"
+        className="w-full flex flex-col justify-center px-6 sm:px-8 md:px-12 mb-28 lg:mb-0 mx-auto"
       >
         {/* Title */}
         <div className="text-center lg:text-left mb-6 lg:mb-10">
