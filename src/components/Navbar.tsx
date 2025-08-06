@@ -26,8 +26,20 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
     setIsMenuOpen(false)
   }
 
+  const menuContainerStyle: React.CSSProperties = {
+    background: 'rgba(0, 0, 0, 0.6)',
+    backdropFilter: 'blur(10px)',
+    WebkitBackdropFilter: 'blur(10px)',
+  };
+
+  const menuButtonStyle: React.CSSProperties = isMenuOpen ? {
+    background: 'rgba(0, 0, 0, 0.6)',
+    backdropFilter: 'blur(10px)',
+    WebkitBackdropFilter: 'blur(10px)',
+  } : {};
+
   return (
-    <nav className="w-full flex items-center justify-between transition-colors duration-500 md:px-12" role="navigation" aria-label="Main navigation">
+    <nav className="w-full flex items-center justify-between transition-colors duration-500 lg:px-12" role="navigation" aria-label="Main navigation">
       {/* Logo and name on the left */}
       <div className="flex items-center relative z-[51] lg:z-auto">
         <Image 
@@ -44,32 +56,32 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
         }`}>DNXT LAB</span>
       </div>
       
-      {/* Desktop Menu Container - Only visible on lg+ */}
-      <div className="hidden lg:flex items-center">
+      {/* Desktop Menu Container - Only visible on md+ */}
+      <div className="hidden md:flex items-center">
         {/* Menu Items - Appear to the left of button with green background */}
         <div className={`flex items-center transition-all duration-500 ease-out ${
           isMenuOpen 
             ? 'opacity-100 translate-x-0 scale-100' 
             : 'opacity-0 translate-x-4 scale-95 pointer-events-none'
         }`} style={{ marginRight: '2px' }}>
-          <div className="flex items-center bg-green-400 rounded-full px-6 py-2 space-x-6">
+          <div className="flex items-center rounded-full px-6 py-2 space-x-6" style={menuContainerStyle}>
             <button 
               onClick={() => handleNavigation(0)}
-              className={`text-lg font-normal font-morien hover:opacity-70 transition-opacity whitespace-nowrap ${isDark ? 'text-black' : 'text-white'}`}
+              className="text-white text-base lg:text-lg font-normal font-morien hover:opacity-70 transition-opacity whitespace-nowrap"
             >
               HOME
             </button>
             
             <button 
               onClick={() => handleNavigation(3)}
-              className={`text-lg font-normal font-morien hover:opacity-70 transition-opacity whitespace-nowrap ${isDark ? 'text-black' : 'text-white'}`}
+              className="text-white text-base lg:text-lg font-normal font-morien hover:opacity-70 transition-opacity whitespace-nowrap"
             >
               SERVICES
             </button>
             
             <button 
               onClick={() => handleNavigation(7)}
-              className={`text-lg font-normal font-morien hover:opacity-70 transition-opacity whitespace-nowrap ${isDark ? 'text-black' : 'text-white'}`}
+              className="text-white text-base lg:text-lg font-normal font-morien hover:opacity-70 transition-opacity whitespace-nowrap"
             >
               BOOK A CALL
             </button>
@@ -80,10 +92,11 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
         <button 
           onClick={handleMenuClick}
           className={`lg:mr-20 w-12 h-12 flex items-center justify-center transition-all duration-300 ${
-            isMenuOpen ? 'bg-green-400 rounded-full' : 'bg-transparent'
+            isMenuOpen ? 'rounded-full' : 'bg-transparent'
           } focus:outline-none focus:ring-opacity-50 ${
             isDark ? '' : 'focus:ring-white'
           }`}
+          style={menuButtonStyle}
           aria-label={isMenuOpen ? "Close menu" : "Open navigation menu"}
           aria-expanded={isMenuOpen}
         >
@@ -117,30 +130,31 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
         </button>
       </div>
 
-      {/* Mobile Plus/X Button - Only visible on mobile/tablet */}
+      {/* Mobile Plus/X Button - Only visible on mobile */}
       <button 
         onClick={handleMenuClick}
-        className={`lg:hidden w-10 h-10 md:w-12 md:h-12 flex items-center justify-center transition-all duration-300 ${
-          isMenuOpen ? 'bg-green-400 rounded-full' : 'bg-transparent'
+        className={`md:hidden w-10 h-10 flex items-center justify-center transition-all duration-300 ${
+          isMenuOpen ? 'rounded-full' : 'bg-transparent'
         } focus:outline-none focus:ring-2 focus:ring-opacity-50 ${
           isDark ? 'focus:ring-black' : 'focus:ring-white'
         }`}
+        style={menuButtonStyle}
         aria-label={isMenuOpen ? "Close menu" : "Open navigation menu"}
         aria-expanded={isMenuOpen}
       >
-        <div className="relative w-5 h-5 md:w-6 md:h-6 flex flex-col justify-center items-center">
+        <div className="relative w-5 h-5 flex flex-col justify-center items-center">
           {/* Hamburger to X Animation */}
           {/* Top line */}
           <div className={`h-0.5 transition-all duration-300 ease-in-out ${
             isDark ? 'bg-black' : 'bg-white'
           } ${
             isMenuOpen 
-              ? 'w-4 md:w-5 rotate-45 translate-y-0' 
-              : 'w-6 md:w-7 rotate-0 -translate-y-1 md:-translate-y-1.5'
+              ? 'w-4 rotate-45 translate-y-0' 
+              : 'w-6 rotate-0 -translate-y-1'
           }`}></div>
           
           {/* Middle line */}
-          <div className={`w-6 md:w-7 h-0.5 transition-all duration-300 ease-in-out ${
+          <div className={`w-6 h-0.5 transition-all duration-300 ease-in-out ${
             isDark ? 'bg-black' : 'bg-white'
           } ${
             isMenuOpen ? 'opacity-0 scale-0' : 'opacity-100 scale-100'
@@ -151,15 +165,15 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
             isDark ? 'bg-black' : 'bg-white'
           } ${
             isMenuOpen 
-              ? 'w-4 md:w-5 -rotate-45 translate-y-0' 
-              : 'w-6 md:w-7 rotate-0 translate-y-1 md:translate-y-1.5'
+              ? 'w-4 -rotate-45 translate-y-0' 
+              : 'w-6 rotate-0 translate-y-1'
           }`}></div>
         </div>
       </button>
 
       {/* Mobile Dropdown menu - Glass effect - Only visible on mobile/tablet */}
       <div 
-        className={`lg:hidden fixed top-0 right-0 z-50 transition-transform duration-500 ease-out ${
+        className={`md:hidden fixed top-0 right-0 z-50 transition-transform duration-500 ease-out ${
           isMenuOpen ? 'transform translate-x-0' : 'transform translate-x-full'
         }`}
         style={{ 
@@ -169,7 +183,6 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
           background: 'rgba(0, 0, 0, 0.6)',
           backdropFilter: 'blur(10px)',
           WebkitBackdropFilter: 'blur(10px)',
-          border: '1px solid rgba(255, 255, 255, 0.1)',
           borderRadius: '30px 0 0 30px'
         }}
       >
@@ -227,7 +240,7 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
       {/* Overlay to close menu when clicking outside - Mobile only */}
       {isMenuOpen && (
         <div 
-          className="lg:hidden fixed inset-0 z-40"
+          className="md:hidden fixed inset-0 z-40"
           onClick={handleMenuClose}
           aria-hidden="true"
         ></div>
