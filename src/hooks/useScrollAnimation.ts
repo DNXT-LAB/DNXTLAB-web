@@ -67,6 +67,8 @@ export const useScrollAnimation = () => {
       if (!isMobile()) return
       
       const scrollPosition = window.scrollY
+      setScrollY(scrollPosition) // Actualizar scrollY directamente
+
       const windowHeight = window.innerHeight
       
       // Calculate which section should be active based on native scroll
@@ -75,7 +77,6 @@ export const useScrollAnimation = () => {
       
       if (clampedSection !== currentSectionRef.current) {
         setCurrentSection(clampedSection)
-        setScrollY(SECTION_POSITIONS[clampedSection] || 0)
       }
     }
 
@@ -123,11 +124,13 @@ export const useScrollAnimation = () => {
     }
     
     return () => {}
-  }, [isTransitioning])
+  }, [isTransitioning, navigateToSection])
 
   // Effect separado para animaciones de scroll basadas en currentSection
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    const isMobile = () => typeof window !== 'undefined' && window.innerWidth < 1024
+
+    if (typeof window !== 'undefined' && !isMobile()) {
       const targetPosition = SECTION_POSITIONS[currentSection]
       if (targetPosition !== undefined) {
         const startPosition = scrollY
@@ -152,7 +155,7 @@ export const useScrollAnimation = () => {
         requestAnimationFrame(animateScroll)
       }
     }
-  }, [currentSection])
+  }, [currentSection, scrollY])
 
       // Calculate all derived values
   const progress = calculateScrollProgress(scrollY)

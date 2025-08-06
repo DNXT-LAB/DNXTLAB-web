@@ -60,15 +60,15 @@ export const calculateTabProperties = (scrollY: number, windowHeight: number, wi
   const { THRESHOLD, NAVBAR_HEIGHT } = SCROLL_CONFIG
   const { SECOND_LEVEL_START } = SCROLL_LEVELS
   
-  const maxScroll = Math.max(650, windowHeight * 0.35)
+  const maxScroll = Math.max(300, windowHeight * 0.2) // Reducido para que la animación sea más rápida
   const adjustedScroll = Math.max(0, scrollY - THRESHOLD)
   const tabProgress = Math.max(0, Math.min(adjustedScroll / maxScroll, 1))
   const smoothTabProgress = easeOutQuart(tabProgress)
   
   // Determine base value according to section and responsive breakpoint
   const getResponsiveBaseTransform = () => {
-    if (windowWidth < 640) return 20    // Mobile
-    if (windowWidth < 1024) return 50   // Tablet  
+    if (windowWidth < 640) return 90    // Mobile: más cerca para empezar
+    if (windowWidth < 1024) return 90   // Tablet: más cerca para empezar
     if (windowWidth < 1536) return 80   // Desktop
     return 50                          // 2xl
   }
