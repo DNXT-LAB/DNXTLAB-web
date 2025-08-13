@@ -367,7 +367,7 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
       </div>
 
             {/* Mobile & iPad Layout - Visible on screens < 1024px */}
-      <div className="block lg:hidden bg-white mt-16 md:mt-32 relative overflow-hidden">
+      <div className="block lg:hidden bg-white mt-16 md:mt-32 relative overflow-hidden h-full">
         {/* Fixed title at top - Always visible */}
         <div className="mb-6 absolute top-4 left-[700px] md:left-[560px] right-0 text-left z-50 bg-white pt-4">
           <h2 className="text-[33px] md:text-3xl font-bold text-black font-poppins leading-none mr-28 md:mr-40">
@@ -381,11 +381,11 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
         <div 
           className="flex flex-col justify-center h-full"
           style={{ 
-            opacity: thirdSmoothProgress < 30000.6 ? 1 : Math.max(0, 1 - ((thirdSmoothProgress - 0.6) * 2.5)),
+            opacity: servicesOpacity,
             transition: 'opacity 0.8s ease-out'
           }}
         >
-          <div className="text-center mt-40 md:mt-48">
+          <div className="text-center">
             <p className="text-xl md:text-3xl text-black font-semibold font-poppins mr-40 md:mr-80">
               Explore our core expertise
             </p>
@@ -419,7 +419,7 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
         </div>
 
         {/* Cards with right to left effect - Appear progressively */}
-        <div className="absolute inset-0 mt-40 md:mt-48">
+        <div className="absolute inset-0 mt-96 md:mt-48 ml-28">
           {/* ServiceCard 1 - Aparece primero con efecto */}
           {thirdSmoothProgress >= 0.4 && (
             <ServiceCard 
@@ -462,7 +462,7 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
       </div>
 
               {/* Centered Services button */}
-        <div className="absolute left-[780px] md:left-[650px] lg:left-[700px] 2xl:left-1/2 -translate-x-1/2 lg:bottom-[2%] xl:bottom-[42%] 2xl:bottom-[-2%]" style={{ 
+        <div className="absolute left-[830px] mt-[-10%] lg:mt-0 md:left-[850px] lg:left-[700px] 2xl:left-1/2 -translate-x-1/2 lg:bottom-[2%] xl:bottom-[42%] 2xl:bottom-[-2%]" style={{ 
           // bottom: getResponsiveBottomPosition(),
           opacity: 1,
           transition: 'opacity 0.5s ease-out'
