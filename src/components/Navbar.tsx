@@ -33,7 +33,7 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
   } : {};
 
   return (
-    <nav className="w-full flex items-center justify-between transition-colors duration-500 lg:px-12" role="navigation" aria-label="Main navigation">
+    <nav className="relative fixed top-0 left-0 w-full flex items-center justify-between transition-colors duration-500 lg:px-12" role="navigation" aria-label="Main navigation">
       {/* Logo and name on the left */}
       <div className="flex items-center relative z-[51] lg:z-auto">
         <Image 

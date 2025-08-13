@@ -57,7 +57,7 @@ export const calculateSectionATransforms = (scrollY: number, progress: ScrollPro
 
 // Calculate tab properties
 export const calculateTabProperties = (scrollY: number, windowHeight: number, windowWidth: number) => {
-  const { THRESHOLD, NAVBAR_HEIGHT } = SCROLL_CONFIG
+  const { THRESHOLD } = SCROLL_CONFIG
   const { SECOND_LEVEL_START } = SCROLL_LEVELS
   
   const maxScroll = Math.max(300, windowHeight * 0.2) // Reducido para que la animación sea más rápida
@@ -70,11 +70,21 @@ export const calculateTabProperties = (scrollY: number, windowHeight: number, wi
     if (windowWidth < 640) return 90    // Mobile: más cerca para empezar
     if (windowWidth < 1024) return 90   // Tablet: más cerca para empezar
     if (windowWidth < 1536) return 80   // Desktop
-    return 50                          // 2xl
+    return 50                            // 2xl
+  }
+
+  // Responsive navbar height according to Tailwind breakpoints
+  const getResponsiveNavbarHeight = () => {
+    if (windowWidth < 768) return 0      // mobile
+    if (windowWidth < 1024) return 70    // md
+    if (windowWidth < 1536) return 130   // lg
+    if (windowWidth < 1736) return 130
+    return 130                           // 2xl
   }
   
   const baseTransform = scrollY >= 1000 ? 100 : getResponsiveBaseTransform()
   const tabTransform = scrollY < THRESHOLD ? 100 : baseTransform - (smoothTabProgress * baseTransform)
+  const NAVBAR_HEIGHT = getResponsiveNavbarHeight()
   const tabHeight = scrollY < SECOND_LEVEL_START ? `calc(100vh - ${NAVBAR_HEIGHT}px)` : '100vh'
   const tabTop = scrollY < SECOND_LEVEL_START ? `${NAVBAR_HEIGHT}px` : '0px'
   

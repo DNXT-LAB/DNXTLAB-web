@@ -107,7 +107,7 @@ const SectionB: React.FC<SectionProps> = ({ progress }) => {
     position: 'absolute',
     width: '100%',
     height: '100%',
-    top: '57%',
+    top: '54%',
     left: `${dimensions.leftPosition}px`,
     transform: `translate(-50%, ${secondSmoothProgress < 0.3 ? '100%' : '-50%'}) translateY(${thirdSmoothProgress > 0 ? -(thirdSmoothProgress * 900 * scaleFactor) : 0}px)`,
     transformOrigin: 'center center',

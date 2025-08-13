@@ -9,11 +9,9 @@ import SectionC from './sections/SectionC'
 import SectionD from './sections/SectionD'
 import { useScrollAnimation } from '@/hooks/useScrollAnimation'
 import { useContactForm } from '@/hooks/useContactForm'
-import { useVH } from '@/hooks/useVH'
 import { SCROLL_LEVELS } from '@/utils/constants'
 
 export default function VideoContent() {
-  useVH()
   const videoRef = useRef<HTMLVideoElement>(null)
   
   // Hooks personalizados
@@ -137,7 +135,7 @@ export default function VideoContent() {
 
       {/* Contenido invisible para activar scroll */}
       <div className="relative z-0 bg-transparent" style={{ height: '200vh' }} />
-      <div className="relative z-0 bg-transparent h-screen-dynamic" />
+      <div className="relative z-0 bg-transparent" style={{ height: '100vh' }} />
       <div className="relative z-0 bg-transparent" style={{ height: '200vh' }} />
       <div className="relative z-0 bg-transparent" style={{ height: '200vh' }} />
       <div className="relative z-0 bg-transparent" style={{ height: '400vh' }} />
