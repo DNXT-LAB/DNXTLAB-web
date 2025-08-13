@@ -27,7 +27,7 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
   }
 
   const menuButtonStyle: React.CSSProperties = isMenuOpen ? {
-    background: 'rgba(0, 0, 0, 0.6)',
+    background: 'rgba(141, 140, 140, 0.6)',
     backdropFilter: 'blur(10px)',
     WebkitBackdropFilter: 'blur(10px)',
   } : {};
@@ -55,7 +55,7 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
         <div
           className="flex items-center justify-end rounded-full transition-all duration-700 ease-in-out"
           style={isMenuOpen ? {
-            background: 'rgba(0, 0, 0, 0.6)',
+            background: 'rgba(141, 140, 140, 0.6)',
             backdropFilter: 'blur(10px)',
             WebkitBackdropFilter: 'blur(10px)',
           } : {}}
