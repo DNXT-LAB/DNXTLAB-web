@@ -85,7 +85,7 @@ export const calculateTabProperties = (scrollY: number, windowHeight: number, wi
   const baseTransform = scrollY >= 1000 ? 100 : getResponsiveBaseTransform()
   const tabTransform = scrollY < THRESHOLD ? 100 : baseTransform - (smoothTabProgress * baseTransform)
   const NAVBAR_HEIGHT = getResponsiveNavbarHeight()
-  const tabHeight = scrollY < SECOND_LEVEL_START ? `calc(100vh - ${NAVBAR_HEIGHT}px)` : '100vh'
+  const tabHeight = scrollY < SECOND_LEVEL_START ? `calc(120vh - ${NAVBAR_HEIGHT}px)` : '120vh'
   const tabTop = scrollY < SECOND_LEVEL_START ? `${NAVBAR_HEIGHT}px` : '0px'
   
   return {
