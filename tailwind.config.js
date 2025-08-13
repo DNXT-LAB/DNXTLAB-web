@@ -6,6 +6,14 @@ module.exports = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    screens: {
+      // Breakpoints personalizados
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: { max: '1760px' }, // hasta 1760px
+      '2xl': '1761px', // a partir de 1761px
+    },
     extend: {
       height: {
         'screen-dynamic': 'calc(var(--vh, 1vh) * 100)',
@@ -18,4 +26,4 @@ module.exports = {
     },
   },
   plugins: [],
-} 
+};

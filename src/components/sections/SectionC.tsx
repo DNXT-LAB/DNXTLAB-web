@@ -183,17 +183,17 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
     willChange: 'transform, opacity'
   }
 
-  const getResponsiveBottomPosition = () => {
-    if (viewportDimensions.width < 768) {
-      return '30%'; // iPhone
-    } else if (viewportDimensions.width < 1024) {
-      return '10%'; // iPad
-    } else if (viewportDimensions.width < 1536) {
-      return '3%'; // Desktop
-    } else {
-      return '-30%'; // 2XL (valor actual)
-    }
-  }
+  // const getResponsiveBottomPosition = () => {
+  //   if (viewportDimensions.width < 768) {
+  //     return '30%'; // iPhone
+  //   } else if (viewportDimensions.width < 1024) {
+  //     return '10%'; // iPad
+  //   } else if (viewportDimensions.width < 1536) {
+  //     return '3%'; // Desktop
+  //   } else {
+  //     return '-30%'; // 2XL (valor actual)
+  //   }
+  // }
 
   const servicesOpacity = fourthSmoothProgress > 0 ? 0 : 1
 
@@ -206,21 +206,21 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
   // Calculate positions and rotations of the cards
   const card1Position = sixthSmoothProgress > 0 
     ? `${-8 + (-8 - 50) * Math.min(1, sixthSmoothProgress * 1.8)}%` 
-    : (fifthSmoothProgress > 0 ? '-20%' : (fourthSmoothProgress > 0 ? '50%' : getResponsiveCard1Position()))
+    : (fifthSmoothProgress > 0 ? '-10%' : (fourthSmoothProgress > 0 ? '45%' : getResponsiveCard1Position()))
   
   const card2Position = sixthSmoothProgress > 0 
-    ? '-20%' 
-    : (fifthSmoothProgress > 0 ? '55%' : (fourthSmoothProgress > 0 ? '130%' : '200%')) // Change: 118% -> 100% (more visible)
+    ? '-10%' 
+    : (fifthSmoothProgress > 0 ? '45%' : (fourthSmoothProgress > 0 ? '130%' : '200%')) // Change: 118% -> 100% (more visible)
   
   const card3Position = sixthSmoothProgress > 0 
-    ? '50%' 
+    ? '45%' 
     : (fifthSmoothProgress > 0 ? '130%' : '200%') // Change: 118% -> 100% (more visible)
 
   const card1Rotation = fifthSmoothProgress > 0 ? '15' : (fourthSmoothProgress > 0 && fifthSmoothProgress === 0) ? '0' : '-15'
   const card2Rotation = sixthSmoothProgress > 0 ? '15' : (fifthSmoothProgress > 0 ? '0' : '-15')
   const card3Rotation = sixthSmoothProgress > 0 ? '0' : '-15'
 
-  const card1Opacity = thirdSmoothProgress < 0.4 ? 0 : Math.min(1, (thirdSmoothProgress - 0.4) * 2.5)
+  const card1Opacity = thirdSmoothProgress < 0 ? 0 : Math.min(1, (thirdSmoothProgress - 0.4) * 2.5)
   const card2Opacity = fourthSmoothProgress > 0 ? 1 : 0
   const card3Opacity = fifthSmoothProgress > 0 ? 1 : 0
 
@@ -233,7 +233,7 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
       >
         {/* Main content left side */}
         <div 
-          className="flex-1 ml-20 2xl:ml-0"
+          className="flex-1 ml-28 2xl:ml-[5.8%] 2xl:mt-[3%]"
         >
           <div 
             style={{ 
@@ -462,15 +462,15 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
       </div>
 
               {/* Centered Services button */}
-        <div className="absolute left-[780px] md:left-[650px] lg:left-[700px] 2xl:left-1/2 -translate-x-1/2" style={{ 
-          bottom: getResponsiveBottomPosition(),
+        <div className="absolute left-[780px] md:left-[650px] lg:left-[700px] 2xl:left-1/2 -translate-x-1/2 lg:bottom-[2%] xl:bottom-[-12%] 2xl:bottom-[-2%]" style={{ 
+          // bottom: getResponsiveBottomPosition(),
           opacity: 1,
           transition: 'opacity 0.5s ease-out'
         }}>
         <button 
           className="flex items-center bg-black text-white rounded-full font-poppins hover:bg-gray-800 transition-colors"
           style={{
-            gap: fontSizes.spacing.gap4,
+            // gap: fontSizes.spacing.gap4,
             paddingLeft: fontSizes.buttonPadding.desktop.x,
             paddingRight: fontSizes.buttonPadding.desktop.x,
             paddingTop: fontSizes.buttonPadding.desktop.y,
