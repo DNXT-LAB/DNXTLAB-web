@@ -233,7 +233,7 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
       >
         {/* Main content left side */}
         <div 
-          className="flex-1 ml-28 2xl:ml-[5.8%] 2xl:mt-[3%]"
+          className="flex-1 ml-32 2xl:ml-[5.8%] 2xl:mt-[3%]"
         >
           <div 
             style={{ 
@@ -462,7 +462,7 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
       </div>
 
               {/* Centered Services button */}
-        <div className="absolute left-[780px] md:left-[650px] lg:left-[700px] 2xl:left-1/2 -translate-x-1/2 lg:bottom-[2%] xl:bottom-[-12%] 2xl:bottom-[-2%]" style={{ 
+        <div className="absolute left-[780px] md:left-[650px] lg:left-[700px] 2xl:left-1/2 -translate-x-1/2 lg:bottom-[2%] xl:bottom-[42%] 2xl:bottom-[-2%]" style={{ 
           // bottom: getResponsiveBottomPosition(),
           opacity: 1,
           transition: 'opacity 0.5s ease-out'

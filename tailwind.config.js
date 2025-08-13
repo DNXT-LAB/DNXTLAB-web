@@ -11,8 +11,8 @@ module.exports = {
       sm: '640px',
       md: '768px',
       lg: '1024px',
-      xl: { max: '1760px' }, // hasta 1760px
-      '2xl': '1761px', // a partir de 1761px
+      xl: { max: '1860px' }, // hasta 1860px
+      '2xl': '1861px', // a partir de 1861px
     },
     extend: {
       height: {
