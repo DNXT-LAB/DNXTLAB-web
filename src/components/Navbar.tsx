@@ -156,7 +156,7 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
           borderRadius: '30px 0 0 30px'
         }}
       >
-        <div className="flex flex-col h-full p-8 relative">
+        <div className="flex flex-col w-full h-full p-8 relative">
           {/* X button to close */}
           <div className="flex justify-end mb-12">
             <button 
