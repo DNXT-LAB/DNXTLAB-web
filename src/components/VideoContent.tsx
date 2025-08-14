@@ -51,7 +51,7 @@ export default function VideoContent() {
         ref={videoRef}
         className="fixed inset-0 w-full h-full object-cover z-0"
         style={{
-          transform: (typeof window !== 'undefined' && windowWidth < 1024) ? 'none' : 'scale(1.1)',
+          // transform: (typeof window !== 'undefined' && windowWidth < 1024) ? 'none' : 'scale(1.1)',
           transformOrigin: 'center center'
         }}
         src="/video.mp4"
