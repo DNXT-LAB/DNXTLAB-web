@@ -70,21 +70,14 @@ export const useScrollAnimation = () => {
       const scrollPosition = window.scrollY
       setScrollY(scrollPosition) // Actualizar scrollY directamente
 
-      // Elegir la sección más cercana según posiciones reales para evitar saltos
-      let nearestIndex = 0
-      let nearestDistance = Infinity
-      for (let i = 0; i < SECTION_POSITIONS.length; i++) {
-        const at = SECTION_POSITIONS[i]
-        if (typeof at !== 'number') continue
-        const distance = Math.abs(scrollPosition - at)
-        if (distance < nearestDistance) {
-          nearestDistance = distance
-          nearestIndex = i
-        }
-      }
-
-      if (nearestIndex !== currentSectionRef.current) {
-        setCurrentSection(nearestIndex)
+      const windowHeight = window.innerHeight
+      
+      // Calculate which section should be active based on native scroll
+      const sectionIndex = Math.round(scrollPosition / windowHeight)
+      const clampedSection = Math.max(0, Math.min(sectionIndex, SECTION_POSITIONS.length - 1))
+      
+      if (clampedSection !== currentSectionRef.current) {
+        setCurrentSection(clampedSection)
       }
     }
 
@@ -142,21 +135,15 @@ export const useScrollAnimation = () => {
     const animate = () => {
       setSmoothedScrollY(prev => {
         const target = scrollY
-        if (!isTouch()) return target
-        
-        // Limitar velocidad por frame y aumentar respuesta
-        const maxStep = Math.max(40, windowHeight * 4) // límite de píxeles por frame
-        let delta = target - prev
-        if (Math.abs(delta) > maxStep) delta = Math.sign(delta) * maxStep
-        const responsiveness = 0.22 // 0..1
-        return prev + delta * responsiveness
+        const smoothingFactor = 0.14 // 0..1, higher = faster response
+        return isTouch() ? prev + (target - prev) * smoothingFactor : target
       })
       rafId = requestAnimationFrame(animate)
     }
 
     rafId = requestAnimationFrame(animate)
     return () => cancelAnimationFrame(rafId)
-  }, [scrollY, windowHeight])
+  }, [scrollY])
 
   // Effect separado para animaciones de scroll basadas en currentSection
   useEffect(() => {
