@@ -28,9 +28,13 @@ export const calculateScrollProgress = (scrollY: number): ScrollProgress => {
 export const calculateSectionATransforms = (scrollY: number, progress: ScrollProgress, windowSize: { width: number; height: number }) => {
   const { secondSmoothProgress } = progress
   const { SECOND_LEVEL_START } = SCROLL_LEVELS
+
+  // Usar easing más suave en táctiles
+  const isTouch = windowSize.width < 1024
+  const eased = isTouch ? easeOutQuart(secondSmoothProgress) : secondSmoothProgress
   
-  const sectionATranslateY = scrollY < SECOND_LEVEL_START ? 0 : -(secondSmoothProgress * 600)
-  const sectionAScale = scrollY < SECOND_LEVEL_START ? 1 : 1 - (secondSmoothProgress * 0.9)
+  const sectionATranslateY = scrollY < SECOND_LEVEL_START ? 0 : -(eased * 600)
+  const sectionAScale = scrollY < SECOND_LEVEL_START ? 1 : 1 - (eased * 0.4)
   
   // Video and text converge to center
   const centerX = windowSize.width / 2
@@ -40,10 +44,10 @@ export const calculateSectionATransforms = (scrollY: number, progress: ScrollPro
   const textOriginalLeft = 60 + 780 + 473
   const textOriginalTop = 400
   
-  const videoConvergeX = scrollY < SECOND_LEVEL_START ? 0 : (centerX - videoOriginalLeft) * secondSmoothProgress
-  const videoConvergeY = scrollY < SECOND_LEVEL_START ? 0 : (centerY - videoOriginalTop) * secondSmoothProgress
-  const textConvergeX = scrollY < SECOND_LEVEL_START ? 0 : (centerX - textOriginalLeft) * secondSmoothProgress
-  const textConvergeY = scrollY < SECOND_LEVEL_START ? 0 : (centerY - textOriginalTop) * secondSmoothProgress
+  const videoConvergeX = scrollY < SECOND_LEVEL_START ? 0 : (centerX - videoOriginalLeft) * eased
+  const videoConvergeY = scrollY < SECOND_LEVEL_START ? 0 : (centerY - videoOriginalTop) * eased
+  const textConvergeX = scrollY < SECOND_LEVEL_START ? 0 : (centerX - textOriginalLeft) * eased
+  const textConvergeY = scrollY < SECOND_LEVEL_START ? 0 : (centerY - textOriginalTop) * eased
   
   return {
     sectionATranslateY,
