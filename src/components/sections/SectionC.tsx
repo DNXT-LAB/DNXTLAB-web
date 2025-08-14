@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import ServiceCard from '@/components/ui/ServiceCard'
 import type { SectionProps } from '@/types/animations'
 
-const SectionC: React.FC<SectionProps> = ({ progress, scrollY, windowHeight, onNavigateToSection }) => {
+const SectionC: React.FC<SectionProps> = ({ progress, onNavigateToSection }) => {
   const { 
     thirdSmoothProgress, 
     fourthSmoothProgress, 
