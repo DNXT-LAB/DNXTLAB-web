@@ -2,8 +2,8 @@ import React from 'react'
 
 export interface ServiceCardProps {
   title: string
-  subtitle: string
-  description: string
+  subtitle: React.ReactNode
+  description: React.ReactNode
   gradient: string
   position: string
   rotation: string
@@ -54,11 +54,11 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
         >
           {subtitle}
         </p>
-        <p 
+        <div 
           className="text-gray-600 font-inter leading-relaxed text-base md:text-lg"
         >
           {description}
-        </p>
+        </div>
       </div>
     </div>
   )

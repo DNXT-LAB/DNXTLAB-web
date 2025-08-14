@@ -339,9 +339,16 @@ const SectionC: React.FC<SectionProps> = ({ progress, onNavigateToSection }) => 
         >
           <ServiceCard 
             title="WEB DESIGN & DEVELOPMENT"
-            subtitle="Design That Converts"
-            description="From sleek landing pages to complex platforms, we design and develop responsive, high-converting websites that adapt to your brand and scale with your business. Every pixel and line of code is crafted with purpose—to deliver speed, clarity, and results."
-            gradient="linear-gradient(135deg, #e5e7eb 0%, #9ca3af 100%)"
+            subtitle={(<span>Tailored Digital Platforms</span>)}
+            description={(
+              <ul className="list-disc pl-6 space-y-1">
+                <li>Landing pages & full websites</li>
+                <li>Optimized for speed, security, and conversions</li>
+                <li>Mobile-first, responsive layouts</li>
+                <li>Custom CMS or headless integration</li>
+              </ul>
+            )}
+            gradient="linear-gradient(10deg, #838383 0%, #F7F7F7 100%)"
             position={card1Position}
             rotation={card1Rotation}
             opacity={card1Opacity}
@@ -349,9 +356,16 @@ const SectionC: React.FC<SectionProps> = ({ progress, onNavigateToSection }) => 
           
           <ServiceCard 
             title="AI INTEGRATIONS"
-            subtitle="Smarter Business Operations"
-            description="We help businesses unlock the power of AI with custom-built solutions that automate workflows, streamline decision-making, and boost productivity. From poppinsnal tools to customer-facing experiences, we design AI that adapts to your goals—and delivers measurable impact."
-            gradient="linear-gradient(135deg, #dbeafe 0%, #60a5fa 100%)"
+            subtitle={(<span>Custom Automation Systems</span>)}
+            description={(
+              <ul className="list-disc pl-6 space-y-1">
+                <li>AI chatbots & agents</li>
+                <li>Workflow & task automation</li>
+                <li>Data processing tools</li>
+                <li>API & platform integrations</li>
+              </ul>
+            )}
+            gradient="linear-gradient(135deg, #60c5ff 0%, #60c5ff 100%)"
             position={card2Position}
             rotation={card2Rotation}
             opacity={card2Opacity}
@@ -359,9 +373,16 @@ const SectionC: React.FC<SectionProps> = ({ progress, onNavigateToSection }) => 
           
           <ServiceCard 
             title="CYBERSECURITY CONSULTANCY"
-            subtitle="Protect What Matters"
-            description="We help you safeguard your digital infrastructure with proactive cybersecurity strategies. From risk assessments to secure system architecture, we design and implement solutions that prevent threats, ensure compliance, and build long-term resilience across your operations."
-            gradient="linear-gradient(135deg, #9ca3af 0%, #4b5563 100%)"
+            subtitle={(<span>Compliance & Protection</span>)}
+            description={(
+              <ul className="list-disc pl-6 space-y-1">
+                <li>GDPR & NIS compliance</li>
+                <li>Vulnerability assessments</li>
+                <li>Real-time threat detection</li>
+                <li>Staff training & system audits</li>
+              </ul>
+            )}
+            gradient="linear-gradient(10deg, #fcd04c 0%, #ba9f4c 100%)"
             position={card3Position}
             rotation={card3Rotation}
             opacity={card3Opacity}
@@ -427,9 +448,18 @@ const SectionC: React.FC<SectionProps> = ({ progress, onNavigateToSection }) => 
           {thirdSmoothProgress >= 0.4 && (
             <ServiceCard 
               title="WEB DESIGN & DEVELOPMENT"
-              subtitle="Design That Converts"
-              description="From sleek landing pages to complex platforms, we design and develop responsive, high-converting websites that adapt to your brand and scale with your business. Every pixel and line of code is crafted with purpose—to deliver speed, clarity, and results."
-              gradient="linear-gradient(135deg, #e5e7eb 0%, #9ca3af 100%)"
+              subtitle={(
+                <span>Tailored Digital Platforms</span>
+              )}
+              description={(
+                <ul className="list-disc pl-6 space-y-1">
+                  <li>Landing pages & full websites</li>
+                  <li>Optimized for speed, security, and conversions</li>
+                  <li>Mobile-first, responsive layouts</li>
+                  <li>Custom CMS or headless integration</li>
+                </ul>
+              )}
+              gradient="linear-gradient(10deg, #838383 0%, #F7F7F7 100%)"
               position={card1Position}
               rotation={card1Rotation}
               opacity={card1Opacity}
@@ -440,9 +470,16 @@ const SectionC: React.FC<SectionProps> = ({ progress, onNavigateToSection }) => 
           {fourthSmoothProgress > 0 && (
             <ServiceCard 
               title="AI INTEGRATIONS"
-              subtitle="Smarter Business Operations"
-              description="We help businesses unlock the power of AI with custom-built solutions that automate workflows, streamline decision-making, and boost productivity. From poppinsnal tools to customer-facing experiences, we design AI that adapts to your goals—and delivers measurable impact."
-              gradient="linear-gradient(135deg, #dbeafe 0%, #60a5fa 100%)"
+              subtitle={(<span>Custom Automation Systems</span>)}
+              description={(
+                <ul className="list-disc pl-6 space-y-1">
+                  <li>AI chatbots & agents</li>
+                  <li>Workflow & task automation</li>
+                  <li>Data processing tools</li>
+                  <li>API & platform integrations</li>
+                </ul>
+              )}
+              gradient="linear-gradient(135deg, #60c5ff 0%, #60c5ff 100%)"
               position={card2Position}
               rotation={card2Rotation}
               opacity={card2Opacity}
@@ -453,9 +490,16 @@ const SectionC: React.FC<SectionProps> = ({ progress, onNavigateToSection }) => 
           {fifthSmoothProgress > 0 && (
             <ServiceCard 
               title="CYBERSECURITY CONSULTANCY"
-              subtitle="Protect What Matters"
-              description="We help you safeguard your digital infrastructure with proactive cybersecurity strategies. From risk assessments to secure system architecture, we design and implement solutions that prevent threats, ensure compliance, and build long-term resilience across your operations."
-              gradient="linear-gradient(135deg, #9ca3af 0%, #4b5563 100%)"
+              subtitle={(<span>Compliance & Protection</span>)}
+              description={(
+                <ul className="list-disc pl-6 space-y-1">
+                  <li>GDPR & NIS compliance</li>
+                  <li>Vulnerability assessments</li>
+                  <li>Real-time threat detection</li>
+                  <li>Staff training & system audits</li>
+                </ul>
+              )}
+              gradient="linear-gradient(10deg, #fcd04c 0%, #ba9f4c 100%)"
               position={card3Position}
               rotation={card3Rotation}
               opacity={card3Opacity}
