@@ -6,7 +6,7 @@ export default function LoadingAnimation({ letters, animatedLetters, mounted }: 
   return (
     <main className="fixed inset-0 w-screen h-screen flex items-center justify-center bg-black overflow-hidden">
       <div className="flex items-center">
-        <div className="w-[40%] lg:w-[20%]">
+        <div className="w-[40%] lg:w-[40%]">
           <Image 
             src="/logo.png" 
             alt="DNXT LAB Logo" 

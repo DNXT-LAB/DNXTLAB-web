@@ -38,8 +38,8 @@ const SectionD: React.FC<ContactSectionProps> = ({
         className="w-full flex flex-col justify-center px-6 sm:px-8 md:px-12 mb-28 lg:mb-0 mx-auto"
       >
         {/* Title */}
-        <div className="text-center lg:text-left mb-6 lg:mb-10">
-          <h2 className="text-3xl lg:text-5xl 2xl:text-7xl font-semibold text-black font-poppins leading-tight">
+        <div className="text-center lg:text-left mb-6 lg:mb-10 2xl:mt-[20%]">
+          <h2 className="text-[150%] md:text-[300%] lg:text-[600%] 2xl:text-[700%] font-semibold text-black font-poppins leading-tight">
             BOOK A CALL NOW
           </h2>
         </div>
@@ -47,95 +47,92 @@ const SectionD: React.FC<ContactSectionProps> = ({
         {/* Form Container */}
         <form
           onSubmit={handleSubmit}
-          className="w-full"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8 xl:w-[150%] "
         >
-          <div className="flex flex-col lg:flex-row lg:gap-x-8">
-            {/* === Left Column: Inputs & Desktop Contact Info === */}
-            <div className="flex-1 flex flex-col space-y-4">
-              <input
-                type="text"
-                name="firstName"
-                value={formState.formData.firstName}
-                onChange={handleInputChange}
-                placeholder="First name"
-                className="w-full px-6 py-2 md:py-4 2xl:py-6 text-base 2xl:text-lg text-black placeholder-gray-500 border-none rounded-full focus:outline-none focus:ring-2 focus:ring-black bg-white shadow-md"
-                style={{ background: 'linear-gradient(0deg, #D6D6D6, #ffffff)' }}
-                required
-              />
-              <input
-                type="text"
-                name="lastName"
-                value={formState.formData.lastName}
-                onChange={handleInputChange}
-                placeholder="Last Name"
-                className="w-full px-6 py-2 md:py-4 2xl:py-6 text-base 2xl:text-lg text-black placeholder-gray-500 border-none rounded-full focus:outline-none focus:ring-2 focus:ring-black bg-white shadow-md"
-                style={{ background: 'linear-gradient(0deg, #D6D6D6, #ffffff)' }}
-                required
-              />
-              <input
-                type="email"
-                name="email"
-                value={formState.formData.email}
-                onChange={handleInputChange}
-                placeholder="Your email"
-                className="w-full px-6 py-2 md:py-4 2xl:py-6 text-base 2xl:text-lg text-black placeholder-gray-500 border-none rounded-full focus:outline-none focus:ring-2 focus:ring-black bg-white shadow-md"
-                style={{ background: 'linear-gradient(0deg, #D6D6D6, #ffffff)' }}
-                required
-              />
-              
-              {/* Desktop Contact Info */}
-              <div className="hidden lg:block pt-6">
-                <div className="space-y-2 text-base 2xl:text-lg text-black font-poppins">
-                  <p>Phone Num: +351 999999999</p>
-                  <p>Email: info@diamondnxt.com</p>
-                  <p>Sede: Rua Conselheiro Veloso Cruz, N.º 10</p>
-                  <p>Porto — 4400 092 Vila Nova de Gaia.</p>
-                </div>
-              </div>
-            </div>
-
-            {/* === Right Column: Textarea & Desktop Button === */}
-            <div className="flex-1 flex flex-col mt-4 lg:mt-0">
-              <textarea
-                name="message"
-                value={formState.formData.message}
-                onChange={handleInputChange}
-                placeholder="Tell us about your project..."
-                className="w-full h-28 md:h-48 lg:h-full px-6 py-4 2xl:py-6 text-base 2xl:text-lg text-black placeholder-gray-500 border-none rounded-3xl focus:outline-none focus:ring-2 focus:ring-black resize-none bg-white shadow-md"
-                style={{ background: 'linear-gradient(0deg, #D6D6D6, #ffffff)' }}
-                required
-              />
-              <div className="hidden lg:flex mt-4">
-                <button
-                  type="submit"
-                  disabled={formState.isSubmitting}
-                  className="w-full px-10 py-4 2xl:py-6 bg-black text-white text-base 2xl:text-lg font-medium rounded-full hover:bg-gray-800 transition-colors disabled:opacity-50"
-                >
-                  {formState.isSubmitting ? 'Sending...' : 'Book a call'}
-                </button>
+          {/* === Left Column: Inputs & Desktop Contact Info === */}
+          <div className="flex flex-col space-y-8">
+            <input
+              type="text"
+              name="firstName"
+              value={formState.formData.firstName}
+              onChange={handleInputChange}
+              placeholder="First name"
+              className="w-[100%] px-[3%] py-[1%] md:py-[2%] 2xl:py-[3%] text-[100%] 2xl:text-[110%] text-black placeholder-gray-500 border-none rounded-full focus:outline-none focus:ring-2 focus:ring-black bg-white shadow-md"
+              style={{ background: 'linear-gradient(0deg, #D6D6D6, #ffffff)' }}
+              required
+            />
+            <input
+              type="text"
+              name="lastName"
+              value={formState.formData.lastName}
+              onChange={handleInputChange}
+              placeholder="Last Name"
+              className="w-[100%] px-[3%] py-[1%] md:py-[2%] 2xl:py-[3%] text-[100%] 2xl:text-[110%] text-black placeholder-gray-500 border-none rounded-full focus:outline-none focus:ring-2 focus:ring-black bg-white shadow-md"
+              style={{ background: 'linear-gradient(0deg, #D6D6D6, #ffffff)' }}
+              required
+            />
+            <input
+              type="email"
+              name="email"
+              value={formState.formData.email}
+              onChange={handleInputChange}
+              placeholder="Your email"
+              className="w-[100%] px-[3%] py-[1%] md:py-[2%] 2xl:py-[3%] text-[100%] 2xl:text-[110%] text-black placeholder-gray-500 border-none rounded-full focus:outline-none focus:ring-2 focus:ring-black bg-white shadow-md"
+              style={{ background: 'linear-gradient(0deg, #D6D6D6, #ffffff)' }}
+              required
+            />
+            {/* Desktop Contact Info */}
+            <div className="hidden lg:block pt-6">
+              <div className="space-y-2 text-base 2xl:text-[200%] text-black font-poppins">
+                <p>Phone Num: +351 999999999</p>
+                <p>Email: info@diamondnxt.com</p>
+                <p>Sede: Rua Conselheiro Veloso Cruz, N.º 10</p>
+                <p>Porto — 4400 092 Vila Nova de Gaia.</p>
               </div>
             </div>
           </div>
-          
-          {/* Mobile/Tablet Button */}
-          <div className="w-full lg:hidden mt-6">
+
+          {/* === Right Column: Textarea & Desktop Button === */}
+          <div className="flex flex-col">
+            <textarea
+              name="message"
+              value={formState.formData.message}
+              onChange={handleInputChange}
+              placeholder="Tell us about your project..."
+              className="w-full h-28 md:h-48 lg:h-full px-6 py-4 2xl:py-6 text-base 2xl:text-lg text-black placeholder-gray-500 border-none rounded-3xl focus:outline-none focus:ring-2 focus:ring-black resize-none bg-white shadow-md"
+              style={{ background: 'linear-gradient(0deg, #D6D6D6, #ffffff)' }}
+              required
+            />
+            <div className="hidden lg:flex mt-4">
+              <button
+                type="submit"
+                disabled={formState.isSubmitting}
+                className="w-[100%] px-[6%] py-[2%] 2xl:py-[3%] bg-black text-white text-[100%] 2xl:text-[110%] font-medium rounded-full hover:bg-gray-800 transition-colors disabled:opacity-50"
+              >
+                {formState.isSubmitting ? 'Sending...' : 'Book a call'}
+              </button>
+            </div>
+          </div>
+
+          {/* Mobile/Tablet Button - full width row */}
+          <div className="w-full lg:hidden mt-2 col-span-1 lg:col-span-2">
             <button
               type="submit"
               disabled={formState.isSubmitting}
-              className="w-full py-4 bg-black text-white text-lg font-medium rounded-full hover:bg-gray-800 transition-colors disabled:opacity-50"
+              className="w-[100%] py-[3%] bg-black text-white text-[110%] font-medium rounded-full hover:bg-gray-800 transition-colors disabled:opacity-50"
             >
               {formState.isSubmitting ? 'Sending...' : 'Book a call'}
             </button>
           </div>
         </form>
-        
+
         {/* Contact Info (Mobile/Tablet Only) */}
         <div className="block lg:hidden text-center mt-8 sm:mt-10">
-            <div className="space-y-2 text-sm text-black font-poppins">
-                <p>Phone Num: +351 999999999</p>
-                <p>Email: info@diamondnxt.com</p>
-                <p>Sede: Rua Conselheiro Veloso Cruz, N.º 10 Porto — 4400 092 Vila Nova de Gaia.</p>
-            </div>
+          <div className="space-y-2 text-sm text-black font-poppins">
+            <p>Phone Num: +351 999999999</p>
+            <p>Email: info@diamondnxt.com</p>
+            <p>Sede: Rua Conselheiro Veloso Cruz, N.º 10 Porto — 4400 092 Vila Nova de Gaia.</p>
+          </div>
         </div>
 
         {/* Form Status Message */}

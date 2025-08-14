@@ -18,7 +18,7 @@ export default function VideoContent() {
   const {
     scrollY,
     windowHeight,
-    windowWidth,
+    // windowWidth,
     progress,
     sectionATransforms,
     tabProperties,
