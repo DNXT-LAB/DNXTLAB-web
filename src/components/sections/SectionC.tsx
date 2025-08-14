@@ -339,9 +339,9 @@ const SectionC: React.FC<SectionProps> = ({ progress, onNavigateToSection }) => 
         >
           <ServiceCard 
             title="WEB DESIGN & DEVELOPMENT"
-            subtitle={(<span>Tailored Digital Platforms</span>)}
+            subtitle={(<span className="text-black">Tailored Digital Platforms</span>)}
             description={(
-              <ul className="list-disc pl-6 space-y-1">
+              <ul className="list-disc pl-6 space-y-1 text-black">
                 <li>Landing pages & full websites</li>
                 <li>Optimized for speed, security, and conversions</li>
                 <li>Mobile-first, responsive layouts</li>
@@ -356,9 +356,9 @@ const SectionC: React.FC<SectionProps> = ({ progress, onNavigateToSection }) => 
           
           <ServiceCard 
             title="AI INTEGRATIONS"
-            subtitle={(<span>Custom Automation Systems</span>)}
+            subtitle={(<span className="text-black">Custom Automation Systems</span>)}
             description={(
-              <ul className="list-disc pl-6 space-y-1">
+              <ul className="list-disc pl-6 space-y-1 text-black">
                 <li>AI chatbots & agents</li>
                 <li>Workflow & task automation</li>
                 <li>Data processing tools</li>
@@ -373,9 +373,9 @@ const SectionC: React.FC<SectionProps> = ({ progress, onNavigateToSection }) => 
           
           <ServiceCard 
             title="CYBERSECURITY CONSULTANCY"
-            subtitle={(<span>Compliance & Protection</span>)}
+            subtitle={(<span className="text-black">Compliance & Protection</span>)}
             description={(
-              <ul className="list-disc pl-6 space-y-1">
+              <ul className="list-disc pl-6 space-y-1 text-black">
                 <li>GDPR & NIS compliance</li>
                 <li>Vulnerability assessments</li>
                 <li>Real-time threat detection</li>
@@ -449,10 +449,10 @@ const SectionC: React.FC<SectionProps> = ({ progress, onNavigateToSection }) => 
             <ServiceCard 
               title="WEB DESIGN & DEVELOPMENT"
               subtitle={(
-                <span>Tailored Digital Platforms</span>
+                <span className="text-black">Tailored Digital Platforms</span>
               )}
               description={(
-                <ul className="list-disc pl-6 space-y-1">
+                <ul className="list-disc pl-6 space-y-1 text-black">
                   <li>Landing pages & full websites</li>
                   <li>Optimized for speed, security, and conversions</li>
                   <li>Mobile-first, responsive layouts</li>
@@ -470,9 +470,9 @@ const SectionC: React.FC<SectionProps> = ({ progress, onNavigateToSection }) => 
           {fourthSmoothProgress > 0 && (
             <ServiceCard 
               title="AI INTEGRATIONS"
-              subtitle={(<span>Custom Automation Systems</span>)}
+              subtitle={(<span className="text-black">Custom Automation Systems</span>)}
               description={(
-                <ul className="list-disc pl-6 space-y-1">
+                <ul className="list-disc pl-6 space-y-1 text-black">
                   <li>AI chatbots & agents</li>
                   <li>Workflow & task automation</li>
                   <li>Data processing tools</li>
@@ -490,9 +490,9 @@ const SectionC: React.FC<SectionProps> = ({ progress, onNavigateToSection }) => 
           {fifthSmoothProgress > 0 && (
             <ServiceCard 
               title="CYBERSECURITY CONSULTANCY"
-              subtitle={(<span>Compliance & Protection</span>)}
+              subtitle={(<span className="text-black">Compliance & Protection</span>)}
               description={(
-                <ul className="list-disc pl-6 space-y-1">
+                <ul className="list-disc pl-6 space-y-1 text-black">
                   <li>GDPR & NIS compliance</li>
                   <li>Vulnerability assessments</li>
                   <li>Real-time threat detection</li>
