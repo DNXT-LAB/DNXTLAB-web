@@ -233,9 +233,9 @@ const SectionC: React.FC<SectionProps> = ({ progress, onNavigateToSection }) => 
       >
         {/* Main content left side */}
         <div 
-          className="flex-1 ml-32 2xl:ml-[5.8%] 2xl:mt-[3%]"
+          className="ml-32 xl:ml-[-5%] 2xl:ml-[-10%] 2xl:mt-[3%]"
           style={{
-            marginLeft: viewportDimensions.width >= 1536 ? (viewportDimensions.width <= 1770 ? '11%' : '5.8%') : undefined
+            // marginLeft: viewportDimensions.width >= 1536 ? (viewportDimensions.width <= 1770 ? '11%' : '5.8%') : undefined
           }}
         >
           <div 
@@ -509,8 +509,8 @@ const SectionC: React.FC<SectionProps> = ({ progress, onNavigateToSection }) => 
       </div>
 
               {/* Centered Services button */}
-      <div className="absolute left-[830px] mt-[-13%] md:mt-[-10%] lg:mt-0 md:left-[850px] lg:left-[700px] 2xl:left-1/2 -translate-x-1/2 lg:bottom-[2%] xl:bottom-[42%] 2xl:bottom-[-2%]" style={{ 
-        bottom: viewportDimensions.width >= 1024 ? (viewportDimensions.width <= 1770 ? '10%' : '-2%') : undefined,
+      <div className="absolute left-[830px] mt-[-13%] md:mt-[-10%] lg:mt-0 md:left-[850px] lg:left-[700px] 2xl:left-1/2 -translate-x-1/2 lg:bottom-[2%] xl:bottom-[2%] 2xl:bottom-[-32%]" style={{ 
+        // marginBottom: viewportDimensions.width >= 1024 ? (viewportDimensions.width <= 1770 ? '10rem' : '-10rem') : undefined,
         opacity: 1,
         transition: 'opacity 0.5s ease-out'
       }}>
