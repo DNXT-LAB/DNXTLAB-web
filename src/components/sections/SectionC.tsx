@@ -382,7 +382,7 @@ const SectionC: React.FC<SectionProps> = ({ progress, onNavigateToSection }) => 
 
         {/* Contenido de servicios - Se oculta cuando aparecen cards */}
         <div 
-          className="flex flex-col justify-center h-full"
+          className="flex flex-col justify-center mt-[10%] md:mt-[12%]"
           style={{ 
             opacity: servicesOpacity,
             transition: 'opacity 0.8s ease-out'
@@ -465,7 +465,7 @@ const SectionC: React.FC<SectionProps> = ({ progress, onNavigateToSection }) => 
       </div>
 
               {/* Centered Services button */}
-      <div className="absolute left-[830px] mt-[-10%] lg:mt-0 md:left-[850px] lg:left-[700px] 2xl:left-1/2 -translate-x-1/2 lg:bottom-[2%] xl:bottom-[42%] 2xl:bottom-[-2%]" style={{ 
+      <div className="absolute left-[830px] mt-[-15%] md:mt-[-10%] lg:mt-0 md:left-[850px] lg:left-[700px] 2xl:left-1/2 -translate-x-1/2 lg:bottom-[2%] xl:bottom-[42%] 2xl:bottom-[-2%]" style={{ 
         bottom: viewportDimensions.width >= 1024 ? (viewportDimensions.width <= 1770 ? '10%' : '-2%') : undefined,
         opacity: 1,
         transition: 'opacity 0.5s ease-out'

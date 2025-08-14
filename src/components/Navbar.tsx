@@ -147,8 +147,8 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
           isMenuOpen ? 'transform translate-x-0' : 'transform translate-x-full'
         }`}
         style={{ 
-          width: '100vw',
-          maxWidth: '400px',
+          width: '100%',
+          maxWidth: '100%',
           height: '100vh',
           background: 'rgba(0, 0, 0, 0.6)',
           backdropFilter: 'blur(10px)',
