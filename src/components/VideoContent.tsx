@@ -63,7 +63,7 @@ export default function VideoContent() {
       />
       
       {/* Overlay to improve readability */}
-      <div className="fixed inset-0 bg-black/60 z-10" aria-hidden="true" />
+      <div className="fixed inset-0 bg-black/60 z-10 h-full" aria-hidden="true" />
       
       {/* Navbar */}
       <div className="fixed top-0 left-0 right-0 z-60 p-8">
