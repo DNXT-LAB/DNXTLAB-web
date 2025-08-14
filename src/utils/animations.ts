@@ -29,12 +29,15 @@ export const calculateSectionATransforms = (scrollY: number, progress: ScrollPro
   const { secondSmoothProgress } = progress
   const { SECOND_LEVEL_START } = SCROLL_LEVELS
 
-  // Usar easing más suave en táctiles
   const isTouch = windowSize.width < 1024
   const eased = isTouch ? easeOutQuart(secondSmoothProgress) : secondSmoothProgress
   
-  const sectionATranslateY = scrollY < SECOND_LEVEL_START ? 0 : -(eased * 1000)
-  const sectionAScale = scrollY < SECOND_LEVEL_START ? 1 : 1 - (eased * 0.9)
+  // En móviles: menos distancia para ser rápido; en desktop: igual
+  const translateDistance = isTouch ? 700 : 1000
+  const scaleDelta = isTouch ? 0.8 : 0.9
+  
+  const sectionATranslateY = scrollY < SECOND_LEVEL_START ? 0 : -(eased * translateDistance)
+  const sectionAScale = scrollY < SECOND_LEVEL_START ? 1 : 1 - (eased * scaleDelta)
   
   // Video and text converge to center
   const centerX = windowSize.width / 2
