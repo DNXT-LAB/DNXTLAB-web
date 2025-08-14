@@ -70,14 +70,21 @@ export const useScrollAnimation = () => {
       const scrollPosition = window.scrollY
       setScrollY(scrollPosition) // Actualizar scrollY directamente
 
-      const windowHeight = window.innerHeight
-      
-      // Calculate which section should be active based on native scroll
-      const sectionIndex = Math.round(scrollPosition / windowHeight)
-      const clampedSection = Math.max(0, Math.min(sectionIndex, SECTION_POSITIONS.length - 1))
-      
-      if (clampedSection !== currentSectionRef.current) {
-        setCurrentSection(clampedSection)
+      // Elegir la sección más cercana según posiciones reales para evitar saltos
+      let nearestIndex = 0
+      let nearestDistance = Infinity
+      for (let i = 0; i < SECTION_POSITIONS.length; i++) {
+        const at = SECTION_POSITIONS[i]
+        if (typeof at !== 'number') continue
+        const distance = Math.abs(scrollPosition - at)
+        if (distance < nearestDistance) {
+          nearestDistance = distance
+          nearestIndex = i
+        }
+      }
+
+      if (nearestIndex !== currentSectionRef.current) {
+        setCurrentSection(nearestIndex)
       }
     }
 
