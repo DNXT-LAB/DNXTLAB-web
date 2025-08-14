@@ -33,7 +33,7 @@ export const calculateSectionATransforms = (scrollY: number, progress: ScrollPro
   const isTouch = windowSize.width < 1024
   const eased = isTouch ? easeOutQuart(secondSmoothProgress) : secondSmoothProgress
   
-  const sectionATranslateY = scrollY < SECOND_LEVEL_START ? 0 : -(eased * 600)
+  const sectionATranslateY = scrollY < SECOND_LEVEL_START ? 0 : -(eased * 1000)
   const sectionAScale = scrollY < SECOND_LEVEL_START ? 1 : 1 - (eased * 0.9)
   
   // Video and text converge to center
