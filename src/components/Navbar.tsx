@@ -153,7 +153,6 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
           background: 'rgba(0, 0, 0, 0.6)',
           backdropFilter: 'blur(10px)',
           WebkitBackdropFilter: 'blur(10px)',
-          borderRadius: '30px 0 0 30px'
         }}
       >
         <div className="flex flex-col w-full h-full p-8 relative">
