@@ -142,15 +142,21 @@ export const useScrollAnimation = () => {
     const animate = () => {
       setSmoothedScrollY(prev => {
         const target = scrollY
-        const smoothingFactor = 0.14 // 0..1, higher = faster response
-        return isTouch() ? prev + (target - prev) * smoothingFactor : target
+        if (!isTouch()) return target
+        
+        // Limitar velocidad por frame y aumentar respuesta
+        const maxStep = Math.max(40, windowHeight * 0.12) // límite de píxeles por frame
+        let delta = target - prev
+        if (Math.abs(delta) > maxStep) delta = Math.sign(delta) * maxStep
+        const responsiveness = 0.22 // 0..1
+        return prev + delta * responsiveness
       })
       rafId = requestAnimationFrame(animate)
     }
 
     rafId = requestAnimationFrame(animate)
     return () => cancelAnimationFrame(rafId)
-  }, [scrollY])
+  }, [scrollY, windowHeight])
 
   // Effect separado para animaciones de scroll basadas en currentSection
   useEffect(() => {
