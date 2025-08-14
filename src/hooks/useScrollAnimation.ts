@@ -145,7 +145,7 @@ export const useScrollAnimation = () => {
         if (!isTouch()) return target
         
         // Limitar velocidad por frame y aumentar respuesta
-        const maxStep = Math.max(40, windowHeight * 2) // límite de píxeles por frame
+        const maxStep = Math.max(40, windowHeight * 4) // límite de píxeles por frame
         let delta = target - prev
         if (Math.abs(delta) > maxStep) delta = Math.sign(delta) * maxStep
         const responsiveness = 0.22 // 0..1
