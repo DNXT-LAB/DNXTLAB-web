@@ -1,6 +1,6 @@
 import React from 'react'
 
-const HeroSection: React.FC = () => {
+const HeroSection: React.FC<{ onNavigateToSection?: (section: number) => void }> = ({ onNavigateToSection }) => {
   return (
     <div className="fixed left-[2%] z-20 md:px-[3%]" style={{ bottom: '3%' }}>
       <div className="flex flex-col items-start mb-[4%]">
@@ -14,6 +14,7 @@ const HeroSection: React.FC = () => {
         <button 
           className="flex items-center justify-center 2xl:px-[2%] 2xl:py-[1.8%] md:px-[1.2%] md:py-[1.2%] px-[0.6%] py-[0.6%] hover:opacity-90 transition-opacity bg-white rounded-full button-size border-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black"
           aria-label="View DNXTLAB services"
+          onClick={() => onNavigateToSection?.(3)}
         >
           <span className="force-black-text font-poppins 2xl:text-[1vw] lg:text-[1.3vw] md:text-[2.5vw] text-[4.2vw] font-light line-height-110 2xl:mr-[10.8%] lg:mr-[10.8%] md:mr-[10.8%] mr-[10.8%]">
             SERVICES

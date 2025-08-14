@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import type { SectionAProps } from '@/types/animations'
 
-const SectionA: React.FC<SectionAProps> = ({
+const SectionA: React.FC<SectionAProps & { onNavigateToSection?: (section: number) => void }> = ({
   progress,
   sectionATranslateY,
   sectionAScale,
   videoConvergeX,
   videoConvergeY,
   textConvergeX,
-  textConvergeY
+  textConvergeY,
+  // scrollY,
+  // windowHeight,
+  onNavigateToSection
 }) => {
   const { secondSmoothProgress } = progress
   const [scaleFactor, setScaleFactor] = useState(1)
@@ -223,6 +226,7 @@ const SectionA: React.FC<SectionAProps> = ({
               paddingBottom: fontSizes.buttonPadding.y,
               gap: fontSizes.gap
             }}
+            onClick={() => onNavigateToSection?.(3)}
           >
             SERVICES
             <svg 
@@ -272,6 +276,7 @@ const SectionA: React.FC<SectionAProps> = ({
           
           <button 
             className="text-sm md:text-base px-6 py-3 md:px-8 md:py-4 bg-black text-white rounded-full font-morien hover:bg-gray-800 transition-colors flex items-center gap-3 self-start"
+            onClick={() => onNavigateToSection?.(3)}
           >
             SERVICES
             <svg 

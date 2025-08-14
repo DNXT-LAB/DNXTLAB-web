@@ -74,7 +74,7 @@ export default function VideoContent() {
       </div>
       
       {/* Hero Section - Fixed main content */}
-      <HeroSection />
+      <HeroSection onNavigateToSection={navigateToSection} />
 
       {/* White tab that slides from below */}
       <div 
@@ -105,6 +105,7 @@ export default function VideoContent() {
             progress={progress}
             windowHeight={windowHeight}
             {...sectionATransforms}
+            onNavigateToSection={navigateToSection}
           />
           
           {/* Section B */}
@@ -119,6 +120,7 @@ export default function VideoContent() {
             scrollY={scrollY}
             progress={progress}
             windowHeight={windowHeight}
+            onNavigateToSection={navigateToSection}
           />
 
           {/* Section D */}

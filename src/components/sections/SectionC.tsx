@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import ServiceCard from '@/components/ui/ServiceCard'
 import type { SectionProps } from '@/types/animations'
 
-const SectionC: React.FC<SectionProps> = ({ progress }) => {
+const SectionC: React.FC<SectionProps> = ({ progress, scrollY, windowHeight, onNavigateToSection }) => {
   const { 
     thirdSmoothProgress, 
     fourthSmoothProgress, 
@@ -465,38 +465,40 @@ const SectionC: React.FC<SectionProps> = ({ progress }) => {
       </div>
 
               {/* Centered Services button */}
-        <div className="absolute left-[830px] mt-[-10%] lg:mt-0 md:left-[850px] lg:left-[700px] 2xl:left-1/2 -translate-x-1/2 lg:bottom-[2%] xl:bottom-[42%] 2xl:bottom-[-2%]" style={{ 
-          bottom: viewportDimensions.width >= 1024 ? (viewportDimensions.width <= 1770 ? '10%' : '-2%') : undefined,
-          opacity: 1,
-          transition: 'opacity 0.5s ease-out'
-        }}>
-        <button 
-          className="flex items-center bg-black text-white rounded-full font-poppins hover:bg-gray-800 transition-colors"
-          style={{
-            // gap: fontSizes.spacing.gap4,
-            paddingLeft: fontSizes.buttonPadding.desktop.x,
-            paddingRight: fontSizes.buttonPadding.desktop.x,
-            paddingTop: fontSizes.buttonPadding.desktop.y,
-            paddingBottom: fontSizes.buttonPadding.desktop.y,
-            fontSize: fontSizes.button.desktop
+      <div className="absolute left-[830px] mt-[-10%] lg:mt-0 md:left-[850px] lg:left-[700px] 2xl:left-1/2 -translate-x-1/2 lg:bottom-[2%] xl:bottom-[42%] 2xl:bottom-[-2%]" style={{ 
+        bottom: viewportDimensions.width >= 1024 ? (viewportDimensions.width <= 1770 ? '10%' : '-2%') : undefined,
+        opacity: 1,
+        transition: 'opacity 0.5s ease-out'
+      }}>
+      <button 
+        className="flex items-center bg-black text-white rounded-full font-poppins hover:bg-gray-800 transition-colors"
+        style={{
+          // gap: fontSizes.spacing.gap4,
+          paddingLeft: fontSizes.buttonPadding.desktop.x,
+          paddingRight: fontSizes.buttonPadding.desktop.x,
+          paddingTop: fontSizes.buttonPadding.desktop.y,
+          paddingBottom: fontSizes.buttonPadding.desktop.y,
+          fontSize: fontSizes.button.desktop
+        }}
+        onClick={() => onNavigateToSection?.(7)}
+      >
+        BOOK A CALL
+        <svg 
+          style={{ 
+            width: `${2 * scaleFactor}rem`, 
+            height: `${2 * scaleFactor}rem`,
+            marginLeft: '30px'
           }}
+          viewBox="0 0 37 37" 
+          fill="none" 
+          xmlns="http://www.w3.org/2000/svg"
         >
-          SERVICES
-          <svg 
-            style={{ 
-              width: `${2 * scaleFactor}rem`, 
-              height: `${2 * scaleFactor}rem` 
-            }}
-            viewBox="0 0 37 37" 
-            fill="none" 
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle cx="18.5" cy="18.5" r="18.5" fill="white"/>
-            <path d="M10.5146 18C9.96236 18 9.51465 18.4477 9.51465 19C9.51465 19.5523 9.96236 20 10.5146 20V18ZM28.1923 19.7071C28.5828 19.3166 28.5828 18.6834 28.1923 18.2929L21.8283 11.9289C21.4378 11.5384 20.8047 11.5384 20.4141 11.9289C20.0236 12.3195 20.0236 12.9526 20.4141 13.3431L26.071 19L20.4141 24.6569C20.0236 25.0474 20.0236 25.6805 20.4141 26.0711C20.8047 26.4616 21.4378 26.4616 21.8283 26.0711L28.1923 19.7071ZM10.5146 19V20H27.4852V19V18H10.5146V19Z" fill="black"/>
-          </svg>
-        </button>
-      </div>
+          <circle cx="18.5" cy="18.5" r="18.5" fill="white"/>
+          <path d="M10.5146 18C9.96236 18 9.51465 18.4477 9.51465 19C9.51465 19.5523 9.96236 20 10.5146 20V18ZM28.1923 19.7071C28.5828 19.3166 28.5828 18.6834 28.1923 18.2929L21.8283 11.9289C21.4378 11.5384 20.8047 11.5384 20.4141 11.9289C20.0236 12.3195 20.0236 12.9526 20.4141 13.3431L26.071 19L20.4141 24.6569C20.0236 25.0474 20.0236 25.6805 20.4141 26.0711C20.8047 26.4616 21.4378 26.4616 21.8283 26.0711L28.1923 19.7071ZM10.5146 19V20H27.4852V19V18H10.5146V19Z" fill="black"/>
+        </svg>
+      </button>
     </div>
+  </div>
   )
 }
 

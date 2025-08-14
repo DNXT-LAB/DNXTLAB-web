@@ -28,6 +28,7 @@ export interface SectionProps {
   scrollY: number
   progress: ScrollProgress
   windowHeight: number
+  onNavigateToSection?: (section: number) => void
 }
 
 export interface SectionAProps extends SectionProps {
