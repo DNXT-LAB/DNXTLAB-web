@@ -18,6 +18,7 @@ export default function VideoContent() {
   const {
     scrollY,
     windowHeight,
+    windowWidth,
     progress,
     sectionATransforms,
     tabProperties,
@@ -50,7 +51,8 @@ export default function VideoContent() {
         ref={videoRef}
         className="fixed inset-0 w-full h-full object-cover z-0"
         style={{
-          transformOrigin: 'center center' 
+          transform: (typeof window !== 'undefined' && windowWidth < 1024) ? 'none' : 'scale(1.1)',
+          transformOrigin: 'center center'
         }}
         src="/video.mp4"
         autoPlay
