@@ -9,6 +9,9 @@ export const useScrollAnimation = () => {
   const [currentSection, setCurrentSection] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
   
+  // Smoothed scroll value used only on touch devices to avoid stutters
+  const [smoothedScrollY, setSmoothedScrollY] = useState(0)
+  
   // Ref para acceder a currentSection sin crear dependencia
   const currentSectionRef = useRef(currentSection)
   
@@ -41,8 +44,6 @@ export const useScrollAnimation = () => {
         window.innerWidth < 1024
       )
     }
-
-
 
     const handleWheel = (e: WheelEvent) => {
       // On mobile, don't interfere with native scroll
@@ -126,6 +127,24 @@ export const useScrollAnimation = () => {
     return () => {}
   }, [isTransitioning, navigateToSection])
 
+  // Smooth the scroll signal on touch devices to avoid stutters between sections
+  useEffect(() => {
+    const isTouch = () => typeof window !== 'undefined' && window.innerWidth < 1024
+    let rafId = 0
+
+    const animate = () => {
+      setSmoothedScrollY(prev => {
+        const target = scrollY
+        const smoothingFactor = 0.18 // 0..1, higher = faster response
+        return isTouch() ? prev + (target - prev) * smoothingFactor : target
+      })
+      rafId = requestAnimationFrame(animate)
+    }
+
+    rafId = requestAnimationFrame(animate)
+    return () => cancelAnimationFrame(rafId)
+  }, [scrollY])
+
   // Effect separado para animaciones de scroll basadas en currentSection
   useEffect(() => {
     const isMobile = () => typeof window !== 'undefined' && window.innerWidth < 1024
@@ -157,13 +176,14 @@ export const useScrollAnimation = () => {
     }
   }, [currentSection, scrollY])
 
-      // Calculate all derived values
-  const progress = calculateScrollProgress(scrollY)
-  const sectionATransforms = calculateSectionATransforms(scrollY, progress, { width: windowWidth, height: windowHeight })
-  const tabProperties = calculateTabProperties(scrollY, windowHeight, windowWidth)
+  // Calculate all derived values
+  const effectiveScrollY = (typeof window !== 'undefined' && windowWidth < 1024) ? smoothedScrollY : scrollY
+  const progress = calculateScrollProgress(effectiveScrollY)
+  const sectionATransforms = calculateSectionATransforms(effectiveScrollY, progress, { width: windowWidth, height: windowHeight })
+  const tabProperties = calculateTabProperties(effectiveScrollY, windowHeight, windowWidth)
 
   return {
-    scrollY,
+    scrollY: effectiveScrollY,
     windowHeight,
     windowWidth,
     currentSection,

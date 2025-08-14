@@ -60,10 +60,13 @@ export const calculateTabProperties = (scrollY: number, windowHeight: number, wi
   const { THRESHOLD } = SCROLL_CONFIG
   const { SECOND_LEVEL_START } = SCROLL_LEVELS
   
-  const maxScroll = Math.max(300, windowHeight * 0.2) // Reducido para que la animación sea más rápida
+  // En táctiles, incrementa maxScroll para transiciones más largas y suaves
+  const isTouch = windowWidth < 1024
+  const baseMax = Math.max(300, windowHeight * 0.2)
+  const maxScroll = isTouch ? Math.max(500, windowHeight * 0.35) : baseMax
   const adjustedScroll = Math.max(0, scrollY - THRESHOLD)
   const tabProgress = Math.max(0, Math.min(adjustedScroll / maxScroll, 1))
-  const smoothTabProgress = easeOutQuart(tabProgress)
+  const smoothTabProgress = isTouch ? easeOutCubic(tabProgress) : easeOutQuart(tabProgress)
   
   // Determine base value according to section and responsive breakpoint
   const getResponsiveBaseTransform = () => {
