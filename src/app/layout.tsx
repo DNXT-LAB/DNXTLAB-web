@@ -32,6 +32,12 @@ export default function RootLayout({
         className={`${poppins.className} min-h-full w-full overflow-x-hidden bg-black`}
         suppressHydrationWarning={true}
       >
+        <style
+          // Desactiva el zoom (transform) del video de fondo en móviles y iPad
+          dangerouslySetInnerHTML={{
+            __html: `@media (max-width: 1024px) { video[aria-label="Background video showing DNXTLAB solutions"] { transform: none !important; } }`
+          }}
+        />
         {children}
       </body>
     </html>
