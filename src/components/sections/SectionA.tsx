@@ -117,7 +117,7 @@ const SectionA: React.FC<SectionAProps & { onNavigateToSection?: (section: numbe
     width: '100%',
     height: '100%',
     top: '0',
-    left: '0',
+    left: '-0.5%',
     transform: `translateY(${sectionATranslateY}px) scale(${sectionAScale})`,
     opacity: secondSmoothProgress > 0.7 ? 0 : 1 - (secondSmoothProgress * 1.2),
     visibility: secondSmoothProgress > 0.8 ? 'hidden' : 'visible',
