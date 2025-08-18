@@ -35,12 +35,14 @@ const SectionD: React.FC<ContactSectionProps> = ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    opacity: seventhSmoothProgress < 0.35 ? 0 : Math.min(1, (seventhSmoothProgress - 0.35) * 1.2),
+    backgroundColor: '#FFFFFF',
+    opacity: seventhSmoothProgress < 0.35 ? 0 : Math.min(1, (seventhSmoothProgress - 0.35) * 1.5),
     visibility: seventhSmoothProgress > 0.35 ? 'visible' : 'hidden',
-    transition: 'opacity 1.2s ease-out',
-    willChange: 'opacity',
+    transition: 'opacity 0.8s ease-out',
+    willChange: 'transform, opacity',
     transform: !isMobile ? `scale(${0.75 / browserZoom})` : 'none',
-    transformOrigin: 'center center'
+    transformOrigin: 'center center',
+    zIndex: 50
   };
 
   const contentStyle: React.CSSProperties = !isMobile ? {
@@ -51,7 +53,8 @@ const SectionD: React.FC<ContactSectionProps> = ({
     display: 'flex',
     flexDirection: 'column',
     gap: '60px',
-    position: 'relative'
+    position: 'relative',
+    backgroundColor: '#FFFFFF'
   } : {
     width: '100%',
     padding: '20px',
@@ -180,7 +183,7 @@ const SectionD: React.FC<ContactSectionProps> = ({
     minWidth: '1480px',
     maxWidth: '1480px'
   } : {
-    fontSize: '36px',
+    fontSize: '30px',
     lineHeight: '44px',
     fontWeight: '600',
     fontFamily: 'Poppins, sans-serif',
@@ -305,7 +308,7 @@ const SectionD: React.FC<ContactSectionProps> = ({
                 display: 'flex', 
                 flexDirection: 'column', 
                 gap: '20px', 
-                width: '100%'
+                width: '98%'
               }}>
                 <input
                   type="text"
