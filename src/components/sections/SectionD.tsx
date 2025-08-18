@@ -28,7 +28,7 @@ const SectionD: React.FC<ContactSectionProps> = ({
     position: 'fixed',
     width: '100%',
     height: '100%',
-    top: '-6%',
+    top: '-3%',
     left: '0',
     right: '0',
     bottom: '0',
