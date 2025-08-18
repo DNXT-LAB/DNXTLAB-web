@@ -3,7 +3,7 @@ import type { SectionPositions } from '@/types/animations'
 // Exact positions of each section
 export const SECTION_POSITIONS: SectionPositions = [
   0,     // Section 0: Full video
-  370,   // Section A: First tab
+  250,   // Section A: First tab (reduced from 370)
   1000,  // Section B: Strategic Flexibility
   1600,  // Section C initial: Full text
   2400,  // Section C with Card 1 centered
@@ -16,15 +16,15 @@ export const SECTION_POSITIONS: SectionPositions = [
 export const SCROLL_CONFIG = {
   THRESHOLD: 50,
   NAVBAR_HEIGHT: 130,
-  TRANSITION_TIMEOUT: 600,
-  ANIMATION_DURATION: 100,
+  TRANSITION_TIMEOUT: 400,    // Reduced from 600
+  ANIMATION_DURATION: 80,     // Reduced from 100
   MESSAGE_CLEAR_TIMEOUT: 5000
 } as const
 
 // Configuraciones de niveles de scroll
 export const SCROLL_LEVELS = {
-  SECOND_LEVEL_START: 650,
-  SECOND_LEVEL_RANGE: 300,
+  SECOND_LEVEL_START: 450,    // Reduced from 650
+  SECOND_LEVEL_RANGE: 200,    // Reduced from 300
   THIRD_LEVEL_START: 1000,
   THIRD_LEVEL_RANGE: 100,
   FOURTH_LEVEL_START: 1600,
