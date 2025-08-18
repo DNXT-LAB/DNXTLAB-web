@@ -52,7 +52,7 @@ export default function VideoContent() {
         className="fixed inset-0 w-screen h-screen object-fill z-0"
         style={{
           width: '100vw',
-          height: '100vh'
+          height: '850px'
         }}
         src="/video.mp4"
         autoPlay
