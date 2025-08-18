@@ -6,7 +6,7 @@ export default function LoadingAnimation({ letters, animatedLetters, mounted }: 
   return (
     <main className="fixed inset-0 w-screen h-screen flex items-center justify-center bg-black overflow-hidden">
       <div className="flex items-center">
-        <div className="w-[40%] lg:w-[40%]">
+        <div className="w-[25%] md:w-[35%] lg:w-[40%]">
           <Image 
             src="/logo.png" 
             alt="DNXT LAB Logo" 
@@ -23,7 +23,7 @@ export default function LoadingAnimation({ letters, animatedLetters, mounted }: 
             return (
               <span
                 key={`${letter}-${index}`}
-                className={`font-bold font-poppins transition-all duration-3700 ease-out text-[200%] lg:text-[700%] ${
+                className={`font-bold font-poppins transition-all duration-3700 ease-out text-[350%] md:text-[500%] lg:text-[700%] ${
                   isAnimated ? 'text-animation-active' : 'text-animation-initial'
                 }`}
                 style={{
