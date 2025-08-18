@@ -135,7 +135,7 @@ export const useScrollAnimation = () => {
     const animate = () => {
       setSmoothedScrollY(prev => {
         const target = scrollY
-        const smoothingFactor = 1.25 // Increased from 0.14 for faster response
+        const smoothingFactor = 0.50 // Increased from 0.14 for faster response
         return isTouch() ? prev + (target - prev) * smoothingFactor : target
       })
       rafId = requestAnimationFrame(animate)
