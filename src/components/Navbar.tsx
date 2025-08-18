@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 
 interface NavbarProps {
@@ -10,6 +10,19 @@ interface NavbarProps {
 
 export default function Navbar({ isDark = false, onNavigateToSection }: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [browserZoom, setBrowserZoom] = useState(1)
+
+  // Detectar y actualizar el zoom del navegador
+  useEffect(() => {
+    const updateZoom = () => {
+      const zoom = Math.round((window.outerWidth / window.innerWidth) * 100) / 100;
+      setBrowserZoom(zoom);
+    };
+
+    updateZoom();
+    window.addEventListener('resize', updateZoom);
+    return () => window.removeEventListener('resize', updateZoom);
+  }, []);
 
   const handleMenuClick = () => {
     setIsMenuOpen(!isMenuOpen)
@@ -26,14 +39,31 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
     setIsMenuOpen(false)
   }
 
-  const menuButtonStyle: React.CSSProperties = isMenuOpen ? {
-    background: 'rgba(141, 140, 140, 0.6)',
-    backdropFilter: 'blur(10px)',
-    WebkitBackdropFilter: 'blur(10px)',
-  } : {};
+  const menuButtonStyle: React.CSSProperties = {
+    ...(isMenuOpen ? {
+      background: 'rgba(141, 140, 140, 0.6)',
+      backdropFilter: 'blur(10px)',
+      WebkitBackdropFilter: 'blur(10px)',
+    } : {}),
+  };
+
+  const navbarStyle: React.CSSProperties = {
+    transform: `scale(${1 / browserZoom})`,
+    transformOrigin: 'top left',
+    width: `${browserZoom * 100}%`,
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    zIndex: 50
+  };
 
   return (
-    <nav className="relative fixed top-0 left-0 w-full flex items-center justify-between transition-colors duration-500 lg:px-12" role="navigation" aria-label="Main navigation">
+    <nav 
+      className="flex items-center justify-between transition-colors duration-500 lg:px-12" 
+      role="navigation" 
+      aria-label="Main navigation"
+      style={navbarStyle}
+    >
       {/* Logo and name on the left */}
       <div className="flex items-center relative z-[51] lg:z-auto">
         <Image 
