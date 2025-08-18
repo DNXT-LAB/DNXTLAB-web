@@ -206,7 +206,7 @@ const SectionC: React.FC<SectionProps> = ({ progress, onNavigateToSection }) => 
   // Calculate positions and rotations of the cards
   const card1Position = sixthSmoothProgress > 0 
     ? `${-8 + (-8 - 50) * Math.min(1, sixthSmoothProgress * 1.8)}%` 
-    : (fifthSmoothProgress > 0 ? '-30%' : (fourthSmoothProgress > 0 ? '50%' : getResponsiveCard1Position()))
+    : (fifthSmoothProgress > 0 ? '-30%' : (fourthSmoothProgress > 0 ? '45%' : getResponsiveCard1Position()))
   
   const card2Position = sixthSmoothProgress > 0 
     ? '-30%' 
@@ -450,7 +450,7 @@ const SectionC: React.FC<SectionProps> = ({ progress, onNavigateToSection }) => 
         </div>
 
         {/* Cards with right to left effect - Appear progressively */}
-        <div className="absolute inset-0 mt-96 md:mt-48 ml-16">
+        <div className="absolute inset-0 mt-96 md:mt-48 ml-28">
           {/* ServiceCard 1 - Aparece primero con efecto */}
           {thirdSmoothProgress >= 0.4 && (
             <ServiceCard 
