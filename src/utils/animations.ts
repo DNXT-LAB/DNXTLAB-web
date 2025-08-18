@@ -33,13 +33,13 @@ export const calculateSectionATransforms = (scrollY: number, progress: ScrollPro
   const eased = isTouch ? easeOutQuart(secondSmoothProgress) : secondSmoothProgress
   
   // En móviles: menos distancia para ser rápido; en desktop: igual
-  const translateDistance = isTouch ? 500 : 1000  // Reduced from 700 to 500 for mobile
-  const scaleDelta = isTouch ? 0.9 : 0.9         // Increased from 0.8 to 0.9 for faster scale down
+  const translateDistance = isTouch ? 700 : 1000
+  const scaleDelta = isTouch ? 0.8 : 0.9
   
   const sectionATranslateY = scrollY < SECOND_LEVEL_START ? 0 : -(eased * translateDistance)
   const sectionAScale = scrollY < SECOND_LEVEL_START ? 1 : 1 - (eased * scaleDelta)
   
-  // Video and text converge to center faster on mobile
+  // Video and text converge to center
   const centerX = windowSize.width / 2
   const centerY = windowSize.height / 2
   const videoOriginalLeft = 60 + 60 + 306
@@ -47,12 +47,10 @@ export const calculateSectionATransforms = (scrollY: number, progress: ScrollPro
   const textOriginalLeft = 60 + 780 + 473
   const textOriginalTop = 400
   
-  const convergeFactor = isTouch ? 1.2 : 1  // Faster convergence on mobile
-  
-  const videoConvergeX = scrollY < SECOND_LEVEL_START ? 0 : (centerX - videoOriginalLeft) * eased * convergeFactor
-  const videoConvergeY = scrollY < SECOND_LEVEL_START ? 0 : (centerY - videoOriginalTop) * eased * convergeFactor
-  const textConvergeX = scrollY < SECOND_LEVEL_START ? 0 : (centerX - textOriginalLeft) * eased * convergeFactor
-  const textConvergeY = scrollY < SECOND_LEVEL_START ? 0 : (centerY - textOriginalTop) * eased * convergeFactor
+  const videoConvergeX = scrollY < SECOND_LEVEL_START ? 0 : (centerX - videoOriginalLeft) * eased
+  const videoConvergeY = scrollY < SECOND_LEVEL_START ? 0 : (centerY - videoOriginalTop) * eased
+  const textConvergeX = scrollY < SECOND_LEVEL_START ? 0 : (centerX - textOriginalLeft) * eased
+  const textConvergeY = scrollY < SECOND_LEVEL_START ? 0 : (centerY - textOriginalTop) * eased
   
   return {
     sectionATranslateY,

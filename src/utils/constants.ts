@@ -3,8 +3,8 @@ import type { SectionPositions } from '@/types/animations'
 // Exact positions of each section
 export const SECTION_POSITIONS: SectionPositions = [
   0,     // Section 0: Full video
-  250,   // Section A: First tab
-  800,   // Section B: Strategic Flexibility (reduced from 1000)
+  250,   // Section A: First tab (reduced from 370)
+  1000,  // Section B: Strategic Flexibility
   1600,  // Section C initial: Full text
   2400,  // Section C with Card 1 centered
   3200,  // Section C with Card 2 centered
@@ -23,10 +23,10 @@ export const SCROLL_CONFIG = {
 
 // Configuraciones de niveles de scroll
 export const SCROLL_LEVELS = {
-  SECOND_LEVEL_START: 450,    
-  SECOND_LEVEL_RANGE: 200,    
-  THIRD_LEVEL_START: 800,     // Reduced from 1000 to match new Section B position
-  THIRD_LEVEL_RANGE: 80,      // Reduced from 100 for faster transition
+  SECOND_LEVEL_START: 450,    // Reduced from 650
+  SECOND_LEVEL_RANGE: 200,    // Reduced from 300
+  THIRD_LEVEL_START: 1000,
+  THIRD_LEVEL_RANGE: 100,
   FOURTH_LEVEL_START: 1600,
   FOURTH_LEVEL_RANGE: 700,
   FIFTH_LEVEL_START: 2400,
