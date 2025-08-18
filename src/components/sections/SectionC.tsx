@@ -169,9 +169,9 @@ const SectionC: React.FC<SectionProps> = ({ progress, onNavigateToSection }) => 
     left: `${dimensions.leftPosition}px`,
     transform: `translate(-50%, ${thirdSmoothProgress < 0.4 ? '100%' : '-50%'}) translateY(${seventhSmoothProgress > 0 ? -(seventhSmoothProgress * 1200 * scaleFactor) : 0}px)`,
     transformOrigin: 'center center',
-    opacity: thirdSmoothProgress < 0.4 ? 0 : (seventhSmoothProgress > 0.3 ? Math.max(0, 1 - (seventhSmoothProgress * 2)) : 1),
-    visibility: thirdSmoothProgress > 0.35 && seventhSmoothProgress < 0.6 ? 'visible' : 'hidden',
-    transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+    opacity: thirdSmoothProgress < 0.4 ? 0 : (seventhSmoothProgress > 0.35 ? Math.max(0, 1 - (seventhSmoothProgress - 0.35) * 5) : 1),
+    visibility: thirdSmoothProgress > 0.35 && seventhSmoothProgress < 0.55 ? 'visible' : 'hidden',
+    transition: 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
     willChange: 'transform, opacity'
   }
 

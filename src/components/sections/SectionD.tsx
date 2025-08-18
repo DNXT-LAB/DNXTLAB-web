@@ -35,9 +35,9 @@ const SectionD: React.FC<ContactSectionProps> = ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    opacity: seventhSmoothProgress < 0.4 ? 0 : Math.min(1, (seventhSmoothProgress - 0.4) * 2.5),
+    opacity: seventhSmoothProgress < 0.35 ? 0 : Math.min(1, (seventhSmoothProgress - 0.35) * 1.2),
     visibility: seventhSmoothProgress > 0.35 ? 'visible' : 'hidden',
-    transition: 'opacity 0.5s ease-out',
+    transition: 'opacity 1.2s ease-out',
     willChange: 'opacity',
     transform: !isMobile ? `scale(${0.75 / browserZoom})` : 'none',
     transformOrigin: 'center center'
