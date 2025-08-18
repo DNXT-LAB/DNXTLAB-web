@@ -450,7 +450,7 @@ const SectionC: React.FC<SectionProps> = ({ progress, onNavigateToSection }) => 
         </div>
 
         {/* Cards with right to left effect - Appear progressively */}
-        <div className="absolute inset-0 mt-96 md:mt-48 ml-28">
+        <div className="absolute inset-0 mt-96 md:mt-48 ml-16">
           {/* ServiceCard 1 - Aparece primero con efecto */}
           {thirdSmoothProgress >= 0.4 && (
             <ServiceCard 
