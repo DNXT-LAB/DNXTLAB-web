@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import type { ContactSectionProps } from '@/types/animations';
 
 const SectionD: React.FC<ContactSectionProps> = ({
@@ -8,57 +8,147 @@ const SectionD: React.FC<ContactSectionProps> = ({
   handleSubmit,
 }) => {
   const { seventhSmoothProgress } = progress;
+  const [browserZoom, setBrowserZoom] = useState(1);
+
+  // Detectar y actualizar el zoom del navegador
+  useEffect(() => {
+    const updateZoom = () => {
+      const zoom = Math.round((window.outerWidth / window.innerWidth) * 100) / 100;
+      setBrowserZoom(zoom);
+    };
+
+    updateZoom();
+    window.addEventListener('resize', updateZoom);
+    return () => window.removeEventListener('resize', updateZoom);
+  }, []);
 
   const sectionStyle: React.CSSProperties = {
-    position: 'absolute',
+    position: 'fixed',
+    width: '100%',
     height: '100%',
-    top: '50%',
-    transform: `translate(-50%, ${
-      seventhSmoothProgress < 0.4 ? '100vh' : '-50%'
-    })`,
+    top: '0',
+    left: '0',
+    right: '0',
+    bottom: '0',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     opacity:
       seventhSmoothProgress < 0.4
         ? 0
         : Math.min(1, (seventhSmoothProgress - 0.4) * 2.5),
     visibility: seventhSmoothProgress > 0.35 ? 'visible' : 'hidden',
-    transition: 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.5s ease-out',
-    willChange: 'transform, opacity',
+    transition: 'opacity 0.5s ease-out',
+    willChange: 'opacity',
+    transform: `scale(${0.75 / browserZoom})`,
+    transformOrigin: 'center center'
   };
 
   const contentStyle: React.CSSProperties = {
-    opacity: Math.min(1, Math.max(0, (seventhSmoothProgress - 0.4) * 2.5)),
-    transition: 'opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-    willChange: 'opacity',
+    width: '1600px',
+    minWidth: '1600px',
+    maxWidth: '1600px',
+    padding: '60px',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '60px',
+    position: 'relative'
+  };
+
+  const formStyle: React.CSSProperties = {
+    display: 'grid',
+    gridTemplateColumns: '700px 700px',
+    gap: '60px',
+    width: '1480px',
+    minWidth: '1480px',
+    maxWidth: '1480px'
+  };
+
+  const inputStyle: React.CSSProperties = {
+    width: '700px',
+    minWidth: '700px',
+    maxWidth: '700px',
+    height: '80px',
+    minHeight: '80px',
+    maxHeight: '80px',
+    padding: '0 40px',
+    fontSize: '20px',
+    lineHeight: '80px',
+    color: 'black',
+    background: 'linear-gradient(0deg, #D6D6D6, #ffffff)',
+    borderRadius: '9999px',
+    border: 'none',
+    outline: 'none',
+    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+  };
+
+  const textareaStyle: React.CSSProperties = {
+    width: '700px',
+    minWidth: '700px',
+    maxWidth: '700px',
+    height: '450px',
+    minHeight: '450px',
+    maxHeight: '450px',
+    padding: '32px 40px',
+    fontSize: '20px',
+    lineHeight: '30px',
+    color: 'black',
+    background: 'linear-gradient(0deg, #D6D6D6, #ffffff)',
+    borderRadius: '32px',
+    border: 'none',
+    outline: 'none',
+    resize: 'none',
+    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+  };
+
+  const buttonStyle: React.CSSProperties = {
+    width: '700px',
+    minWidth: '700px',
+    maxWidth: '700px',
+    height: '80px',
+    minHeight: '80px',
+    maxHeight: '80px',
+    fontSize: '20px',
+    lineHeight: '80px',
+    color: 'white',
+    backgroundColor: 'black',
+    borderRadius: '9999px',
+    border: 'none',
+    cursor: 'pointer',
+    transition: 'background-color 0.2s',
+    padding: '0'
   };
 
   return (
-    <div style={sectionStyle} className="flex items-center justify-center md:mt-[4%] lg:mt-[1%] w-[20%] ml-[8%] md:ml-[18%] md:w-[40%] lg:w-[70%] lg:ml-[39%] 2xl:w-[85%] 2xl:ml-[46%]">
-      <div
-        style={contentStyle}
-        className="w-full flex flex-col justify-center px-6 sm:px-8 md:px-12 mb-28 lg:mb-0 mx-auto"
-      >
+    <div style={sectionStyle}>
+      <div style={contentStyle}>
         {/* Title */}
-        <div className="text-center lg:text-left mb-6 lg:mb-10 2xl:mt-[20%]">
-          <h2 className="text-[150%] md:text-[300%] lg:text-[600%] 2xl:text-[700%] font-semibold text-black font-poppins leading-tight">
-            BOOK A CALL NOW
-          </h2>
-        </div>
+        <h2 style={{
+          fontSize: '80px',
+          lineHeight: '88px',
+          fontWeight: '600',
+          fontFamily: 'Poppins, sans-serif',
+          color: 'black',
+          margin: '0',
+          padding: '0',
+          width: '1480px',
+          minWidth: '1480px',
+          maxWidth: '1480px'
+        }}>
+          BOOK A CALL NOW
+        </h2>
 
         {/* Form Container */}
-        <form
-          onSubmit={handleSubmit}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8 xl:w-[150%] "
-        >
+        <form onSubmit={handleSubmit} style={formStyle}>
           {/* === Left Column: Inputs & Desktop Contact Info === */}
-          <div className="flex flex-col space-y-8">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '32px', width: '700px', minWidth: '700px', maxWidth: '700px' }}>
             <input
               type="text"
               name="firstName"
               value={formState.formData.firstName}
               onChange={handleInputChange}
               placeholder="First name"
-              className="w-[100%] px-[3%] py-[1%] md:py-[2%] 2xl:py-[3%] text-[100%] 2xl:text-[110%] text-black placeholder-gray-500 border-none rounded-full focus:outline-none focus:ring-2 focus:ring-black bg-white shadow-md"
-              style={{ background: 'linear-gradient(0deg, #D6D6D6, #ffffff)' }}
+              style={inputStyle}
               required
             />
             <input
@@ -67,8 +157,7 @@ const SectionD: React.FC<ContactSectionProps> = ({
               value={formState.formData.lastName}
               onChange={handleInputChange}
               placeholder="Last Name"
-              className="w-[100%] px-[3%] py-[1%] md:py-[2%] 2xl:py-[3%] text-[100%] 2xl:text-[110%] text-black placeholder-gray-500 border-none rounded-full focus:outline-none focus:ring-2 focus:ring-black bg-white shadow-md"
-              style={{ background: 'linear-gradient(0deg, #D6D6D6, #ffffff)' }}
+              style={inputStyle}
               required
             />
             <input
@@ -77,72 +166,67 @@ const SectionD: React.FC<ContactSectionProps> = ({
               value={formState.formData.email}
               onChange={handleInputChange}
               placeholder="Your email"
-              className="w-[100%] px-[3%] py-[1%] md:py-[2%] 2xl:py-[3%] text-[100%] 2xl:text-[110%] text-black placeholder-gray-500 border-none rounded-full focus:outline-none focus:ring-2 focus:ring-black bg-white shadow-md"
-              style={{ background: 'linear-gradient(0deg, #D6D6D6, #ffffff)' }}
+              style={inputStyle}
               required
             />
             {/* Desktop Contact Info */}
-            <div className="hidden lg:block pt-6">
-              <div className="space-y-2 text-base 2xl:text-[200%] text-black font-poppins">
-                <p>Phone Num: +351 999999999</p>
-                <p>Email: info@diamondnxt.com</p>
-                <p>Sede: Rua Conselheiro Veloso Cruz, N.º 10</p>
-                <p>Porto — 4400 092 Vila Nova de Gaia.</p>
+            <div style={{ marginTop: 'auto', width: '700px', minWidth: '700px', maxWidth: '700px' }}>
+              <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '12px',
+                fontSize: '20px',
+                lineHeight: '30px',
+                color: 'black',
+                fontFamily: 'Poppins, sans-serif',
+                width: '700px',
+                minWidth: '700px',
+                maxWidth: '700px'
+              }}>
+                <p style={{ margin: '0', padding: '0' }}>Phone Num: +351 999999999</p>
+                <p style={{ margin: '0', padding: '0' }}>Email: info@diamondnxt.com</p>
+                <p style={{ margin: '0', padding: '0' }}>Sede: Rua Conselheiro Veloso Cruz, N.º 10</p>
+                <p style={{ margin: '0', padding: '0' }}>Porto — 4400 092 Vila Nova de Gaia.</p>
               </div>
             </div>
           </div>
 
-          {/* === Right Column: Textarea & Desktop Button === */}
-          <div className="flex flex-col">
+          {/* === Right Column: Textarea & Button === */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '32px', width: '700px', minWidth: '700px', maxWidth: '700px' }}>
             <textarea
               name="message"
               value={formState.formData.message}
               onChange={handleInputChange}
               placeholder="Tell us about your project..."
-              className="w-full h-28 md:h-48 lg:h-full px-6 py-4 2xl:py-6 text-base 2xl:text-lg text-black placeholder-gray-500 border-none rounded-3xl focus:outline-none focus:ring-2 focus:ring-black resize-none bg-white shadow-md"
-              style={{ background: 'linear-gradient(0deg, #D6D6D6, #ffffff)' }}
+              style={textareaStyle}
               required
             />
-            <div className="hidden lg:flex mt-4">
-              <button
-                type="submit"
-                disabled={formState.isSubmitting}
-                className="w-[100%] px-[6%] py-[2%] 2xl:py-[3%] bg-black text-white text-[100%] 2xl:text-[110%] font-medium rounded-full hover:bg-gray-800 transition-colors disabled:opacity-50"
-              >
-                {formState.isSubmitting ? 'Sending...' : 'Book a call'}
-              </button>
-            </div>
-          </div>
-
-          {/* Mobile/Tablet Button - full width row */}
-          <div className="w-full lg:hidden mt-2 col-span-1 lg:col-span-2">
             <button
               type="submit"
               disabled={formState.isSubmitting}
-              className="w-[100%] py-[3%] bg-black text-white text-[110%] font-medium rounded-full hover:bg-gray-800 transition-colors disabled:opacity-50"
+              style={{
+                ...buttonStyle,
+                opacity: formState.isSubmitting ? '0.5' : '1'
+              }}
             >
               {formState.isSubmitting ? 'Sending...' : 'Book a call'}
             </button>
           </div>
         </form>
 
-        {/* Contact Info (Mobile/Tablet Only) */}
-        <div className="block lg:hidden text-center mt-8 sm:mt-10">
-          <div className="space-y-2 text-sm text-black font-poppins">
-            <p>Phone Num: +351 999999999</p>
-            <p>Email: info@diamondnxt.com</p>
-            <p>Sede: Rua Conselheiro Veloso Cruz, N.º 10 Porto — 4400 092 Vila Nova de Gaia.</p>
-          </div>
-        </div>
-
         {/* Form Status Message */}
         {formState.submitMessage && (
           <div
-            className={`text-center text-base mt-6 ${
-              formState.submitStatus === 'success'
-                ? 'text-green-600'
-                : 'text-red-600'
-            }`}
+            style={{
+              position: 'absolute',
+              bottom: '-50px',
+              left: '0',
+              width: '1480px',
+              textAlign: 'center',
+              fontSize: '20px',
+              lineHeight: '30px',
+              color: formState.submitStatus === 'success' ? '#059669' : '#DC2626'
+            }}
           >
             {formState.submitMessage}
           </div>
