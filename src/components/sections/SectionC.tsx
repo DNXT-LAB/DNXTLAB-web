@@ -516,8 +516,8 @@ const SectionC: React.FC<SectionProps> = ({ progress, onNavigateToSection }) => 
       </div>
 
               {/* Centered Services button */}
-      <div className="absolute left-[830px] mt-[-13%] md:mt-[-10%] lg:mt-0 md:left-[850px] lg:left-[700px] 2xl:left-1/2 -translate-x-1/2 lg:bottom-[2%] xl:bottom-[2%]" style={{ 
-        marginBottom: viewportDimensions.width >= 1024 ? (viewportDimensions.width <= 1770 ? '10rem' : '-10rem') : undefined,
+      <div className="absolute left-[830px] mt-[-13%] md:mt-[-10%] lg:mt-0 md:left-[850px] lg:left-[700px] 2xl:left-1/2 -translate-x-1/2" style={{ 
+        marginTop: viewportDimensions.width >= 1024 ? (viewportDimensions.width <= 1770 ? '-240px' : '240px') : undefined,
         opacity: 1,
         transition: 'opacity 0.5s ease-out'
       }}>
