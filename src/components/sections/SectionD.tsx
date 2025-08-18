@@ -28,7 +28,7 @@ const SectionD: React.FC<ContactSectionProps> = ({
     position: 'fixed',
     width: '100%',
     height: '100%',
-    top: '0%',
+    top: '-6%',
     left: '0',
     right: '0',
     bottom: '0',
@@ -110,7 +110,7 @@ const SectionD: React.FC<ContactSectionProps> = ({
     width: '700px',
     minWidth: '700px',
     maxWidth: '700px',
-    height: '350px',
+    height: '450px',
     minHeight: '450px',
     maxHeight: '450px',
     padding: '32px 40px',
@@ -125,7 +125,7 @@ const SectionD: React.FC<ContactSectionProps> = ({
     boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
   } : {
     width: '100%',
-    height: '200px',
+    height: '100px',
     padding: '15px 20px',
     fontSize: '16px',
     lineHeight: '24px',
