@@ -67,26 +67,27 @@ export const calculateTabProperties = (scrollY: number, windowHeight: number, wi
   const { THRESHOLD } = SCROLL_CONFIG
   const { SECOND_LEVEL_START } = SCROLL_LEVELS
   
-  // En táctiles, incrementa maxScroll para transiciones más largas y suaves
   const isTouch = windowWidth < 1024
-  const baseMax = Math.max(300, windowHeight * 0.2)
-  const maxScroll = isTouch ? Math.max(500, windowHeight * 0.35) : baseMax
+  // Reducir el maxScroll en móvil para que la animación sea más directa
+  const baseMax = Math.max(200, windowHeight * 0.15)
+  const maxScroll = isTouch ? baseMax : Math.max(300, windowHeight * 0.2)
   const adjustedScroll = Math.max(0, scrollY - THRESHOLD)
   const tabProgress = Math.max(0, Math.min(adjustedScroll / maxScroll, 1))
-  const smoothTabProgress = isTouch ? easeOutCubic(tabProgress) : easeOutQuart(tabProgress)
+  // Usar easeOutQuart para ambos casos para una animación más suave
+  const smoothTabProgress = easeOutQuart(tabProgress)
   
   // Determine base value according to section and responsive breakpoint
   const getResponsiveBaseTransform = () => {
-    if (windowWidth < 640) return 90    // Mobile: más cerca para empezar
-    if (windowWidth < 1024) return 90   // Tablet: más cerca para empezar
+    if (windowWidth < 640) return 100    // Mobile: empezar desde más abajo
+    if (windowWidth < 1024) return 100   // Tablet: empezar desde más abajo
     if (windowWidth < 1536) return 80   // Desktop
-    return 50                            // 2xl
+    return 50                           // 2xl
   }
 
   // Responsive navbar height according to Tailwind breakpoints
   const getResponsiveNavbarHeight = () => {
-    if (windowWidth < 768) return 100      // mobile
-    if (windowWidth < 1024) return 120    // md
+    if (windowWidth < 768) return 80      // mobile: reducido para mejor visibilidad
+    if (windowWidth < 1024) return 100    // md: reducido para mejor visibilidad
     if (windowWidth < 1536) return 130   // lg
     if (windowWidth < 1736) return 140
     return 130                           // 2xl
@@ -95,7 +96,8 @@ export const calculateTabProperties = (scrollY: number, windowHeight: number, wi
   const baseTransform = scrollY >= 1000 ? 100 : getResponsiveBaseTransform()
   const tabTransform = scrollY < THRESHOLD ? 100 : baseTransform - (smoothTabProgress * baseTransform)
   const NAVBAR_HEIGHT = getResponsiveNavbarHeight()
-  const tabHeight = scrollY < SECOND_LEVEL_START ? `calc(120vh - ${NAVBAR_HEIGHT}px)` : '120vh'
+  // Ajustar altura del tab para móvil
+  const tabHeight = scrollY < SECOND_LEVEL_START ? `calc(${isTouch ? '110vh' : '120vh'} - ${NAVBAR_HEIGHT}px)` : (isTouch ? '110vh' : '120vh')
   const tabTop = scrollY < SECOND_LEVEL_START ? `${NAVBAR_HEIGHT}px` : '0px'
   
   return {
