@@ -23,7 +23,7 @@ export default function LoadingAnimation({ letters, animatedLetters, mounted }: 
             return (
               <span
                 key={`${letter}-${index}`}
-                className={`font-medium transition-all duration-3700 ease-out text-[200%] lg:text-[700%] ${
+                className={`font-bold font-poppins transition-all duration-3700 ease-out text-[200%] lg:text-[700%] ${
                   isAnimated ? 'text-animation-active' : 'text-animation-initial'
                 }`}
                 style={{

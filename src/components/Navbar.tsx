@@ -45,7 +45,7 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
           priority
           quality={90}
         />
-        <span className={`text-2xl md:text-4xl lg:text-6xl font-bold font-morien transition-colors duration-500 ${
+        <span className={`text-2xl md:text-4xl lg:text-6xl font-bold font-poppins transition-colors duration-500 ${
           isDark ? 'text-black' : 'text-white'
         }`}>DNXT LAB</span>
       </div>
