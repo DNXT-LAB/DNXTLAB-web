@@ -49,10 +49,10 @@ export default function VideoContent() {
       {/* Video Background - Fixed so it's always in the background */}
       <video
         ref={videoRef}
-        className="fixed inset-0 max-w-[100%] max-h-[100%] min-w-[100%] min-h-[100%] object-cover z-0"
+        className="fixed inset-0 w-screen h-screen object-fill z-0"
         style={{
-          // transform: (typeof window !== 'undefined' && windowWidth < 1024) ? 'none' : 'scale(1.1)',
-          // transformOrigin: 'center center'
+          width: '100vw',
+          height: '100vh'
         }}
         src="/video.mp4"
         autoPlay
