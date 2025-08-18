@@ -2,7 +2,7 @@ import React from 'react'
 
 const HeroSection: React.FC<{ onNavigateToSection?: (section: number) => void }> = ({ onNavigateToSection }) => {
   return (
-    <div className="fixed left-[2%] z-20 md:px-[3%]" style={{ bottom: '3%' }}>
+    <div className="fixed left-[2%] z-20 md:px-[3%] bottom-[10%] lg:bottom-[3%]" >
       <div className="flex flex-col items-start mb-[4%]">
         <h1 className="force-white-text font-bold uppercase font-poppins text-[10vw] md:text-[9.5vw] lg:text-[6vw] 2xl:text-[4.8vw] line-height-90 mb-[1.5%]">
           BESPOKE AI & WEB<br />
