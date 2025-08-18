@@ -39,23 +39,23 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       className={`transform -translate-x-[60%] -translate-y-[50%] sm:-translate-x-[60%] sm:-translate-y-[50%] md:-translate-x-[60%] md:-translate-y-[10%] lg:-translate-x-[60%] lg:-translate-y-[10%] ${isCentered ? 'xl:-translate-x-[60%]' : 'xl:-translate-x-[70%]'} xl:-translate-y-[-10%] ${isCentered ? '2xl:-translate-x-[30%]' : '2xl:-translate-x-[100%]'} 2xl:-translate-y-[20%] rotate-[var(--tw-rotate)]`}
     >
       <div 
-        className="shadow-2xl rounded-3xl p-8 lg:p-14 w-[320px] h-[400px] md:w-[600px] md:h-[400px] lg:w-[800px] lg:h-[450px]"
+        className="shadow-2xl rounded-3xl p-8 lg:p-12 w-[320px] h-[400px] md:w-[600px] md:h-[400px] lg:w-[800px] lg:h-[450px]"
         style={{
           background: gradient,
         }}
       >
         <h3 
-          className="font-bold text-black font-morien text-3xl md:text-4xl lg:text-5xl mb-6"
+          className="font-bold text-black font-morien text-2xl md:text-3xl lg:text-5xl xl:text-5xl mb-4 lg:mb-6"
         >
           {title}
         </h3>
         <p 
-          className="text-gray-700 font-inter text-xl md:text-2xl lg:text-3xl mb-6"
+          className="text-gray-700 font-inter text-lg md:text-xl lg:text-3xl xl:text-3xl mb-4 lg:mb-6"
         >
           {subtitle}
         </p>
         <div 
-          className="text-gray-600 font-inter leading-relaxed text-lg md:text-xl lg:text-2xl"
+          className="text-gray-600 font-inter leading-relaxed text-base md:text-lg lg:text-2xl xl:text-2xl"
         >
           {description}
         </div>
