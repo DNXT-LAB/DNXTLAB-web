@@ -9,7 +9,7 @@ const poppins = Poppins({
   display: 'swap',
   variable: '--font-poppins'
 })
-
+  
 export const metadata: Metadata = {
   icons: {
     icon: '/favicon.png',
