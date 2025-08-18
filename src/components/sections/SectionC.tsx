@@ -239,10 +239,10 @@ const SectionC: React.FC<SectionProps> = ({ progress, onNavigateToSection }) => 
             marginLeft: viewportDimensions.width >= 1536 ? 
               (viewportDimensions.width <= 1770 ? 
                 `calc(11% * ${1 / scaleFactor})` : 
-                `calc(5.8% * ${1 / scaleFactor})`
+                `calc(-1.8% * ${1 / scaleFactor})`
               ) : undefined,
             transform: `scale(${scaleFactor})`,
-            transformOrigin: 'left center'
+            // transformOrigin: 'left center'
           }}
         >
           <div 
@@ -516,8 +516,8 @@ const SectionC: React.FC<SectionProps> = ({ progress, onNavigateToSection }) => 
       </div>
 
               {/* Centered Services button */}
-      <div className="absolute left-[830px] mt-[-13%] md:mt-[-10%] lg:mt-0 md:left-[850px] lg:left-[700px] 2xl:left-1/2 -translate-x-1/2 lg:bottom-[2%] xl:bottom-[2%] 2xl:bottom-[-40%]" style={{ 
-        // marginBottom: viewportDimensions.width >= 1024 ? (viewportDimensions.width <= 1770 ? '10rem' : '-10rem') : undefined,
+      <div className="absolute left-[830px] mt-[-13%] md:mt-[-10%] lg:mt-0 md:left-[850px] lg:left-[700px] 2xl:left-1/2 -translate-x-1/2 lg:bottom-[2%] xl:bottom-[2%]" style={{ 
+        marginBottom: viewportDimensions.width >= 1024 ? (viewportDimensions.width <= 1770 ? '10rem' : '-10rem') : undefined,
         opacity: 1,
         transition: 'opacity 0.5s ease-out'
       }}>
