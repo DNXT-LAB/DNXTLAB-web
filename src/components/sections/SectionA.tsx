@@ -171,8 +171,8 @@ const SectionA: React.FC<SectionAProps & { onNavigateToSection?: (section: numbe
 
   return (
     <div style={sectionStyle}>
-              {/* Desktop Layout - Only visible on screens >= 1024px */}
-      <div className="hidden lg:block">
+      {/* Desktop 2XL layout (1536px+) */}
+      <div className="hidden 2xl:block">
         <video 
           src="/video2.mp4" 
           autoPlay 
@@ -245,10 +245,9 @@ const SectionA: React.FC<SectionAProps & { onNavigateToSection?: (section: numbe
         </div>
       </div>
 
-              {/* Mobile & iPad Layout - Visible on screens < 1024px */}
-      <div className="block lg:hidden w-full h-full mt-12 flex flex-col">
-        {/* Video at top with padding */}
-        <div className="w-full mb-6 md:mb-8">
+      {/* XL/desktop layout for 1280px–1535px */}
+      <div className="hidden xl:flex 2xl:hidden w-full h-full items-center px-8 py-12 gap-8">
+        <div className="flex-1 flex justify-center">
           <video 
             src="/video2.mp4" 
             autoPlay 
@@ -256,26 +255,63 @@ const SectionA: React.FC<SectionAProps & { onNavigateToSection?: (section: numbe
             muted 
             playsInline 
             preload="auto" 
-            className="w-72 md:w-[650px] h-40 md:h-64 object-cover shadow-2xl rounded-2xl"
+            className="object-cover rounded-2xl shadow-2xl w-full max-w-[420px] h-[320px]"
+          />
+        </div>
+        <div className="flex-1 flex flex-col justify-center">
+          <h2 className="text-4xl font-bold text-black font-poppins mb-4 leading-tight">
+            WE BUILD WITH<br/>INTELLIGENCE AND<br/>INTENT
+          </h2>
+          <p className="text-2xl text-black font-inter mb-4 leading-tight">
+            Smart systems. Seamless design.<br/>Real results.
+          </p>
+          <p className="text-base text-black font-poppins mb-8 leading-relaxed max-w-[90%]">
+            At DNXT LAB, we create intelligent digital solutions that think, adapt, and scale—combining AI automation, UX strategy, and high-performance web design to help you launch faster, work smarter, and grow stronger.
+          </p>
+          <button 
+            className="bg-black text-white rounded-full font-morien hover:bg-gray-800 transition-colors flex items-center px-8 py-4 gap-3 w-fit"
+            onClick={() => onNavigateToSection?.(3)}
+          >
+            SERVICES
+            <svg className="w-5 h-5" viewBox="0 0 37 37" fill="none">
+              <circle cx="18.5" cy="18.5" r="18.5" fill="white"/>
+              <path d="M10.5146 18C9.96236 18 9.51465 18.4477 9.51465 19C9.51465 19.5523 9.96236 20 10.5146 20V18ZM28.1923 19.7071C28.5828 19.3166 28.5828 18.6834 28.1923 18.2929L21.8283 11.9289C21.4378 11.5384 20.8047 11.5384 20.4141 11.9289C20.0236 12.3195 20.0236 12.9526 20.4141 13.3431L26.071 19L20.4141 24.6569C20.0236 25.0474 20.0236 25.6805 20.4141 26.0711C20.8047 26.4616 21.4378 26.4616 21.8283 26.0711L28.1923 19.7071ZM10.5146 19V20H27.4852V19V18H10.5146V19Z" fill="black"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      {/* Tablet & Mobile layout (below 1280px) */}
+      <div className="block xl:hidden w-full h-full flex flex-col items-center px-4 md:px-8 pt-8">
+        {/* Video at top with padding */}
+        <div className="w-full flex justify-center mb-6 md:mb-8">
+          <video 
+            src="/video2.mp4" 
+            autoPlay 
+            loop 
+            muted 
+            playsInline 
+            preload="auto" 
+            className="w-full max-w-[350px] md:max-w-[650px] h-[180px] md:h-[260px] object-cover shadow-2xl rounded-2xl"
           />
         </div>
         
         {/* Text below */}
-        <div className="flex-1 flex flex-col">
-          <h2 className="text-2xl md:text-5xl font-bold text-black font-poppins mb-4 md:mb-6 leading-tight">
-            WE BUILD WITH<br/>INTELLIGENCE AND<br/>INTENT
+        <div className="flex-1 flex flex-col items-center w-full">
+          <h2 className="text-2xl md:text-4xl font-bold text-black font-poppins mb-4 md:mb-6 leading-tight text-center">
+            WE BUILD WITH INTELLIGENCE AND<br/>INTENT
           </h2>
           
-          <p className="text-lg md:text-2xl text-black font-inter mb-4 md:mb-6 leading-tight">
+          <p className="text-base md:text-2xl text-black font-inter mb-4 md:mb-6 leading-tight text-center">
             Smart systems. Seamless design.<br/>Real results.
           </p>
           
-          <p className="text-[12px] md:text-base text-black font-inter mb-6 md:mb-8 leading-relaxed max-w-[300px] md:max-w-[600px]">
+          <p className="text-xs md:text-base text-black font-inter mb-6 md:mb-8 leading-relaxed max-w-[90vw] md:max-w-[600px] text-center">
             At DNXT LAB, we create intelligent digital solutions that think, adapt, and scale—combining AI automation, UX strategy, and high-performance web design to help you launch faster, work smarter, and grow stronger.
           </p>
           
           <button 
-            className="text-sm md:text-base px-6 py-3 md:px-8 md:py-4 bg-black text-white rounded-full font-morien hover:bg-gray-800 transition-colors flex items-center gap-3 self-start"
+            className="text-xs md:text-base px-6 py-3 md:px-8 md:py-4 bg-black text-white rounded-full font-morien hover:bg-gray-800 transition-colors flex items-center gap-3 self-center"
             onClick={() => onNavigateToSection?.(3)}
           >
             SERVICES
@@ -295,4 +331,4 @@ const SectionA: React.FC<SectionAProps & { onNavigateToSection?: (section: numbe
   )
 }
 
-export default SectionA 
+export default SectionA

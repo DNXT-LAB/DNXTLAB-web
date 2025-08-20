@@ -8,74 +8,30 @@ export const useScrollAnimation = () => {
   const [windowWidth, setWindowWidth] = useState(1200)
   const [currentSection, setCurrentSection] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
-  
-  // Smoothed scroll value used only on touch devices to avoid stutters
-  const [smoothedScrollY, setSmoothedScrollY] = useState(0)
-  
-  // Ref para acceder a currentSection sin crear dependencia
   const currentSectionRef = useRef(currentSection)
-  
-  // Update ref every time currentSection changes
+
   useEffect(() => {
     currentSectionRef.current = currentSection
   }, [currentSection])
 
-  // Function to navigate to a specific section
+  // Only scroll to section on navigation, not on every scroll event
   const navigateToSection = useCallback((targetSection: number) => {
     if (targetSection >= 0 && targetSection < SECTION_POSITIONS.length) {
       setIsTransitioning(true)
       setCurrentSection(targetSection)
-      
       const targetPosition = SECTION_POSITIONS[targetSection]
-      if (targetPosition !== undefined) {
-        setScrollY(targetPosition)
+      if (typeof window !== 'undefined' && targetPosition !== undefined) {
+        window.scrollTo({ top: targetPosition, behavior: 'smooth' })
       }
-      
       setTimeout(() => setIsTransitioning(false), 200)
     }
   }, [])
 
-  // Effect to configure scroll and resize events (only once)
   useEffect(() => {
-    // Detect if we are on a mobile device
-    const isMobile = () => {
-      return typeof window !== 'undefined' && (
-        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
-        window.innerWidth < 1024
-      )
-    }
-
-    const handleWheel = (e: WheelEvent) => {
-      // On mobile, don't interfere with native scroll
-      if (isMobile()) return
-      
-      e.preventDefault()
-      
-      if (isTransitioning) return
-      
-      setIsTransitioning(true)
-      
-      if (e.deltaY > 0) {
-        setCurrentSection(prev => Math.min(prev + 1, SECTION_POSITIONS.length - 1))
-      } else {
-        setCurrentSection(prev => Math.max(prev - 1, 0))
-      }
-      
-      setTimeout(() => setIsTransitioning(false), SCROLL_CONFIG.TRANSITION_TIMEOUT)
-    }
-
     const handleNativeScroll = () => {
-      if (!isMobile()) return
-      
-      const scrollPosition = window.scrollY
-      setScrollY(scrollPosition) // Actualizar scrollY directamente
-
-      const windowHeight = window.innerHeight
-      
-      // Calculate which section should be active based on native scroll
-      const sectionIndex = Math.round(scrollPosition / windowHeight)
+      setScrollY(window.scrollY)
+      const sectionIndex = Math.round(window.scrollY / window.innerHeight)
       const clampedSection = Math.max(0, Math.min(sectionIndex, SECTION_POSITIONS.length - 1))
-      
       if (clampedSection !== currentSectionRef.current) {
         setCurrentSection(clampedSection)
       }
@@ -87,97 +43,33 @@ export const useScrollAnimation = () => {
     }
 
     if (typeof window !== 'undefined') {
-      // Configure initial values
       setWindowHeight(window.innerHeight)
       setWindowWidth(window.innerWidth)
-      
-      if (isMobile()) {
-        // On mobile: use native scroll
+      window.addEventListener('scroll', handleNativeScroll, { passive: true })
+      window.addEventListener('resize', handleResize)
+      // Only set body height for desktop
+      if (window.innerWidth >= 1024) {
+        document.body.style.height = `${SECTION_POSITIONS.length * 100}vh`
         document.body.style.overflow = 'auto'
         document.documentElement.style.overflow = 'auto'
-        
-        // Set content height to allow native scroll
-        document.body.style.height = `${SECTION_POSITIONS.length * 100}vh`
-        
-        window.addEventListener('scroll', handleNativeScroll, { passive: true })
       } else {
-        // En desktop: usar scroll personalizado
-        document.body.style.overflow = 'hidden'
-        document.documentElement.style.overflow = 'hidden'
-        
-        window.addEventListener('wheel', handleWheel, { passive: false })
+        document.body.style.height = ''
+        document.body.style.overflow = ''
+        document.documentElement.style.overflow = ''
       }
-      
-      window.addEventListener('resize', handleResize)
-      
       return () => {
-        window.removeEventListener('wheel', handleWheel)
         window.removeEventListener('scroll', handleNativeScroll)
         window.removeEventListener('resize', handleResize)
-        
-        // Restaurar estilos
-        if (typeof document !== 'undefined') {
-          document.body.style.overflow = ''
-          document.documentElement.style.overflow = ''
-          document.body.style.height = ''
-        }
+        document.body.style.height = ''
+        document.body.style.overflow = ''
+        document.documentElement.style.overflow = ''
       }
     }
-    
     return () => {}
-  }, [isTransitioning, navigateToSection])
-
-  // Smooth the scroll signal on touch devices to avoid stutters between sections
-  useEffect(() => {
-    const isTouch = () => typeof window !== 'undefined' && window.innerWidth < 1024
-    let rafId = 0
-
-    const animate = () => {
-      setSmoothedScrollY(prev => {
-        const target = scrollY
-        const smoothingFactor = 0.10 // Increased from 0.14 for faster response
-        return isTouch() ? prev + (target - prev) * smoothingFactor : target
-      })
-      rafId = requestAnimationFrame(animate)
-    }
-
-    rafId = requestAnimationFrame(animate)
-    return () => cancelAnimationFrame(rafId)
-  }, [scrollY])
-
-  // Effect separado para animaciones de scroll basadas en currentSection
-  useEffect(() => {
-    const isMobile = () => typeof window !== 'undefined' && window.innerWidth < 1024
-
-    if (typeof window !== 'undefined' && !isMobile()) {
-      const targetPosition = SECTION_POSITIONS[currentSection]
-      if (targetPosition !== undefined) {
-        const startPosition = scrollY
-        const duration = SCROLL_CONFIG.ANIMATION_DURATION
-        const startTime = performance.now()
-        
-        const animateScroll = (currentTime: number) => {
-          const elapsed = currentTime - startTime
-          const progress = Math.min(elapsed / duration, 1)
-          
-          // Easing function (ease-out-cubic)
-          const easeProgress = 1 - Math.pow(1 - progress, 3)
-          
-          const newScrollY = startPosition + (targetPosition - startPosition) * easeProgress
-          setScrollY(newScrollY)
-          
-          if (progress < 1) {
-            requestAnimationFrame(animateScroll)
-          }
-        }
-        
-        requestAnimationFrame(animateScroll)
-      }
-    }
-  }, [currentSection, scrollY])
+  }, [])
 
   // Calculate all derived values
-  const effectiveScrollY = (typeof window !== 'undefined' && windowWidth < 1024) ? smoothedScrollY : scrollY
+  const effectiveScrollY = scrollY
   const progress = calculateScrollProgress(effectiveScrollY)
   const sectionATransforms = calculateSectionATransforms(effectiveScrollY, progress, { width: windowWidth, height: windowHeight })
   const tabProperties = calculateTabProperties(effectiveScrollY, windowHeight, windowWidth)
@@ -193,4 +85,4 @@ export const useScrollAnimation = () => {
     tabProperties,
     navigateToSection
   }
-} 
+}

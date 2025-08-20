@@ -91,15 +91,7 @@ export default function VideoContent() {
           transition: 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-radius 0.4s ease-out, height 0.4s ease-out, top 0.4s ease-out'
         }}
       >
-        <div 
-          className="relative"
-          style={{
-            position: 'absolute',
-            width: '1817px',
-            height: '861px',
-            left: '60px',
-          }}
-        >
+      
           {/* Section A */}
           <SectionA 
             scrollY={scrollY}
@@ -115,7 +107,15 @@ export default function VideoContent() {
             progress={progress}
             windowHeight={windowHeight}
           />
-          
+            <div 
+          className="relative"
+          style={{
+            position: 'absolute',
+            width: '1817px',
+            height: '861px',
+            left: '60px',
+          }}
+        >
           {/* Section C */}
           <SectionC 
             scrollY={scrollY}
