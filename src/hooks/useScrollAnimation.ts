@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { SECTION_POSITIONS, SCROLL_CONFIG } from '@/utils/constants'
+import { SECTION_POSITIONS } from '@/utils/constants'
 import { calculateScrollProgress, calculateSectionATransforms, calculateTabProperties } from '@/utils/animations'
 
 export const useScrollAnimation = () => {
