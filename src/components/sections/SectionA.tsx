@@ -116,7 +116,11 @@ const SectionA: React.FC<SectionAProps & { onNavigateToSection?: (section: numbe
     position: 'absolute',
     width: '100%',
     height: '100%',
-    top: '0',
+    // Apply top: '-10%' only for XL screens
+    top:
+      viewportDimensions.width >= 1024 && viewportDimensions.width < 1536
+        ? '-10%'
+        : '0',
     left: '-0.5%',
     transform: `translateY(${sectionATranslateY}px) scale(${sectionAScale})`,
     opacity: secondSmoothProgress > 0.7 ? 0 : 1 - (secondSmoothProgress * 1.2),
@@ -150,7 +154,7 @@ const SectionA: React.FC<SectionAProps & { onNavigateToSection?: (section: numbe
   // Calculate scaled font sizes
   const getScaledFontSizes = () => {
     return {
-      mainTitle: `${6 * scaleFactor}rem`,
+      mainTitle: `${4.5 * scaleFactor}rem`,
       subtitle: `${3 * scaleFactor}rem`,
       description: `${1.25 * scaleFactor}rem`,
       button: `${1.125 * scaleFactor}rem`,
@@ -185,7 +189,7 @@ const SectionA: React.FC<SectionAProps & { onNavigateToSection?: (section: numbe
         />
         
         <div 
-          className="transition-transform duration-700 ease-out mt-12"
+          className="transition-transform duration-700 ease-out mt-12 pl-6"
           style={textStyle}
         >
           <h2 
@@ -245,8 +249,8 @@ const SectionA: React.FC<SectionAProps & { onNavigateToSection?: (section: numbe
         </div>
       </div>
 
-      {/* XL/desktop layout for 1280px–1535px */}
-      <div className="hidden xl:flex 2xl:hidden w-full h-full items-center px-8 py-12 gap-8">
+      {/* Side by side layout for 1024px–1535px (lg and xl screens) */}
+      <div className="hidden lg:flex 2xl:hidden w-full h-full items-center px-8 py-12 gap-3">
         <div className="flex-1 flex justify-center">
           <video 
             src="/video2.mp4" 
@@ -255,10 +259,10 @@ const SectionA: React.FC<SectionAProps & { onNavigateToSection?: (section: numbe
             muted 
             playsInline 
             preload="auto" 
-            className="object-cover rounded-2xl shadow-2xl w-full max-w-[420px] h-[320px]"
+            className="object-cover rounded-2xl shadow-2xl w-full max-w-[520px] h-[380px]"
           />
         </div>
-        <div className="flex-1 flex flex-col justify-center">
+        <div className="flex-1 flex flex-col justify-center we-build-text-wrapper">
           <h2 className="text-4xl font-bold text-black font-poppins mb-4 leading-tight">
             WE BUILD WITH<br/>INTELLIGENCE AND<br/>INTENT
           </h2>
@@ -281,8 +285,9 @@ const SectionA: React.FC<SectionAProps & { onNavigateToSection?: (section: numbe
         </div>
       </div>
 
-      {/* Tablet & Mobile layout (below 1280px) */}
-      <div className="block xl:hidden w-full h-full flex flex-col items-center px-4 md:px-8 pt-8">
+      {/* Tablet & Mobile layout (below 1024px) */}
+      <div className="block lg:hidden w-full h-full flex flex-col items-center px-4 md:px-8 pt-8 sm:flex flex-wrap flex-row
+content-center !h-[80%]">
         {/* Video at top with padding */}
         <div className="w-full flex justify-center mb-6 md:mb-8">
           <video 

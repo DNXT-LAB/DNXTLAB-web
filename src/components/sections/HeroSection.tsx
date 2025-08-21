@@ -4,11 +4,11 @@ const HeroSection: React.FC<{ onNavigateToSection?: (section: number) => void }>
   return (
     <div className="fixed left-[2%] z-20 md:px-[3%] bottom-[10%] lg:bottom-[3%]" >
       <div className="flex flex-col items-start mb-[4%]">
-        <h1 className="force-white-text font-bold uppercase font-poppins text-[10vw] md:text-[9.5vw] lg:text-[6vw] 2xl:text-[4.8vw] line-height-90 mb-[1.5%]">
+        <h1 className="force-white-text font-bold uppercase font-poppins text-[10vw] md:text-[7vw] line-height-110  lg:text-[6vw] 2xl:text-[4.8vw] line-height-90 mb-[1.5%]">
           BESPOKE AI & WEB<br />
           DESIGN SOLUTIONS
         </h1>
-        <p className="force-white-text font-inter font-poppins w-[92%] md:w-[95%] lg:w-[85%] text-[4.7vw] md:text-[4.4vw] lg:text-[2.7vw] 2xl:text-[1.8vw] leading-[1.3] font-normal md:max-w-[95%] lg:max-w-[60%] 2xl:max-w-[45%] mb-[2%]">
+        <p className="force-white-text font-inter font-poppins w-[92%] md:w-[95%] lg:w-[85%] text-[4.7vw] md:text-[3.5vw] lg:text-[2.7vw] 2xl:text-[1.8vw] leading-[1.3] font-normal md:max-w-[95%] lg:max-w-[60%] 2xl:max-w-[45%] mb-[2%]">
           Empowering businesses through intelligent automation, data-driven experiences, and future-proof digital design.
         </p>
         <button 
