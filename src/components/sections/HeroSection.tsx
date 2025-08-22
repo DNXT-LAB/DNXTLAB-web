@@ -2,25 +2,48 @@ import React from 'react'
 
 const HeroSection: React.FC<{ onNavigateToSection?: (section: number) => void }> = ({ onNavigateToSection }) => {
   return (
-    <div className="fixed left-[2%] z-20 md:px-[3%] bottom-[10%] lg:bottom-[3%]" >
-      <div className="flex flex-col items-start mb-[4%]">
-        <h1 className="force-white-text font-bold uppercase font-poppins text-[10vw] md:text-[9.5vw] lg:text-[6vw] 2xl:text-[4.8vw] line-height-90 mb-[1.5%]">
-          BESPOKE AI & WEB<br />
-          DESIGN SOLUTIONS
+    <div className="fixed left-2 right-2 bottom-8 sm:left-4 sm:right-auto sm:bottom-12 lg:bottom-6 z-20 px-2 sm:px-4 md:px-8">
+      <div className="flex flex-col items-start space-y-3 sm:space-y-4">
+        
+        {/* Heading */}
+        <h1
+          className="text-white font-bold uppercase font-poppins leading-tight"
+          style={{
+            fontSize: 'clamp(1.5rem, 5vw, 4.5rem)', // Responsive font size
+            lineHeight: '1.1'
+          }}
+        >
+          BESPOKE AI & WEB <br /> DESIGN SOLUTIONS
         </h1>
-        <p className="force-white-text font-inter font-poppins w-[92%] md:w-[95%] lg:w-[85%] text-[4.7vw] md:text-[4.4vw] lg:text-[2.7vw] 2xl:text-[1.8vw] leading-[1.3] font-normal md:max-w-[95%] lg:max-w-[60%] 2xl:max-w-[45%] mb-[2%]">
-          Empowering businesses through intelligent automation, data-driven experiences, and future-proof digital design.
+        
+        {/* Subtext */}
+        <p
+          className="text-white font-inter leading-relaxed"
+          style={{
+            fontSize: 'clamp(1rem, 2.5vw, 2rem)', // Responsive font size
+            maxWidth: 'clamp(63vw, 60vw, 800px)'
+          }}
+        >
+          Empowering businesses through intelligent automation, data-driven experiences, 
+          and future-proof digital design.
         </p>
-        <button 
-          className="flex items-center justify-center 2xl:px-[2%] 2xl:py-[1.8%] md:px-[1.2%] md:py-[1.2%] px-[0.6%] py-[0.6%] hover:opacity-90 transition-opacity bg-white rounded-full button-size border-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black"
+        
+        {/* CTA Button */}
+        <button
+          className="flex items-center justify-center px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3
+          bg-white rounded-full hover:opacity-90 transition
+          focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black"
           aria-label="View DNXTLAB services"
           onClick={() => onNavigateToSection?.(3)}
+          style={{
+            fontSize: 'clamp(0.9rem, 2vw, 1.25rem)'
+          }}
         >
-          <span className="force-black-text font-poppins 2xl:text-[1vw] lg:text-[1.3vw] md:text-[2.5vw] text-[4.2vw] font-light line-height-110 2xl:mr-[10.8%] lg:mr-[10.8%] md:mr-[10.8%] mr-[10.8%]">
+          <span className="text-black font-poppins mr-2 sm:mr-3" style={{ fontSize: 'inherit' }}>
             SERVICES
           </span>
           <svg 
-            className="svg-size" 
+            className="w-5 h-5 md:w-6 md:h-6"
             viewBox="0 0 37 37" 
             fill="none" 
             xmlns="http://www.w3.org/2000/svg"
@@ -35,4 +58,4 @@ const HeroSection: React.FC<{ onNavigateToSection?: (section: number) => void }>
   )
 }
 
-export default HeroSection 
+export default HeroSection

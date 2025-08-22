@@ -233,14 +233,15 @@ const SectionC: React.FC<SectionProps> = ({ progress, onNavigateToSection }) => 
       >
         {/* Main content left side */}
         <div 
-          className="2xl:mt-[3%]"
+          className="2xl:mt-[3%] elevate-text"
           style={{
             position: 'relative',
-            marginLeft: viewportDimensions.width >= 1536 ? 
-              (viewportDimensions.width <= 1770 ? 
-                `calc(11% * ${1 / scaleFactor})` : 
-                `calc(-1.8% * ${1 / scaleFactor})`
-              ) : undefined,
+            marginLeft: viewportDimensions.width >= 1536
+              ? (viewportDimensions.width <= 1920
+                  ? `calc(11% * ${1 / scaleFactor})`
+                  : `calc(-1.8% * ${1 / scaleFactor})`
+                )
+              : '8rem', // Add margin for non-2XL screens to move right
             transform: `scale(${scaleFactor})`,
             // transformOrigin: 'left center'
           }}
@@ -339,7 +340,7 @@ const SectionC: React.FC<SectionProps> = ({ progress, onNavigateToSection }) => 
 
         {/* Contenedor de Cards Desktop */}
         <div 
-          className="absolute inset-0"
+          className="absolute inset-0 web-cards-container"
           style={{
             marginTop: viewportDimensions.width >= 1536 ? '20rem' : '10rem' // 2XL: mt-80, others: mt-40 (higher up)
           }}
@@ -401,7 +402,7 @@ const SectionC: React.FC<SectionProps> = ({ progress, onNavigateToSection }) => 
       <div className="block lg:hidden bg-white mt-16 md:mt-32 relative overflow-hidden h-full">
         {/* Fixed title at top - Always visible */}
         <div className="mb-6 absolute top-4 left-[700px] md:left-[560px] right-0 text-left z-50 bg-white pt-4">
-          <h2 className="text-[33px] md:text-3xl font-bold text-black font-poppins leading-none mr-28 md:mr-40">
+          <h2 className="text-[33px] md:text-3xl font-bold text-black font-poppins leading-none mr-28 md:mr-40 elevate-text-mobile">
             ELEVATE YOUR<br/>
             DIGITAL<br/>
             INFRASTRUCTURE
@@ -410,7 +411,7 @@ const SectionC: React.FC<SectionProps> = ({ progress, onNavigateToSection }) => 
 
         {/* Contenido de servicios - Se oculta cuando aparecen cards */}
         <div 
-          className="flex flex-col justify-center mt-[10%] md:mt-[12%]"
+          className="flex flex-col justify-center mt-[10%] md:mt-[8%] explore-text-wrapper"
           style={{ 
             opacity: servicesOpacity,
             transition: 'opacity 0.8s ease-out'
@@ -516,8 +517,8 @@ const SectionC: React.FC<SectionProps> = ({ progress, onNavigateToSection }) => 
       </div>
 
               {/* Centered Services button */}
-      <div className="absolute left-[830px] mt-[-13%] md:mt-[-10%] lg:mt-0 md:left-[850px] lg:left-[700px] 2xl:left-1/2 -translate-x-1/2" style={{ 
-        marginTop: viewportDimensions.width >= 1024 ? (viewportDimensions.width <= 1770 ? '-240px' : '240px') : undefined,
+      <div className="absolute left-[830px] mt-[-13%] md:mt-[-10%] lg:mt-0 md:left-[850px] lg:left[700px] 2xl:left-1/2 -translate-x-1/2 book-button" style={{ 
+        marginTop: viewportDimensions.width >= 1024 ? (viewportDimensions.width <= 1920 ? '-220px' : '240px') : undefined,
         opacity: 1,
         transition: 'opacity 0.5s ease-out'
       }}>
@@ -553,4 +554,4 @@ const SectionC: React.FC<SectionProps> = ({ progress, onNavigateToSection }) => 
   )
 }
 
-export default SectionC 
+export default SectionC

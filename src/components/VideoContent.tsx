@@ -123,7 +123,7 @@ export default function VideoContent() {
             windowHeight={windowHeight}
             onNavigateToSection={navigateToSection}
           />
-
+        </div>
           {/* Section D */}
           <SectionD 
             scrollY={scrollY}
@@ -133,7 +133,6 @@ export default function VideoContent() {
             handleInputChange={handleInputChange}
             handleSubmit={handleSubmit}
           />
-        </div>
       </div>
 
       {/* Contenido invisible para activar scroll */}

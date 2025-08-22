@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
@@ -34,13 +35,13 @@ html {
   .text-logo-size {
     font-size: clamp(3rem, 4vw, 2rem);
   }
-  
+
   .text-animation-initial {
     color: #333333;
   }
-  
+
   .text-animation-active {
-    color: #FFFFFF;
+    color: #ffffff;
     /* filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3)); */
   }
 }
@@ -85,21 +86,76 @@ html {
 }
 
 .font-morien {
-  font-family: 'Morien', sans-serif;
+  font-family: "Morien", sans-serif;
 }
 
 .font-inter {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .force-white-text {
-  color: #FFFFFF !important;
+  color: #ffffff !important;
 }
 
 .force-black-text {
   color: #000000 !important;
 }
 
-/* Clases conflictivas removidas para que Tailwind funcione */
+@media screen and (min-device-width: 1024px) and (max-device-width: 1279px) {
+  .elevate-text {
+    margin-left: 23rem !important;
+  }
+  .web-cards-container {
+    margin-top: 16rem !important;
+    left: 8% !important;
+  }
+  .book-button {
+    left: 43% !important;
+  }
+  .we-build-text-wrapper {
+    margin-left: 60px !important;
+  }
+}
+@media screen and (min-device-width: 768px) and (max-device-width: 1023px) {
+  .elevate-text {
+    margin-left: 23rem !important;
+  }
+  .web-cards-container {
+    margin-top: 16rem !important;
+    left: 8% !important;
+  }
+  .book-button {
+    left: 43% !important;
+    margin-top: -18% !important;
+  }
+  .elevate-text-mobile {
+    width: 520px !important;
+    text-align: center !important;
+  }
+  .explore-text-wrapper {
+    margin-top: 8.5% !important;
+  }
+}
 
-/* Estilos personalizados removidos - usando Tailwind CSS */ 
+@media only screen and (max-width: 767px) {
+  .book-button {
+    margin-top: -16% !important;
+  }
+  .elevate-text-mobile {
+    width: 311px !important;
+    text-align: center !important;
+  }
+}
+
+@media screen and (min-device-width: 1280px) and (max-device-width: 1535px) {
+  .book-button {
+    left: 40% !important;
+  }
+}
+
+@media only screen and (min-width: 1536px) {
+  .book-button {
+    left: 54% !important;
+  }
+  
+}
