@@ -4,11 +4,6 @@ import type { SectionProps } from "@/types/animations";
 const SectionB: React.FC<SectionProps> = ({ progress }) => {
   const { secondSmoothProgress, thirdSmoothProgress } = progress;
   const [scaleFactor, setScaleFactor] = useState(1);
-  const [viewportDimensions, setViewportDimensions] = useState({
-    width: 1920,
-    height: 1080,
-  });
-
   // Function to calculate scale factor based on viewport
   const calculateScaleAndDimensions = () => {
     if (typeof window !== "undefined") {
@@ -47,11 +42,8 @@ const SectionB: React.FC<SectionProps> = ({ progress }) => {
     const updateScale = () => {
       const {
         scaleFactor: newScale,
-        width,
-        height,
       } = calculateScaleAndDimensions();
       setScaleFactor(newScale);
-      setViewportDimensions({ width, height });
     };
 
     // Establecer escala inicial
@@ -64,46 +56,6 @@ const SectionB: React.FC<SectionProps> = ({ progress }) => {
       window.removeEventListener("resize", updateScale);
     };
   }, []);
-
-  // Calculate scaled dimensions and positions
-  const getScaledDimensions = () => {
-    const baseVideoWidth = viewportDimensions.width * 0.75;
-    const baseVideoHeight = 530;
-
-    return {
-      video: {
-        width: baseVideoWidth,
-        height: baseVideoHeight * scaleFactor,
-      },
-    };
-  };
-
-  const dimensions = getScaledDimensions();
-
-  // Calculate scaled font sizes
-  const getScaledFontSizes = () => {
-    return {
-      subtitle: `${1.875 * scaleFactor}rem`, // text-3xl base
-      title: `${3 * scaleFactor}rem`, // text-5xl base
-      description: `${1.25 * scaleFactor}rem`, // text-xl base
-      spacing: {
-        mb6: `${1.5 * scaleFactor}rem`,
-        mb8: `${2 * scaleFactor}rem`,
-        mb12: `${3 * scaleFactor}rem`,
-        mt12: `${3 * scaleFactor}rem`,
-        px4: `${1 * scaleFactor}rem`,
-        px8: `${2 * scaleFactor}rem`,
-        px12: `${3 * scaleFactor}rem`,
-      },
-      maxWidth: {
-        sm: `${20 * scaleFactor}rem`, // max-w-sm
-        xl: `${32 * scaleFactor}rem`, // max-w-2xl
-        xxl: `${56 * scaleFactor}rem`, // max-w-4xl
-      },
-    };
-  };
-
-  const fontSizes = getScaledFontSizes();
 
   const sectionStyle: React.CSSProperties = {
     position: "absolute",
