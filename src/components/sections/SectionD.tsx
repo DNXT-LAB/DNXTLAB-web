@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import type { ContactSectionProps } from '@/types/animations';
+import React, { useState, useEffect } from "react";
+import type { ContactSectionProps } from "@/types/animations";
 
 const SectionD: React.FC<ContactSectionProps> = ({
   progress,
@@ -11,374 +11,131 @@ const SectionD: React.FC<ContactSectionProps> = ({
   const [browserZoom, setBrowserZoom] = useState(1);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Detectar y actualizar el zoom del navegador y el estado móvil
+  // Detect browser zoom + mobile
   useEffect(() => {
     const updateDimensions = () => {
-      const zoom = Math.round((window.outerWidth / window.innerWidth) * 100) / 100;
+      const zoom =
+        Math.round((window.outerWidth / window.innerWidth) * 100) / 100;
       setBrowserZoom(zoom);
       setIsMobile(window.innerWidth < 1024);
     };
-
     updateDimensions();
-    window.addEventListener('resize', updateDimensions);
-    return () => window.removeEventListener('resize', updateDimensions);
+    window.addEventListener("resize", updateDimensions);
+    return () => window.removeEventListener("resize", updateDimensions);
   }, []);
 
-  const sectionStyle: React.CSSProperties = {
-    position: 'fixed',
-    width: '100%',
-    height: '100%',
-    top: '-3%',
-    left: '0',
-    right: '0',
-    bottom: '0',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#FFFFFF',
-    opacity: seventhSmoothProgress < 0.35 ? 0 : Math.min(1, (seventhSmoothProgress - 0.35) * 1.5),
-    visibility: seventhSmoothProgress > 0.35 ? 'visible' : 'hidden',
-    transition: 'opacity 0.8s ease-out',
-    willChange: 'transform, opacity',
-    transform: !isMobile ? `scale(${0.75 / browserZoom})` : 'none',
-    transformOrigin: 'center center',
-    zIndex: 50
-  };
-
-  const contentStyle: React.CSSProperties = !isMobile ? {
-    width: '1600px',
-    minWidth: '1600px',
-    maxWidth: '1600px',
-    padding: '60px',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '60px',
-    position: 'relative',
-    backgroundColor: '#FFFFFF'
-  } : {
-    width: '100%',
-    padding: '20px',
-    paddingTop: '0', // Reducido el padding superior
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '30px',
-    position: 'relative'
-  };
-
-  const formStyle: React.CSSProperties = !isMobile ? {
-    display: 'grid',
-    gridTemplateColumns: '700px 700px',
-    gap: '60px',
-    width: '1480px',
-    minWidth: '1480px',
-    maxWidth: '1480px'
-  } : {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '20px',
-    width: '100%'
-  };
-
-  const inputStyle: React.CSSProperties = !isMobile ? {
-    width: '700px',
-    minWidth: '700px',
-    maxWidth: '700px',
-    height: '80px',
-    minHeight: '80px',
-    maxHeight: '80px',
-    padding: '0 40px',
-    fontSize: '20px',
-    lineHeight: '80px',
-    color: 'black',
-    background: 'linear-gradient(0deg, #D6D6D6, #ffffff)',
-    borderRadius: '9999px',
-    border: 'none',
-    outline: 'none',
-    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
-  } : {
-    width: '100%',
-    height: '50px',
-    padding: '0 20px',
-    fontSize: '16px',
-    lineHeight: '50px',
-    color: 'black',
-    background: 'linear-gradient(0deg, #D6D6D6, #ffffff)',
-    borderRadius: '25px',
-    border: 'none',
-    outline: 'none',
-    boxShadow: '0 2px 4px -1px rgba(0, 0, 0, 0.1)'
-  };
-
-  const textareaStyle: React.CSSProperties = !isMobile ? {
-    width: '700px',
-    minWidth: '700px',
-    maxWidth: '700px',
-    height: '450px',
-    minHeight: '450px',
-    maxHeight: '450px',
-    padding: '32px 40px',
-    fontSize: '20px',
-    lineHeight: '30px',
-    color: 'black',
-    background: 'linear-gradient(0deg, #D6D6D6, #ffffff)',
-    borderRadius: '32px',
-    border: 'none',
-    outline: 'none',
-    resize: 'none',
-    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
-  } : {
-    width: '100%',
-    height: '100px',
-    padding: '15px 20px',
-    fontSize: '16px',
-    lineHeight: '24px',
-    color: 'black',
-    background: 'linear-gradient(0deg, #D6D6D6, #ffffff)',
-    borderRadius: '20px',
-    border: 'none',
-    outline: 'none',
-    resize: 'none',
-    boxShadow: '0 2px 4px -1px rgba(0, 0, 0, 0.1)'
-  };
-
-  const buttonStyle: React.CSSProperties = !isMobile ? {
-    width: '700px',
-    minWidth: '700px',
-    maxWidth: '700px',
-    height: '80px',
-    minHeight: '80px',
-    maxHeight: '80px',
-    fontSize: '20px',
-    lineHeight: '80px',
-    color: 'white',
-    backgroundColor: 'black',
-    borderRadius: '9999px',
-    border: 'none',
-    cursor: 'pointer',
-    transition: 'background-color 0.2s',
-    padding: '0'
-  } : {
-    width: '100%',
-    height: '50px',
-    fontSize: '16px',
-    lineHeight: '50px',
-    color: 'white',
-    backgroundColor: 'black',
-    borderRadius: '25px',
-    border: 'none',
-    cursor: 'pointer',
-    transition: 'background-color 0.2s',
-    padding: '0'
-  };
-
-  const titleStyle: React.CSSProperties = !isMobile ? {
-    fontSize: '100px',
-    lineHeight: '88px',
-    fontWeight: '600',
-    fontFamily: 'Poppins, sans-serif',
-    color: 'black',
-    margin: '0',
-    padding: '0',
-    width: '1480px',
-    minWidth: '1480px',
-    maxWidth: '1480px'
-  } : {
-    fontSize: '30px',
-    lineHeight: '44px',
-    fontWeight: '600',
-    fontFamily: 'Poppins, sans-serif',
-    color: 'black',
-    margin: '0',
-    padding: '0',
-    width: '100%',
-    textAlign: 'center'
-  };
-
-  const contactInfoStyle: React.CSSProperties = !isMobile ? {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '12px',
-    fontSize: '20px',
-    lineHeight: '30px',
-    color: 'black',
-    fontFamily: 'Poppins, sans-serif',
-    width: '700px',
-    minWidth: '700px',
-    maxWidth: '700px'
-  } : {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '8px',
-    fontSize: '14px',
-    lineHeight: '20px',
-    color: 'black',
-    fontFamily: 'Poppins, sans-serif',
-    width: '100%',
-    textAlign: 'center',
-    marginTop: '20px'
-  };
-
   return (
-    <div style={sectionStyle}>
-      <div style={contentStyle}>
+    <div
+      className={`
+        fixed inset-0 flex items-center justify-center bg-white z-50
+        transition-opacity duration-800 ease-out
+        ${
+          seventhSmoothProgress > 0.35
+            ? "visible opacity-100"
+            : "invisible opacity-0"
+        }
+      `}
+      style={{
+        transform: !isMobile ? `scale(${0.75 / browserZoom})` : "none",
+        transformOrigin: "center",
+      }}
+    >
+      <div className="w-full max-w-[1800px] px-5 py-8 flex flex-col gap-10 lg:gap-15 mt-[-100px] relative md:mt-0">
         {/* Title */}
-        <h2 style={titleStyle}>
+        <h2 className="text-[36px] leading-[48px] lg:text-[70px] lg:leading-[110px] font-semibold font-[Poppins] text-black text-center">
           BOOK A CALL NOW
         </h2>
 
-        {/* Form Container */}
-        <form onSubmit={handleSubmit} style={formStyle}>
-          {!isMobile ? (
-            <>
-              {/* Desktop Layout */}
-              <div style={{ 
-                display: 'flex', 
-                flexDirection: 'column', 
-                gap: '32px', 
-                width: '700px'
-              }}>
-                <input
-                  type="text"
-                  name="firstName"
-                  value={formState.formData.firstName}
-                  onChange={handleInputChange}
-                  placeholder="First name"
-                  style={inputStyle}
-                  required
-                />
-                <input
-                  type="text"
-                  name="lastName"
-                  value={formState.formData.lastName}
-                  onChange={handleInputChange}
-                  placeholder="Last Name"
-                  style={inputStyle}
-                  required
-                />
-                <input
-                  type="email"
-                  name="email"
-                  value={formState.formData.email}
-                  onChange={handleInputChange}
-                  placeholder="Your email"
-                  style={inputStyle}
-                  required
-                />
-                {/* Contact Info */}
-                <div style={{ marginTop: 'auto', width: '700px' }}>
-                  <div style={contactInfoStyle}>
-                    <p style={{ margin: '0', padding: '0' }}>Phone Num: +351 999999999</p>
-                    <p style={{ margin: '0', padding: '0' }}>Email: info@diamondnxt.com</p>
-                    <p style={{ margin: '0', padding: '0' }}>Sede: Rua Conselheiro Veloso Cruz, N.º 10</p>
-                    <p style={{ margin: '0', padding: '0' }}>Porto — 4400 092 Vila Nova de Gaia.</p>
-                  </div>
-                </div>
-              </div>
+        {/* Form */}
+        <form
+          onSubmit={handleSubmit}
+          className=" w-full mx-auto flex flex-col gap-6 sm:max-w-sm md:max-w-md lg:max-w-[100%] lg:grid lg:grid-cols-2 lg:gap-20 "
+          
+        >
+          {/* Left Side */}
+          <div className="flex flex-col gap-6">
+            <input
+              type="text"
+              name="firstName"
+              placeholder="First name"
+              value={formState.formData.firstName}
+              onChange={handleInputChange}
+              required
+              className="w-full h-[50px] lg:h-[80px] px-4 lg:px-10 text-sm md:text-base lg:text-xl rounded-xl lg:rounded-full bg-gradient-to-t from-gray-300 to-white shadow-sm outline-none"
+            />
 
-              <div style={{ 
-                display: 'flex', 
-                flexDirection: 'column', 
-                gap: '32px',
-                width: '700px'
-              }}>
-                <textarea
-                  name="message"
-                  value={formState.formData.message}
-                  onChange={handleInputChange}
-                  placeholder="Tell us about your project..."
-                  style={textareaStyle}
-                  required
-                />
-                <button
-                  type="submit"
-                  disabled={formState.isSubmitting}
-                  style={{
-                    ...buttonStyle,
-                    opacity: formState.isSubmitting ? '0.5' : '1'
-                  }}
-                >
-                  {formState.isSubmitting ? 'Sending...' : 'Book a call'}
-                </button>
+            <input
+              type="text"
+              name="lastName"
+              placeholder="Last name"
+              value={formState.formData.lastName}
+              onChange={handleInputChange}
+              required
+              className="w-full h-[50px] lg:h-[80px] px-4 lg:px-10 text-sm md:text-base lg:text-xl rounded-xl lg:rounded-full bg-gradient-to-t from-gray-300 to-white shadow-sm outline-none"
+            />
+
+            <input
+              type="email"
+              name="email"
+              placeholder="Your email"
+              value={formState.formData.email}
+              onChange={handleInputChange}
+              required
+              className="w-full h-[50px] lg:h-[80px] px-4 lg:px-10 text-sm md:text-base lg:text-xl rounded-xl lg:rounded-full bg-gradient-to-t from-gray-300 to-white shadow-sm outline-none"
+            />
+
+            {/* Desktop only contact info */}
+            {!isMobile && (
+              <div className="hidden lg:flex flex-col gap-3 text-lg text-black mt-8">
+                <p>Phone Num: +351 999999999</p>
+                <p>Email: info@diamondnxt.com</p>
+                <p>Sede: Rua Conselheiro Veloso Cruz, N.º 10</p>
+                <p>Porto — 4400 092 Vila Nova de Gaia.</p>
               </div>
-            </>
-          ) : (
-            <>
-              {/* Mobile Layout */}
-              <div style={{ 
-                display: 'flex', 
-                flexDirection: 'column', 
-                gap: '20px', 
-                width: '98%'
-              }}>
-                <input
-                  type="text"
-                  name="firstName"
-                  value={formState.formData.firstName}
-                  onChange={handleInputChange}
-                  placeholder="First name"
-                  style={inputStyle}
-                  required
-                />
-                <input
-                  type="text"
-                  name="lastName"
-                  value={formState.formData.lastName}
-                  onChange={handleInputChange}
-                  placeholder="Last Name"
-                  style={inputStyle}
-                  required
-                />
-                <input
-                  type="email"
-                  name="email"
-                  value={formState.formData.email}
-                  onChange={handleInputChange}
-                  placeholder="Your email"
-                  style={inputStyle}
-                  required
-                />
-                <textarea
-                  name="message"
-                  value={formState.formData.message}
-                  onChange={handleInputChange}
-                  placeholder="Tell us about your project..."
-                  style={textareaStyle}
-                  required
-                />
-                <button
-                  type="submit"
-                  disabled={formState.isSubmitting}
-                  style={{
-                    ...buttonStyle,
-                    opacity: formState.isSubmitting ? '0.5' : '1'
-                  }}
-                >
-                  {formState.isSubmitting ? 'Sending...' : 'Book a call'}
-                </button>
-                {/* Contact Info al final en móvil */}
-                <div style={contactInfoStyle}>
-                  <p style={{ margin: '0', padding: '0' }}>Phone Num: +351 999999999</p>
-                  <p style={{ margin: '0', padding: '0' }}>Email: info@diamondnxt.com</p>
-                  <p style={{ margin: '0', padding: '0' }}>Sede: Rua Conselheiro Veloso Cruz, N.º 10</p>
-                  <p style={{ margin: '0', padding: '0' }}>Porto — 4400 092 Vila Nova de Gaia.</p>
-                </div>
+            )}
+          </div>
+
+          {/* Right Side */}
+          <div className="flex flex-col gap-6">
+            <textarea
+              name="message"
+              placeholder="Tell us about your project..."
+              value={formState.formData.message}
+              onChange={handleInputChange}
+              required
+              className="w-full resize-none h-[120px] md:h-[180px] lg:h-[450px] px-4 lg:px-10 py-3 lg:py-8 text-sm md:text-base lg:text-xl rounded-xl lg:rounded-[32px] bg-gradient-to-t from-gray-300 to-white shadow-sm outline-none"
+            />
+
+            <button
+              type="submit"
+              disabled={formState.isSubmitting}
+              className="w-full h-[50px] lg:h-[80px] text-sm md:text-base lg:text-2xl rounded-xl lg:rounded-full bg-black text-white transition disabled:opacity-50"
+            >
+              {formState.isSubmitting ? "Sending..." : "Book a call"}
+            </button>
+
+            {/* Mobile contact info */}
+            {isMobile && (
+              <div className="flex flex-col gap-1 text-xs md:text-sm text-black text-center mt-2">
+                <p>Phone Num: +351 999999999</p>
+                <p>Email: info@diamondnxt.com</p>
+                <p>Sede: Rua Conselheiro Veloso Cruz, N.º 10</p>
+                <p>Porto — 4400 092 Vila Nova de Gaia.</p>
               </div>
-            </>
-          )}
+            )}
+          </div>
         </form>
 
-        {/* Form Status Message */}
+        {/* Status message */}
         {formState.submitMessage && (
           <div
+            className={`absolute w-full text-center ${
+              formState.submitStatus === "success"
+                ? "text-green-600"
+                : "text-red-600"
+            } text-sm lg:text-xl`}
             style={{
-              position: 'absolute',
-              bottom: !isMobile ? '-50px' : '-30px',
-              left: '0',
-              width: !isMobile ? '1480px' : '100%',
-              textAlign: 'center',
-              fontSize: !isMobile ? '20px' : '14px',
-              lineHeight: !isMobile ? '30px' : '20px',
-              color: formState.submitStatus === 'success' ? '#059669' : '#DC2626'
+              bottom: isMobile ? "-30px" : "-50px",
             }}
           >
             {formState.submitMessage}
