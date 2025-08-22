@@ -138,8 +138,9 @@ const SectionB: React.FC<SectionProps> = ({ progress }) => {
         </div>
         {/* Text */}
         <div className="flex flex-col text-center w-full items-center">
-          <h2 className="font-bold text-black font-poppins mb-3 md:mb-6 leading-tight text-xl sm:text-2xl md:text-4xl lg:text-5xl max-w-2xl">
-            Solutions That Evolve <br className="hidden md:block" />With Your Business
+          <h2 className="text-4xl font-bold text-black font-poppins mb-4 leading-tight">
+            SOLUTIONS THAT EVOLVE
+            <br className="hidden md:block" />WITH YOUR BUSINESS
           </h2>
           <p className="text-xs sm:text-sm md:text-base text-black font-poppins leading-relaxed max-w-xs sm:max-w-md md:max-w-lg lg:max-w-2xl mx-auto">
             At DNXT LAB, we don&apos;t sell tools—we design intelligent frameworks tailored to your operations. By blending technical depth with strategic foresight, we ensure every AI or digital solution evolves with your business and supports long-term growth.
