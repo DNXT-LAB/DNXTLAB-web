@@ -125,13 +125,10 @@ html {
     left: 8% !important;
   }
   .book-button {
-    left: 43% !important;
-    margin-top: -18% !important;
+    left: 44% !important;
+    margin-top: -15% !important;
   }
-  .elevate-text-mobile {
-    width: 520px !important;
-    text-align: center !important;
-  }
+
   .explore-text-wrapper {
     margin-top: 8.5% !important;
   }
@@ -139,11 +136,22 @@ html {
 
 @media only screen and (max-width: 767px) {
   .book-button {
-    margin-top: -16% !important;
+    margin-top: -14% !important;
   }
-  .elevate-text-mobile {
-    width: 311px !important;
-    text-align: center !important;
+}
+
+@media only screen and (max-width: 999px) {
+  .stategic-video {
+    height: 280px !important;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .stategic-video {
+    height: 200px !important;
+  }
+  .stategic-content {
+    max-width: 76% !important;
   }
 }
 
@@ -156,6 +164,6 @@ html {
 @media only screen and (min-width: 1536px) {
   .book-button {
     left: 54% !important;
+    margin-top: -8% !important;
   }
-  
 }

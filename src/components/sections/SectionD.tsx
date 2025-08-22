@@ -50,6 +50,7 @@ const SectionD: React.FC<ContactSectionProps> = ({
         <form
           onSubmit={handleSubmit}
           className=" w-full mx-auto flex flex-col gap-6 sm:max-w-sm md:max-w-md lg:max-w-[100%] lg:grid lg:grid-cols-2 lg:gap-20 "
+          
         >
           {/* Left Side */}
           <div className="flex flex-col gap-6">
@@ -60,7 +61,7 @@ const SectionD: React.FC<ContactSectionProps> = ({
               value={formState.formData.firstName}
               onChange={handleInputChange}
               required
-              className="w-full h-[50px] lg:h-[80px] px-4 lg:px-10 text-sm md:text-base lg:text-xl rounded-xl border border-gray-400 focus:border-black focus:ring-2 focus:ring-black focus:outline-none"
+              className="w-full h-[50px] lg:h-[80px] px-4 lg:px-10 text-sm md:text-base lg:text-xl rounded-xl lg:rounded-full bg-gradient-to-t from-gray-300 to-white shadow-sm outline-none"
             />
 
             <input
@@ -70,7 +71,7 @@ const SectionD: React.FC<ContactSectionProps> = ({
               value={formState.formData.lastName}
               onChange={handleInputChange}
               required
-              className="w-full h-[50px] lg:h-[80px] px-4 lg:px-10 text-sm md:text-base lg:text-xl rounded-xl border border-gray-400 focus:border-black focus:ring-2 focus:ring-black focus:outline-none"
+              className="w-full h-[50px] lg:h-[80px] px-4 lg:px-10 text-sm md:text-base lg:text-xl rounded-xl lg:rounded-full bg-gradient-to-t from-gray-300 to-white shadow-sm outline-none"
             />
 
             <input
@@ -80,23 +81,15 @@ const SectionD: React.FC<ContactSectionProps> = ({
               value={formState.formData.email}
               onChange={handleInputChange}
               required
-              className="w-full h-[50px] lg:h-[80px] px-4 lg:px-10 text-sm md:text-base lg:text-xl rounded-xl border border-gray-400 focus:border-black focus:ring-2 focus:ring-black focus:outline-none"
+              className="w-full h-[50px] lg:h-[80px] px-4 lg:px-10 text-sm md:text-base lg:text-xl rounded-xl lg:rounded-full bg-gradient-to-t from-gray-300 to-white shadow-sm outline-none"
             />
 
             {/* Desktop only contact info */}
             {!isMobile && (
-              <div className="hidden lg:flex flex-col gap-3 text-lg text-black mt-8">
-                <p>
-                  {" "}
-                  <b>Phone Number:</b> +351 999999999
-                </p>
-                <p>
-                  {" "}
-                  <b>Email:</b> info@diamondnxt.com
-                </p>
-                <p>
-                  <b>Sede:</b> Rua Conselheiro Veloso Cruz, N.º 10
-                </p>
+              <div className="hidden lg:flex flex-col gap-3 text-lg text-black mt-auto">
+                <p>Phone Num: +351 999999999</p>
+                <p>Email: info@diamondnxt.com</p>
+                <p>Sede: Rua Conselheiro Veloso Cruz, N.º 10</p>
                 <p>Porto — 4400 092 Vila Nova de Gaia.</p>
               </div>
             )}
@@ -110,13 +103,13 @@ const SectionD: React.FC<ContactSectionProps> = ({
               value={formState.formData.message}
               onChange={handleInputChange}
               required
-              className="w-full resize-none h-[120px] md:h-[180px] lg:h-[450px] px-4 lg:px-10 py-3 lg:py-8 text-sm md:text-base lg:text-xl rounded-xl border border-gray-400 focus:border-black focus:ring-2 focus:ring-black focus:outline-none"
+              className="w-full resize-none h-[120px] md:h-[180px] lg:h-[450px] px-4 lg:px-10 py-3 lg:py-8 text-sm md:text-base lg:text-xl rounded-xl lg:rounded-[32px] bg-gradient-to-t from-gray-300 to-white shadow-sm outline-none"
             />
 
             <button
               type="submit"
               disabled={formState.isSubmitting}
-              className="w-full h-[50px] lg:h-[80px] text-sm md:text-base lg:text-2xl rounded-xl bg-black text-white transition disabled:opacity-50 focus:ring-2"
+              className="w-full h-[50px] lg:h-[80px] text-sm md:text-base lg:text-2xl rounded-xl lg:rounded-full bg-black text-white transition disabled:opacity-50"
             >
               {formState.isSubmitting ? "Sending..." : "Book a call"}
             </button>
