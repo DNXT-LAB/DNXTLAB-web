@@ -167,3 +167,20 @@ html {
     margin-top: -8% !important;
   }
 }
+
+/* SectionC: Show text by default */
+.web-cards-container h3,
+.web-cards-container p,
+.web-cards-container ul,
+.web-cards-container .text-gray-600 {
+	opacity: 1;
+	transition: opacity .4s ease;
+}
+  
+/* When a card is centered at 47% (desktop), hide text on peeking siblings */
+.web-cards-container:has(> div[style*="left: 47%"]) > div:not([style*="left: 47%"]) h3,
+.web-cards-container:has(> div[style*="left: 47%"]) > div:not([style*="left: 47%"]) p,
+.web-cards-container:has(> div[style*="left: 47%"]) > div:not([style*="left: 47%"]) ul,
+.web-cards-container:has(> div[style*="left: 47%"]) > div:not([style*="left: 47%"]) .text-gray-600 {
+	opacity: 0;
+}
