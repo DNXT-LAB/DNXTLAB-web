@@ -66,8 +66,8 @@ const SectionB: React.FC<SectionProps> = ({ progress }) => {
     transform: `translate(-50%, ${
       secondSmoothProgress < 0.3 ? "100%" : "-50%"
     }) translateY(${
-      thirdSmoothProgress > 0 ? -(thirdSmoothProgress * 900 * scaleFactor) : 0
-    }px)`,
+      thirdSmoothProgress > 0 ? -(thirdSmoothProgress * 500 * scaleFactor) : 0
+    }px)`, // Reduced from 900 to 500 for slower scroll-out
     transformOrigin: "center center",
     opacity:
       secondSmoothProgress < 0.2
@@ -106,7 +106,7 @@ const SectionB: React.FC<SectionProps> = ({ progress }) => {
               background:
                 "linear-gradient(135deg, #0891b2 0%, #1e40af 50%, #7c3aed 100%)",
               maxWidth: "90%",
-              height:"370px"
+              height:"430px"
             }}
           />
         </div>
