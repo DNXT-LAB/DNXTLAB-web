@@ -115,6 +115,14 @@ html {
   .we-build-text-wrapper {
     margin-left: 60px !important;
   }
+  
+  /* Increased text sizes for 1024px-1279px screens */
+  .elevate-text h2 {
+    font-size: 3.3rem !important;
+    line-height: 1.1 !important;
+    /* text-align: center !important; */
+  }
+ 
 }
 @media screen and (min-device-width: 768px) and (max-device-width: 1023px) {
   .elevate-text {
