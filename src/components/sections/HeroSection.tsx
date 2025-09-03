@@ -2,12 +2,12 @@ import React from 'react'
 
 const HeroSection: React.FC<{ onNavigateToSection?: (section: number) => void }> = ({ onNavigateToSection }) => {
   return (
-    <div className="fixed left-2 right-2 bottom-8 sm:left-4 sm:right-auto sm:bottom-12 lg:bottom-6 z-20 px-2 sm:px-4 md:px-8">
+    <div className="fixed left-2 right-2 bottom-8 sm:left-4 sm:right-auto sm:bottom-12 lg:bottom-6 z-20 px-2 sm:px-4 md:px-8 hero-root">
       <div className="flex flex-col items-start space-y-3 sm:space-y-4">
         
         {/* Heading */}
         <h1
-          className="text-white font-bold uppercase font-poppins leading-tight"
+          className="text-white font-bold uppercase font-poppins leading-tight hero-heading"
           style={{
             fontSize: 'clamp(1.5rem, 5vw, 4.5rem)', // Responsive font size
             lineHeight: '1.1'
@@ -18,7 +18,7 @@ const HeroSection: React.FC<{ onNavigateToSection?: (section: number) => void }>
         
         {/* Subtext */}
         <p
-          className="text-white font-inter leading-relaxed"
+          className="text-white font-inter leading-relaxed hero-subtext"
           style={{
             fontSize: 'clamp(1rem, 2.5vw, 2rem)', // Responsive font size
             maxWidth: 'clamp(63vw, 60vw, 800px)'

@@ -107,7 +107,7 @@ html {
   }
   .web-cards-container {
     margin-top: 16rem !important;
-    left: 8% !important;
+    left: 18% !important;
   }
   .book-button {
     left: 48% !important;
@@ -151,7 +151,7 @@ html {
     height: 200px !important;
   }
   .stategic-content {
-    max-width: 76% !important;
+    max-width: 100% !important;
   }
 }
 
@@ -183,4 +183,20 @@ html {
 .web-cards-container:has(> div[style*="left: 47%"]) > div:not([style*="left: 47%"]) ul,
 .web-cards-container:has(> div[style*="left: 47%"]) > div:not([style*="left: 47%"]) .text-gray-600 {
 	opacity: 0;
+}
+
+/* Hero micro-breakpoint for very small devices */
+@media (max-width: 667px) {
+	.hero-heading {
+		font-size: clamp(2.2rem, 8vw, 3rem) !important;
+		line-height: 1.1 !important;
+	}
+	.hero-subtext {
+		font-size: clamp(1.15rem, 4vw, 1.6rem) !important;
+		max-width: 95vw !important;
+	}
+	.hero-root {
+		left: 0.25rem !important;
+		right: 0.25rem !important;
+	}
 }

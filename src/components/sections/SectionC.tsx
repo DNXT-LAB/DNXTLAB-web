@@ -127,9 +127,9 @@ const SectionC: React.FC<SectionProps> = ({
   // Calculate responsively scaled font sizes
   const getScaledFontSizes = () => {
     const getResponsiveMainTitle = () => {
-      if (viewportDimensions.width >= 1536) return 3.5; // 2XL: 5.5rem
-      if (viewportDimensions.width >= 1280) return 3.5; // XL: 4.5rem
-      return 3.5; // Desktop: 3.5rem (more compact)
+      if (viewportDimensions.width >= 1536) return 5.5; // 2XL: 5.5rem (increased from 3.5)
+      if (viewportDimensions.width >= 1280) return 4.5; // XL: 4.5rem (increased from 3.5)
+      return 4.0; // Desktop: 4.0rem (increased from 3.5)
     };
 
     return {
@@ -333,10 +333,9 @@ const SectionC: React.FC<SectionProps> = ({
               className="transition-opacity duration-500"
             >
               <p
-                className="text-black font-poppins"
+                className="text-black font-poppins mb-5"
                 style={{
                   fontSize: fontSizes.subtitle,
-                  marginBottom: fontSizes.spacing.mb12,
                 }}
               >
                 Explore our core expertise
