@@ -23,7 +23,7 @@ export const SCROLL_CONFIG = {
 
 // Configuraciones de niveles de scroll
 export const SCROLL_LEVELS = {
-  SECOND_LEVEL_START: 900,    // Reduced from 650
+  SECOND_LEVEL_START: 700,    // Reduced from 650
   SECOND_LEVEL_RANGE: 300,    // Reduced from 300
   THIRD_LEVEL_START: 1500,
   THIRD_LEVEL_RANGE: 300,
