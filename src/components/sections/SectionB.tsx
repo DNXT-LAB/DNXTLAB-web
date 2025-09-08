@@ -72,8 +72,8 @@ const SectionB: React.FC<SectionProps> = ({ progress }) => {
     opacity:
       secondSmoothProgress < 0.2
         ? 0
-        : thirdSmoothProgress > 0.3
-        ? Math.max(0, 1 - thirdSmoothProgress * 2)
+        : thirdSmoothProgress > 0
+        ? 0
         : 1,
     visibility:
       secondSmoothProgress > 0.1 && thirdSmoothProgress < 0.6
@@ -111,14 +111,13 @@ const SectionB: React.FC<SectionProps> = ({ progress }) => {
           />
         </div>
         {/* Text */}
-        <div className="flex flex-col text-center w-full items-center">
-          <h2 className="text-4xl text-black font-poppins mb-4 leading-tight">
+        <div className="flex flex-col w-[90%] max-md:w-[90%] lg:text-center lg:items-center">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl text-black font-poppins mb-4 leading-tight text-left lg:text-center">
             Solutions That Evolve
             <b> With Your Bussiness</b>
           </h2>
           <p
-            className="text-xs sm:text-sm md:text-base text-black font-poppins leading-relaxed max-w-xs sm:max-w-md md:max-w-lg lg:max-w-2xl mx-auto stategic-content"
-            style={{ maxWidth: "60%" }}
+            className="text-sm sm:text-base lg:text-base text-black font-poppins leading-relaxed max-w-full lg:max-w-2xl lg:mx-auto stategic-content text-left lg:text-center px-0 sm:px-0 lg:px-0"
           >
             At DNXT LAB, we don&apos;t sell tools—we design intelligent
             frameworks tailored to your operations. By blending technical depth

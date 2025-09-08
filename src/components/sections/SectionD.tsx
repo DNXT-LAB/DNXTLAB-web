@@ -42,7 +42,7 @@ const SectionD: React.FC<ContactSectionProps> = ({
     >
       <div className="w-full max-w-[1800px] px-5 py-8 flex flex-col gap-10 lg:gap-15 mt-[25px] relative md:mt-0">
         {/* Title */}
-        <h2 className="text-[36px] leading-[48px] lg:text-[70px] lg:leading-[110px] font-semibold font-[Poppins] text-black text-center">
+        <h2 className="text-[36px] leading-[48px] lg:text-[70px] lg:leading-[110px] font-semibold font-[Poppins] text-black text-center lg:text-left">
           BOOK A CALL NOW
         </h2>
 

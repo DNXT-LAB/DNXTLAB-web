@@ -297,26 +297,26 @@ content-center !h-[80%]">
             muted 
             playsInline 
             preload="auto" 
-            className="w-full max-w-[350px] md:max-w-[650px] h-[180px] md:h-[260px] object-cover shadow-2xl rounded-2xl"
+            className="w-full  sm:max-w-[650px] h-[180px] sm:h-[260px] object-cover shadow-2xl rounded-2xl"
           />
         </div>
         
         {/* Text below */}
-        <div className="flex-1 flex flex-col items-center w-full">
-          <h2 className="text-2xl md:text-4xl font-bold text-black font-poppins mb-4 md:mb-6 leading-tight text-center">
-            WE BUILD WITH INTELLIGENCE AND<br/>INTENT
+        <div className="flex-1 flex flex-col items-left w-full  sm:max-w-[650px] m-auto">
+          <h2 className="text-2xl md:text-4xl font-bold text-black font-poppins mb-4 md:mb-6 leading-tight ">
+            WE BUILD WITH INTELLIGENCE AND INTENT
           </h2>
           
-          <p className="text-base md:text-2xl text-black font-inter mb-4 md:mb-6 leading-tight text-center">
-            Smart systems. Seamless design.<br/>Real results.
+          <p className="text-base md:text-2xl text-black font-inter mb-4 md:mb-6 leading-tight">
+            Smart systems. Seamless design. Real results.
           </p>
           
-          <p className="text-xs md:text-base text-black font-inter mb-6 md:mb-8 leading-relaxed max-w-[90vw] md:max-w-[600px] text-center">
+          <p className="text-xs md:text-base text-black font-inter mb-6 md:mb-8 leading-relaxed max-w-[90vw] sm:max-w-[650px]">
             At DNXT LAB, we create intelligent digital solutions that think, adapt, and scale—combining AI automation, UX strategy, and high-performance web design to help you launch faster, work smarter, and grow stronger.
           </p>
           
           <button 
-            className="text-xs md:text-base px-6 py-3 md:px-8 md:py-4 bg-black text-white rounded-full font-morien hover:bg-gray-800 transition-colors flex items-center gap-3 self-center"
+            className="text-xs md:text-base px-6 py-3 md:px-8 md:py-4 bg-black text-white rounded-full font-morien hover:bg-gray-800 transition-colors flex items-center gap-3 self-start"
             onClick={() => onNavigateToSection?.(3)}
           >
             SERVICES
