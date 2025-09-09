@@ -112,12 +112,12 @@ const SectionB: React.FC<SectionProps> = ({ progress }) => {
         </div>
         {/* Text */}
         <div className="flex flex-col w-[90%] max-md:w-[90%] lg:text-center lg:items-center">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl text-black font-poppins mb-4 leading-tight text-left lg:text-center">
+          <h2 className="text-2xl sm:text-3xl lg:text-5xl text-black font-poppins mb-4 leading-tight text-left lg:text-center ">
             Solutions That Evolve
             <b> With Your Bussiness</b>
           </h2>
           <p
-            className="text-sm sm:text-base lg:text-base text-black font-poppins leading-relaxed max-w-full lg:max-w-2xl lg:mx-auto stategic-content text-left lg:text-center px-0 sm:px-0 lg:px-0"
+            className="text-sm sm:text-base lg:text-lg text-black font-poppins leading-relaxed max-w-full lg:max-w-3xl lg:mx-auto stategic-content text-left lg:text-center px-0 sm:px-0 lg:px-0 main-text"
           >
             At DNXT LAB, we don&apos;t sell tools—we design intelligent
             frameworks tailored to your operations. By blending technical depth

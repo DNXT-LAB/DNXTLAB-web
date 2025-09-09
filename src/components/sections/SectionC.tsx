@@ -13,7 +13,7 @@ const SectionC: React.FC<SectionProps> = ({
     sixthSmoothProgress,
     seventhSmoothProgress,
   } = progress;
-
+console.log('progress', progress)
   const [scaleFactor, setScaleFactor] = useState(1);
   const [viewportDimensions, setViewportDimensions] = useState({
     width: 1920,
@@ -171,7 +171,6 @@ const SectionC: React.FC<SectionProps> = ({
   };
 
   const fontSizes = getScaledFontSizes();
-
   const sectionStyle: React.CSSProperties = {
     position: "absolute",
     width: "100%",
@@ -186,14 +185,15 @@ const SectionC: React.FC<SectionProps> = ({
         : 0
     }px)`,
     transformOrigin: "center center",
-    opacity:
-      thirdSmoothProgress < 0.4
-        ? 0
-        : seventhSmoothProgress > 0.35
-        ? Math.max(0, 1 - (seventhSmoothProgress - 0.35) * 5)
-        : 1,
+   opacity:sixthSmoothProgress > 0.99 ? 0 : 1,
+    // opacity:
+    //   thirdSmoothProgress < 0.4
+    //     ? 0
+    //     : seventhSmoothProgress > 0.35
+    //     ? Math.max(0, 1 - (seventhSmoothProgress - 0.35) * 5)
+    //     : 1,
     visibility:
-      thirdSmoothProgress > 0.35 && seventhSmoothProgress < 0.55
+      thirdSmoothProgress > 0.35 && seventhSmoothProgress < 0.36
         ? "visible"
         : "hidden",
     transition: "all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
@@ -225,12 +225,17 @@ const SectionC: React.FC<SectionProps> = ({
 
   // Function to get responsive initial position of card1
   const getResponsiveCard1Position = () => {
+    if (viewportDimensions.width >= 2400) return "130%"; // 2XL: 108% (original)
     if (viewportDimensions.width >= 1536) return "108%"; // 2XL: 108% (original)
     return "75%"; // Desktop/XL: 75% (more visible)
   };
 
   // Helper to pick values by width: small (<1280), xl (1280-1535), 2xl (>=1536)
-  const pickByWidth = (smallValue: string, xlValue: string, twoXlValue: string) => {
+  const pickByWidth = (
+    smallValue: string,
+    xlValue: string,
+    twoXlValue: string
+  ) => {
     const w = viewportDimensions.width;
     if (w >= 1536) return twoXlValue;
     if (w >= 1280) return xlValue;
@@ -238,7 +243,7 @@ const SectionC: React.FC<SectionProps> = ({
   };
 
   const centerPos = viewportDimensions.width <= 767 ? "45%" : "47%";
-  
+
   // Calculate positions and rotations of  the cards
   const card1Position =
     sixthSmoothProgress > 0
@@ -248,22 +253,36 @@ const SectionC: React.FC<SectionProps> = ({
       : fourthSmoothProgress > 0
       ? centerPos
       : getResponsiveCard1Position();
-  
+
+  // Helper for 2xl/2400+ for card2/card3
+  const pickByWidthCardRight = (
+    smallValue: string,
+    xlValue: string,
+    twoXlValue: string,
+    ultraValue: string
+  ) => {
+    const w = viewportDimensions.width;
+    if (w >= 2400) return ultraValue;
+    if (w >= 1536) return twoXlValue;
+    if (w >= 1280) return xlValue;
+    return smallValue;
+  };
+
   const card2Position =
     sixthSmoothProgress > 0
       ? pickByWidth("-30%", "-5%", "-15%")
       : fifthSmoothProgress > 0
       ? centerPos
       : fourthSmoothProgress > 0
-      ? pickByWidth("150%", "96%", "130%")
+      ? pickByWidthCardRight("150%", "96%", "130%", "145%")
       : "200%";
-  
+
   const card3Position =
     sixthSmoothProgress > 0
       ? centerPos
       : fifthSmoothProgress > 0
-      ? pickByWidth("150%", "96%", "130%")
-      : "200%"
+      ? pickByWidthCardRight("150%", "96%", "130%", "145%")
+      : "200%";
 
   const card1Rotation =
     fifthSmoothProgress > 0
@@ -298,6 +317,8 @@ const SectionC: React.FC<SectionProps> = ({
               viewportDimensions.width >= 1536
                 ? viewportDimensions.width <= 1920
                   ? `calc(11% * ${1 / scaleFactor})`
+                  : viewportDimensions.width <= 2400
+                  ? `calc(11% * ${1 / scaleFactor})`
                   : `calc(-1.8% * ${1 / scaleFactor})`
                 : "8rem", // Add margin for non-2XL screens to move right
             transform: `scale(${scaleFactor})`,
@@ -313,12 +334,14 @@ const SectionC: React.FC<SectionProps> = ({
             <h2
               className="font-bold text-black font-poppins leading-[1.1]"
               style={{
-                fontSize: fontSizes.mainTitle.desktop,
+                fontSize: "60px",
                 marginBottom: fontSizes.spacing.mb6,
                 marginTop:
-                  viewportDimensions.width >= 1536
-                    ? fontSizes.spacing.mt28
-                    : "10rem", // 2XL: original
+                  viewportDimensions.width >= 2400
+                    ? "15rem"
+                    : viewportDimensions.width >= 1536
+                      ? fontSizes.spacing.mt28
+                      : "10rem",
                 textAlign: "start",
               }}
             >
@@ -335,7 +358,7 @@ const SectionC: React.FC<SectionProps> = ({
               <p
                 className="text-black font-poppins mb-5"
                 style={{
-                  fontSize: fontSizes.subtitle,
+                  fontSize: "40px",
                 }}
               >
                 Explore our core expertise
@@ -352,7 +375,7 @@ const SectionC: React.FC<SectionProps> = ({
                   <h3
                     className="font-poppins"
                     style={{
-                      fontSize: fontSizes.serviceTitle,
+                      fontSize: "20px",
                       marginBottom: fontSizes.spacing.mb1,
                     }}
                   >
@@ -360,7 +383,7 @@ const SectionC: React.FC<SectionProps> = ({
                   </h3>
                   <p
                     className="text-gray-600 font-poppins"
-                    style={{ fontSize: fontSizes.serviceDescription }}
+                    style={{ fontSize: "16px" }}
                   >
                     Crafting sleek, responsive websites that convert and reflect
                     <br />
@@ -372,7 +395,7 @@ const SectionC: React.FC<SectionProps> = ({
                   <h3
                     className="font-poppins"
                     style={{
-                      fontSize: fontSizes.serviceTitle,
+                      fontSize: "20px",
                       marginBottom: fontSizes.spacing.mb1,
                     }}
                   >
@@ -380,7 +403,7 @@ const SectionC: React.FC<SectionProps> = ({
                   </h3>
                   <p
                     className="text-gray-600 font-poppins"
-                    style={{ fontSize: fontSizes.serviceDescription }}
+                    style={{ fontSize: "16px" }}
                   >
                     Automating workflows, enhancing decision-making, and
                     <br />
@@ -392,7 +415,7 @@ const SectionC: React.FC<SectionProps> = ({
                   <h3
                     className="font-poppins"
                     style={{
-                      fontSize: fontSizes.serviceTitle,
+                      fontSize: "20px",
                       marginBottom: fontSizes.spacing.mb1,
                     }}
                   >
@@ -400,7 +423,7 @@ const SectionC: React.FC<SectionProps> = ({
                   </h3>
                   <p
                     className="text-gray-600 font-poppins"
-                    style={{ fontSize: fontSizes.serviceDescription }}
+                    style={{ fontSize: "16px" }}
                   >
                     Protecting your digital assets with proactive strategies and
                     <br />
@@ -416,7 +439,12 @@ const SectionC: React.FC<SectionProps> = ({
         <div
           className="absolute inset-0 web-cards-container"
           style={{
-            marginTop: viewportDimensions.width >= 1536 ? "20rem" : "10rem", // 2XL: mt-80, others: mt-40 (higher up)
+            marginTop:
+              viewportDimensions.width >= 2400
+                ? "25rem"
+                : viewportDimensions.width >= 1536
+                ? "20rem"
+                : "10rem",
           }}
         >
           <ServiceCard
