@@ -7,7 +7,11 @@ export const easeOutQuart = (t: number): number => 1 - Math.pow(1 - t, 4)
 
 // Calculate scroll progress for each level
 export const calculateScrollProgress = (scrollY: number): ScrollProgress => {
-  const secondLevelProgress = Math.max(0, Math.min((scrollY - SCROLL_LEVELS.SECOND_LEVEL_START) / SCROLL_LEVELS.SECOND_LEVEL_RANGE, 1))
+  // Determine dynamic SECOND_LEVEL_START based on window width
+  const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false
+  const dynamicSecondLevelStart = isMobile ? 900 : SCROLL_LEVELS.SECOND_LEVEL_START
+console.log('dynamicSecondLevelStart', dynamicSecondLevelStart)
+  const secondLevelProgress = Math.max(0, Math.min((scrollY - dynamicSecondLevelStart) / SCROLL_LEVELS.SECOND_LEVEL_RANGE, 1))
   const thirdLevelProgress = Math.max(0, Math.min((scrollY - SCROLL_LEVELS.THIRD_LEVEL_START) / SCROLL_LEVELS.THIRD_LEVEL_RANGE, 1))
   const fourthLevelProgress = Math.max(0, Math.min((scrollY - SCROLL_LEVELS.FOURTH_LEVEL_START) / SCROLL_LEVELS.FOURTH_LEVEL_RANGE, 1))
   const fifthLevelProgress = Math.max(0, Math.min((scrollY - SCROLL_LEVELS.FIFTH_LEVEL_START) / SCROLL_LEVELS.FIFTH_LEVEL_RANGE, 1))

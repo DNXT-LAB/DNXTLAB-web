@@ -32,7 +32,7 @@ const HeroSection: React.FC<{ onNavigateToSection?: (section: number) => void }>
         <button
           className="flex items-center justify-center px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3
           bg-white rounded-full hover:opacity-90 transition
-          focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black"
+          focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black hero-button"
           aria-label="View DNXTLAB services"
           onClick={() => onNavigateToSection?.(3)}
           style={{

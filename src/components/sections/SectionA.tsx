@@ -123,8 +123,8 @@ const SectionA: React.FC<SectionAProps & { onNavigateToSection?: (section: numbe
         : '0',
     left: '-0.5%',
     transform: `translateY(${sectionATranslateY}px) scale(${sectionAScale})`,
-    opacity: secondSmoothProgress > 0.7 ? 0 : 1 - (secondSmoothProgress * 1.2),
-    visibility: secondSmoothProgress > 0.8 ? 'hidden' : 'visible',
+    opacity: secondSmoothProgress > 0.15 ? 0 : 1 - (secondSmoothProgress * 1.2),
+    visibility: secondSmoothProgress > 0.2 ? 'hidden' : 'visible',
     transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
     willChange: 'transform, opacity'
   }
