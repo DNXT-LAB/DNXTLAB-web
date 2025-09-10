@@ -83,7 +83,7 @@ const SectionD: React.FC<ContactSectionProps> = ({
 
             {/* Desktop only contact info */}
             {!isMobile && (
-              <div className="hidden lg:flex flex-col gap-3 text-lg text-black mt-auto">
+              <div className="hidden lg:flex flex-col gap-3 text-2xl text-black mt-auto">
                 <p>Phone Num: +351 999999999</p>
                 <p>Email: info@diamondnxt.com</p>
                 <p>Sede: Rua Conselheiro Veloso Cruz, N.º 10</p>

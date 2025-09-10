@@ -122,6 +122,9 @@ html {
     line-height: 1.1 !important;
     /* text-align: center !important; */
   }
+   .stategic-video {
+    height: 390px !important;
+  }
  
 }
 @media screen and (min-device-width: 768px) and (max-device-width: 1023px) {
@@ -166,6 +169,9 @@ html {
 @media screen and (min-device-width: 1280px) and (max-device-width: 1535px) {
   .book-button {
     left: 40% !important;
+  }
+   .stategic-video {
+    height: 400px !important;
   }
 }
 
