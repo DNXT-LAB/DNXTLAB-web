@@ -1,19 +1,19 @@
-'use client'
+"use client";
 
-import React, { useRef, useEffect } from 'react'
-import Navbar from './Navbar'
-import HeroSection from './sections/HeroSection'
-import SectionA from './sections/SectionA'
-import SectionB from './sections/SectionB'
-import SectionC from './sections/SectionC'
-import SectionD from './sections/SectionD'
-import { useScrollAnimation } from '@/hooks/useScrollAnimation'
-import { useContactForm } from '@/hooks/useContactForm'
-import { SCROLL_LEVELS } from '@/utils/constants'
+import React, { useRef, useEffect } from "react";
+import Navbar from "./Navbar";
+import HeroSection from "./sections/HeroSection";
+import SectionA from "./sections/SectionA";
+import SectionB from "./sections/SectionB";
+import SectionC from "./sections/SectionC";
+import SectionD from "./sections/SectionD";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useContactForm } from "@/hooks/useContactForm";
+import { SCROLL_LEVELS } from "@/utils/constants";
 
 export default function VideoContent() {
-  const videoRef = useRef<HTMLVideoElement>(null)
-  
+  const videoRef = useRef<HTMLVideoElement>(null);
+
   // Hooks personalizados
   const {
     scrollY,
@@ -22,27 +22,23 @@ export default function VideoContent() {
     progress,
     sectionATransforms,
     tabProperties,
-    navigateToSection
-  } = useScrollAnimation()
-  
-  const {
-    formState,
-    handleInputChange,
-    handleSubmit
-  } = useContactForm()
+    navigateToSection,
+  } = useScrollAnimation();
+
+  const { formState, handleInputChange, handleSubmit } = useContactForm();
 
   // Inicializar video
   useEffect(() => {
-    const video = videoRef.current
+    const video = videoRef.current;
     if (video) {
-      video.play().catch(error => {
-        console.warn('Error al reproducir video:', error)
-      })
+      video.play().catch((error) => {
+        console.warn("Error al reproducir video:", error);
+      });
     }
-  }, [])
+  }, []);
 
-  const { tabTransform, tabHeight, tabTop } = tabProperties
-  const { secondSmoothProgress } = progress
+  const { tabTransform, tabHeight, tabTop } = tabProperties;
+  const { secondSmoothProgress } = progress;
 
   return (
     <div className="relative w-screen bg-black">
@@ -51,7 +47,7 @@ export default function VideoContent() {
         ref={videoRef}
         className="fixed inset-0 w-full h-[800px] lg:h-full object-cover z-0"
         style={{
-          // transform: (typeof window !== 'undefined' && windowWidth < 1024) ? 'none' : 'scale(1.1)',
+          transform: "scale(1.1)",
           // transformOrigin: 'center center'
         }}
         src="/video.mp4"
@@ -62,88 +58,119 @@ export default function VideoContent() {
         preload="auto"
         aria-label="Background video showing DNXTLAB solutions"
       />
-      
+
       {/* Overlay to improve readability */}
-      <div className="fixed inset-0 bg-black/60 z-10" aria-hidden="true" style={{ width: '100vw', height: '100dvh' }} />
-      
+      <div
+        className="fixed inset-0 bg-black/60 z-10"
+        aria-hidden="true"
+        style={{ width: "100vw", height: "100dvh" }}
+      />
+
       {/* Navbar */}
       <div className="fixed top-0 left-0 right-0 z-60 p-8">
-        <Navbar 
-          isDark={secondSmoothProgress > 0.3} 
+        <Navbar
+          isDark={secondSmoothProgress > 0.3}
           onNavigateToSection={navigateToSection}
         />
       </div>
-      
+
       {/* Hero Section - Fixed main content */}
       <HeroSection onNavigateToSection={navigateToSection} />
 
       {/* White tab that slides from below */}
-      <div 
+      <div
         className="fixed h-full left-0 right-0 z-50 transition-all duration-500 ease-out"
         style={{
           transform: `translateY(${tabTransform}%)`,
-          borderRadius: scrollY < SCROLL_LEVELS.SECOND_LEVEL_START ? '32px 32px 0 0' : `${16 * (1 - secondSmoothProgress)}px`,
+          borderRadius:
+            scrollY < SCROLL_LEVELS.SECOND_LEVEL_START
+              ? "32px 32px 0 0"
+              : `${16 * (1 - secondSmoothProgress)}px`,
           height: tabHeight,
           top: tabTop,
-          width: '100vw',
-          backgroundColor: '#FFFFFF',
-          boxShadow: '0 -8px 32px rgba(0, 0, 0, 0.3)',
-          transition: 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-radius 0.4s ease-out, height 0.4s ease-out, top 0.4s ease-out'
+          width: "100vw",
+          backgroundColor: "#FFFFFF",
+          boxShadow: "0 -8px 32px rgba(0, 0, 0, 0.3)",
+          transition:
+            "transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-radius 0.4s ease-out, height 0.4s ease-out, top 0.4s ease-out",
         }}
       >
-      
-          {/* Section A */}
-          <SectionA 
-            scrollY={scrollY}
-            progress={progress}
-            windowHeight={windowHeight}
-            {...sectionATransforms}
-            onNavigateToSection={navigateToSection}
-          />
-          
-          {/* Section B */}
-          <SectionB 
-            scrollY={scrollY}
-            progress={progress}
-            windowHeight={windowHeight}
-          />
-            <div 
+        {/* Section A */}
+        <SectionA
+          scrollY={scrollY}
+          progress={progress}
+          windowHeight={windowHeight}
+          {...sectionATransforms}
+          onNavigateToSection={navigateToSection}
+        />
+
+        {/* Section B */}
+        <SectionB
+          scrollY={scrollY}
+          progress={progress}
+          windowHeight={windowHeight}
+        />
+        <div
           className="relative"
           style={{
-            position: 'absolute',
-            width: '1817px',
-            height: '861px',
-            left: '60px',
+            position: "absolute",
+            width: "1817px",
+            height: "861px",
+            left: "60px",
           }}
         >
           {/* Section C */}
-          <SectionC 
+          <SectionC
             scrollY={scrollY}
             progress={progress}
             windowHeight={windowHeight}
             onNavigateToSection={navigateToSection}
           />
         </div>
-          {/* Section D */}
-          <SectionD 
-            scrollY={scrollY}
-            progress={progress}
-            windowHeight={windowHeight}
-            formState={formState}
-            handleInputChange={handleInputChange}
-            handleSubmit={handleSubmit}
-          />
+        {/* Section D */}
+        <SectionD
+          scrollY={scrollY}
+          progress={progress}
+          windowHeight={windowHeight}
+          formState={formState}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+        />
       </div>
 
       {/* Contenido invisible para activar scroll */}
-      <div className="relative z-0 bg-transparent" style={{ height: '200vh' }} />
-      <div className="relative z-0 bg-transparent" style={{ height: '100vh' }} />
-      <div className="relative z-0 bg-transparent" style={{ height: '200vh' }} />
-      <div className="relative z-0 bg-transparent" style={{ height: '200vh' }} />
-      <div className="relative z-0 bg-transparent" style={{ height: '400vh' }} />
-      <div className="relative z-0 bg-transparent" style={{ height: '400vh' }} />
-      <div className="relative z-0 bg-transparent" style={{ height: '400vh' }} />
-      <div className="relative z-0 bg-transparent" style={{ height: '400vh' }} />
+      <div
+        className="relative z-0 bg-transparent"
+        style={{ height: "200vh" }}
+      />
+      <div
+        className="relative z-0 bg-transparent"
+        style={{ height: "100vh" }}
+      />
+      <div
+        className="relative z-0 bg-transparent"
+        style={{ height: "200vh" }}
+      />
+      <div
+        className="relative z-0 bg-transparent"
+        style={{ height: "200vh" }}
+      />
+      <div
+        className="relative z-0 bg-transparent"
+        style={{ height: "400vh" }}
+      />
+      <div
+        className="relative z-0 bg-transparent"
+        style={{ height: "400vh" }}
+      />
+      <div
+        className="relative z-0 bg-transparent"
+        style={{ height: "400vh" }}
+      />
+      <div
+        className="relative z-0 bg-transparent"
+        style={{ height: "400vh" }}
+      />
     </div>
-  )
-} 
+  );
+}

@@ -10,7 +10,6 @@ export const calculateScrollProgress = (scrollY: number): ScrollProgress => {
   // Determine dynamic SECOND_LEVEL_START based on window width
   const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false
   const dynamicSecondLevelStart = isMobile ? 900 : SCROLL_LEVELS.SECOND_LEVEL_START
-console.log('dynamicSecondLevelStart', dynamicSecondLevelStart)
   const secondLevelProgress = Math.max(0, Math.min((scrollY - dynamicSecondLevelStart) / SCROLL_LEVELS.SECOND_LEVEL_RANGE, 1))
   const thirdLevelProgress = Math.max(0, Math.min((scrollY - SCROLL_LEVELS.THIRD_LEVEL_START) / SCROLL_LEVELS.THIRD_LEVEL_RANGE, 1))
   const fourthLevelProgress = Math.max(0, Math.min((scrollY - SCROLL_LEVELS.FOURTH_LEVEL_START) / SCROLL_LEVELS.FOURTH_LEVEL_RANGE, 1))

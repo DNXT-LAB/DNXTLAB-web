@@ -84,11 +84,11 @@ const SectionB: React.FC<SectionProps> = ({ progress }) => {
   };
 
   return (
-    <div style={sectionStyle}>
+    <div style={sectionStyle} className="strategic-section-main">
       <div className="w-full min-h-screen flex flex-col justify-center items-center px-2 md:px-8">
         {/* Title */}
         <div className="w-full mb-6 md:mb-8 text-center">
-          <p className="font-poppins text-black uppercase tracking-wider text-lg md:text-2xl mt-8 md:mt-20">
+          <p className="font-poppins text-black uppercase tracking-wider text-lg md:text-2xl mt-8 md:mt-20 strategic-title">
             STRATEGIC FLEXIBILITY
           </p>
         </div>

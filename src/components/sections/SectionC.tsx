@@ -13,7 +13,6 @@ const SectionC: React.FC<SectionProps> = ({
     sixthSmoothProgress,
     seventhSmoothProgress,
   } = progress;
-console.log('progress', progress)
   const [scaleFactor, setScaleFactor] = useState(1);
   const [viewportDimensions, setViewportDimensions] = useState({
     width: 1920,
@@ -169,7 +168,6 @@ console.log('progress', progress)
       },
     };
   };
-
   const fontSizes = getScaledFontSizes();
   const sectionStyle: React.CSSProperties = {
     position: "absolute",

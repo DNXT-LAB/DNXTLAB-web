@@ -2,9 +2,9 @@ import { useState, useEffect, useCallback, useMemo } from 'react'
 import { AnimationPhase, AnimationState } from '../types'
 
 const ANIMATION_CONFIG = {
-  INITIAL_DELAY: 500,
-  LETTER_DELAY: 120,
-  FINAL_DELAY: 1500,
+  INITIAL_DELAY: 300,
+  LETTER_DELAY: 80,
+  FINAL_DELAY: 1000,
   TEXT: "DNXT LAB"
 } as const
 
