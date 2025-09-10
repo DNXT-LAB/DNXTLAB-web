@@ -8,15 +8,11 @@ const SectionD: React.FC<ContactSectionProps> = ({
   handleSubmit,
 }) => {
   const { seventhSmoothProgress } = progress;
-  const [browserZoom, setBrowserZoom] = useState(1);
   const [isMobile, setIsMobile] = useState(false);
 
   // Detect browser zoom + mobile
   useEffect(() => {
     const updateDimensions = () => {
-      const zoom =
-        Math.round((window.outerWidth / window.innerWidth) * 100) / 100;
-      setBrowserZoom(zoom);
       setIsMobile(window.innerWidth < 1024);
     };
     updateDimensions();
@@ -28,15 +24,16 @@ const SectionD: React.FC<ContactSectionProps> = ({
     <div
       className={`
         fixed inset-0 flex items-center justify-center bg-white z-50
-        transition-opacity duration-800 ease-out
+        transition-opacity duration-800 ease-out lg:mt-[-70px]
+        container-contact
         ${
-          seventhSmoothProgress > 0.35
+          seventhSmoothProgress > 0.17
             ? "visible opacity-100"
             : "invisible opacity-0"
         }
       `}
       style={{
-        transform: !isMobile ? `scale(${0.75 / browserZoom})` : "none",
+        transform: !isMobile ? `scale(0.8)` : "none",
         transformOrigin: "center",
       }}
     >

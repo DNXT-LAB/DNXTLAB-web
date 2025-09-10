@@ -178,24 +178,24 @@ html {
 
 /* Hero micro-breakpoint for very small devices */
 @media (max-width: 667px) {
-	.hero-heading {
-		font-size: clamp(2.2rem, 8vw, 3rem) !important;
-		line-height: 1.1 !important;
-	}
-	.hero-subtext {
-		font-size: clamp(1.15rem, 4vw, 1.6rem) !important;
-		max-width: 95vw !important;
-	}
-	.hero-root {
-		left: 0.25rem !important;
-		right: 0.25rem !important;
-	}
+  .hero-heading {
+    font-size: clamp(2.2rem, 8vw, 3rem) !important;
+    line-height: 1.1 !important;
+  }
+  .hero-subtext {
+    font-size: clamp(1.15rem, 4vw, 1.6rem) !important;
+    max-width: 95vw !important;
+  }
+  .hero-root {
+    left: 0.25rem !important;
+    right: 0.25rem !important;
+  }
 }
 
 @media (min-width: 2400px) {
-  .service-card-root{
+  .service-card-root {
     min-height: 450px !important;
-  width: 800px !important;
+    width: 800px !important;
   }
   .service-card-root > div {
     width: 900px !important;
@@ -209,22 +209,38 @@ html {
   .service-card-root div {
     font-size: 1.5rem !important;
   }
-   .book-button {
+  .book-button {
     /* left: 44% !important; */
-    margin-top: -0% !important;
+    margin-top: 6% !important;
   }
-  .main-text{
+  .main-text {
     font-size: 22px !important;
   }
   .hero-heading {
-		font-size: 5rem !important;
-		line-height: 1.1 !important;
-	}
-  .hero-subtext{
+    font-size: 5rem !important;
+    line-height: 1.1 !important;
+  }
+  .hero-subtext {
     font-size: 2.5rem !important;
   }
-  .hero-button{
+  .hero-button {
     font-size: 1.75rem !important;
     padding: 0.75rem 2.5rem !important;
+  }
+  .strategic-section-main {
+    margin-top: -1.5rem !important;
+  }
+  .strategic-title {
+    font-size: 2rem !important;
+  }
+  .stategic-video {
+    height: 550px !important;
+  }
+  .stategic-content {
+    max-width: 55% !important;
+  }
+  .container-contact {
+    transform: scale(1) !important;
+    margin-top: -120px !important;
   }
 }
