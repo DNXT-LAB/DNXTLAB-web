@@ -24,7 +24,7 @@ const SectionD: React.FC<ContactSectionProps> = ({
     <div
       className={`
         fixed inset-0 flex items-center justify-center bg-white z-50
-        transition-opacity duration-800 ease-out lg:mt-[-70px]
+        transition-opacity duration-800 ease-out lg:mt-[-150px]
         container-contact
         ${
           seventhSmoothProgress > 0.17
@@ -37,7 +37,7 @@ const SectionD: React.FC<ContactSectionProps> = ({
         transformOrigin: "center",
       }}
     >
-      <div className="w-full max-w-[1800px] px-5 py-8 flex flex-col gap-10 lg:gap-15 mt-[25px] relative md:mt-0">
+      <div className="w-full max-w-[1800px] px-5 py-8 flex flex-col gap-10 lg:gap-15 mt-[25px] relative md:mt-0 lg:left-[-6.5rem] form-section">
         {/* Title */}
         <h2 className="text-[36px] leading-[48px] lg:text-[70px] lg:leading-[110px] font-semibold font-[Poppins] text-black text-center lg:text-left">
           BOOK A CALL NOW
@@ -58,7 +58,7 @@ const SectionD: React.FC<ContactSectionProps> = ({
               value={formState.formData.firstName}
               onChange={handleInputChange}
               required
-              className="w-full h-[50px] lg:h-[80px] px-4 lg:px-10 text-sm md:text-base lg:text-xl rounded-xl lg:rounded-full bg-gradient-to-t from-gray-300 to-white shadow-sm outline-none"
+              className="w-full h-[50px] lg:h-[85px] px-4 lg:px-10 text-sm md:text-base lg:text-2xl rounded-xl lg:rounded-full bg-gradient-to-t from-gray-300 to-white shadow-sm outline-none"
             />
 
             <input
@@ -68,7 +68,7 @@ const SectionD: React.FC<ContactSectionProps> = ({
               value={formState.formData.lastName}
               onChange={handleInputChange}
               required
-              className="w-full h-[50px] lg:h-[80px] px-4 lg:px-10 text-sm md:text-base lg:text-xl rounded-xl lg:rounded-full bg-gradient-to-t from-gray-300 to-white shadow-sm outline-none"
+              className="w-full h-[50px] lg:h-[85px] px-4 lg:px-10 text-sm md:text-base lg:text-2xl rounded-xl lg:rounded-full bg-gradient-to-t from-gray-300 to-white shadow-sm outline-none"
             />
 
             <input
@@ -78,7 +78,7 @@ const SectionD: React.FC<ContactSectionProps> = ({
               value={formState.formData.email}
               onChange={handleInputChange}
               required
-              className="w-full h-[50px] lg:h-[80px] px-4 lg:px-10 text-sm md:text-base lg:text-xl rounded-xl lg:rounded-full bg-gradient-to-t from-gray-300 to-white shadow-sm outline-none"
+              className="w-full h-[50px] lg:h-[85px] px-4 lg:px-10 text-sm md:text-base lg:text-2xl rounded-xl lg:rounded-full bg-gradient-to-t from-gray-300 to-white shadow-sm outline-none"
             />
 
             {/* Desktop only contact info */}
@@ -100,13 +100,13 @@ const SectionD: React.FC<ContactSectionProps> = ({
               value={formState.formData.message}
               onChange={handleInputChange}
               required
-              className="w-full resize-none h-[120px] md:h-[180px] lg:h-[450px] px-4 lg:px-10 py-3 lg:py-8 text-sm md:text-base lg:text-xl rounded-xl lg:rounded-[32px] bg-gradient-to-t from-gray-300 to-white shadow-sm outline-none"
+              className="w-full resize-none h-[120px] md:h-[180px] lg:h-[450px] px-4 lg:px-10 py-3 lg:py-8 text-sm md:text-base lg:text-2xl rounded-xl lg:rounded-[32px] bg-gradient-to-t from-gray-300 to-white shadow-sm outline-none"
             />
 
             <button
               type="submit"
               disabled={formState.isSubmitting}
-              className="w-full h-[50px] lg:h-[80px] text-sm md:text-base lg:text-2xl rounded-xl lg:rounded-full bg-black text-white transition disabled:opacity-50"
+              className="w-full h-[50px] lg:h-[85px] text-sm md:text-base lg:text-2xl rounded-xl lg:rounded-full bg-black text-white transition disabled:opacity-50"
             >
               {formState.isSubmitting ? "Sending..." : "Book a call"}
             </button>
