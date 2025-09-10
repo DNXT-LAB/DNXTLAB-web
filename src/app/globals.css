@@ -243,4 +243,7 @@ html {
     transform: scale(1) !important;
     margin-top: -120px !important;
   }
+  .form-section{
+    left: -9rem !important;
+  }
 }
