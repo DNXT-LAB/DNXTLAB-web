@@ -191,7 +191,7 @@ const SectionC: React.FC<SectionProps> = ({
     //     ? Math.max(0, 1 - (seventhSmoothProgress - 0.35) * 5)
     //     : 1,
     visibility:
-      thirdSmoothProgress > 0.35 && seventhSmoothProgress < 0.36
+      thirdSmoothProgress > 0.35 && seventhSmoothProgress < 0.16
         ? "visible"
         : "hidden",
     transition: "all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
