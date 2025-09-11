@@ -58,18 +58,18 @@ const SectionB: React.FC<SectionBProps> = ({ progress, tabTop }) => {
       window.removeEventListener("resize", updateScale);
     };
   }, []);
-
+console.log('secondSmoothProgress', secondSmoothProgress)
+  // Lower the threshold so SectionB appears sooner (reduce blank)
   const sectionStyle: React.CSSProperties = {
     position: "absolute",
     width: "100%",
-    // Remove height property entirely for better flex centering
     top: "45%",
     left: "50%",
     transform: `translate(-50%, ${
-      secondSmoothProgress < 0.3 ? "100%" : "-50%"
+      secondSmoothProgress < 0.05 ? "100%" : "-50%"
     }) translateY(${
       thirdSmoothProgress > 0 ? -(thirdSmoothProgress * 500 * scaleFactor) : 0
-    }px)`, // Reduced from 900 to 500 for slower scroll-out
+    }px)`,
     transformOrigin: "center center",
     opacity:
       thirdSmoothProgress >= 0.009 &&
