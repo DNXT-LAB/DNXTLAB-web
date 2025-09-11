@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import type { SectionAProps } from '@/types/animations'
 
 const SectionA: React.FC<SectionAProps & { onNavigateToSection?: (section: number) => void, tabTop?: string }> = ({
-  progress,
   sectionATranslateY,
   sectionAScale,
   videoConvergeX,
@@ -14,7 +13,6 @@ const SectionA: React.FC<SectionAProps & { onNavigateToSection?: (section: numbe
   onNavigateToSection,
   tabTop
 }) => {
-  const { secondSmoothProgress } = progress
   const [scaleFactor, setScaleFactor] = useState(1)
   const [viewportDimensions, setViewportDimensions] = useState({ width: 1920, height: 1080 })
 
