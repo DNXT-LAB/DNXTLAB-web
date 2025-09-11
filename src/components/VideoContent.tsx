@@ -15,7 +15,7 @@ export default function VideoContent() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   // Hooks personalizados
-  const {
+  const { 
     scrollY,
     windowHeight,
     // windowWidth,
