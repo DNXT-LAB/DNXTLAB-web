@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import type { SectionAProps } from '@/types/animations'
 
-const SectionA: React.FC<SectionAProps & { onNavigateToSection?: (section: number) => void }> = ({
+const SectionA: React.FC<SectionAProps & { onNavigateToSection?: (section: number) => void, tabTop?: string }> = ({
   progress,
   sectionATranslateY,
   sectionAScale,
@@ -11,7 +11,8 @@ const SectionA: React.FC<SectionAProps & { onNavigateToSection?: (section: numbe
   textConvergeY,
   // scrollY,
   // windowHeight,
-  onNavigateToSection
+  onNavigateToSection,
+  tabTop
 }) => {
   const { secondSmoothProgress } = progress
   const [scaleFactor, setScaleFactor] = useState(1)
@@ -123,10 +124,10 @@ const SectionA: React.FC<SectionAProps & { onNavigateToSection?: (section: numbe
         : '0',
     left: '-0.5%',
     transform: `translateY(${sectionATranslateY}px) scale(${sectionAScale})`,
-    opacity: secondSmoothProgress > 0.15 ? 0 : 1 - (secondSmoothProgress * 1.2),
-    visibility: secondSmoothProgress > 0.2 ? 'hidden' : 'visible',
-    transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-    willChange: 'transform, opacity'
+    transition: 'opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), visibility 0.8s ease',
+    opacity: tabTop && typeof tabTop === 'string' && parseInt(tabTop) >= 80 ? 1 : 0,
+    visibility: tabTop && typeof tabTop === 'string' && parseInt(tabTop) >= 80 ? 'visible' : 'hidden',
+    zIndex: 10,
   }
 
   const videoStyle: React.CSSProperties = {
@@ -137,7 +138,7 @@ const SectionA: React.FC<SectionAProps & { onNavigateToSection?: (section: numbe
     top: `${dimensions.video.top}px`,
     transform: `translateY(${sectionATranslateY + videoConvergeY}px) translateX(${videoConvergeX}px) scale(${sectionAScale})`,
     transformOrigin: 'center center',
-    opacity: secondSmoothProgress > 0.7 ? 0 : 1 - (secondSmoothProgress * 1.2)
+    // opacity: secondSmoothProgress > 0.7 ? 0 : 1 - (secondSmoothProgress * 1.2)
   }
 
   const textStyle: React.CSSProperties = { 
@@ -148,7 +149,7 @@ const SectionA: React.FC<SectionAProps & { onNavigateToSection?: (section: numbe
     // top: dimensions.text.top,
     transform: `translateY(${sectionATranslateY + textConvergeY}px) translateX(${textConvergeX}px) scale(${sectionAScale})`,
     transformOrigin: 'center center',
-    opacity: secondSmoothProgress > 0.7 ? 0 : 1 - (secondSmoothProgress * 1.2)
+    // opacity: secondSmoothProgress > 0.7 ? 0 : 1 - (secondSmoothProgress * 1.2)
   }
 
   // Calculate scaled font sizes

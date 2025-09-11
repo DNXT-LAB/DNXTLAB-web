@@ -102,6 +102,7 @@ export default function VideoContent() {
           windowHeight={windowHeight}
           {...sectionATransforms}
           onNavigateToSection={navigateToSection}
+          tabTop={tabTop}
         />
 
         {/* Section B */}
@@ -109,6 +110,7 @@ export default function VideoContent() {
           scrollY={scrollY}
           progress={progress}
           windowHeight={windowHeight}
+          tabTop={tabTop}
         />
         <div
           className="relative"

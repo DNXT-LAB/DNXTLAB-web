@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import type { SectionProps } from "@/types/animations";
 
-const SectionB: React.FC<SectionProps> = ({ progress }) => {
+interface SectionBProps extends SectionProps {
+  tabTop?: string;
+}
+
+const SectionB: React.FC<SectionBProps> = ({ progress, tabTop }) => {
   const { secondSmoothProgress, thirdSmoothProgress } = progress;
   const [scaleFactor, setScaleFactor] = useState(1);
   // Function to calculate scale factor based on viewport
@@ -40,9 +44,7 @@ const SectionB: React.FC<SectionProps> = ({ progress }) => {
   // Effect to update scale factor when size changes
   useEffect(() => {
     const updateScale = () => {
-      const {
-        scaleFactor: newScale,
-      } = calculateScaleAndDimensions();
+      const { scaleFactor: newScale } = calculateScaleAndDimensions();
       setScaleFactor(newScale);
     };
 
@@ -70,15 +72,13 @@ const SectionB: React.FC<SectionProps> = ({ progress }) => {
     }px)`, // Reduced from 900 to 500 for slower scroll-out
     transformOrigin: "center center",
     opacity:
-      secondSmoothProgress < 0.2
-        ? 0
-        : thirdSmoothProgress > 0
+      (thirdSmoothProgress >= 0.009 && !(tabTop && typeof tabTop === "string" && parseInt(tabTop) >= 80))
         ? 0
         : 1,
     visibility:
-      secondSmoothProgress > 0.1 && thirdSmoothProgress < 0.6
-        ? "visible"
-        : "hidden",
+      (thirdSmoothProgress >= 0.009 && !(tabTop && typeof tabTop === "string" && parseInt(tabTop) >= 80))
+        ? "hidden"
+        : "visible",
     transition: "all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
     willChange: "transform, opacity",
   };
@@ -106,7 +106,7 @@ const SectionB: React.FC<SectionProps> = ({ progress }) => {
               background:
                 "linear-gradient(135deg, #0891b2 0%, #1e40af 50%, #7c3aed 100%)",
               maxWidth: "90%",
-              height:"430px"
+              height: "430px",
             }}
           />
         </div>
@@ -116,9 +116,7 @@ const SectionB: React.FC<SectionProps> = ({ progress }) => {
             Solutions That Evolve
             <b> With Your Bussiness</b>
           </h2>
-          <p
-            className="text-sm sm:text-base lg:text-lg text-black font-poppins leading-relaxed max-w-full lg:max-w-3xl lg:mx-auto stategic-content text-left lg:text-center px-0 sm:px-0 lg:px-0 main-text"
-          >
+          <p className="text-sm sm:text-base lg:text-lg text-black font-poppins leading-relaxed max-w-full lg:max-w-3xl lg:mx-auto stategic-content text-left lg:text-center px-0 sm:px-0 lg:px-0 main-text">
             At DNXT LAB, we don&apos;t sell tools—we design intelligent
             frameworks tailored to your operations. By blending technical depth
             with strategic foresight, we ensure every AI or digital solution

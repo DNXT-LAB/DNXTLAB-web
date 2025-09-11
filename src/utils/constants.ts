@@ -9,7 +9,7 @@ export const SECTION_POSITIONS: SectionPositions = [
   2400,  // Section C with Card 1 centered
   3200,  // Section C with Card 2 centered
   4000,  // Section C with Card 3 centered
-  4800   // Section D: Form
+  4400   // Section D: Form (reduced gap from 4800 to 4400)
 ] as const
 
 // Scroll configurations
