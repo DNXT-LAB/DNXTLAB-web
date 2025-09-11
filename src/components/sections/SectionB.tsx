@@ -72,9 +72,13 @@ const SectionB: React.FC<SectionBProps> = ({ progress, tabTop }) => {
     }px)`, // Reduced from 900 to 500 for slower scroll-out
     transformOrigin: "center center",
     opacity:
-      tabTop && typeof tabTop === "string" && parseInt(tabTop) >= 80 ? 0 : 1,
+      thirdSmoothProgress >= 0.009 &&
+      !(tabTop && typeof tabTop === "string" && parseInt(tabTop) >= 80)
+        ? 0
+        : 1,
     visibility:
-      tabTop && typeof tabTop === "string" && parseInt(tabTop) >= 80
+      thirdSmoothProgress >= 0.009 &&
+      !(tabTop && typeof tabTop === "string" && parseInt(tabTop) >= 80)
         ? "hidden"
         : "visible",
     transition: "all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
