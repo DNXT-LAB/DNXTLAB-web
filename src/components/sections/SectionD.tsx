@@ -4,9 +4,11 @@ import type { ContactSectionProps } from "@/types/animations";
 const SectionD: React.FC<ContactSectionProps> = ({
   progress,
   formState,
+  scrollY,
   handleInputChange,
   handleSubmit,
 }) => {
+  console.log('scrollY', scrollY)
   const { seventhSmoothProgress } = progress;
   const [isMobile, setIsMobile] = useState(false);
 
@@ -19,7 +21,7 @@ const SectionD: React.FC<ContactSectionProps> = ({
     window.addEventListener("resize", updateDimensions);
     return () => window.removeEventListener("resize", updateDimensions);
   }, []);
-
+console.log('seventhSmoothProgress', seventhSmoothProgress)
   return (
     <div
       className={`
@@ -27,7 +29,7 @@ const SectionD: React.FC<ContactSectionProps> = ({
         transition-opacity duration-800 ease-out lg:mt-[-150px]
         container-contact
         ${
-          seventhSmoothProgress > 0.17
+          seventhSmoothProgress > 0.017 || scrollY > 4600
             ? "visible opacity-100"
             : "invisible opacity-0"
         }
