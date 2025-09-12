@@ -115,17 +115,19 @@ html {
   .we-build-text-wrapper {
     margin-left: 60px !important;
   }
-  
+
   /* Increased text sizes for 1024px-1279px screens */
   .elevate-text h2 {
     font-size: 3.3rem !important;
     line-height: 1.1 !important;
     /* text-align: center !important; */
   }
-   .stategic-video {
-    height: 390px !important;
+  .stategic-video {
+    height: 330px !important;
   }
- 
+  .form-section {
+    left: 65px;
+  }
 }
 @media screen and (min-device-width: 768px) and (max-device-width: 1023px) {
   .elevate-text {
@@ -170,11 +172,15 @@ html {
   .book-button {
     left: 40% !important;
   }
-   .stategic-video {
+  .stategic-video {
     height: 400px !important;
   }
 }
-
+@media screen and (min-device-width: 1440px) and (max-device-width: 1919px) {
+  .form-section {
+    left: 20px !important;
+  }
+}
 @media only screen and (min-width: 1536px) {
   .book-button {
     left: 54% !important;
@@ -249,7 +255,7 @@ html {
     transform: scale(1) !important;
     margin-top: -120px !important;
   }
-  .form-section{
-    left: -9rem !important;
+  .form-section {
+    left: -10rem !important;
   }
 }

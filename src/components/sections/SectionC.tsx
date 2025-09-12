@@ -4,6 +4,7 @@ import type { SectionProps } from "@/types/animations";
 
 const SectionC: React.FC<SectionProps> = ({
   progress,
+  scrollY,
   onNavigateToSection,
 }) => {
   const {
@@ -168,6 +169,7 @@ const SectionC: React.FC<SectionProps> = ({
       },
     };
   };
+  console.log('fifthSmoothProgress', fifthSmoothProgress)
   const fontSizes = getScaledFontSizes();
   const sectionStyle: React.CSSProperties = {
     position: "absolute",
@@ -183,17 +185,14 @@ const SectionC: React.FC<SectionProps> = ({
         : 0
     }px)`,
     transformOrigin: "center center",
-   opacity:sixthSmoothProgress > 0.99 ? 0 : 1,
+   opacity: scrollY >=  1538 ? 1 : 0,
     // opacity:
     //   thirdSmoothProgress < 0.4
     //     ? 0
     //     : seventhSmoothProgress > 0.35
     //     ? Math.max(0, 1 - (seventhSmoothProgress - 0.35) * 5)
     //     : 1,
-    visibility:
-      thirdSmoothProgress > 0.35 && seventhSmoothProgress < 0.16
-        ? "visible"
-        : "hidden",
+    visibility:scrollY >=  1538 ? 'visible' : 'hidden',
     transition: "all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
     willChange: "transform, opacity",
   };
@@ -314,11 +313,11 @@ const SectionC: React.FC<SectionProps> = ({
             marginLeft:
               viewportDimensions.width >= 1536
                 ? viewportDimensions.width <= 1920
-                  ? `calc(11% * ${1 / scaleFactor})`
+                  ? `calc(6% * ${1 / scaleFactor})`
                   : viewportDimensions.width <= 2400
-                  ? `calc(11% * ${1 / scaleFactor})`
+                  ? `calc(-2% * ${1 / scaleFactor})`
                   : `calc(-1.8% * ${1 / scaleFactor})`
-                : "8rem", // Add margin for non-2XL screens to move right
+                : "7rem", // Add margin for non-2XL screens to move right
             transform: `scale(${scaleFactor})`,
             // transformOrigin: 'left center'
           }}
@@ -507,8 +506,8 @@ const SectionC: React.FC<SectionProps> = ({
       {/* Mobile & iPad Layout - Visible on screens < 1024px */}
       <div className="block lg:hidden bg-white mt-16 md:mt-32 relative overflow-hidden h-full">
         {/* Fixed title at top - Always visible */}
-        <div className="mb-6 absolute top-4 left-[700px] md:left-[560px] right-0 text-left z-50 bg-white pt-4">
-          <h2 className="text-[33px] md:text-3xl font-bold text-black font-poppins leading-none mr-28 md:mr-40 elevate-text-mobile">
+        <div className="mb-6 absolute top-4 left-[700px] md:left-[560px] right-0 text-left z-50 bg-white pt-4 ">
+          <h2 className="text-[33px] md:text-3xl font-bold text-black font-poppins leading-none mr-28 md:mr-40">
             ELEVATE YOUR
             <br />
             DIGITAL
