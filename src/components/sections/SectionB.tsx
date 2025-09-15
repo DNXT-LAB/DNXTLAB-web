@@ -66,21 +66,13 @@ console.log('secondSmoothProgress', secondSmoothProgress)
     top: "45%",
     left: "50%",
     transform: `translate(-50%, ${
-      secondSmoothProgress < 0.05 ? "100%" : "-50%"
+      secondSmoothProgress < 0.15 ? "100%" : "-50%"
     }) translateY(${
       thirdSmoothProgress > 0 ? -(thirdSmoothProgress * 500 * scaleFactor) : 0
     }px)`,
     transformOrigin: "center center",
-    opacity:
-      thirdSmoothProgress >= 0.009 &&
-      !(tabTop && typeof tabTop === "string" && parseInt(tabTop) >= 80)
-        ? 0
-        : 1,
-    visibility:
-      thirdSmoothProgress >= 0.009 &&
-      !(tabTop && typeof tabTop === "string" && parseInt(tabTop) >= 80)
-        ? "hidden"
-        : "visible",
+    opacity: secondSmoothProgress >= 0.2 && thirdSmoothProgress < 0.1 ? 1 : 0,
+    visibility: secondSmoothProgress >= 0.2 && thirdSmoothProgress < 0.1 ? "visible" : "hidden",
     transition: "all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
     willChange: "transform, opacity",
   };

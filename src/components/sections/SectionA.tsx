@@ -8,6 +8,7 @@ const SectionA: React.FC<SectionAProps & { onNavigateToSection?: (section: numbe
   videoConvergeY,
   textConvergeX,
   textConvergeY,
+  progress,
   // scrollY,
   // windowHeight,
   onNavigateToSection,
@@ -110,6 +111,7 @@ const SectionA: React.FC<SectionAProps & { onNavigateToSection?: (section: numbe
   }
 
   const dimensions = getScaledDimensions()
+  const { secondSmoothProgress } = progress
 
   const sectionStyle: React.CSSProperties = { 
     position: 'absolute',
@@ -123,8 +125,8 @@ const SectionA: React.FC<SectionAProps & { onNavigateToSection?: (section: numbe
     left: '-0.5%',
     transform: `translateY(${sectionATranslateY}px) scale(${sectionAScale})`,
     transition: 'opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), visibility 0.8s ease',
-    opacity: tabTop && typeof tabTop === 'string' && parseInt(tabTop) >= 80 ? 1 : 0,
-    visibility: tabTop && typeof tabTop === 'string' && parseInt(tabTop) >= 80 ? 'visible' : 'hidden',
+    opacity: secondSmoothProgress < 0.8 ? 1 : 0,
+    visibility: secondSmoothProgress < 0.8 ? 'visible' : 'hidden',
     zIndex: 10,
   }
 

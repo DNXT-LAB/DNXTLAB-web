@@ -10,7 +10,7 @@ const HeroSection: React.FC<{
         <h1
           className="text-white font-bold uppercase font-poppins leading-tight hero-heading"
           style={{
-            fontSize: "clamp(1.5rem, 5vw, 4.5rem)", // Responsive font size
+            fontSize: "clamp(2.5rem, 6vw, 7rem)", // Responsive font size - mucho más grande
             lineHeight: "1.1",
           }}
         >
@@ -21,23 +21,23 @@ const HeroSection: React.FC<{
         <p
           className="text-white font-inter leading-relaxed hero-subtext"
           style={{
-            fontSize: "clamp(1rem, 2.5vw, 2rem)", // Responsive font size
+            fontSize: "clamp(1.5rem, 3vw, 2rem)", // Responsive font size - mucho más grande
             maxWidth: "clamp(63vw, 60vw, 800px)",
           }}
         >
           Empowering businesses through intelligent <br /> automation,
-          data-driven experiences, and <br /> future-proof digital design.
+          data-driven experiences, and future-<br /> proof digital design.
         </p>
 
         {/* CTA Button */}
         <button
-          className="flex items-center justify-center px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3
+          className="flex items-center justify-center px-4 py-3 sm:px-6 sm:py-4 md:px-8 md:py-5
           bg-white rounded-full hover:opacity-90 transition
           focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black hero-button"
           aria-label="View DNXTLAB services"
           onClick={() => onNavigateToSection?.(3)}
           style={{
-            fontSize: "clamp(0.9rem, 2vw, 1.25rem)",
+            fontSize: "clamp(1.1rem, 2.5vw, 1.5rem)",
           }}
         >
           <span
@@ -47,7 +47,7 @@ const HeroSection: React.FC<{
             SERVICES
           </span>
           <svg
-            className="w-5 h-5 md:w-6 md:h-6"
+            className="w-6 h-6 md:w-7 md:h-7"
             viewBox="0 0 37 37"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
