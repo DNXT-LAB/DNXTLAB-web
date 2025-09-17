@@ -11,8 +11,7 @@ const SectionA: React.FC<SectionAProps & { onNavigateToSection?: (section: numbe
   progress,
   // scrollY,
   // windowHeight,
-  onNavigateToSection,
-  tabTop
+  onNavigateToSection
 }) => {
   const [scaleFactor, setScaleFactor] = useState(1)
   const [viewportDimensions, setViewportDimensions] = useState({ width: 1920, height: 1080 })

@@ -4,7 +4,6 @@ import type { SectionProps } from "@/types/animations";
 
 const SectionC: React.FC<SectionProps> = ({
   progress,
-  scrollY,
   onNavigateToSection,
 }) => {
   const {

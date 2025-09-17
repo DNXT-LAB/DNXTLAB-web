@@ -5,7 +5,7 @@ interface SectionBProps extends SectionProps {
   tabTop?: string;
 }
 
-const SectionB: React.FC<SectionBProps> = ({ progress, tabTop }) => {
+const SectionB: React.FC<SectionBProps> = ({ progress }) => {
   const { secondSmoothProgress, thirdSmoothProgress } = progress;
   const [scaleFactor, setScaleFactor] = useState(1);
   // Function to calculate scale factor based on viewport
