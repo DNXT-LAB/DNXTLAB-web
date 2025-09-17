@@ -286,8 +286,8 @@ const SectionA: React.FC<SectionAProps & { onNavigateToSection?: (section: numbe
       </div>
 
       {/* Tablet & Mobile layout (below 1024px) */}
-      <div className="block lg:hidden w-full h-full flex flex-col items-center px-4 md:px-8 pt-8 sm:flex flex-wrap flex-row
-content-center !h-[80%]">
+      <div className="block lg:hidden w-full flex flex-col items-center px-4 md:px-8 pt-8 sm:flex flex-wrap flex-row
+content-center !h-[80%] video-text-wrapper">
         {/* Video at top with padding */}
         <div className="w-full flex justify-center mb-6 md:mb-8">
           <video 
