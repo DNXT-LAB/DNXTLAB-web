@@ -195,6 +195,9 @@ html {
   .form-section {
     left: 65px;
   }
+  .form-section h2 {
+    font-size: 5rem !important;
+  }
 }
 
 @media screen and (min-device-width: 1280px) and (max-device-width: 1535px) {
@@ -203,6 +206,9 @@ html {
   }
   .stategic-video {
     height: 400px !important;
+  }
+    .form-main{
+    margin-left: 9%!important;
   }
 }
 @media screen and (min-device-width: 1440px) and (max-device-width: 1919px) {
@@ -221,6 +227,9 @@ html {
   .elevate-p{
     font-size: 1.25rem !important;
     width: 595px !important;
+  }
+    .form-main{
+    margin-left: 0%!important;
   }
 }
 @media only screen and (min-width: 1536px) {
@@ -247,23 +256,40 @@ html {
   .card-sec-title {
     margin-top: 80px !important;
   }
-}
-@media (min-width: 2400px) {
   .service-card-root {
-    min-height: 450px !important;
-    width: 800px !important;
-  }
-  .service-card-root > div {
-    width: 900px !important;
+    width: 800px;
+    height: 400px !important;
   }
   .service-card-root h3 {
     font-size: 2.5rem !important;
   }
   .service-card-root p {
-    font-size: 2rem !important;
+    font-size: 2.25rem !important;
   }
   .service-card-root div {
     font-size: 1.5rem !important;
+  }
+    .form-main{
+    margin-left: 7%!important;
+  }
+}
+@media (min-width: 2400px) {
+  .service-card-root {
+    min-height: 450px !important;
+    width: 920px !important;
+    height: 500px !important;
+  }
+  .service-card-root > div {
+    width: 900px !important;
+  }
+  .service-card-root h3 {
+    font-size: 3rem !important;
+  }
+  .service-card-root p {
+    font-size: 2.5rem !important;
+  }
+  .service-card-root div {
+    font-size: 1.7rem !important;
   }
   .book-button {
     /* left: 44% !important; */
@@ -302,5 +328,8 @@ html {
   }
   .card-sec-title {
     margin-left: 20px !important;
+  }
+   .form-main{
+    margin-left: 9%!important;
   }
 }

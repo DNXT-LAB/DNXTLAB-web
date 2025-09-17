@@ -26,7 +26,7 @@ export const SCROLL_LEVELS = {
   SECOND_LEVEL_START: 1000,    // Reduced from 650
   SECOND_LEVEL_RANGE: 300,    // Reduced from 300
   THIRD_LEVEL_START: 1500,
-  THIRD_LEVEL_RANGE: 300,
+  THIRD_LEVEL_RANGE: 200,  // Reduced to 200 to make B to C transition faster
   FOURTH_LEVEL_START: 2200,
   FOURTH_LEVEL_RANGE: 700,
   FIFTH_LEVEL_START: 3000,

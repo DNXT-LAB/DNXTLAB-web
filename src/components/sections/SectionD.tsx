@@ -48,7 +48,7 @@ console.log('seventhSmoothProgress', seventhSmoothProgress)
         {/* Form */}
         <form
           onSubmit={handleSubmit}
-          className=" w-full mx-auto flex flex-col gap-6 sm:max-w-sm md:max-w-md lg:max-w-[100%] lg:grid lg:grid-cols-2 lg:gap-20 "
+          className=" w-full mx-auto flex flex-col gap-6 sm:max-w-sm md:max-w-md lg:max-w-[100%] lg:grid lg:grid-cols-2 lg:gap-20 form-main"
           
         >
           {/* Left Side */}
