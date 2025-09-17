@@ -101,32 +101,33 @@ html {
   color: #000000 !important;
 }
 
-@media screen and (min-device-width: 1024px) and (max-device-width: 1279px) {
-  .elevate-text {
-    margin-left: 23rem !important;
-  }
-  .web-cards-container {
-    margin-top: 16rem !important;
-    left: 18% !important;
-  }
-  .book-button {
-    left: 48% !important;
-  }
-  .we-build-text-wrapper {
-    margin-left: 60px !important;
-  }
-
-  /* Increased text sizes for 1024px-1279px screens */
-  .elevate-text h2 {
-    font-size: 3.3rem !important;
-    line-height: 1.1 !important;
-    /* text-align: center !important; */
-  }
+@media only screen and (max-width: 600px) {
   .stategic-video {
-    height: 330px !important;
+    height: 200px !important;
   }
-  .form-section {
-    left: 65px;
+  .stategic-content {
+    max-width: 100% !important;
+  }
+}
+/* Hero micro-breakpoint for very small devices */
+@media (max-width: 667px) {
+  .hero-heading {
+    font-size: clamp(2.2rem, 8vw, 3rem) !important;
+    line-height: 1.1 !important;
+  }
+  .hero-subtext {
+    font-size: clamp(1.15rem, 4vw, 1.6rem) !important;
+    max-width: 95vw !important;
+  }
+  .hero-root {
+    left: 0.25rem !important;
+    right: 0.25rem !important;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .book-button {
+    margin-top: -14% !important;
   }
 }
 @media screen and (min-device-width: 768px) and (max-device-width: 1023px) {
@@ -147,24 +148,37 @@ html {
   }
 }
 
-@media only screen and (max-width: 767px) {
-  .book-button {
-    margin-top: -14% !important;
-  }
-}
-
 @media only screen and (max-width: 999px) {
   .stategic-video {
     height: 280px !important;
   }
 }
-
-@media only screen and (max-width: 600px) {
-  .stategic-video {
-    height: 200px !important;
+@media screen and (min-device-width: 1024px) and (max-device-width: 1279px) {
+  .elevate-text {
+    margin-left: 23rem !important;
   }
-  .stategic-content {
-    max-width: 100% !important;
+  .web-cards-container {
+    margin-top: 16rem !important;
+    left: 18% !important;
+  }
+  .book-button {
+    left: 48% !important;
+  }
+  .we-build-text-wrapper {
+    margin-left: 60px !important;
+  }
+  /* Increased text sizes for 1024px-1279px screens */
+  .elevate-text h2 {
+    font-size: 4.5rem !important;
+    line-height: 1.1 !important;
+    width: 520px !important;
+    /* text-align: center !important; */
+  }
+  .stategic-video {
+    height: 330px !important;
+  }
+  .form-section {
+    left: 65px;
   }
 }
 
@@ -177,8 +191,21 @@ html {
   }
 }
 @media screen and (min-device-width: 1440px) and (max-device-width: 1919px) {
+  .we-build-text-wrapper h2{
+    font-size: 3.5rem !important;
+  }
   .form-section {
     left: 20px !important;
+  }
+  .elevate-text h2 {
+    font-size: 3.5rem !important;
+  }
+  .elevate-subtitle{
+    font-size: 1.5rem !important;
+  }
+  .elevate-p{
+    font-size: 1.25rem !important;
+    width: 595px !important;
   }
 }
 @media only screen and (min-width: 1536px) {
@@ -186,24 +213,26 @@ html {
     left: 54% !important;
     margin-top: -8% !important;
   }
+  .stategic-title {
+    font-size: 2.5rem !important;
+  }
+  .stategic-content {
+    max-width: 64% !important;
+    font-size: 20px !important;
+  }
 }
-
-/* Hero micro-breakpoint for very small devices */
-@media (max-width: 667px) {
-  .hero-heading {
-    font-size: clamp(2.2rem, 8vw, 3rem) !important;
+@media screen and (min-width: 1920px) {
+  .elevate-text {
+    margin-top: -10px;
+  }
+  .elevate-text h2 {
+    font-size: 5.1rem !important;
     line-height: 1.1 !important;
   }
-  .hero-subtext {
-    font-size: clamp(1.15rem, 4vw, 1.6rem) !important;
-    max-width: 95vw !important;
-  }
-  .hero-root {
-    left: 0.25rem !important;
-    right: 0.25rem !important;
+  .card-sec-title {
+    margin-top: 80px !important;
   }
 }
-
 @media (min-width: 2400px) {
   .service-card-root {
     min-height: 450px !important;
@@ -213,7 +242,7 @@ html {
     width: 900px !important;
   }
   .service-card-root h3 {
-    font-size: 2rem !important;
+    font-size: 2.5rem !important;
   }
   .service-card-root p {
     font-size: 2rem !important;
@@ -224,9 +253,6 @@ html {
   .book-button {
     /* left: 44% !important; */
     margin-top: 6% !important;
-  }
-  .main-text {
-    font-size: 22px !important;
   }
   .hero-heading {
     font-size: 5rem !important;
@@ -250,6 +276,7 @@ html {
   }
   .stategic-content {
     max-width: 55% !important;
+    font-size: 22px !important;
   }
   .container-contact {
     transform: scale(1) !important;
@@ -257,5 +284,8 @@ html {
   }
   .form-section {
     left: -10rem !important;
+  }
+  .card-sec-title {
+    margin-left: 20px !important;
   }
 }

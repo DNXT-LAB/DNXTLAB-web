@@ -86,7 +86,7 @@ const SectionC: React.FC<SectionProps> = ({
     };
 
     const getResponsiveMaxWidth = () => {
-      if (viewportDimensions.width >= 1536) return 700; // 2XL: 700px (perfecto)
+      if (viewportDimensions.width >= 1536) return 800; // 2XL: 700px (perfecto)
       if (viewportDimensions.width >= 1280) return 650; // XL: 650px (closer to center)
       return 600; // Desktop: 600px (closer to center)
     };
@@ -169,7 +169,6 @@ const SectionC: React.FC<SectionProps> = ({
       },
     };
   };
-  console.log('fifthSmoothProgress', fifthSmoothProgress)
   const fontSizes = getScaledFontSizes();
   const sectionStyle: React.CSSProperties = {
     position: "absolute",
@@ -185,21 +184,21 @@ const SectionC: React.FC<SectionProps> = ({
         : 0
     }px)`,
     transformOrigin: "center center",
-   opacity: thirdSmoothProgress >= 0.05 ? 1 : 0,
+    opacity: thirdSmoothProgress >= 0.05 ? 1 : 0,
     // opacity:
     //   thirdSmoothProgress < 0.4
     //     ? 0
     //     : seventhSmoothProgress > 0.35
     //     ? Math.max(0, 1 - (seventhSmoothProgress - 0.35) * 5)
     //     : 1,
-    visibility: thirdSmoothProgress >= 0.05 ? 'visible' : 'hidden',
+    visibility: thirdSmoothProgress >= 0.05 ? "visible" : "hidden",
     transition: "all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
     willChange: "transform, opacity",
   };
 
   const titleStyle = {
     transform:
-      fourthSmoothProgress > 0 ? "scale(0.4) translateX(-10%)" : "scale(1)",
+      fourthSmoothProgress > 0 ? "scale(0.7) translateX(-10%)" : "scale(1)",
     transformOrigin: "left center",
     opacity: fifthSmoothProgress > 0 ? 0 : 1,
     transition: "all 0.6s ease-out",
@@ -297,7 +296,6 @@ const SectionC: React.FC<SectionProps> = ({
       : Math.min(1, (thirdSmoothProgress - 0.4) * 2.5);
   const card2Opacity = fourthSmoothProgress > 0 ? 1 : 0;
   const card3Opacity = fifthSmoothProgress > 0 ? 1 : 0;
-
   return (
     <div style={sectionStyle}>
       {/* Desktop Layout - Only visible on screens >= 1024px */}
@@ -307,7 +305,7 @@ const SectionC: React.FC<SectionProps> = ({
       >
         {/* Main content left side */}
         <div
-          className="2xl:mt-[3%] elevate-text"
+          className={`2xl:mt-[3%] elevate-text ${fourthSmoothProgress > 0 ? 'card-sec-title' : ''}`}
           style={{
             position: "relative",
             marginLeft:
@@ -325,7 +323,7 @@ const SectionC: React.FC<SectionProps> = ({
           <div
             style={{
               ...titleStyle,
-              maxWidth: `${dimensions.maxWidths.large}px`,
+              // maxWidth: `${dimensions.maxWidths.large}px`,
             }}
           >
             <h2
@@ -337,8 +335,8 @@ const SectionC: React.FC<SectionProps> = ({
                   viewportDimensions.width >= 2400
                     ? "15rem"
                     : viewportDimensions.width >= 1536
-                      ? fontSizes.spacing.mt28
-                      : "10rem",
+                    ? fontSizes.spacing.mt28
+                    : "10rem",
                 textAlign: "start",
               }}
             >
@@ -352,12 +350,7 @@ const SectionC: React.FC<SectionProps> = ({
               style={{ opacity: servicesOpacity }}
               className="transition-opacity duration-500"
             >
-              <p
-                className="text-black font-poppins mb-5"
-                style={{
-                  fontSize: "40px",
-                }}
-              >
+              <p className="text-black font-poppins mb-5 text-[40px] 2xl:text-[35px] elevate-subtitle">
                 Explore our core expertise
               </p>
 
@@ -367,21 +360,13 @@ const SectionC: React.FC<SectionProps> = ({
                   flexDirection: "column",
                   gap: fontSizes.spacing.spaceY6,
                 }}
+                className="elevate-p"
               >
                 <div>
-                  <h3
-                    className="font-poppins"
-                    style={{
-                      fontSize: "20px",
-                      marginBottom: fontSizes.spacing.mb1,
-                    }}
-                  >
+                  <h3 className="font-poppins text-[20px]">
                     Web Design & Development:
                   </h3>
-                  <p
-                    className="text-gray-600 font-poppins"
-                    style={{ fontSize: "16px" }}
-                  >
+                  <p className="font-poppins text-[20px] elevate-p ">
                     Crafting sleek, responsive websites that convert and reflect
                     <br />
                     your brand with precision.
@@ -389,19 +374,8 @@ const SectionC: React.FC<SectionProps> = ({
                 </div>
 
                 <div>
-                  <h3
-                    className="font-poppins"
-                    style={{
-                      fontSize: "20px",
-                      marginBottom: fontSizes.spacing.mb1,
-                    }}
-                  >
-                    AI Integrations
-                  </h3>
-                  <p
-                    className="text-gray-600 font-poppins"
-                    style={{ fontSize: "16px" }}
-                  >
+                  <h3 className="font-poppins text-[20px]">AI Integrations</h3>
+                  <p className="font-poppins text-[20px] elevate-p">
                     Automating workflows, enhancing decision-making, and
                     <br />
                     unlocking new business capabilities with custom AI agents.
@@ -409,19 +383,10 @@ const SectionC: React.FC<SectionProps> = ({
                 </div>
 
                 <div>
-                  <h3
-                    className="font-poppins"
-                    style={{
-                      fontSize: "20px",
-                      marginBottom: fontSizes.spacing.mb1,
-                    }}
-                  >
+                  <h3 className="font-poppins text-[20px]">
                     Cybersecurity Consultancy
                   </h3>
-                  <p
-                    className="text-gray-600 font-poppins"
-                    style={{ fontSize: "16px" }}
-                  >
+                  <p className="font-poppins text-[20px] elevate-p">
                     Protecting your digital assets with proactive strategies and
                     <br />
                     robust security frameworks tailored to your operations.

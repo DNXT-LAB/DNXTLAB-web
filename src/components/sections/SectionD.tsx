@@ -41,7 +41,7 @@ console.log('seventhSmoothProgress', seventhSmoothProgress)
     >
       <div className="w-full max-w-[1800px] px-5 py-8 flex flex-col gap-10 lg:gap-15 mt-[25px] relative md:mt-0 lg:left-[-6.5rem] form-section">
         {/* Title */}
-        <h2 className="text-[36px] leading-[48px] lg:text-[70px] lg:leading-[110px] font-semibold font-[Poppins] text-black text-center lg:text-left">
+        <h2 className="text-[36px] leading-[48px] lg:text-[100px] lg:leading-[110px] font-bold font-[Poppins] text-black text-center lg:text-left">
           BOOK A CALL NOW
         </h2>
 
@@ -115,7 +115,7 @@ console.log('seventhSmoothProgress', seventhSmoothProgress)
 
             {/* Mobile contact info */}
             {isMobile && (
-              <div className="flex flex-col gap-1 text-xs md:text-sm text-black text-center mt-2">
+              <div className="flex flex-col gap-1 text-xs md:text-sm text-black mt-2">
                 <p>Phone Num: +351 999999999</p>
                 <p>Email: info@diamondnxt.com</p>
                 <p>Sede: Rua Conselheiro Veloso Cruz, N.º 10</p>

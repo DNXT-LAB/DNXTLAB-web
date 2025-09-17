@@ -45,12 +45,12 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
         }}
       >
         <h3 
-          className="font-bold text-black font-morien text-2xl md:text-3xl lg:text-3xl xl:text-3xl mb-4 lg:mb-6"
+          className="font-[950] tracking-[1.5px] text-black font-morien text-2xl md:text-3xl lg:text-3xl xl:text-[34px] mb-4 lg:mb-6 card-title"
         >
           {title}
         </h3>
         <p 
-          className="text-gray-700 font-inter text-lg md:text-xl lg:text-3xl xl:text-3xl mb-4 lg:mb-3"
+          className="text-gray-700 font-inter text-lg md:text-xl lg:text-3xl xl:text-3xl mb-4 lg:mb-5"
         >
           {subtitle}
         </p>

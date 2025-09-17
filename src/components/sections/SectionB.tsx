@@ -106,11 +106,11 @@ console.log('secondSmoothProgress', secondSmoothProgress)
         </div>
         {/* Text */}
         <div className="flex flex-col w-[90%] max-md:w-[90%] lg:text-center lg:items-center">
-          <h2 className="text-2xl sm:text-3xl lg:text-5xl text-black font-poppins mb-4 leading-tight text-left lg:text-center ">
+          <h2 className="text-2xl sm:text-3xl lg:text-5xl text-black font-poppins mb-4 leading-tight text-left lg:text-center stategic-title">
             Solutions That Evolve
             <b> With Your Bussiness</b>
           </h2>
-          <p className="text-sm sm:text-base lg:text-lg text-black font-poppins leading-relaxed max-w-full lg:max-w-3xl lg:mx-auto stategic-content text-left lg:text-center px-0 sm:px-0 lg:px-0 main-text">
+          <p className="text-sm sm:text-base lg:text-lg text-black font-poppins leading-relaxed max-w-full lg:max-w-3xl lg:mx-auto text-left lg:text-center px-0 sm:px-0 lg:px-0 stategic-content">
             At DNXT LAB, we don&apos;t sell tools—we design intelligent
             frameworks tailored to your operations. By blending technical depth
             with strategic foresight, we ensure every AI or digital solution

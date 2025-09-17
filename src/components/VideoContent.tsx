@@ -69,7 +69,7 @@ export default function VideoContent() {
       {/* Navbar */}
       <div className="fixed top-0 left-0 right-0 z-60 p-8">
         <Navbar
-          isDark={scrollY > 910}
+          isDark={scrollY > 960}
           onNavigateToSection={navigateToSection}
         />
       </div>
