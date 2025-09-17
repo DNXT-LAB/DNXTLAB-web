@@ -8,6 +8,10 @@ interface SectionBProps extends SectionProps {
 const SectionB: React.FC<SectionBProps> = ({ progress }) => {
   const { secondSmoothProgress, thirdSmoothProgress } = progress;
   const [scaleFactor, setScaleFactor] = useState(1);
+  const [viewportDimensions, setViewportDimensions] = useState({
+    width: 1920,
+    height: 1080,
+  });
   // Function to calculate scale factor based on viewport
   const calculateScaleAndDimensions = () => {
     if (typeof window !== "undefined") {
@@ -44,8 +48,9 @@ const SectionB: React.FC<SectionBProps> = ({ progress }) => {
   // Effect to update scale factor when size changes
   useEffect(() => {
     const updateScale = () => {
-      const { scaleFactor: newScale } = calculateScaleAndDimensions();
+      const { scaleFactor: newScale, width, height } = calculateScaleAndDimensions();
       setScaleFactor(newScale);
+      setViewportDimensions({ width, height });
     };
 
     // Establecer escala inicial
@@ -65,11 +70,17 @@ console.log('secondSmoothProgress', secondSmoothProgress)
     width: "100%",
     top: "45%",
     left: "50%",
-    transform: `translate(-50%, ${
-      secondSmoothProgress < 0.15 ? "100%" : "-50%"
-    }) translateY(${
-      thirdSmoothProgress > 0 ? -(thirdSmoothProgress * 500 * scaleFactor) : 0
-    }px)`,
+    transform: viewportDimensions.width < 1024
+      ? `translate(-50%, ${
+          secondSmoothProgress < 0.70 ? "100%" : "-50%"
+        }) translateY(${
+          thirdSmoothProgress > 0 ? -(thirdSmoothProgress * 500 * scaleFactor) : 0
+        }px)`
+      : `translate(-50%, ${
+          secondSmoothProgress < 0.15 ? "100%" : "-50%"
+        }) translateY(${
+          thirdSmoothProgress > 0 ? -(thirdSmoothProgress * 500 * scaleFactor) : 0
+        }px)`,
     transformOrigin: "center center",
     opacity: secondSmoothProgress >= 0.2 && thirdSmoothProgress < 0.1 ? 1 : 0,
     visibility: secondSmoothProgress >= 0.2 && thirdSmoothProgress < 0.1 ? "visible" : "hidden",
