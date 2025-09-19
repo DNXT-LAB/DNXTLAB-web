@@ -35,10 +35,22 @@ export default function Navbar({ isDark = false, onNavigateToSection }: NavbarPr
   return (
     <nav className="relative fixed top-0 left-0 w-full flex items-center justify-between transition-colors duration-500 lg:px-12" role="navigation" aria-label="Main navigation">
       {/* Logo and name on the left */}
-      <div className="flex items-center relative z-[51] lg:z-auto">
-        <Image 
-          src="/logo.png" 
-          alt="DNXT LAB Logo" 
+      <div
+        className="flex items-center relative z-[51] lg:z-auto cursor-pointer"
+        onClick={() => handleNavigation(0)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            handleNavigation(0);
+          }
+        }}
+        aria-label="Go to home section"
+      >
+        <Image
+          src="/logo.png"
+          alt="DNXT LAB Logo"
           width={70}
           height={70}
           className="w-12 h-12 md:w-20 md:h-20 lg:w-24 lg:h-24"

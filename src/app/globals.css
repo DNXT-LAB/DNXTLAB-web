@@ -141,6 +141,9 @@ html {
    .card-title{
     letter-spacing: normal !important;
   }
+  .main-video{
+    height: 100vh !important;
+  }
 }
 @media screen and (min-device-width: 768px) and (max-device-width: 1023px) {
   .elevate-text {
@@ -157,6 +160,9 @@ html {
 
   .explore-text-wrapper {
     margin-top: 8.5% !important;
+  }
+  .main-video{
+    height: 100vh !important;
   }
 }
 

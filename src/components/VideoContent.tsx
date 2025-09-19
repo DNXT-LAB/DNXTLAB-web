@@ -45,7 +45,7 @@ export default function VideoContent() {
       {/* Video Background - Fixed so it's always in the background */}
       <video
         ref={videoRef}
-        className="fixed inset-0 w-full h-[800px] lg:h-full object-cover z-0"
+        className="fixed inset-0 w-full h-[800px] lg:h-full object-cover z-0 md:h-[100vh] main-video"
         style={{
           transform: "scale(1.1)",
           // transformOrigin: 'center center'
