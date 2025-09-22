@@ -104,11 +104,11 @@ html {
 @media only screen and (max-width: 600px) {
   .stategic-video {
     height: 200px !important;
-  }  
+  }
   .stategic-content {
     max-width: 100% !important;
   }
-  .card-title{
+  .card-title {
     letter-spacing: normal !important;
   }
 }
@@ -126,22 +126,32 @@ html {
     left: 0.25rem !important;
     right: 0.25rem !important;
   }
-   .card-title{
+  .card-title {
     letter-spacing: normal !important;
   }
-  .video-text-wrapper{
-    margin-top: -25px !important;
+  .video-text-wrapper {
+    align-content: start !important;
+    margin-top: 20px !important;
   }
+  .a-main-text {
+    font-size: 1.65rem !important;
+  }
+.a-inner-p{
+  font-size: 15px !important;
+}
+.video-text-wrapper video{
+  height: 220px !important;
+}
 }
 
 @media only screen and (max-width: 767px) {
   .book-button {
     margin-top: -14% !important;
   }
-   .card-title{
+  .card-title {
     letter-spacing: normal !important;
   }
-  .main-video{
+  .main-video {
     height: 100vh !important;
   }
 }
@@ -161,7 +171,7 @@ html {
   .explore-text-wrapper {
     margin-top: 8.5% !important;
   }
-  .main-video{
+  .main-video {
     height: 100vh !important;
   }
 }
@@ -172,7 +182,7 @@ html {
   }
 }
 @media screen and (min-device-width: 1024px) and (max-device-width: 1279px) {
-  .hero-subtext{
+  .hero-subtext {
     font-size: 1.5rem !important;
   }
   .elevate-text {
@@ -190,7 +200,7 @@ html {
   }
   /* Increased text sizes for 1024px-1279px screens */
   .elevate-text h2 {
-    font-size: 3.70rem !important;
+    font-size: 3.7rem !important;
     line-height: 1.1 !important;
     width: 520px !important;
     /* text-align: center !important; */
@@ -213,12 +223,12 @@ html {
   .stategic-video {
     height: 400px !important;
   }
-    .form-main{
-    margin-left: 9%!important;
+  .form-main {
+    margin-left: 9% !important;
   }
 }
 @media screen and (min-device-width: 1440px) and (max-device-width: 1919px) {
-  .we-build-text-wrapper h2{
+  .we-build-text-wrapper h2 {
     font-size: 3.5rem !important;
   }
   .form-section {
@@ -227,15 +237,15 @@ html {
   .elevate-text h2 {
     font-size: 3.5rem !important;
   }
-  .elevate-subtitle{
+  .elevate-subtitle {
     font-size: 1.5rem !important;
   }
-  .elevate-p{
+  .elevate-p {
     font-size: 1.25rem !important;
     width: 595px !important;
   }
-    .form-main{
-    margin-left: 0%!important;
+  .form-main {
+    margin-left: 0% !important;
   }
 }
 @media only screen and (min-width: 1536px) {
@@ -275,8 +285,8 @@ html {
   .service-card-root div {
     font-size: 1.5rem !important;
   }
-    .form-main{
-    margin-left: 7%!important;
+  .form-main {
+    margin-left: 7% !important;
   }
 }
 @media (min-width: 2400px) {
@@ -335,7 +345,7 @@ html {
   .card-sec-title {
     margin-left: 20px !important;
   }
-   .form-main{
-    margin-left: 9%!important;
+  .form-main {
+    margin-left: 9% !important;
   }
 }

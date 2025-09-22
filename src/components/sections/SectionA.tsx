@@ -303,20 +303,20 @@ content-center !h-[80%] video-text-wrapper">
         
         {/* Text below */}
         <div className="flex-1 flex flex-col items-left w-full  sm:max-w-[650px] m-auto">
-          <h2 className="text-2xl md:text-4xl font-bold text-black font-poppins mb-4 md:mb-6 leading-tight ">
+          <h2 className="text-2xl md:text-4xl font-bold text-black font-poppins mb-4 md:mb-6 leading-tight a-main-text ">
             WE BUILD WITH INTELLIGENCE AND INTENT
           </h2>
           
-          <p className="text-base md:text-2xl text-black font-inter mb-4 md:mb-6 leading-tight">
+          <p className="text-base md:text-2xl text-black font-inter mb-4 md:mb-6 leading-tight a-inner-text">
             Smart systems. Seamless design. Real results.
           </p>
           
-          <p className="text-xs md:text-base text-black font-inter mb-6 md:mb-8 leading-relaxed max-w-[90vw] sm:max-w-[650px]">
+          <p className="text-xs md:text-base text-black font-inter mb-6 md:mb-8 leading-relaxed max-w-[90vw] sm:max-w-[650px] a-inner-p">
             At DNXT LAB, we create intelligent digital solutions that think, adapt, and scale—combining AI automation, UX strategy, and high-performance web design to help you launch faster, work smarter, and grow stronger.
           </p>
           
           <button 
-            className="text-xs md:text-base px-6 py-3 md:px-8 md:py-4 bg-black text-white rounded-full font-morien hover:bg-gray-800 transition-colors flex items-center gap-3 self-start"
+            className="text-xs md:text-base px-6 py-3 md:px-8 md:py-4 bg-black text-white rounded-full font-morien hover:bg-gray-800 transition-colors flex items-center gap-3 self-start a-button"
             onClick={() => onNavigateToSection?.(3)}
           >
             SERVICES
