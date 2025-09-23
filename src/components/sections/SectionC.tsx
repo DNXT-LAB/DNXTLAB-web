@@ -194,7 +194,7 @@ const SectionC: React.FC<SectionProps> = ({
       fourthSmoothProgress > 0 ? "scale(0.7) translateX(-10%)" : "scale(1)",
     transformOrigin: "left center",
     opacity: fifthSmoothProgress > 0 ? 0 : 1,
-    transition: "all 0.6s ease-out",
+        transition: "all 1s cubic-bezier(0.22, 0.61, 0.36, 1)",
     willChange: "transform, opacity",
   };
 
