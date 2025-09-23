@@ -184,14 +184,8 @@ const SectionC: React.FC<SectionProps> = ({
     }px)`,
     transformOrigin: "center center",
     opacity: thirdSmoothProgress >= 0.05 ? 1 : 0,
-    // opacity:
-    //   thirdSmoothProgress < 0.4
-    //     ? 0
-    //     : seventhSmoothProgress > 0.35
-    //     ? Math.max(0, 1 - (seventhSmoothProgress - 0.35) * 5)
-    //     : 1,
     visibility: thirdSmoothProgress >= 0.05 ? "visible" : "hidden",
-    transition: "all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+    transition: "all 1.4s cubic-bezier(0.22, 0.61, 0.36, 1)",
     willChange: "transform, opacity",
   };
 
@@ -293,7 +287,7 @@ const SectionC: React.FC<SectionProps> = ({
     thirdSmoothProgress < 0
       ? 0
       : Math.min(1, (thirdSmoothProgress - 0.4) * 2.5);
-  const card2Opacity = fourthSmoothProgress > 0 ? 1 : 0;
+  const card2Opacity = scrollY < 4622 ? 1 : 0;
   const card3Opacity = fifthSmoothProgress > 0 ? 1 : 0;
   return (
     <div style={sectionStyle}>

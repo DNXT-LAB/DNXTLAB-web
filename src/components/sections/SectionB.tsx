@@ -84,7 +84,7 @@ console.log('secondSmoothProgress', secondSmoothProgress)
     transformOrigin: "center center",
     opacity: secondSmoothProgress >= 0.2 && thirdSmoothProgress < 0.1 ? 1 : 0,
     visibility: secondSmoothProgress >= 0.2 && thirdSmoothProgress < 0.1 ? "visible" : "hidden",
-    transition: "all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+  transition: "all 1.4s cubic-bezier(0.22, 0.61, 0.36, 1)",
     willChange: "transform, opacity",
   };
 
