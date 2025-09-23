@@ -23,7 +23,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
     position: 'absolute',
     left: position,
     opacity,
-  transition: 'all 1s cubic-bezier(0.22, 0.61, 0.36, 1)',
+    transition: 'all 0.6s ease-out',
     willChange: 'transform, left, opacity'
   }
 

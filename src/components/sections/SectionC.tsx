@@ -194,7 +194,7 @@ const SectionC: React.FC<SectionProps> = ({
       fourthSmoothProgress > 0 ? "scale(0.7) translateX(-10%)" : "scale(1)",
     transformOrigin: "left center",
     opacity: fifthSmoothProgress > 0 ? 0 : 1,
-        transition: "all 1s cubic-bezier(0.22, 0.61, 0.36, 1)",
+    transition: "all 0.6s ease-out",
     willChange: "transform, opacity",
   };
 
@@ -479,7 +479,7 @@ const SectionC: React.FC<SectionProps> = ({
           className="flex flex-col justify-center mt-[10%] md:mt-[8%] explore-text-wrapper"
           style={{
             opacity: servicesOpacity,
-            transition: "opacity 0.3s ease-out",
+            transition: "opacity 0.15s ease-out",
           }}
         >
           <div className="text-center">
