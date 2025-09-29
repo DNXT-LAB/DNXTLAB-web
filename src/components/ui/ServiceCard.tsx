@@ -38,7 +38,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       style={{ ...cardStyle, ['--tw-rotate' as any]: `${rotation}deg` }}
       className={`transform -translate-x-[60%] -translate-y-[50%] sm:-translate-x-[60%] sm:-translate-y-[50%] md:-translate-x-[60%] md:-translate-y-[10%] lg:-translate-x-[60%] lg:-translate-y-[10%] ${isCentered ? 'xl:-translate-x-[60%]' : 'xl:-translate-x-[70%]'} xl:-translate-y-[-10%] ${isCentered ? '2xl:-translate-x-[30%]' : '2xl:-translate-x-[100%]'} 2xl:-translate-y-[20%] rotate-[var(--tw-rotate)]`}
     >
-      <div 
+      <div
         className="service-card-root shadow-2xl rounded-3xl p-8 lg:p-12 w-[320px] md:w-[600px] lg:w-[700px] h-[375px] "
         style={{
           background: gradient,

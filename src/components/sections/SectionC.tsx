@@ -479,7 +479,7 @@ const SectionC: React.FC<SectionProps> = ({
           className="flex flex-col justify-center mt-[10%] md:mt-[8%] explore-text-wrapper"
           style={{
             opacity: servicesOpacity,
-            transition: "opacity 0.15s ease-out",
+            transition: "opacity 0.08s ease-out", // linea 483 opacity 0.15s
           }}
         >
           <div className="text-center">
