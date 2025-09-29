@@ -4,7 +4,7 @@ const HeroSection: React.FC<{
   onNavigateToSection?: (section: number) => void;
 }> = ({ onNavigateToSection }) => {
   return (
-    <div className="fixed left-2 right-2 bottom-8 sm:left-4 sm:right-auto sm:bottom-12 lg:bottom-6 z-20 px-2 sm:px-4 md:px-8 hero-root">
+    <div className="fixed left-2 right-2 bottom-8 sm:left-4 sm:right-auto sm:bottom-12 lg:bottom-6 z-20 px-2 sm:px-4 md:px-8 hero-root lg:mb-[50px]">
       <div className="flex flex-col items-start space-y-3 sm:space-y-4">
         {/* Heading */}
         <h1
