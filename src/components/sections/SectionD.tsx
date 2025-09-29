@@ -39,7 +39,7 @@ console.log('seventhSmoothProgress', seventhSmoothProgress)
         transformOrigin: "center",
       }}
     >
-      <div className="w-full max-w-[1800px] px-5 py-8 flex flex-col gap-10 lg:gap-15 relative md:mt-0 lg:left-[-6.5rem] form-section">
+      <div className="w-full max-w-[1800px] px-5 py-8 flex flex-col gap-10 lg:gap-15 relative md:mt-0 lg:left-[-6.5rem] form-section mb-[100px] lg:mb-0">
         {/* Title */}
         <h2 className="text-[36px] leading-[48px] lg:text-[100px] lg:leading-[110px] lg:mb-10 font-bold font-[Poppins] text-black text-center">
           BOOK A CALL NOW
