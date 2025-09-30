@@ -101,6 +101,13 @@ html {
   color: #000000 !important;
 }
 
+@media (max-width: 600px) {
+  input,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .stategic-video {
     height: 200px !important;
@@ -142,11 +149,26 @@ html {
 .video-text-wrapper video{
   height: 220px !important;
 }
+.form-inner-div{
+  gap: 10px !important;
+}
+.form-title{
+  margin-top: 30px !important;
+}
+.form-main-container{
+  gap: 12px !important;
+}
+.card-main-container{
+  margin-top: 18.5% !important;
+}
+.card-title{
+  font-size: 32px !important;
+}
 }
 
 @media only screen and (max-width: 767px) {
   .book-button {
-    margin-top: -14% !important;
+    margin-top: -17.5% !important;
   }
   .card-title {
     letter-spacing: normal !important;

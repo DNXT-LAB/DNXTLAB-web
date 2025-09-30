@@ -465,7 +465,7 @@ const SectionC: React.FC<SectionProps> = ({
       <div className="block lg:hidden bg-white mt-16 md:mt-32 relative overflow-hidden h-full">
         {/* Fixed title at top - Always visible */}
         <div className="mb-6 absolute top-4 left-[700px] md:left-[560px] right-0 text-left z-50 bg-white pt-4 ">
-          <h2 className="text-[33px] md:text-3xl font-bold text-black font-poppins leading-none mr-28 md:mr-40">
+          <h2 className="text-[33px] md:text-3xl font-bold text-black font-poppins leading-none mr-28 md:mr-40 card-title">
             ELEVATE YOUR
             <br />
             DIGITAL
@@ -519,7 +519,7 @@ const SectionC: React.FC<SectionProps> = ({
         </div>
 
         {/* Cards with right to left effect - Appear progressively */}
-        <div className="absolute inset-0 mt-96 md:mt-48 ml-28">
+        <div className="absolute inset-0 mt-96 md:mt-48 ml-28 card-main-container">
           {/* ServiceCard 1 - Aparece primero con efecto */}
           {thirdSmoothProgress >= 0.4 && (
             <ServiceCard
