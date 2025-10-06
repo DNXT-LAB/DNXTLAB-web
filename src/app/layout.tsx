@@ -2,6 +2,7 @@ import React from 'react'
 import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
 import './globals.css'
+import ScrollIndicator from '../components/ScrollIndicator'
 
 const poppins = Poppins({ 
   subsets: ['latin'],
@@ -38,6 +39,7 @@ export default function RootLayout({
             __html: `@media (max-width: 1024px) { video[aria-label="Background video showing DNXTLAB solutions"] { transform: none !important; } }`
           }}
         />
+        <ScrollIndicator />
         {children}
       </body>
     </html>
