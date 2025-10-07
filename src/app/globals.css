@@ -9,16 +9,7 @@ body {
   width: 100vw;
   background-color: #000000;
   /* Ocultar scrollbar en todos los navegadores */
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
 }
-
-/* Ocultar scrollbar en Chrome, Safari y Edge */
-html::-webkit-scrollbar,
-body::-webkit-scrollbar {
-  display: none;
-}
-
 /* Asegurar que el scroll siga funcionando */
 html {
   scroll-behavior: smooth;
@@ -143,27 +134,27 @@ html {
   .a-main-text {
     font-size: 1.65rem !important;
   }
-.a-inner-p{
-  font-size: 15px !important;
-}
-.video-text-wrapper video{
-  height: 220px !important;
-}
-.form-inner-div{
-  gap: 10px !important;
-}
-.form-title{
-  margin-top: 30px !important;
-}
-.form-main-container{
-  gap: 12px !important;
-}
-.card-main-container{
-  margin-top: 18.5% !important;
-}
-.card-title{
-  font-size: 32px !important;
-}
+  .a-inner-p {
+    font-size: 15px !important;
+  }
+  .video-text-wrapper video {
+    height: 220px !important;
+  }
+  .form-inner-div {
+    gap: 10px !important;
+  }
+  .form-title {
+    margin-top: 30px !important;
+  }
+  .form-main-container {
+    gap: 12px !important;
+  }
+  .card-main-container {
+    margin-top: 18.5% !important;
+  }
+  .card-title {
+    font-size: 32px !important;
+  }
 }
 
 @media only screen and (max-width: 767px) {
@@ -177,6 +168,31 @@ html {
     height: 100vh !important;
   }
 }
+
+@media only screen and (max-width: 767px) {
+  html, body {
+    scrollbar-width: thin;
+    scrollbar-color: red transparent; /* Firefox ke liye */
+  }
+
+  /* Webkit browsers */
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    width: 8px; /* Scrollbar width */
+  }
+
+  html::-webkit-scrollbar-thumb,
+  body::-webkit-scrollbar-thumb {
+    background-color: red; /* Thumb ka color */
+    border-radius: 4px;
+  }
+
+  html::-webkit-scrollbar-thumb:hover,
+  body::-webkit-scrollbar-thumb:hover {
+    background-color: darkred;
+  }
+}
+
 @media screen and (min-device-width: 768px) and (max-device-width: 1023px) {
   .elevate-text {
     margin-left: 23rem !important;
@@ -369,5 +385,18 @@ html {
   }
   .form-main {
     margin-left: 9% !important;
+  }
+}
+
+@media only screen and (min-width: 767px) {
+  html,
+  body {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+  }
+  /* Ocultar scrollbar en Chrome, Safari y Edge */
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none;
   }
 }
