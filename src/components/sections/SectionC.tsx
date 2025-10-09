@@ -185,7 +185,10 @@ const SectionC: React.FC<SectionProps> = ({
     transformOrigin: "center center",
     opacity: thirdSmoothProgress >= 0.05 ? 1 : 0,
     visibility: thirdSmoothProgress >= 0.05 ? "visible" : "hidden",
-    transition: "all 1.4s cubic-bezier(0.22, 0.61, 0.36, 1)",
+    transition:
+      viewportDimensions.width < 1024
+        ? "all 0.6s cubic-bezier(0.22, 0.61, 0.36, 1)"
+        : "all 1.4s cubic-bezier(0.22, 0.61, 0.36, 1)",
     willChange: "transform, opacity",
   };
 
@@ -298,7 +301,9 @@ const SectionC: React.FC<SectionProps> = ({
       >
         {/* Main content left side */}
         <div
-          className={`2xl:mt-[3%] elevate-text ${fourthSmoothProgress > 0 ? 'card-sec-title' : ''}`}
+          className={`2xl:mt-[3%] elevate-text ${
+            fourthSmoothProgress > 0 ? "card-sec-title" : ""
+          }`}
           style={{
             position: "relative",
             marginLeft:

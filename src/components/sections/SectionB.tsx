@@ -48,7 +48,11 @@ const SectionB: React.FC<SectionBProps> = ({ progress }) => {
   // Effect to update scale factor when size changes
   useEffect(() => {
     const updateScale = () => {
-      const { scaleFactor: newScale, width, height } = calculateScaleAndDimensions();
+      const {
+        scaleFactor: newScale,
+        width,
+        height,
+      } = calculateScaleAndDimensions();
       setScaleFactor(newScale);
       setViewportDimensions({ width, height });
     };
@@ -63,28 +67,39 @@ const SectionB: React.FC<SectionBProps> = ({ progress }) => {
       window.removeEventListener("resize", updateScale);
     };
   }, []);
-console.log('secondSmoothProgress', secondSmoothProgress)
+  console.log("secondSmoothProgress", secondSmoothProgress);
   // Lower the threshold so SectionB appears sooner (reduce blank)
   const sectionStyle: React.CSSProperties = {
     position: "absolute",
     width: "100%",
     top: "45%",
     left: "50%",
-    transform: viewportDimensions.width < 1024
-      ? `translate(-50%, ${
-          secondSmoothProgress < 0.70 ? "100%" : "-50%"
-        }) translateY(${
-          thirdSmoothProgress > 0 ? -(thirdSmoothProgress * 500 * scaleFactor) : 0
-        }px)`
-      : `translate(-50%, ${
-          secondSmoothProgress < 0.15 ? "100%" : "-50%"
-        }) translateY(${
-          thirdSmoothProgress > 0 ? -(thirdSmoothProgress * 500 * scaleFactor) : 0
-        }px)`,
+    transform:
+      viewportDimensions.width < 1024
+        ? `translate(-50%, ${
+            secondSmoothProgress < 0.7 ? "100%" : "-50%"
+          }) translateY(${
+            thirdSmoothProgress > 0
+              ? -(thirdSmoothProgress * 500 * scaleFactor)
+              : 0
+          }px)`
+        : `translate(-50%, ${
+            secondSmoothProgress < 0.15 ? "100%" : "-50%"
+          }) translateY(${
+            thirdSmoothProgress > 0
+              ? -(thirdSmoothProgress * 500 * scaleFactor)
+              : 0
+          }px)`,
     transformOrigin: "center center",
     opacity: secondSmoothProgress >= 0.2 && thirdSmoothProgress < 0.1 ? 1 : 0,
-    visibility: secondSmoothProgress >= 0.2 && thirdSmoothProgress < 0.1 ? "visible" : "hidden",
-  transition: "all 1.4s cubic-bezier(0.22, 0.61, 0.36, 1)",
+    visibility:
+      secondSmoothProgress >= 0.2 && thirdSmoothProgress < 0.1
+        ? "visible"
+        : "hidden",
+    transition:
+      viewportDimensions.width < 1024
+        ? "all 0.6s cubic-bezier(0.22, 0.61, 0.36, 1)"
+        : "all 1.4s cubic-bezier(0.22, 0.61, 0.36, 1)",
     willChange: "transform, opacity",
   };
 
