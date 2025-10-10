@@ -400,3 +400,20 @@ html {
     display: none;
   }
 }
+
+/* Mobile-only navbar background helper */
+.mobile-nav-bg {
+  transition: background-color 500ms ease-out, backdrop-filter 500ms ease-out;
+  background-color: transparent;
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+}
+
+@media (max-width: 767.98px) {
+  .mobile-nav-bg.is-dark {
+    background-color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding-bottom: 0px;
+  }
+}
