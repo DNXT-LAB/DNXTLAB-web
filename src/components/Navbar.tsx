@@ -15,50 +15,55 @@ export default function Navbar({
 
   // Add/remove no-scroll class to body
 useEffect(() => {
-  const html = document.documentElement
   const body = document.body
+  const html = document.documentElement
 
   const preventTouchMove = (e: TouchEvent) => {
-    if (window.innerWidth <= 767) e.preventDefault()
+    e.preventDefault()
   }
 
   if (isMenuOpen && window.innerWidth <= 767) {
+    // 🟡 Capture current scroll position
     const scrollY = window.scrollY
+    body.dataset.scrollY = scrollY.toString()
+
+    // 🟢 Lock body scroll (works in Safari + Chrome mobile)
     body.style.position = 'fixed'
     body.style.top = `-${scrollY}px`
     body.style.left = '0'
     body.style.right = '0'
+    body.style.width = '100%'
     body.style.overflow = 'hidden'
     html.style.overflow = 'hidden'
 
-    // 💡 Add event listener to block touch scroll on iOS
+    // ✅ Force browser to stay at current position (prevents jump)
+    window.scrollTo(0, scrollY)
+
+    // Disable touch move (Safari fix)
     document.addEventListener('touchmove', preventTouchMove, { passive: false })
   } else {
-    const scrollY = body.style.top
+    // 🔵 Unlock scroll and restore previous position
+    const scrollY = parseInt(body.dataset.scrollY || '0', 10)
     body.style.position = ''
     body.style.top = ''
     body.style.left = ''
     body.style.right = ''
+    body.style.width = ''
     body.style.overflow = ''
     html.style.overflow = ''
-
     document.removeEventListener('touchmove', preventTouchMove)
 
-    if (scrollY) {
-      window.scrollTo(0, parseInt(scrollY || '0') * -1)
-    }
+    // ✅ Restore scroll position
+    window.scrollTo(0, scrollY)
   }
 
-  // Cleanup on unmount
+  // Cleanup on unmount (safety)
   return () => {
     document.removeEventListener('touchmove', preventTouchMove)
-    html.style.overflow = ''
-    body.style.overflow = ''
-    body.style.position = ''
-    body.style.top = ''
   }
 }, [isMenuOpen])
- 
+
+
   const handleMenuClick = () => setIsMenuOpen(!isMenuOpen);
   const handleMenuClose = () => setIsMenuOpen(false);
 
