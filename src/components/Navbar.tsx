@@ -14,38 +14,51 @@ export default function Navbar({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Add/remove no-scroll class to body
-  useEffect(() => {
-    const html = document.documentElement;
+useEffect(() => {
+  const html = document.documentElement
+  const body = document.body
 
-    const handleScrollLock = () => {
-      if (window.innerWidth <= 767) {
-        if (isMenuOpen) {
-          html.style.overflow = "hidden";
-          html.style.height = "100%";
-        } else {
-          html.style.overflow = "";
-          html.style.height = "";
-        }
-      } else {
-        // Ensure scroll is restored on larger screens
-        html.style.overflow = "";
-        html.style.height = "";
-      }
-    };
+  const preventTouchMove = (e: TouchEvent) => {
+    if (window.innerWidth <= 767) e.preventDefault()
+  }
 
-    handleScrollLock();
+  if (isMenuOpen && window.innerWidth <= 767) {
+    const scrollY = window.scrollY
+    body.style.position = 'fixed'
+    body.style.top = `-${scrollY}px`
+    body.style.left = '0'
+    body.style.right = '0'
+    body.style.overflow = 'hidden'
+    html.style.overflow = 'hidden'
 
-    // Optional: handle window resize to restore scroll if menu was open
-    const handleResize = () => handleScrollLock();
-    window.addEventListener("resize", handleResize);
+    // 💡 Add event listener to block touch scroll on iOS
+    document.addEventListener('touchmove', preventTouchMove, { passive: false })
+  } else {
+    const scrollY = body.style.top
+    body.style.position = ''
+    body.style.top = ''
+    body.style.left = ''
+    body.style.right = ''
+    body.style.overflow = ''
+    html.style.overflow = ''
 
-    return () => {
-      html.style.overflow = "";
-      html.style.height = "";
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [isMenuOpen]);
+    document.removeEventListener('touchmove', preventTouchMove)
 
+    if (scrollY) {
+      window.scrollTo(0, parseInt(scrollY || '0') * -1)
+    }
+  }
+
+  // Cleanup on unmount
+  return () => {
+    document.removeEventListener('touchmove', preventTouchMove)
+    html.style.overflow = ''
+    body.style.overflow = ''
+    body.style.position = ''
+    body.style.top = ''
+  }
+}, [isMenuOpen])
+ 
   const handleMenuClick = () => setIsMenuOpen(!isMenuOpen);
   const handleMenuClose = () => setIsMenuOpen(false);
 
