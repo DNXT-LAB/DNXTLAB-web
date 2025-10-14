@@ -28,15 +28,9 @@ export const useScrollAnimation = () => {
   }, [])
 
   useEffect(() => {
-    // Use last SECTION_POSITIONS entry as the maximum logical scroll offset
-    const maxScroll = SECTION_POSITIONS[SECTION_POSITIONS.length - 1] ?? 0
-
     const handleNativeScroll = () => {
-      // Read native scroll and clamp internal state only (do not write to window/document here)
-      const nativeY = Math.min(window.scrollY, maxScroll)
-      setScrollY(nativeY)
-
-      const sectionIndex = Math.round(nativeY / window.innerHeight)
+      setScrollY(window.scrollY)
+      const sectionIndex = Math.round(window.scrollY / window.innerHeight)
       const clampedSection = Math.max(0, Math.min(sectionIndex, SECTION_POSITIONS.length - 1))
       if (clampedSection !== currentSectionRef.current) {
         setCurrentSection(clampedSection)
@@ -51,16 +45,24 @@ export const useScrollAnimation = () => {
     if (typeof window !== 'undefined') {
       setWindowHeight(window.innerHeight)
       setWindowWidth(window.innerWidth)
-
       window.addEventListener('scroll', handleNativeScroll, { passive: true })
       window.addEventListener('resize', handleResize)
-
-      // initialize internal scrollY (do not modify window/document here)
-      setScrollY(Math.min(window.scrollY, maxScroll))
-
+      // Only set body height for desktop
+      if (window.innerWidth >= 1024) {
+        document.body.style.height = `${SECTION_POSITIONS.length * 100}vh`
+        document.body.style.overflow = 'auto'
+        document.documentElement.style.overflow = 'auto'
+      } else {
+        document.body.style.height = ''
+        document.body.style.overflow = ''
+        document.documentElement.style.overflow = ''
+      }
       return () => {
         window.removeEventListener('scroll', handleNativeScroll)
         window.removeEventListener('resize', handleResize)
+        document.body.style.height = ''
+        document.body.style.overflow = ''
+        document.documentElement.style.overflow = ''
       }
     }
     return () => {}

@@ -469,7 +469,7 @@ const SectionC: React.FC<SectionProps> = ({
       {/* Mobile & iPad Layout - Visible on screens < 1024px */}
       <div className="block lg:hidden bg-white mt-16 md:mt-32 relative overflow-hidden h-full">
         {/* Fixed title at top - Always visible */}
-        <div className="mb-6 absolute top-4 left-[700px] md:left-[560px] right-0 text-left z-50 bg-white pt-4 ">
+        <div className="mb-6 absolute top-4 left-[700px] md:left-[560px] right-0 text-left z-50 bg-white pt-4 card-container-main ">
           <h2 className="text-[33px] md:text-3xl font-bold text-black font-poppins leading-none mr-28 md:mr-40 card-title">
             ELEVATE YOUR
             <br />

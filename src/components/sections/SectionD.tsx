@@ -29,7 +29,7 @@ const SectionD: React.FC<ContactSectionProps> = ({
         transition-opacity duration-800 ease-out lg:mt-[-150px]
         container-contact
         ${
-          seventhSmoothProgress > 0.017 || scrollY > 4600
+          scrollY > 4800
             ? "visible opacity-100"
             : "invisible opacity-0"
         }

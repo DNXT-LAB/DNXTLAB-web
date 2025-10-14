@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import Navbar from "./Navbar";
 import HeroSection from "./sections/HeroSection";
 import SectionA from "./sections/SectionA";
@@ -9,14 +9,13 @@ import SectionC from "./sections/SectionC";
 import SectionD from "./sections/SectionD";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useContactForm } from "@/hooks/useContactForm";
-import { SCROLL_LEVELS, SECTION_POSITIONS } from "@/utils/constants";
+import { SCROLL_LEVELS } from "@/utils/constants";
 
 export default function VideoContent() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [spacerHeight, setSpacerHeight] = useState<number>(0);
 
   // Hooks personalizados
-  const { 
+  const {
     scrollY,
     windowHeight,
     // windowWidth,
@@ -38,36 +37,6 @@ export default function VideoContent() {
     }
   }, []);
 
-  // Compute spacer height so page can scroll exactly up to last SECTION_POSITIONS value
-  useEffect(() => {
-    const compute = () => {
-      const last = SECTION_POSITIONS[SECTION_POSITIONS.length - 1] ?? 0;
-      const h = typeof window !== "undefined" ? last + window.innerHeight : last;
-      setSpacerHeight(h);
-    };
-    compute();
-    window.addEventListener("resize", compute);
-    return () => window.removeEventListener("resize", compute);
-  }, []);
-
-  // Apply spacer height to document.body on desktop so document height won't exceed intended value
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const apply = () => {
-      if (window.innerWidth >= 1024 && spacerHeight > 0) {
-        document.body.style.height = `${spacerHeight}px`;
-      } else {
-        document.body.style.height = "";
-      }
-    };
-    apply();
-    window.addEventListener("resize", apply);
-    return () => {
-      window.removeEventListener("resize", apply);
-      document.body.style.height = "";
-    };
-  }, [spacerHeight]);
-
   const { tabTransform, tabHeight, tabTop } = tabProperties;
   const { secondSmoothProgress } = progress;
 
@@ -79,6 +48,7 @@ export default function VideoContent() {
         className="fixed inset-0 w-full h-[800px] lg:h-full object-cover z-0 md:h-[100vh] main-video"
         style={{
           transform: "scale(1.1)",
+          // transformOrigin: 'center center'
         }}
         src="/video.mp4"
         autoPlay
@@ -97,7 +67,11 @@ export default function VideoContent() {
       />
 
       {/* Navbar */}
-      <div className={`fixed top-0 left-0 right-0 z-60 p-8 mobile-nav-bg ${scrollY > 960 ? 'is-dark' : ''}`}>
+      <div
+        className={`fixed top-0 left-0 right-0 z-60 p-8 mobile-nav-bg ${
+          scrollY > 960 ? "is-dark" : ""
+        }`}
+      >
         <Navbar
           isDark={scrollY > 960}
           onNavigateToSection={navigateToSection}
@@ -170,11 +144,38 @@ export default function VideoContent() {
         />
       </div>
 
-      {/* Single spacer computed from SECTION_POSITIONS to avoid scrolling past last section */}
+      {/* Contenido invisible para activar scroll */}
       <div
         className="relative z-0 bg-transparent"
-        style={{ height: spacerHeight ? `${spacerHeight}px` : "1px" }}
-        aria-hidden="true"
+        style={{ height: "200vh" }}
+      />
+      <div
+        className="relative z-0 bg-transparent"
+        style={{ height: "100vh" }}
+      />
+      <div
+        className="relative z-0 bg-transparent"
+        style={{ height: "200vh" }}
+      />
+      <div
+        className="relative z-0 bg-transparent"
+        style={{ height: "200vh" }}
+      />
+      <div
+        className="relative z-0 bg-transparent"
+        style={{ height: "400vh" }}
+      />
+      <div
+        className="relative z-0 bg-transparent"
+        style={{ height: "400vh" }}
+      />
+      <div
+        className="relative z-0 bg-transparent"
+        style={{ height: "400vh" }}
+      />
+      <div
+        className="relative z-0 bg-transparent"
+        style={{ height: "400vh" }}
       />
     </div>
   );
